@@ -1,0 +1,201 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="ecp__alt_8h" kind="file">
+    <compoundname>ecp_alt.h</compoundname>
+    <includedby refid="ecp_8h" local="yes">ecp.h</includedby>
+    <invincdepgraph>
+      <node id="7293">
+        <label>ssl.h</label>
+        <link refid="ssl_8h"/>
+        <childnode refid="7294" relation="include">
+        </childnode>
+        <childnode refid="7295" relation="include">
+        </childnode>
+        <childnode refid="7296" relation="include">
+        </childnode>
+        <childnode refid="7297" relation="include">
+        </childnode>
+        <childnode refid="7298" relation="include">
+        </childnode>
+      </node>
+      <node id="7304">
+        <label>oid.h</label>
+        <link refid="oid_8h"/>
+      </node>
+      <node id="7299">
+        <label>x509.h</label>
+        <link refid="x509_8h"/>
+        <childnode refid="7300" relation="include">
+        </childnode>
+        <childnode refid="7302" relation="include">
+        </childnode>
+        <childnode refid="7303" relation="include">
+        </childnode>
+      </node>
+      <node id="7301">
+        <label>pkcs7.h</label>
+        <link refid="pkcs7_8h"/>
+      </node>
+      <node id="7298">
+        <label>ssl_ticket.h</label>
+        <link refid="ssl__ticket_8h"/>
+      </node>
+      <node id="7289">
+        <label>crypto_driver_contexts_composites.h</label>
+        <link refid="crypto__driver__contexts__composites_8h"/>
+        <childnode refid="7290" relation="include">
+        </childnode>
+      </node>
+      <node id="7292">
+        <label>ssl_ciphersuites.h</label>
+        <link refid="ssl__ciphersuites_8h"/>
+        <childnode refid="7293" relation="include">
+        </childnode>
+      </node>
+      <node id="7297">
+        <label>ssl_cookie.h</label>
+        <link refid="ssl__cookie_8h"/>
+      </node>
+      <node id="7305">
+        <label>ecjpake.h</label>
+        <link refid="ecjpake_8h"/>
+        <childnode refid="7288" relation="include">
+        </childnode>
+      </node>
+      <node id="7294">
+        <label>debug.h</label>
+        <link refid="debug_8h"/>
+      </node>
+      <node id="7285">
+        <label>ecp_alt.h</label>
+        <link refid="ecp_alt.h"/>
+        <childnode refid="7286" relation="include">
+        </childnode>
+      </node>
+      <node id="7296">
+        <label>ssl_cache.h</label>
+        <link refid="ssl__cache_8h"/>
+      </node>
+      <node id="7303">
+        <label>x509_csr.h</label>
+        <link refid="x509__csr_8h"/>
+      </node>
+      <node id="7286">
+        <label>ecp.h</label>
+        <link refid="ecp_8h"/>
+        <childnode refid="7287" relation="include">
+        </childnode>
+        <childnode refid="7305" relation="include">
+        </childnode>
+        <childnode refid="7293" relation="include">
+        </childnode>
+        <childnode refid="7291" relation="include">
+        </childnode>
+        <childnode refid="7306" relation="include">
+        </childnode>
+        <childnode refid="7294" relation="include">
+        </childnode>
+      </node>
+      <node id="7306">
+        <label>ecdh.h</label>
+        <link refid="ecdh_8h"/>
+        <childnode refid="7293" relation="include">
+        </childnode>
+      </node>
+      <node id="7287">
+        <label>ecdsa.h</label>
+        <link refid="ecdsa_8h"/>
+        <childnode refid="7288" relation="include">
+        </childnode>
+        <childnode refid="7291" relation="include">
+        </childnode>
+      </node>
+      <node id="7288">
+        <label>crypto_builtin_composites.h</label>
+        <link refid="crypto__builtin__composites_8h"/>
+        <childnode refid="7289" relation="include">
+        </childnode>
+      </node>
+      <node id="7291">
+        <label>pk.h</label>
+        <link refid="pk_8h"/>
+        <childnode refid="7292" relation="include">
+        </childnode>
+        <childnode refid="7299" relation="include">
+        </childnode>
+        <childnode refid="7304" relation="include">
+        </childnode>
+      </node>
+      <node id="7290">
+        <label>crypto_struct.h</label>
+        <link refid="crypto__struct_8h"/>
+      </node>
+      <node id="7300">
+        <label>x509_crt.h</label>
+        <link refid="x509__crt_8h"/>
+        <childnode refid="7293" relation="include">
+        </childnode>
+        <childnode refid="7301" relation="include">
+        </childnode>
+      </node>
+      <node id="7295">
+        <label>net_sockets.h</label>
+        <link refid="net__sockets_8h"/>
+      </node>
+      <node id="7302">
+        <label>x509_crl.h</label>
+        <link refid="x509__crl_8h"/>
+        <childnode refid="7300" relation="include">
+        </childnode>
+        <childnode refid="7293" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structmbedtls__ecp__group" prot="public">mbedtls_ecp_group</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="ecp__alt_8h_1a5f67516cc3afd10876a97ba2a25e3f54" prot="public" static="no">
+        <type>struct <ref refid="structmbedtls__ecp__group" kindref="compound">mbedtls_ecp_group</ref></type>
+        <definition>typedef struct mbedtls_ecp_group
+ mbedtls_ecp_group</definition>
+        <argsstring></argsstring>
+        <name>mbedtls_ecp_group</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/tests/include/alt-dummy/ecp_alt.h" line="20" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*<sp/>ecp_alt.h<sp/>with<sp/>dummy<sp/>types<sp/>for<sp/>MBEDTLS_ECP_ALT<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/><sp/>Copyright<sp/>The<sp/>Mbed<sp/>TLS<sp/>Contributors</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*<sp/><sp/>SPDX-License-Identifier:<sp/>Apache-2.0<sp/>OR<sp/>GPL-2.0-or-later</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>ECP_ALT_H</highlight></codeline>
+<codeline lineno="8"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>ECP_ALT_H</highlight></codeline>
+<codeline lineno="9"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10" refid="structmbedtls__ecp__group" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structmbedtls__ecp__group" kindref="compound">mbedtls_ecp_group</ref><sp/>{</highlight></codeline>
+<codeline lineno="11" refid="structmbedtls__ecp__group_1a94eb7f4b410417a3e3af9ba006600a86" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="ecp_8h_1af79e530ea8f8416480f805baa20b1a2d" kindref="member">mbedtls_ecp_group_id</ref><sp/><ref refid="structmbedtls__ecp__group_1a94eb7f4b410417a3e3af9ba006600a86" kindref="member">id</ref>;</highlight></codeline>
+<codeline lineno="12" refid="structmbedtls__ecp__group_1a27683b20d03866228d4b64231412aed7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structmbedtls__mpi" kindref="compound">mbedtls_mpi</ref><sp/><ref refid="structmbedtls__ecp__group_1a27683b20d03866228d4b64231412aed7" kindref="member">P</ref>;</highlight></codeline>
+<codeline lineno="13" refid="structmbedtls__ecp__group_1a7fdcee12d3d07e97b624a4e22b292607" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structmbedtls__mpi" kindref="compound">mbedtls_mpi</ref><sp/><ref refid="structmbedtls__ecp__group_1a7fdcee12d3d07e97b624a4e22b292607" kindref="member">A</ref>;</highlight></codeline>
+<codeline lineno="14" refid="structmbedtls__ecp__group_1a877247378dd8a87f2420c20f36a31a10" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structmbedtls__mpi" kindref="compound">mbedtls_mpi</ref><sp/><ref refid="structmbedtls__ecp__group_1a877247378dd8a87f2420c20f36a31a10" kindref="member">B</ref>;</highlight></codeline>
+<codeline lineno="15" refid="structmbedtls__ecp__group_1a2e3e1d82a040a42f1451f65f0f466fa6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structmbedtls__ecp__point" kindref="compound">mbedtls_ecp_point</ref><sp/><ref refid="structmbedtls__ecp__group_1a2e3e1d82a040a42f1451f65f0f466fa6" kindref="member">G</ref>;</highlight></codeline>
+<codeline lineno="16" refid="structmbedtls__ecp__group_1a319b65efb5052b2f4b2f62857ad29bd5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structmbedtls__mpi" kindref="compound">mbedtls_mpi</ref><sp/><ref refid="structmbedtls__ecp__group_1a319b65efb5052b2f4b2f62857ad29bd5" kindref="member">N</ref>;</highlight></codeline>
+<codeline lineno="17" refid="structmbedtls__ecp__group_1a22bbc210655606fd7bf6cee692268726" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="structmbedtls__ecp__group_1a22bbc210655606fd7bf6cee692268726" kindref="member">pbits</ref>;</highlight></codeline>
+<codeline lineno="18" refid="structmbedtls__ecp__group_1a1b3f00e3672215cc883b425e7c662cdc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="structmbedtls__ecp__group_1a1b3f00e3672215cc883b425e7c662cdc" kindref="member">nbits</ref>;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><ref refid="ecp__alt_8h_1a5f67516cc3afd10876a97ba2a25e3f54" kindref="member">mbedtls_ecp_group</ref>;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>ecp_alt.h<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/tests/include/alt-dummy/ecp_alt.h"/>
+  </compounddef>
+</doxygen>

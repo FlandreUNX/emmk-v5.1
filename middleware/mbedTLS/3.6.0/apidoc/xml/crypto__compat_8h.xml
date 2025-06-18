@@ -1,0 +1,604 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="crypto__compat_8h" kind="file">
+    <compoundname>crypto_compat.h</compoundname>
+    <includedby refid="crypto__extra_8h" local="yes">crypto_extra.h</includedby>
+    <invincdepgraph>
+      <node id="6297">
+        <label>ssl.h</label>
+        <link refid="ssl_8h"/>
+        <childnode refid="6298" relation="include">
+        </childnode>
+        <childnode refid="6299" relation="include">
+        </childnode>
+        <childnode refid="6300" relation="include">
+        </childnode>
+        <childnode refid="6301" relation="include">
+        </childnode>
+        <childnode refid="6302" relation="include">
+        </childnode>
+      </node>
+      <node id="6308">
+        <label>oid.h</label>
+        <link refid="oid_8h"/>
+      </node>
+      <node id="6303">
+        <label>x509.h</label>
+        <link refid="x509_8h"/>
+        <childnode refid="6304" relation="include">
+        </childnode>
+        <childnode refid="6306" relation="include">
+        </childnode>
+        <childnode refid="6307" relation="include">
+        </childnode>
+      </node>
+      <node id="6305">
+        <label>pkcs7.h</label>
+        <link refid="pkcs7_8h"/>
+      </node>
+      <node id="6302">
+        <label>ssl_ticket.h</label>
+        <link refid="ssl__ticket_8h"/>
+      </node>
+      <node id="6296">
+        <label>ssl_ciphersuites.h</label>
+        <link refid="ssl__ciphersuites_8h"/>
+        <childnode refid="6297" relation="include">
+        </childnode>
+      </node>
+      <node id="6301">
+        <label>ssl_cookie.h</label>
+        <link refid="ssl__cookie_8h"/>
+      </node>
+      <node id="6292">
+        <label>crypto_compat.h</label>
+        <link refid="crypto_compat.h"/>
+        <childnode refid="6293" relation="include">
+        </childnode>
+      </node>
+      <node id="6298">
+        <label>debug.h</label>
+        <link refid="debug_8h"/>
+      </node>
+      <node id="6300">
+        <label>ssl_cache.h</label>
+        <link refid="ssl__cache_8h"/>
+      </node>
+      <node id="6307">
+        <label>x509_csr.h</label>
+        <link refid="x509__csr_8h"/>
+      </node>
+      <node id="6309">
+        <label>psa_util.h</label>
+        <link refid="psa__util_8h"/>
+      </node>
+      <node id="6294">
+        <label>crypto.h</label>
+        <link refid="crypto_8h"/>
+        <childnode refid="6295" relation="include">
+        </childnode>
+        <childnode refid="6297" relation="include">
+        </childnode>
+        <childnode refid="6309" relation="include">
+        </childnode>
+        <childnode refid="6302" relation="include">
+        </childnode>
+      </node>
+      <node id="6295">
+        <label>pk.h</label>
+        <link refid="pk_8h"/>
+        <childnode refid="6296" relation="include">
+        </childnode>
+        <childnode refid="6303" relation="include">
+        </childnode>
+        <childnode refid="6308" relation="include">
+        </childnode>
+      </node>
+      <node id="6304">
+        <label>x509_crt.h</label>
+        <link refid="x509__crt_8h"/>
+        <childnode refid="6297" relation="include">
+        </childnode>
+        <childnode refid="6305" relation="include">
+        </childnode>
+      </node>
+      <node id="6299">
+        <label>net_sockets.h</label>
+        <link refid="net__sockets_8h"/>
+      </node>
+      <node id="6293">
+        <label>crypto_extra.h</label>
+        <link refid="crypto__extra_8h"/>
+        <childnode refid="6294" relation="include">
+        </childnode>
+      </node>
+      <node id="6306">
+        <label>x509_crl.h</label>
+        <link refid="x509__crl_8h"/>
+        <childnode refid="6304" relation="include">
+        </childnode>
+        <childnode refid="6297" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="crypto__compat_8h_1a95017cf75d44a5ce463d585740a9bcf6" prot="public" static="no">
+        <name>PSA_KEY_HANDLE_INIT</name>
+        <initializer><ref refid="group__key__lifetimes_1ga838f2dc64e670aa69fc4c0b82932f021" kindref="member">MBEDTLS_SVC_KEY_ID_INIT</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_compat.h" line="33" column="9" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_compat.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__attributes_1gab930304ccac92e0729fb5535c87a9fc2" prot="public" static="no">
+        <name>PSA_DH_FAMILY_CUSTOM</name>
+        <initializer>((<ref refid="group__crypto__types_1gaf632c5b13aa19c98f8591d4beda8dd1a" kindref="member">psa_dh_family_t</ref>) MBEDTLS_DEPRECATED_NUMERIC_CONSTANT(0x7e))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Custom Diffie-Hellman group.</para><para>Mbed TLS does not support custom DH groups.</para><para><xrefsect id="deprecated_1_deprecated000001"><xreftitle>Deprecated</xreftitle><xrefdescription><para>This value is not useful, so this macro will be removed in a future version of the library. </para></xrefdescription></xrefsect></para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_compat.h" line="161" column="9" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_compat.h" bodystart="161" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__attributes_1ga59089e39970e89191105bd3b3294c3bd" prot="public" static="no">
+        <name>PSA_KEY_DOMAIN_PARAMETERS_SIZE</name>
+        <param><defname>key_type</defname></param>
+        <param><defname>key_bits</defname></param>
+        <initializer>MBEDTLS_DEPRECATED_NUMERIC_CONSTANT(1u)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Safe output buffer size for <ref refid="group__attributes_1gae40c5b0309ede4a4d121681bf73069e0" kindref="member">psa_get_key_domain_parameters()</ref>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_compat.h" line="220" column="9" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_compat.h" bodystart="220" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="crypto__compat_8h_1a0a6f2a05474d7789332f228946840504" prot="public" static="no">
+        <type><ref refid="structmbedtls__svc__key__id__t" kindref="compound">mbedtls_svc_key_id_t</ref></type>
+        <definition>typedef mbedtls_svc_key_id_t psa_key_handle_t</definition>
+        <argsstring></argsstring>
+        <name>psa_key_handle_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_compat.h" line="31" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_compat.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="crypto__compat_8h_1ab0a62e4db36560fc64e6a684abe1ef49" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>static int psa_key_handle_is_null</definition>
+        <argsstring>(psa_key_handle_t handle)</argsstring>
+        <name>psa_key_handle_is_null</name>
+        <param>
+          <type><ref refid="crypto__compat_8h_1a0a6f2a05474d7789332f228946840504" kindref="member">psa_key_handle_t</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Check whether a handle is null.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Handle</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Non-zero if the handle is null, zero otherwise. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_compat.h" line="41" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_compat.h" bodystart="41" bodyend="44"/>
+        <references refid="group__key__lifetimes_1ga131f49c7d8f4cae1c40a018b956dbe78" compoundref="crypto__values_8h" startline="2474" endline="2477">mbedtls_svc_key_id_is_null</references>
+      </memberdef>
+      <memberdef kind="function" id="crypto__compat_8h_1a950f0f358a0a012b043d02e55faed7c0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__error_1ga05676e70ba5c6a7565aff3c36677c1f9" kindref="member">psa_status_t</ref></type>
+        <definition>psa_status_t psa_open_key</definition>
+        <argsstring>(mbedtls_svc_key_id_t key, psa_key_handle_t *handle)</argsstring>
+        <name>psa_open_key</name>
+        <param>
+          <type><ref refid="structmbedtls__svc__key__id__t" kindref="compound">mbedtls_svc_key_id_t</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type><ref refid="crypto__compat_8h_1a0a6f2a05474d7789332f228946840504" kindref="member">psa_key_handle_t</ref> *</type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Open a handle to an existing persistent key.</para><para>Open a handle to a persistent key. A key is persistent if it was created with a lifetime other than <ref refid="group__key__lifetimes_1ga8b438870ba69489b685730d346455108" kindref="member">PSA_KEY_LIFETIME_VOLATILE</ref>. A persistent key always has a nonzero key identifier, set with <ref refid="group__attributes_1gae48fcfdc72a23e7499957d7f54ff5a64" kindref="member">psa_set_key_id()</ref> when creating the key. Implementations may provide additional pre-provisioned keys that can be opened with <ref refid="crypto__compat_8h_1a950f0f358a0a012b043d02e55faed7c0" kindref="member">psa_open_key()</ref>. Such keys have an application key identifier in the vendor range, as documented in the description of <ref refid="group__key__lifetimes_1ga11e986351c65bd3dc3c0fe2cd9926e4b" kindref="member">psa_key_id_t</ref>.</para><para>The application must eventually close the handle with <ref refid="crypto__compat_8h_1aa09b720d299dfe6b9f41c36e448078eb" kindref="member">psa_close_key()</ref> or <ref refid="group__key__management_1ga5f52644312291335682fbc0292c43cd2" kindref="member">psa_destroy_key()</ref> to release associated resources. If the application dies without calling one of these functions, the implementation should perform the equivalent of a call to <ref refid="crypto__compat_8h_1aa09b720d299dfe6b9f41c36e448078eb" kindref="member">psa_close_key()</ref>.</para><para>Some implementations permit an application to open the same key multiple times. If this is successful, each call to <ref refid="crypto__compat_8h_1a950f0f358a0a012b043d02e55faed7c0" kindref="member">psa_open_key()</ref> will return a different key handle.</para><para><simplesect kind="note"><para>This API is not part of the PSA Cryptography API Release 1.0.0 specification. It was defined in the 1.0 Beta 3 version of the specification but was removed in the 1.0.0 released version. This API is kept for the time being to not break applications relying on it. It is not deprecated yet but will be in the near future.</para><simplesectsep/><para>Applications that rely on opening a key multiple times will not be portable to implementations that only permit a single key handle to be opened. See also :ref:`key-handles`.</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The persistent identifier of the key. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>On success, a handle to the key.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="group__error_1ga4cc859e2c66ca381c7418db3527a65e1" kindref="member">PSA_SUCCESS</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Success. The application can now use the value of <computeroutput>*handle</computeroutput> to access the key. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="group__error_1ga91b2ad8a867517a2651f1b076c5216e5" kindref="member">PSA_ERROR_INSUFFICIENT_MEMORY</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The implementation does not have sufficient resources to open the key. This can be due to reaching an implementation limit on the number of open keys, the number of open key handles, or available memory. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="group__error_1ga18646babb2ae6cbde02ea3828bbd9141" kindref="member">PSA_ERROR_DOES_NOT_EXIST</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>There is no persistent key with key identifier <computeroutput>key</computeroutput>. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="group__error_1ga798df25a505ebf931f7bec1f80f1f85f" kindref="member">PSA_ERROR_INVALID_ARGUMENT</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>key</computeroutput> is not a valid persistent key identifier. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="group__error_1ga4d1b8dd8526177a15a210b7afc1accb1" kindref="member">PSA_ERROR_NOT_PERMITTED</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The specified key exists, but the application does not have the permission to access it. Note that this specification does not define any way to create such a key, but it may be possible through implementation-specific means. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="group__error_1ga5cdb6948371d49e916106249020ea3f7" kindref="member">PSA_ERROR_COMMUNICATION_FAILURE</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="group__error_1ga116f4d4c6a9d9db3397991a8472d8950" kindref="member">PSA_ERROR_CORRUPTION_DETECTED</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="group__error_1gadd169a1af2707862b95fb9df91dfc37d" kindref="member">PSA_ERROR_STORAGE_FAILURE</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="group__error_1gacebfbd25a7c2a727694fb57182a66533" kindref="member">PSA_ERROR_DATA_INVALID</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="group__error_1ga9febb81a44bdeb4c6c42bf4f697b13bf" kindref="member">PSA_ERROR_DATA_CORRUPT</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="group__error_1ga933d40fa2a591004f2e93aa91e11db84" kindref="member">PSA_ERROR_BAD_STATE</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The library has not been previously initialized by <ref refid="group__initialization_1ga2de150803fc2f7dc6101d5af7e921dd9" kindref="member">psa_crypto_init()</ref>. It is implementation-dependent whether a failure to initialize results in this error code. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_compat.h" line="106" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="crypto__compat_8h_1aa09b720d299dfe6b9f41c36e448078eb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__error_1ga05676e70ba5c6a7565aff3c36677c1f9" kindref="member">psa_status_t</ref></type>
+        <definition>psa_status_t psa_close_key</definition>
+        <argsstring>(psa_key_handle_t handle)</argsstring>
+        <name>psa_close_key</name>
+        <param>
+          <type><ref refid="crypto__compat_8h_1a0a6f2a05474d7789332f228946840504" kindref="member">psa_key_handle_t</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Close a key handle.</para><para>If the handle designates a volatile key, this will destroy the key material and free all associated resources, just like <ref refid="group__key__management_1ga5f52644312291335682fbc0292c43cd2" kindref="member">psa_destroy_key()</ref>.</para><para>If this is the last open handle to a persistent key, then closing the handle will free all resources associated with the key in volatile memory. The key data in persistent storage is not affected and can be opened again later with a call to <ref refid="crypto__compat_8h_1a950f0f358a0a012b043d02e55faed7c0" kindref="member">psa_open_key()</ref>.</para><para>Closing the key handle makes the handle invalid, and the key handle must not be used again by the application.</para><para><simplesect kind="note"><para>This API is not part of the PSA Cryptography API Release 1.0.0 specification. It was defined in the 1.0 Beta 3 version of the specification but was removed in the 1.0.0 released version. This API is kept for the time being to not break applications relying on it. It is not deprecated yet but will be in the near future.</para><simplesectsep/><para>If the key handle was used to set up an active :ref:`multipart operation &lt;multipart-operations&gt;`, then closing the key handle can cause the multipart operation to fail. Applications should maintain the key handle until after the multipart operation has finished.</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The key handle to close. If this is <computeroutput>0</computeroutput>, do nothing and return <computeroutput>PSA_SUCCESS</computeroutput>.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="group__error_1ga4cc859e2c66ca381c7418db3527a65e1" kindref="member">PSA_SUCCESS</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>handle</computeroutput> was a valid handle or <computeroutput>0</computeroutput>. It is now closed. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="group__error_1gadf22718935657c2c3168c228204085f9" kindref="member">PSA_ERROR_INVALID_HANDLE</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>handle</computeroutput> is not a valid handle nor <computeroutput>0</computeroutput>. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="group__error_1ga5cdb6948371d49e916106249020ea3f7" kindref="member">PSA_ERROR_COMMUNICATION_FAILURE</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="group__error_1ga116f4d4c6a9d9db3397991a8472d8950" kindref="member">PSA_ERROR_CORRUPTION_DETECTED</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="group__error_1ga933d40fa2a591004f2e93aa91e11db84" kindref="member">PSA_ERROR_BAD_STATE</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The library has not been previously initialized by <ref refid="group__initialization_1ga2de150803fc2f7dc6101d5af7e921dd9" kindref="member">psa_crypto_init()</ref>. It is implementation-dependent whether a failure to initialize results in this error code. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_compat.h" line="147" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group__attributes_1ga780e4839104a518e3c52c7b6b96dcc9b" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group__error_1ga05676e70ba5c6a7565aff3c36677c1f9" kindref="member">psa_status_t</ref> MBEDTLS_DEPRECATED</type>
+        <definition>static psa_status_t MBEDTLS_DEPRECATED psa_set_key_domain_parameters</definition>
+        <argsstring>(psa_key_attributes_t *attributes, psa_key_type_t type, const uint8_t *data, size_t data_length)</argsstring>
+        <name>psa_set_key_domain_parameters</name>
+        <param>
+          <type><ref refid="group__attributes_1ga0ec645e1fdafe59d591104451ebf5680" kindref="member">psa_key_attributes_t</ref> *</type>
+          <declname>attributes</declname>
+        </param>
+        <param>
+          <type><ref refid="group__crypto__types_1ga63fce6880ca5933b5d6baa257febf1f6" kindref="member">psa_key_type_t</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>const uint8_t *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>data_length</declname>
+        </param>
+        <briefdescription>
+<para>Set domain parameters for a key. </para>        </briefdescription>
+        <detaileddescription>
+<para><xrefsect id="deprecated_1_deprecated000002"><xreftitle>Deprecated</xreftitle><xrefdescription><para>Mbed TLS no longer supports any domain parameters. This function only does the equivalent of <ref refid="group__attributes_1ga6857ef0ecb3fa844d4536939d9c64025" kindref="member">psa_set_key_type()</ref> and will be removed in a future version of the library.</para></xrefdescription></xrefsect></para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">attributes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Attribute structure where <computeroutput>type</computeroutput> will be set. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Key type (a <computeroutput>PSA_KEY_TYPE_XXX</computeroutput> value). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ignored. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data_length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Must be 0.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="group__error_1ga4cc859e2c66ca381c7418db3527a65e1" kindref="member">PSA_SUCCESS</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="group__error_1ga1dcc6d130633ed5db8942257581b55dd" kindref="member">PSA_ERROR_NOT_SUPPORTED</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_compat.h" line="180" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_compat.h" bodystart="180" bodyend="190"/>
+        <references refid="group__error_1ga1dcc6d130633ed5db8942257581b55dd" compoundref="crypto__values_8h" startline="73">PSA_ERROR_NOT_SUPPORTED</references>
+        <references refid="group__attributes_1ga6857ef0ecb3fa844d4536939d9c64025">psa_set_key_type</references>
+        <references refid="group__error_1ga4cc859e2c66ca381c7418db3527a65e1" compoundref="crypto__values_8h" startline="57">PSA_SUCCESS</references>
+      </memberdef>
+      <memberdef kind="function" id="group__attributes_1gae40c5b0309ede4a4d121681bf73069e0" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group__error_1ga05676e70ba5c6a7565aff3c36677c1f9" kindref="member">psa_status_t</ref> MBEDTLS_DEPRECATED</type>
+        <definition>static psa_status_t MBEDTLS_DEPRECATED psa_get_key_domain_parameters</definition>
+        <argsstring>(const psa_key_attributes_t *attributes, uint8_t *data, size_t data_size, size_t *data_length)</argsstring>
+        <name>psa_get_key_domain_parameters</name>
+        <param>
+          <type>const <ref refid="group__attributes_1ga0ec645e1fdafe59d591104451ebf5680" kindref="member">psa_key_attributes_t</ref> *</type>
+          <declname>attributes</declname>
+        </param>
+        <param>
+          <type>uint8_t *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>data_size</declname>
+        </param>
+        <param>
+          <type>size_t *</type>
+          <declname>data_length</declname>
+        </param>
+        <briefdescription>
+<para>Get domain parameters for a key. </para>        </briefdescription>
+        <detaileddescription>
+<para><xrefsect id="deprecated_1_deprecated000003"><xreftitle>Deprecated</xreftitle><xrefdescription><para>Mbed TLS no longer supports any domain parameters. This function alwaya has an empty output and will be removed in a future version of the library.</para></xrefdescription></xrefsect></para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">attributes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ignored. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ignored. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ignored. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">data_length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Set to 0.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="group__error_1ga4cc859e2c66ca381c7418db3527a65e1" kindref="member">PSA_SUCCESS</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_compat.h" line="206" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_compat.h" bodystart="206" bodyend="215"/>
+        <references refid="group__error_1ga4cc859e2c66ca381c7418db3527a65e1" compoundref="crypto__values_8h" startline="57">PSA_SUCCESS</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>PSA cryptography module: Backward compatibility aliases. </para>    </briefdescription>
+    <detaileddescription>
+<para>This header declares alternative names for macro and functions. New application code should not use these names. These names may be removed in a future version of Mbed TLS.</para><para><simplesect kind="note"><para>This file may not be included directly. Applications must include <ref refid="crypto_8h" kindref="compound">psa/crypto.h</ref>. </para></simplesect>
+</para>    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="13"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/><sp/>Copyright<sp/>The<sp/>Mbed<sp/>TLS<sp/>Contributors</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*<sp/><sp/>SPDX-License-Identifier:<sp/>Apache-2.0<sp/>OR<sp/>GPL-2.0-or-later</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>PSA_CRYPTO_COMPAT_H</highlight></codeline>
+<codeline lineno="19"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>PSA_CRYPTO_COMPAT_H</highlight></codeline>
+<codeline lineno="20"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight></codeline>
+<codeline lineno="22"><highlight class="preprocessor"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="24"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>*<sp/>To<sp/>support<sp/>both<sp/>openless<sp/>APIs<sp/>and<sp/>psa_open_key()<sp/>temporarily,<sp/>define</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>*<sp/>psa_key_handle_t<sp/>to<sp/>be<sp/>equal<sp/>to<sp/>mbedtls_svc_key_id_t.<sp/>Do<sp/>not<sp/>mark<sp/>the</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/>*<sp/>type<sp/>and<sp/>its<sp/>utility<sp/>macros<sp/>and<sp/>functions<sp/>deprecated<sp/>yet.<sp/>This<sp/>will<sp/>be<sp/>done</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/>*<sp/>in<sp/>a<sp/>subsequent<sp/>phase.</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31" refid="crypto__compat_8h_1a0a6f2a05474d7789332f228946840504" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/><ref refid="structmbedtls__svc__key__id__t" kindref="compound">mbedtls_svc_key_id_t</ref><sp/><ref refid="crypto__compat_8h_1a0a6f2a05474d7789332f228946840504" kindref="member">psa_key_handle_t</ref>;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33" refid="crypto__compat_8h_1a95017cf75d44a5ce463d585740a9bcf6" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>PSA_KEY_HANDLE_INIT<sp/>MBEDTLS_SVC_KEY_ID_INIT</highlight></codeline>
+<codeline lineno="34"><highlight class="preprocessor"></highlight></codeline>
+<codeline lineno="41" refid="crypto__compat_8h_1ab0a62e4db36560fc64e6a684abe1ef49" refkind="member"><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="crypto__compat_8h_1ab0a62e4db36560fc64e6a684abe1ef49" kindref="member">psa_key_handle_is_null</ref>(psa_key_handle_t<sp/>handle)</highlight></codeline>
+<codeline lineno="42"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group__key__lifetimes_1ga131f49c7d8f4cae1c40a018b956dbe78" kindref="member">mbedtls_svc_key_id_is_null</ref>(handle);</highlight></codeline>
+<codeline lineno="44"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><ref refid="group__error_1ga05676e70ba5c6a7565aff3c36677c1f9" kindref="member">psa_status_t</ref><sp/><ref refid="crypto__compat_8h_1a950f0f358a0a012b043d02e55faed7c0" kindref="member">psa_open_key</ref>(<ref refid="structmbedtls__svc__key__id__t" kindref="compound">mbedtls_svc_key_id_t</ref><sp/>key,</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>psa_key_handle_t<sp/>*handle);</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><ref refid="group__error_1ga05676e70ba5c6a7565aff3c36677c1f9" kindref="member">psa_status_t</ref><sp/><ref refid="crypto__compat_8h_1aa09b720d299dfe6b9f41c36e448078eb" kindref="member">psa_close_key</ref>(psa_key_handle_t<sp/>handle);</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="preprocessor">#if<sp/>!defined(MBEDTLS_DEPRECATED_REMOVED)</highlight></codeline>
+<codeline lineno="154"><highlight class="preprocessor"></highlight></codeline>
+<codeline lineno="161" refid="group__attributes_1gab930304ccac92e0729fb5535c87a9fc2" refkind="member"><highlight class="preprocessor">#define<sp/>PSA_DH_FAMILY_CUSTOM<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="162"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>((psa_dh_family_t)<sp/>MBEDTLS_DEPRECATED_NUMERIC_CONSTANT(0x7e))</highlight></codeline>
+<codeline lineno="163"><highlight class="preprocessor"></highlight></codeline>
+<codeline lineno="180" refid="group__attributes_1ga780e4839104a518e3c52c7b6b96dcc9b" refkind="member"><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/><ref refid="group__error_1ga05676e70ba5c6a7565aff3c36677c1f9" kindref="member">psa_status_t</ref><sp/>MBEDTLS_DEPRECATED<sp/><ref refid="group__attributes_1ga780e4839104a518e3c52c7b6b96dcc9b" kindref="member">psa_set_key_domain_parameters</ref>(</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structpsa__key__attributes__s" kindref="compound">psa_key_attributes_t</ref><sp/>*attributes,</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__crypto__types_1ga63fce6880ca5933b5d6baa257febf1f6" kindref="member">psa_key_type_t</ref><sp/>type,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>*data,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>data_length)</highlight></codeline>
+<codeline lineno="183"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/>(void)<sp/>data;</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(data_length<sp/>!=<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group__error_1ga1dcc6d130633ed5db8942257581b55dd" kindref="member">PSA_ERROR_NOT_SUPPORTED</ref>;</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__attributes_1ga6857ef0ecb3fa844d4536939d9c64025" kindref="member">psa_set_key_type</ref>(attributes,<sp/>type);</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group__error_1ga4cc859e2c66ca381c7418db3527a65e1" kindref="member">PSA_SUCCESS</ref>;</highlight></codeline>
+<codeline lineno="190"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"></highlight></codeline>
+<codeline lineno="206" refid="group__attributes_1gae40c5b0309ede4a4d121681bf73069e0" refkind="member"><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/><ref refid="group__error_1ga05676e70ba5c6a7565aff3c36677c1f9" kindref="member">psa_status_t</ref><sp/>MBEDTLS_DEPRECATED<sp/><ref refid="group__attributes_1gae40c5b0309ede4a4d121681bf73069e0" kindref="member">psa_get_key_domain_parameters</ref>(</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structpsa__key__attributes__s" kindref="compound">psa_key_attributes_t</ref><sp/>*attributes,</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>*data,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>data_size,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>*data_length)</highlight></codeline>
+<codeline lineno="209"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/>(void)<sp/>attributes;</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/>(void)<sp/>data;</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/>(void)<sp/>data_size;</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/>*data_length<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group__error_1ga4cc859e2c66ca381c7418db3527a65e1" kindref="member">PSA_SUCCESS</ref>;</highlight></codeline>
+<codeline lineno="215"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"></highlight></codeline>
+<codeline lineno="220" refid="group__attributes_1ga59089e39970e89191105bd3b3294c3bd" refkind="member"><highlight class="preprocessor">#define<sp/>PSA_KEY_DOMAIN_PARAMETERS_SIZE(key_type,<sp/>key_bits)<sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="221"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>MBEDTLS_DEPRECATED_NUMERIC_CONSTANT(1u)</highlight></codeline>
+<codeline lineno="222"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>MBEDTLS_DEPRECATED_REMOVED<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+<codeline lineno="223"><highlight class="preprocessor"></highlight></codeline>
+<codeline lineno="226"><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight></codeline>
+<codeline lineno="227"><highlight class="preprocessor"></highlight><highlight class="normal">}</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="229"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="230"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>PSA_CRYPTO_COMPAT_H<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_compat.h"/>
+  </compounddef>
+</doxygen>

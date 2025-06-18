@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="rsa__alt_8h" kind="file">
+    <compoundname>rsa_alt.h</compoundname>
+    <includedby refid="rsa_8h" local="yes">rsa.h</includedby>
+    <invincdepgraph>
+      <node id="8399">
+        <label>ssl.h</label>
+        <link refid="ssl_8h"/>
+        <childnode refid="8400" relation="include">
+        </childnode>
+        <childnode refid="8401" relation="include">
+        </childnode>
+        <childnode refid="8402" relation="include">
+        </childnode>
+        <childnode refid="8403" relation="include">
+        </childnode>
+        <childnode refid="8404" relation="include">
+        </childnode>
+      </node>
+      <node id="8410">
+        <label>oid.h</label>
+        <link refid="oid_8h"/>
+      </node>
+      <node id="8405">
+        <label>x509.h</label>
+        <link refid="x509_8h"/>
+        <childnode refid="8406" relation="include">
+        </childnode>
+        <childnode refid="8408" relation="include">
+        </childnode>
+        <childnode refid="8409" relation="include">
+        </childnode>
+      </node>
+      <node id="8407">
+        <label>pkcs7.h</label>
+        <link refid="pkcs7_8h"/>
+      </node>
+      <node id="8404">
+        <label>ssl_ticket.h</label>
+        <link refid="ssl__ticket_8h"/>
+      </node>
+      <node id="8398">
+        <label>ssl_ciphersuites.h</label>
+        <link refid="ssl__ciphersuites_8h"/>
+        <childnode refid="8399" relation="include">
+        </childnode>
+      </node>
+      <node id="8403">
+        <label>ssl_cookie.h</label>
+        <link refid="ssl__cookie_8h"/>
+      </node>
+      <node id="8395">
+        <label>rsa_alt.h</label>
+        <link refid="rsa_alt.h"/>
+        <childnode refid="8396" relation="include">
+        </childnode>
+      </node>
+      <node id="8400">
+        <label>debug.h</label>
+        <link refid="debug_8h"/>
+      </node>
+      <node id="8402">
+        <label>ssl_cache.h</label>
+        <link refid="ssl__cache_8h"/>
+      </node>
+      <node id="8409">
+        <label>x509_csr.h</label>
+        <link refid="x509__csr_8h"/>
+      </node>
+      <node id="8396">
+        <label>rsa.h</label>
+        <link refid="rsa_8h"/>
+        <childnode refid="8397" relation="include">
+        </childnode>
+        <childnode refid="8405" relation="include">
+        </childnode>
+      </node>
+      <node id="8397">
+        <label>pk.h</label>
+        <link refid="pk_8h"/>
+        <childnode refid="8398" relation="include">
+        </childnode>
+        <childnode refid="8405" relation="include">
+        </childnode>
+        <childnode refid="8410" relation="include">
+        </childnode>
+      </node>
+      <node id="8406">
+        <label>x509_crt.h</label>
+        <link refid="x509__crt_8h"/>
+        <childnode refid="8399" relation="include">
+        </childnode>
+        <childnode refid="8407" relation="include">
+        </childnode>
+      </node>
+      <node id="8401">
+        <label>net_sockets.h</label>
+        <link refid="net__sockets_8h"/>
+      </node>
+      <node id="8408">
+        <label>x509_crl.h</label>
+        <link refid="x509__crl_8h"/>
+        <childnode refid="8406" relation="include">
+        </childnode>
+        <childnode refid="8399" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structmbedtls__rsa__context" prot="public">mbedtls_rsa_context</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="rsa__alt_8h_1ac141e7327c8a77e161438ad695ac434a" prot="public" static="no">
+        <type>struct <ref refid="structmbedtls__rsa__context" kindref="compound">mbedtls_rsa_context</ref></type>
+        <definition>typedef struct mbedtls_rsa_context
+ mbedtls_rsa_context</definition>
+        <argsstring></argsstring>
+        <name>mbedtls_rsa_context</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/tests/include/alt-dummy/rsa_alt.h" line="13" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*<sp/>rsa_alt.h<sp/>with<sp/>dummy<sp/>types<sp/>for<sp/>MBEDTLS_RSA_ALT<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/><sp/>Copyright<sp/>The<sp/>Mbed<sp/>TLS<sp/>Contributors</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*<sp/><sp/>SPDX-License-Identifier:<sp/>Apache-2.0<sp/>OR<sp/>GPL-2.0-or-later</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>RSA_ALT_H</highlight></codeline>
+<codeline lineno="8"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>RSA_ALT_H</highlight></codeline>
+<codeline lineno="9"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10" refid="structmbedtls__rsa__context" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structmbedtls__rsa__context" kindref="compound">mbedtls_rsa_context</ref><sp/>{</highlight></codeline>
+<codeline lineno="11" refid="structmbedtls__rsa__context_1adf7c8fb47077126d1956eeec98738487" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structmbedtls__rsa__context_1adf7c8fb47077126d1956eeec98738487" kindref="member">dummy</ref>;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><ref refid="rsa__alt_8h_1ac141e7327c8a77e161438ad695ac434a" kindref="member">mbedtls_rsa_context</ref>;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>rsa_alt.h<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/tests/include/alt-dummy/rsa_alt.h"/>
+  </compounddef>
+</doxygen>

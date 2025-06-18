@@ -1,0 +1,368 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="block__cipher_8h" kind="file">
+    <compoundname>block_cipher.h</compoundname>
+    <includes refid="private__access_8h" local="yes">mbedtls/private_access.h</includes>
+    <includes refid="mbedtls_2build__info_8h" local="yes">mbedtls/build_info.h</includes>
+    <includes refid="aes_8h" local="yes">mbedtls/aes.h</includes>
+    <includes refid="aria_8h" local="yes">mbedtls/aria.h</includes>
+    <includes refid="camellia_8h" local="yes">mbedtls/camellia.h</includes>
+    <incdepgraph>
+      <node id="4824">
+        <label>mbedtls/platform_time.h</label>
+        <link refid="platform__time_8h"/>
+        <childnode refid="4803" relation="include">
+        </childnode>
+        <childnode refid="4825" relation="include">
+        </childnode>
+        <childnode refid="4820" relation="include">
+        </childnode>
+        <childnode refid="4826" relation="include">
+        </childnode>
+      </node>
+      <node id="4809">
+        <label>mbedcrypto/psa/crypto_adjust_config_synonyms.h</label>
+        <link refid="crypto__adjust__config__synonyms_8h"/>
+      </node>
+      <node id="4814">
+        <label>mbedtls/config_adjust_psa_from_legacy.h</label>
+        <link refid="config__adjust__psa__from__legacy_8h"/>
+      </node>
+      <node id="4811">
+        <label>mbedcrypto/psa/crypto_adjust_config_key_pair_types.h</label>
+        <link refid="crypto__adjust__config__key__pair__types_8h"/>
+      </node>
+      <node id="4820">
+        <label>stdint.h</label>
+      </node>
+      <node id="4804">
+        <label>mbedtls/mbedtls_config.h</label>
+        <link refid="mbedtls__config_8h"/>
+      </node>
+      <node id="4830">
+        <label>mbedtls/camellia.h</label>
+        <link refid="camellia_8h"/>
+        <childnode refid="4802" relation="include">
+        </childnode>
+        <childnode refid="4803" relation="include">
+        </childnode>
+        <childnode refid="4823" relation="include">
+        </childnode>
+        <childnode refid="4820" relation="include">
+        </childnode>
+        <childnode refid="4822" relation="include">
+        </childnode>
+        <childnode refid="4831" relation="include">
+        </childnode>
+      </node>
+      <node id="4807">
+        <label>mbedtls/config_psa.h</label>
+        <link refid="config__psa_8h"/>
+        <childnode refid="4808" relation="include">
+        </childnode>
+        <childnode refid="4809" relation="include">
+        </childnode>
+        <childnode refid="4810" relation="include">
+        </childnode>
+        <childnode refid="4811" relation="include">
+        </childnode>
+        <childnode refid="4812" relation="include">
+        </childnode>
+        <childnode refid="4813" relation="include">
+        </childnode>
+        <childnode refid="4814" relation="include">
+        </childnode>
+      </node>
+      <node id="4827">
+        <label>aes_alt.h</label>
+        <link refid="aes__alt_8h"/>
+      </node>
+      <node id="4818">
+        <label>mbedtls/check_config.h</label>
+        <link refid="check__config_8h"/>
+        <childnode refid="4819" relation="include">
+        </childnode>
+        <childnode refid="4820" relation="include">
+        </childnode>
+      </node>
+      <node id="4801">
+        <label>block_cipher.h</label>
+        <link refid="block_cipher.h"/>
+        <childnode refid="4802" relation="include">
+        </childnode>
+        <childnode refid="4803" relation="include">
+        </childnode>
+        <childnode refid="4821" relation="include">
+        </childnode>
+        <childnode refid="4828" relation="include">
+        </childnode>
+        <childnode refid="4830" relation="include">
+        </childnode>
+      </node>
+      <node id="4806">
+        <label>psa/crypto_config.h</label>
+        <link refid="crypto__config_8h"/>
+      </node>
+      <node id="4828">
+        <label>mbedtls/aria.h</label>
+        <link refid="aria_8h"/>
+        <childnode refid="4802" relation="include">
+        </childnode>
+        <childnode refid="4803" relation="include">
+        </childnode>
+        <childnode refid="4823" relation="include">
+        </childnode>
+        <childnode refid="4820" relation="include">
+        </childnode>
+        <childnode refid="4822" relation="include">
+        </childnode>
+        <childnode refid="4829" relation="include">
+        </childnode>
+      </node>
+      <node id="4823">
+        <label>stddef.h</label>
+      </node>
+      <node id="4822">
+        <label>mbedtls/platform_util.h</label>
+        <link refid="platform__util_8h"/>
+        <childnode refid="4803" relation="include">
+        </childnode>
+        <childnode refid="4823" relation="include">
+        </childnode>
+        <childnode refid="4824" relation="include">
+        </childnode>
+        <childnode refid="4825" relation="include">
+        </childnode>
+      </node>
+      <node id="4821">
+        <label>mbedtls/aes.h</label>
+        <link refid="aes_8h"/>
+        <childnode refid="4802" relation="include">
+        </childnode>
+        <childnode refid="4803" relation="include">
+        </childnode>
+        <childnode refid="4822" relation="include">
+        </childnode>
+        <childnode refid="4823" relation="include">
+        </childnode>
+        <childnode refid="4820" relation="include">
+        </childnode>
+        <childnode refid="4827" relation="include">
+        </childnode>
+      </node>
+      <node id="4819">
+        <label>limits.h</label>
+      </node>
+      <node id="4817">
+        <label>mbedtls/config_adjust_ssl.h</label>
+        <link refid="config__adjust__ssl_8h"/>
+      </node>
+      <node id="4808">
+        <label>mbedcrypto/psa/crypto_legacy.h</label>
+        <link refid="crypto__legacy_8h"/>
+      </node>
+      <node id="4813">
+        <label>mbedcrypto/psa/crypto_adjust_auto_enabled.h</label>
+        <link refid="crypto__adjust__auto__enabled_8h"/>
+      </node>
+      <node id="4829">
+        <label>aria_alt.h</label>
+        <link refid="aria__alt_8h"/>
+      </node>
+      <node id="4825">
+        <label>time.h</label>
+      </node>
+      <node id="4803">
+        <label>mbedtls/build_info.h</label>
+        <link refid="mbedtls_2build__info_8h"/>
+        <childnode refid="4804" relation="include">
+        </childnode>
+        <childnode refid="4805" relation="include">
+        </childnode>
+        <childnode refid="4806" relation="include">
+        </childnode>
+        <childnode refid="4807" relation="include">
+        </childnode>
+        <childnode refid="4815" relation="include">
+        </childnode>
+        <childnode refid="4816" relation="include">
+        </childnode>
+        <childnode refid="4817" relation="include">
+        </childnode>
+        <childnode refid="4818" relation="include">
+        </childnode>
+      </node>
+      <node id="4816">
+        <label>mbedtls/config_adjust_x509.h</label>
+        <link refid="config__adjust__x509_8h"/>
+      </node>
+      <node id="4831">
+        <label>camellia_alt.h</label>
+        <link refid="camellia__alt_8h"/>
+      </node>
+      <node id="4812">
+        <label>mbedtls/config_adjust_legacy_from_psa.h</label>
+        <link refid="config__adjust__legacy__from__psa_8h"/>
+      </node>
+      <node id="4805">
+        <label>/dev/null</label>
+      </node>
+      <node id="4802">
+        <label>mbedtls/private_access.h</label>
+        <link refid="private__access_8h"/>
+      </node>
+      <node id="4815">
+        <label>mbedtls/config_adjust_legacy_crypto.h</label>
+        <link refid="config__adjust__legacy__crypto_8h"/>
+      </node>
+      <node id="4810">
+        <label>mbedtls/config_adjust_psa_superset_legacy.h</label>
+        <link refid="config__adjust__psa__superset__legacy_8h"/>
+      </node>
+      <node id="4826">
+        <label>inttypes.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structmbedtls__block__cipher__context__t" prot="public">mbedtls_block_cipher_context_t</innerclass>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="block__cipher_8h_1a4ea902984e31452e729f4e287b6072b6" prot="public" static="no">
+        <name>mbedtls_block_cipher_id_t</name>
+        <enumvalue id="block__cipher_8h_1a4ea902984e31452e729f4e287b6072b6adc92eadde40f3523412e1f9f9077535f" prot="public">
+          <name>MBEDTLS_BLOCK_CIPHER_ID_NONE</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Unset. </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="block__cipher_8h_1a4ea902984e31452e729f4e287b6072b6a5e4db4e919fa8b38aa6eac0d3a51dd3c" prot="public">
+          <name>MBEDTLS_BLOCK_CIPHER_ID_AES</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>The AES cipher. </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="block__cipher_8h_1a4ea902984e31452e729f4e287b6072b6ac39755b483ec8ecab3f3e88d1222f0c6" prot="public">
+          <name>MBEDTLS_BLOCK_CIPHER_ID_CAMELLIA</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>The Camellia cipher. </para>          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="block__cipher_8h_1a4ea902984e31452e729f4e287b6072b6a67d5ae33562bdf4f4bc221196559a832" prot="public">
+          <name>MBEDTLS_BLOCK_CIPHER_ID_ARIA</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>The Aria cipher. </para>          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/block_cipher.h" line="35" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/block_cipher.h" bodystart="35" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="enum" id="block__cipher_8h_1a2b8b3c31dd3972be3decf44f58ea030d" prot="public" static="no">
+        <name>mbedtls_block_cipher_engine_t</name>
+        <enumvalue id="block__cipher_8h_1a2b8b3c31dd3972be3decf44f58ea030da1d7eecdf8c126f7eb00c6801b38225f6" prot="public">
+          <name>MBEDTLS_BLOCK_CIPHER_ENGINE_LEGACY</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="block__cipher_8h_1a2b8b3c31dd3972be3decf44f58ea030da3fc464bc899ac46bfad066ac6399e8b6" prot="public">
+          <name>MBEDTLS_BLOCK_CIPHER_ENGINE_PSA</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Used internally to indicate whether a context uses legacy or PSA.</para><para>Internal use only. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/block_cipher.h" line="47" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/block_cipher.h" bodystart="47" bodyend="50"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Internal abstraction layer. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="6"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/><sp/>Copyright<sp/>The<sp/>Mbed<sp/>TLS<sp/>Contributors</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*<sp/><sp/>SPDX-License-Identifier:<sp/>Apache-2.0<sp/>OR<sp/>GPL-2.0-or-later</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>MBEDTLS_BLOCK_CIPHER_H</highlight></codeline>
+<codeline lineno="11"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>MBEDTLS_BLOCK_CIPHER_H</highlight></codeline>
+<codeline lineno="12"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="private__access_8h" kindref="compound">mbedtls/private_access.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="mbedtls_2build__info_8h" kindref="compound">mbedtls/build_info.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(MBEDTLS_AES_C)</highlight></codeline>
+<codeline lineno="18"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="aes_8h" kindref="compound">mbedtls/aes.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="20"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#if<sp/>defined(MBEDTLS_ARIA_C)</highlight></codeline>
+<codeline lineno="21"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="aria_8h" kindref="compound">mbedtls/aria.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="23"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#if<sp/>defined(MBEDTLS_CAMELLIA_C)</highlight></codeline>
+<codeline lineno="24"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="camellia_8h" kindref="compound">mbedtls/camellia.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="26"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(MBEDTLS_BLOCK_CIPHER_SOME_PSA)</highlight></codeline>
+<codeline lineno="28"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="crypto__types_8h" kindref="compound">psa/crypto_types.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="30"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight></codeline>
+<codeline lineno="32"><highlight class="preprocessor"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="34"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35" refid="block__cipher_8h_1a4ea902984e31452e729f4e287b6072b6" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="36" refid="block__cipher_8h_1a4ea902984e31452e729f4e287b6072b6adc92eadde40f3523412e1f9f9077535f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="block__cipher_8h_1a4ea902984e31452e729f4e287b6072b6adc92eadde40f3523412e1f9f9077535f" kindref="member">MBEDTLS_BLOCK_CIPHER_ID_NONE</ref><sp/>=<sp/>0,<sp/><sp/></highlight></codeline>
+<codeline lineno="37" refid="block__cipher_8h_1a4ea902984e31452e729f4e287b6072b6a5e4db4e919fa8b38aa6eac0d3a51dd3c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="block__cipher_8h_1a4ea902984e31452e729f4e287b6072b6a5e4db4e919fa8b38aa6eac0d3a51dd3c" kindref="member">MBEDTLS_BLOCK_CIPHER_ID_AES</ref>,<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="38" refid="block__cipher_8h_1a4ea902984e31452e729f4e287b6072b6ac39755b483ec8ecab3f3e88d1222f0c6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="block__cipher_8h_1a4ea902984e31452e729f4e287b6072b6ac39755b483ec8ecab3f3e88d1222f0c6" kindref="member">MBEDTLS_BLOCK_CIPHER_ID_CAMELLIA</ref>,<sp/><sp/></highlight></codeline>
+<codeline lineno="39" refid="block__cipher_8h_1a4ea902984e31452e729f4e287b6072b6a67d5ae33562bdf4f4bc221196559a832" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="block__cipher_8h_1a4ea902984e31452e729f4e287b6072b6a67d5ae33562bdf4f4bc221196559a832" kindref="member">MBEDTLS_BLOCK_CIPHER_ID_ARIA</ref>,<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="40"><highlight class="normal">}<sp/><ref refid="block__cipher_8h_1a4ea902984e31452e729f4e287b6072b6" kindref="member">mbedtls_block_cipher_id_t</ref>;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47" refid="block__cipher_8h_1a2b8b3c31dd3972be3decf44f58ea030d" refkind="member"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="48" refid="block__cipher_8h_1a2b8b3c31dd3972be3decf44f58ea030da1d7eecdf8c126f7eb00c6801b38225f6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="block__cipher_8h_1a2b8b3c31dd3972be3decf44f58ea030da1d7eecdf8c126f7eb00c6801b38225f6" kindref="member">MBEDTLS_BLOCK_CIPHER_ENGINE_LEGACY</ref><sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="49" refid="block__cipher_8h_1a2b8b3c31dd3972be3decf44f58ea030da3fc464bc899ac46bfad066ac6399e8b6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="block__cipher_8h_1a2b8b3c31dd3972be3decf44f58ea030da3fc464bc899ac46bfad066ac6399e8b6" kindref="member">MBEDTLS_BLOCK_CIPHER_ENGINE_PSA</ref>,</highlight></codeline>
+<codeline lineno="50"><highlight class="normal">}<sp/><ref refid="block__cipher_8h_1a2b8b3c31dd3972be3decf44f58ea030d" kindref="member">mbedtls_block_cipher_engine_t</ref>;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52" refid="structmbedtls__block__cipher__context__t" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="53" refid="structmbedtls__block__cipher__context__t_1a82b8d96fc73579a71b388d4fd0ca5808" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="block__cipher_8h_1a4ea902984e31452e729f4e287b6072b6" kindref="member">mbedtls_block_cipher_id_t</ref><sp/><ref refid="private__access_8h_1a86c7c64c999531bacf3c31619ff9de8d" kindref="member">MBEDTLS_PRIVATE</ref>(</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(MBEDTLS_BLOCK_CIPHER_SOME_PSA)</highlight></codeline>
+<codeline lineno="55"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="block__cipher_8h_1a2b8b3c31dd3972be3decf44f58ea030d" kindref="member">mbedtls_block_cipher_engine_t</ref><sp/><ref refid="private__access_8h_1a86c7c64c999531bacf3c31619ff9de8d" kindref="member">MBEDTLS_PRIVATE</ref>(engine);</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structmbedtls__svc__key__id__t" kindref="compound">mbedtls_svc_key_id_t</ref><sp/><ref refid="private__access_8h_1a86c7c64c999531bacf3c31619ff9de8d" kindref="member">MBEDTLS_PRIVATE</ref>(psa_key_id);</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="58"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">union<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="59" refid="structmbedtls__block__cipher__context__t_1a7ddbbb4a0606f6a5839c4848d1cc916c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/><ref refid="structmbedtls__block__cipher__context__t_1a7ddbbb4a0606f6a5839c4848d1cc916c" kindref="member">dummy</ref>;<sp/></highlight><highlight class="comment">/*<sp/>Make<sp/>the<sp/>union<sp/>non-empty<sp/>even<sp/>with<sp/>no<sp/>supported<sp/>algorithms.<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(MBEDTLS_AES_C)</highlight></codeline>
+<codeline lineno="61" refid="structmbedtls__block__cipher__context__t_1ad93f00ca72b5c2942c4649be8bad7803" refkind="member"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structmbedtls__aes__context" kindref="compound">mbedtls_aes_context</ref><sp/><ref refid="private__access_8h_1a86c7c64c999531bacf3c31619ff9de8d" kindref="member">MBEDTLS_PRIVATE</ref>(aes);</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="63"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#if<sp/>defined(MBEDTLS_ARIA_C)</highlight></codeline>
+<codeline lineno="64" refid="structmbedtls__block__cipher__context__t_1ae4beeee5c2d67b4d71c4a5298eb26f0a" refkind="member"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structmbedtls__aria__context" kindref="compound">mbedtls_aria_context</ref><sp/><ref refid="private__access_8h_1a86c7c64c999531bacf3c31619ff9de8d" kindref="member">MBEDTLS_PRIVATE</ref>(aria);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="66"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#if<sp/>defined(MBEDTLS_CAMELLIA_C)</highlight></codeline>
+<codeline lineno="67" refid="structmbedtls__block__cipher__context__t_1ae94bace665990e9bb2ab37c491956a89" refkind="member"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structmbedtls__camellia__context" kindref="compound">mbedtls_camellia_context</ref><sp/><ref refid="private__access_8h_1a86c7c64c999531bacf3c31619ff9de8d" kindref="member">MBEDTLS_PRIVATE</ref>(camellia);</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="69"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/><ref refid="private__access_8h_1a86c7c64c999531bacf3c31619ff9de8d" kindref="member">MBEDTLS_PRIVATE</ref>(ctx);</highlight></codeline>
+<codeline lineno="70"><highlight class="normal">}<sp/><ref refid="structmbedtls__block__cipher__context__t" kindref="compound">mbedtls_block_cipher_context_t</ref>;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight></codeline>
+<codeline lineno="73"><highlight class="preprocessor"></highlight><highlight class="normal">}</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="75"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>MBEDTLS_BLOCK_CIPHER_H<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/block_cipher.h"/>
+  </compounddef>
+</doxygen>

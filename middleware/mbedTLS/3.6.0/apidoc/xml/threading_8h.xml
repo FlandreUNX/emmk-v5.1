@@ -1,0 +1,619 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="threading_8h" kind="file">
+    <compoundname>threading.h</compoundname>
+    <includes refid="private__access_8h" local="yes">mbedtls/private_access.h</includes>
+    <includes refid="mbedtls_2build__info_8h" local="yes">mbedtls/build_info.h</includes>
+    <includes local="no">stdlib.h</includes>
+    <includes local="no">pthread.h</includes>
+    <includes refid="threading__alt_8h" local="yes">threading_alt.h</includes>
+    <includedby refid="entropy_8h" local="yes">entropy.h</includedby>
+    <includedby refid="ctr__drbg_8h" local="yes">ctr_drbg.h</includedby>
+    <includedby refid="rsa_8h" local="yes">rsa.h</includedby>
+    <includedby refid="hmac__drbg_8h" local="yes">hmac_drbg.h</includedby>
+    <includedby refid="ssl__cache_8h" local="yes">ssl_cache.h</includedby>
+    <includedby refid="ssl__ticket_8h" local="yes">ssl_ticket.h</includedby>
+    <incdepgraph>
+      <node id="8845">
+        <label>mbedcrypto/psa/crypto_adjust_config_synonyms.h</label>
+        <link refid="crypto__adjust__config__synonyms_8h"/>
+      </node>
+      <node id="8850">
+        <label>mbedtls/config_adjust_psa_from_legacy.h</label>
+        <link refid="config__adjust__psa__from__legacy_8h"/>
+      </node>
+      <node id="8859">
+        <label>threading_alt.h</label>
+        <link refid="threading__alt_8h"/>
+      </node>
+      <node id="8847">
+        <label>mbedcrypto/psa/crypto_adjust_config_key_pair_types.h</label>
+        <link refid="crypto__adjust__config__key__pair__types_8h"/>
+      </node>
+      <node id="8856">
+        <label>stdint.h</label>
+      </node>
+      <node id="8857">
+        <label>stdlib.h</label>
+      </node>
+      <node id="8840">
+        <label>mbedtls/mbedtls_config.h</label>
+        <link refid="mbedtls__config_8h"/>
+      </node>
+      <node id="8843">
+        <label>mbedtls/config_psa.h</label>
+        <link refid="config__psa_8h"/>
+        <childnode refid="8844" relation="include">
+        </childnode>
+        <childnode refid="8845" relation="include">
+        </childnode>
+        <childnode refid="8846" relation="include">
+        </childnode>
+        <childnode refid="8847" relation="include">
+        </childnode>
+        <childnode refid="8848" relation="include">
+        </childnode>
+        <childnode refid="8849" relation="include">
+        </childnode>
+        <childnode refid="8850" relation="include">
+        </childnode>
+      </node>
+      <node id="8854">
+        <label>mbedtls/check_config.h</label>
+        <link refid="check__config_8h"/>
+        <childnode refid="8855" relation="include">
+        </childnode>
+        <childnode refid="8856" relation="include">
+        </childnode>
+      </node>
+      <node id="8842">
+        <label>psa/crypto_config.h</label>
+        <link refid="crypto__config_8h"/>
+      </node>
+      <node id="8855">
+        <label>limits.h</label>
+      </node>
+      <node id="8853">
+        <label>mbedtls/config_adjust_ssl.h</label>
+        <link refid="config__adjust__ssl_8h"/>
+      </node>
+      <node id="8858">
+        <label>pthread.h</label>
+      </node>
+      <node id="8844">
+        <label>mbedcrypto/psa/crypto_legacy.h</label>
+        <link refid="crypto__legacy_8h"/>
+      </node>
+      <node id="8849">
+        <label>mbedcrypto/psa/crypto_adjust_auto_enabled.h</label>
+        <link refid="crypto__adjust__auto__enabled_8h"/>
+      </node>
+      <node id="8839">
+        <label>mbedtls/build_info.h</label>
+        <link refid="mbedtls_2build__info_8h"/>
+        <childnode refid="8840" relation="include">
+        </childnode>
+        <childnode refid="8841" relation="include">
+        </childnode>
+        <childnode refid="8842" relation="include">
+        </childnode>
+        <childnode refid="8843" relation="include">
+        </childnode>
+        <childnode refid="8851" relation="include">
+        </childnode>
+        <childnode refid="8852" relation="include">
+        </childnode>
+        <childnode refid="8853" relation="include">
+        </childnode>
+        <childnode refid="8854" relation="include">
+        </childnode>
+      </node>
+      <node id="8852">
+        <label>mbedtls/config_adjust_x509.h</label>
+        <link refid="config__adjust__x509_8h"/>
+      </node>
+      <node id="8848">
+        <label>mbedtls/config_adjust_legacy_from_psa.h</label>
+        <link refid="config__adjust__legacy__from__psa_8h"/>
+      </node>
+      <node id="8841">
+        <label>/dev/null</label>
+      </node>
+      <node id="8838">
+        <label>mbedtls/private_access.h</label>
+        <link refid="private__access_8h"/>
+      </node>
+      <node id="8851">
+        <label>mbedtls/config_adjust_legacy_crypto.h</label>
+        <link refid="config__adjust__legacy__crypto_8h"/>
+      </node>
+      <node id="8846">
+        <label>mbedtls/config_adjust_psa_superset_legacy.h</label>
+        <link refid="config__adjust__psa__superset__legacy_8h"/>
+      </node>
+      <node id="8837">
+        <label>threading.h</label>
+        <link refid="threading.h"/>
+        <childnode refid="8838" relation="include">
+        </childnode>
+        <childnode refid="8839" relation="include">
+        </childnode>
+        <childnode refid="8857" relation="include">
+        </childnode>
+        <childnode refid="8858" relation="include">
+        </childnode>
+        <childnode refid="8859" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="8861">
+        <label>entropy.h</label>
+        <link refid="entropy_8h"/>
+        <childnode refid="8862" relation="include">
+        </childnode>
+      </node>
+      <node id="8866">
+        <label>ssl.h</label>
+        <link refid="ssl_8h"/>
+        <childnode refid="8867" relation="include">
+        </childnode>
+        <childnode refid="8868" relation="include">
+        </childnode>
+        <childnode refid="8869" relation="include">
+        </childnode>
+        <childnode refid="8870" relation="include">
+        </childnode>
+        <childnode refid="8871" relation="include">
+        </childnode>
+      </node>
+      <node id="8877">
+        <label>oid.h</label>
+        <link refid="oid_8h"/>
+      </node>
+      <node id="8872">
+        <label>x509.h</label>
+        <link refid="x509_8h"/>
+        <childnode refid="8873" relation="include">
+        </childnode>
+        <childnode refid="8875" relation="include">
+        </childnode>
+        <childnode refid="8876" relation="include">
+        </childnode>
+      </node>
+      <node id="8874">
+        <label>pkcs7.h</label>
+        <link refid="pkcs7_8h"/>
+      </node>
+      <node id="8871">
+        <label>ssl_ticket.h</label>
+        <link refid="ssl__ticket_8h"/>
+      </node>
+      <node id="8865">
+        <label>ssl_ciphersuites.h</label>
+        <link refid="ssl__ciphersuites_8h"/>
+        <childnode refid="8866" relation="include">
+        </childnode>
+      </node>
+      <node id="8870">
+        <label>ssl_cookie.h</label>
+        <link refid="ssl__cookie_8h"/>
+      </node>
+      <node id="8867">
+        <label>debug.h</label>
+        <link refid="debug_8h"/>
+      </node>
+      <node id="8869">
+        <label>ssl_cache.h</label>
+        <link refid="ssl__cache_8h"/>
+      </node>
+      <node id="8876">
+        <label>x509_csr.h</label>
+        <link refid="x509__csr_8h"/>
+      </node>
+      <node id="8878">
+        <label>hmac_drbg.h</label>
+        <link refid="hmac__drbg_8h"/>
+      </node>
+      <node id="8863">
+        <label>rsa.h</label>
+        <link refid="rsa_8h"/>
+        <childnode refid="8864" relation="include">
+        </childnode>
+        <childnode refid="8872" relation="include">
+        </childnode>
+      </node>
+      <node id="8862">
+        <label>ctr_drbg.h</label>
+        <link refid="ctr__drbg_8h"/>
+      </node>
+      <node id="8864">
+        <label>pk.h</label>
+        <link refid="pk_8h"/>
+        <childnode refid="8865" relation="include">
+        </childnode>
+        <childnode refid="8872" relation="include">
+        </childnode>
+        <childnode refid="8877" relation="include">
+        </childnode>
+      </node>
+      <node id="8873">
+        <label>x509_crt.h</label>
+        <link refid="x509__crt_8h"/>
+        <childnode refid="8866" relation="include">
+        </childnode>
+        <childnode refid="8874" relation="include">
+        </childnode>
+      </node>
+      <node id="8868">
+        <label>net_sockets.h</label>
+        <link refid="net__sockets_8h"/>
+      </node>
+      <node id="8860">
+        <label>threading.h</label>
+        <link refid="threading.h"/>
+        <childnode refid="8861" relation="include">
+        </childnode>
+        <childnode refid="8862" relation="include">
+        </childnode>
+        <childnode refid="8863" relation="include">
+        </childnode>
+        <childnode refid="8878" relation="include">
+        </childnode>
+        <childnode refid="8869" relation="include">
+        </childnode>
+        <childnode refid="8871" relation="include">
+        </childnode>
+      </node>
+      <node id="8875">
+        <label>x509_crl.h</label>
+        <link refid="x509__crl_8h"/>
+        <childnode refid="8873" relation="include">
+        </childnode>
+        <childnode refid="8866" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structmbedtls__threading__mutex__t" prot="public">mbedtls_threading_mutex_t</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="threading_8h_1a76cd79a1ed3fd583ed3a4428d6a1e967" prot="public" static="no">
+        <name>MBEDTLS_ERR_THREADING_BAD_INPUT_DATA</name>
+        <initializer>-0x001C</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Bad input parameters to function. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/threading.h" line="23" column="9" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/threading.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="threading_8h_1a51005c51b928706511d3c2ea3390c07f" prot="public" static="no">
+        <name>MBEDTLS_ERR_THREADING_MUTEX_ERROR</name>
+        <initializer>-0x001E</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Locking / unlocking / free failed with error code. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/threading.h" line="25" column="9" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/threading.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="threading_8h_1aeb3bf51c492406c24d3ae91b864a6a18" prot="public" static="no">
+        <type>struct <ref refid="structmbedtls__threading__mutex__t" kindref="compound">mbedtls_threading_mutex_t</ref></type>
+        <definition>typedef struct mbedtls_threading_mutex_t  mbedtls_threading_mutex_t</definition>
+        <argsstring></argsstring>
+        <name>mbedtls_threading_mutex_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/threading.h" line="39" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="threading_8h_1a92228f8dc3c7b899b0f3d190c78c5383" prot="public" static="no" mutable="no">
+        <type>void(*</type>
+        <definition>void(* mbedtls_mutex_init)(mbedtls_threading_mutex_t *mutex)</definition>
+        <argsstring>)(mbedtls_threading_mutex_t *mutex)</argsstring>
+        <name>mbedtls_mutex_init</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/threading.h" line="81" column="1"/>
+      </memberdef>
+      <memberdef kind="variable" id="threading_8h_1a76b36ae7227a79d855795b1a0cdb21b6" prot="public" static="no" mutable="no">
+        <type>void(*</type>
+        <definition>void(* mbedtls_mutex_free)(mbedtls_threading_mutex_t *mutex)</definition>
+        <argsstring>)(mbedtls_threading_mutex_t *mutex)</argsstring>
+        <name>mbedtls_mutex_free</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/threading.h" line="82" column="1"/>
+      </memberdef>
+      <memberdef kind="variable" id="threading_8h_1a1de33e9651d8fa82ada873f7c41fe118" prot="public" static="no" mutable="no">
+        <type>int(*</type>
+        <definition>int(* mbedtls_mutex_lock)(mbedtls_threading_mutex_t *mutex)</definition>
+        <argsstring>)(mbedtls_threading_mutex_t *mutex)</argsstring>
+        <name>mbedtls_mutex_lock</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/threading.h" line="83" column="1"/>
+      </memberdef>
+      <memberdef kind="variable" id="threading_8h_1a3bc5b1a8f4c0b19a69db0978f4879b73" prot="public" static="no" mutable="no">
+        <type>int(*</type>
+        <definition>int(* mbedtls_mutex_unlock)(mbedtls_threading_mutex_t *mutex)</definition>
+        <argsstring>)(mbedtls_threading_mutex_t *mutex)</argsstring>
+        <name>mbedtls_mutex_unlock</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/threading.h" line="84" column="1"/>
+      </memberdef>
+      <memberdef kind="variable" id="threading_8h_1a87bbccdf40874b80a9f7313627734c38" prot="public" static="no" mutable="no">
+        <type><ref refid="structmbedtls__threading__mutex__t" kindref="compound">mbedtls_threading_mutex_t</ref></type>
+        <definition>mbedtls_threading_mutex_t mbedtls_threading_readdir_mutex</definition>
+        <argsstring></argsstring>
+        <name>mbedtls_threading_readdir_mutex</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/threading.h" line="90" column="1"/>
+      </memberdef>
+      <memberdef kind="variable" id="threading_8h_1aab13380c3189f3ee1278e41535712f25" prot="public" static="no" mutable="no">
+        <type><ref refid="structmbedtls__threading__mutex__t" kindref="compound">mbedtls_threading_mutex_t</ref></type>
+        <definition>mbedtls_threading_mutex_t mbedtls_threading_key_slot_mutex</definition>
+        <argsstring></argsstring>
+        <name>mbedtls_threading_key_slot_mutex</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/threading.h" line="114" column="1"/>
+      </memberdef>
+      <memberdef kind="variable" id="threading_8h_1ab7b6876b2b39a4fe5506257695e9b417" prot="public" static="no" mutable="no">
+        <type><ref refid="structmbedtls__threading__mutex__t" kindref="compound">mbedtls_threading_mutex_t</ref></type>
+        <definition>mbedtls_threading_mutex_t mbedtls_threading_psa_globaldata_mutex</definition>
+        <argsstring></argsstring>
+        <name>mbedtls_threading_psa_globaldata_mutex</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/threading.h" line="121" column="1"/>
+      </memberdef>
+      <memberdef kind="variable" id="threading_8h_1af186c9b0d0a584972d154c51a8a32ad4" prot="public" static="no" mutable="no">
+        <type><ref refid="structmbedtls__threading__mutex__t" kindref="compound">mbedtls_threading_mutex_t</ref></type>
+        <definition>mbedtls_threading_mutex_t mbedtls_threading_psa_rngdata_mutex</definition>
+        <argsstring></argsstring>
+        <name>mbedtls_threading_psa_rngdata_mutex</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/threading.h" line="128" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="threading_8h_1a827c7ec5b9ed1dfa35c77c0d3664de49" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void mbedtls_threading_set_alt</definition>
+        <argsstring>(void(*mutex_init)(mbedtls_threading_mutex_t *), void(*mutex_free)(mbedtls_threading_mutex_t *), int(*mutex_lock)(mbedtls_threading_mutex_t *), int(*mutex_unlock)(mbedtls_threading_mutex_t *))</argsstring>
+        <name>mbedtls_threading_set_alt</name>
+        <param>
+          <type>void(*)(<ref refid="structmbedtls__threading__mutex__t" kindref="compound">mbedtls_threading_mutex_t</ref> *)</type>
+          <declname>mutex_init</declname>
+        </param>
+        <param>
+          <type>void(*)(<ref refid="structmbedtls__threading__mutex__t" kindref="compound">mbedtls_threading_mutex_t</ref> *)</type>
+          <declname>mutex_free</declname>
+        </param>
+        <param>
+          <type>int(*)(<ref refid="structmbedtls__threading__mutex__t" kindref="compound">mbedtls_threading_mutex_t</ref> *)</type>
+          <declname>mutex_lock</declname>
+        </param>
+        <param>
+          <type>int(*)(<ref refid="structmbedtls__threading__mutex__t" kindref="compound">mbedtls_threading_mutex_t</ref> *)</type>
+          <declname>mutex_unlock</declname>
+        </param>
+        <briefdescription>
+<para>Set your alternate threading implementation function pointers and initialize global mutexes. If used, this function must be called once in the main thread before any other Mbed TLS function is called, and <ref refid="threading_8h_1a57912b195ee76e378ced4197822599af" kindref="member">mbedtls_threading_free_alt()</ref> must be called once in the main thread after all other Mbed TLS functions. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>mutex_init() and mutex_free() don&apos;t return a status code. If mutex_init() fails, it should leave its argument (the mutex) in a state such that mutex_lock() will fail when called with this argument.</para></simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>mutex_init</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the init function implementation </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mutex_free</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the free function implementation </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mutex_lock</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the lock function implementation </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mutex_unlock</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the unlock function implementation </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/threading.h" line="64" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="threading_8h_1a57912b195ee76e378ced4197822599af" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void mbedtls_threading_free_alt</definition>
+        <argsstring>(void)</argsstring>
+        <name>mbedtls_threading_free_alt</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Free global mutexes. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/threading.h" line="72" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Threading abstraction layer. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="6"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/><sp/>Copyright<sp/>The<sp/>Mbed<sp/>TLS<sp/>Contributors</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*<sp/><sp/>SPDX-License-Identifier:<sp/>Apache-2.0<sp/>OR<sp/>GPL-2.0-or-later</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>MBEDTLS_THREADING_H</highlight></codeline>
+<codeline lineno="11"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>MBEDTLS_THREADING_H</highlight></codeline>
+<codeline lineno="12"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="private__access_8h" kindref="compound">mbedtls/private_access.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="mbedtls_2build__info_8h" kindref="compound">mbedtls/build_info.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdlib.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight></codeline>
+<codeline lineno="19"><highlight class="preprocessor"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="21"><highlight class="preprocessor"></highlight></codeline>
+<codeline lineno="23" refid="threading_8h_1a76cd79a1ed3fd583ed3a4428d6a1e967" refkind="member"><highlight class="preprocessor">#define<sp/>MBEDTLS_ERR_THREADING_BAD_INPUT_DATA<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-0x001C</highlight></codeline>
+<codeline lineno="24"><highlight class="preprocessor"></highlight></codeline>
+<codeline lineno="25" refid="threading_8h_1a51005c51b928706511d3c2ea3390c07f" refkind="member"><highlight class="preprocessor">#define<sp/>MBEDTLS_ERR_THREADING_MUTEX_ERROR<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-0x001E</highlight></codeline>
+<codeline lineno="26"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(MBEDTLS_THREADING_PTHREAD)</highlight></codeline>
+<codeline lineno="28"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#include<sp/>&lt;pthread.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29" refid="structmbedtls__threading__mutex__t" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structmbedtls__threading__mutex__t" kindref="compound">mbedtls_threading_mutex_t</ref><sp/>{</highlight></codeline>
+<codeline lineno="30" refid="structmbedtls__threading__mutex__t_1a8d7f88a1c24d4500634a519408c63725" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>pthread_mutex_t<sp/><ref refid="private__access_8h_1a86c7c64c999531bacf3c31619ff9de8d" kindref="member">MBEDTLS_PRIVATE</ref>(mutex);</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>WARNING<sp/>-<sp/>state<sp/>should<sp/>only<sp/>be<sp/>accessed<sp/>when<sp/>holding<sp/>the<sp/>mutex<sp/>lock<sp/>in</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>tests/src/threading_helpers.c,<sp/>otherwise<sp/>corruption<sp/>can<sp/>occur.</highlight></codeline>
+<codeline lineno="34"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>state<sp/>will<sp/>be<sp/>0<sp/>after<sp/>a<sp/>failed<sp/>init<sp/>or<sp/>a<sp/>free,<sp/>and<sp/>nonzero<sp/>after<sp/>a</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>successful<sp/>init.<sp/>This<sp/>field<sp/>is<sp/>for<sp/>testing<sp/>only<sp/>and<sp/>thus<sp/>not<sp/>considered</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>part<sp/>of<sp/>the<sp/>public<sp/>API<sp/>of<sp/>Mbed<sp/>TLS<sp/>and<sp/>may<sp/>change<sp/>without<sp/>notice.*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37" refid="structmbedtls__threading__mutex__t_1aaf41b61c0c2dc5f0bdb3f243d3a9c5ae" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/><ref refid="private__access_8h_1a86c7c64c999531bacf3c31619ff9de8d" kindref="member">MBEDTLS_PRIVATE</ref>(state);</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal">}<sp/><ref refid="threading_8h_1aeb3bf51c492406c24d3ae91b864a6a18" kindref="member">mbedtls_threading_mutex_t</ref>;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="41"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(MBEDTLS_THREADING_ALT)</highlight></codeline>
+<codeline lineno="43"><highlight class="preprocessor"></highlight><highlight class="comment">/*<sp/>You<sp/>should<sp/>define<sp/>the<sp/>mbedtls_threading_mutex_t<sp/>type<sp/>in<sp/>your<sp/>header<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="threading__alt_8h" kindref="compound">threading_alt.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="threading_8h_1a827c7ec5b9ed1dfa35c77c0d3664de49" kindref="member">mbedtls_threading_set_alt</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>(*mutex_init)(<ref refid="structmbedtls__threading__mutex__t" kindref="compound">mbedtls_threading_mutex_t</ref><sp/>*),</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>(*mutex_free)(<ref refid="structmbedtls__threading__mutex__t" kindref="compound">mbedtls_threading_mutex_t</ref><sp/>*),</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>(*mutex_lock)(<ref refid="structmbedtls__threading__mutex__t" kindref="compound">mbedtls_threading_mutex_t</ref><sp/>*),</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>(*mutex_unlock)(<ref refid="structmbedtls__threading__mutex__t" kindref="compound">mbedtls_threading_mutex_t</ref><sp/>*));</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="threading_8h_1a57912b195ee76e378ced4197822599af" kindref="member">mbedtls_threading_free_alt</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>MBEDTLS_THREADING_ALT<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+<codeline lineno="74"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(MBEDTLS_THREADING_C)</highlight></codeline>
+<codeline lineno="76"><highlight class="preprocessor"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="77"><highlight class="comment"><sp/>*<sp/>The<sp/>function<sp/>pointers<sp/>for<sp/>mutex_init,<sp/>mutex_free,<sp/>mutex_<sp/>and<sp/>mutex_unlock</highlight></codeline>
+<codeline lineno="78"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="79"><highlight class="comment"><sp/>*<sp/>All<sp/>these<sp/>functions<sp/>are<sp/>expected<sp/>to<sp/>work<sp/>or<sp/>the<sp/>result<sp/>will<sp/>be<sp/>undefined.</highlight></codeline>
+<codeline lineno="80"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>void<sp/>(*<ref refid="threading_8h_1a92228f8dc3c7b899b0f3d190c78c5383" kindref="member">mbedtls_mutex_init</ref>)(<ref refid="structmbedtls__threading__mutex__t" kindref="compound">mbedtls_threading_mutex_t</ref><sp/>*mutex);</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>void<sp/>(*<ref refid="threading_8h_1a76b36ae7227a79d855795b1a0cdb21b6" kindref="member">mbedtls_mutex_free</ref>)(<ref refid="structmbedtls__threading__mutex__t" kindref="compound">mbedtls_threading_mutex_t</ref><sp/>*mutex);</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>int<sp/>(*<ref refid="threading_8h_1a1de33e9651d8fa82ada873f7c41fe118" kindref="member">mbedtls_mutex_lock</ref>)(<ref refid="structmbedtls__threading__mutex__t" kindref="compound">mbedtls_threading_mutex_t</ref><sp/>*mutex);</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/>int<sp/>(*<ref refid="threading_8h_1a3bc5b1a8f4c0b19a69db0978f4879b73" kindref="member">mbedtls_mutex_unlock</ref>)(<ref refid="structmbedtls__threading__mutex__t" kindref="compound">mbedtls_threading_mutex_t</ref><sp/>*mutex);</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="87"><highlight class="comment"><sp/>*<sp/>Global<sp/>mutexes</highlight></codeline>
+<codeline lineno="88"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(MBEDTLS_FS_IO)</highlight></codeline>
+<codeline lineno="90"><highlight class="preprocessor"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/><ref refid="structmbedtls__threading__mutex__t" kindref="compound">mbedtls_threading_mutex_t</ref><sp/><ref refid="threading_8h_1a87bbccdf40874b80a9f7313627734c38" kindref="member">mbedtls_threading_readdir_mutex</ref>;</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="92"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(MBEDTLS_HAVE_TIME_DATE)<sp/>&amp;&amp;<sp/>!defined(MBEDTLS_PLATFORM_GMTIME_R_ALT)</highlight></codeline>
+<codeline lineno="94"><highlight class="preprocessor"></highlight><highlight class="comment">/*<sp/>This<sp/>mutex<sp/>may<sp/>or<sp/>may<sp/>not<sp/>be<sp/>used<sp/>in<sp/>the<sp/>default<sp/>definition<sp/>of</highlight></codeline>
+<codeline lineno="95"><highlight class="comment"><sp/>*<sp/>mbedtls_platform_gmtime_r(),<sp/>but<sp/>in<sp/>order<sp/>to<sp/>determine<sp/>that,</highlight></codeline>
+<codeline lineno="96"><highlight class="comment"><sp/>*<sp/>we<sp/>need<sp/>to<sp/>check<sp/>POSIX<sp/>features,<sp/>hence<sp/>modify<sp/>_POSIX_C_SOURCE.</highlight></codeline>
+<codeline lineno="97"><highlight class="comment"><sp/>*<sp/>With<sp/>the<sp/>current<sp/>approach,<sp/>this<sp/>declaration<sp/>is<sp/>orphaned,<sp/>lacking</highlight></codeline>
+<codeline lineno="98"><highlight class="comment"><sp/>*<sp/>an<sp/>accompanying<sp/>definition,<sp/>in<sp/>case<sp/>mbedtls_platform_gmtime_r()</highlight></codeline>
+<codeline lineno="99"><highlight class="comment"><sp/>*<sp/>doesn&apos;t<sp/>need<sp/>it,<sp/>but<sp/>that&apos;s<sp/>not<sp/>a<sp/>problem.<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/><ref refid="structmbedtls__threading__mutex__t" kindref="compound">mbedtls_threading_mutex_t</ref><sp/>mbedtls_threading_gmtime_mutex;</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>MBEDTLS_HAVE_TIME_DATE<sp/>&amp;&amp;<sp/>!MBEDTLS_PLATFORM_GMTIME_R_ALT<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+<codeline lineno="102"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(MBEDTLS_PSA_CRYPTO_C)</highlight></codeline>
+<codeline lineno="104"><highlight class="preprocessor"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="105"><highlight class="comment"><sp/>*<sp/>A<sp/>mutex<sp/>used<sp/>to<sp/>make<sp/>the<sp/>PSA<sp/>subsystem<sp/>thread<sp/>safe.</highlight></codeline>
+<codeline lineno="106"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="107"><highlight class="comment"><sp/>*<sp/>key_slot_mutex<sp/>protects<sp/>the<sp/>registered_readers<sp/>and</highlight></codeline>
+<codeline lineno="108"><highlight class="comment"><sp/>*<sp/>state<sp/>variable<sp/>for<sp/>all<sp/>key<sp/>slots<sp/>in<sp/>&amp;global_data.key_slots.</highlight></codeline>
+<codeline lineno="109"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="110"><highlight class="comment"><sp/>*<sp/>This<sp/>mutex<sp/>must<sp/>be<sp/>held<sp/>when<sp/>any<sp/>read<sp/>from<sp/>or<sp/>write<sp/>to<sp/>a<sp/>state<sp/>or</highlight></codeline>
+<codeline lineno="111"><highlight class="comment"><sp/>*<sp/>registered_readers<sp/>field<sp/>is<sp/>performed,<sp/>i.e.<sp/>when<sp/>calling<sp/>functions:</highlight></codeline>
+<codeline lineno="112"><highlight class="comment"><sp/>*<sp/>psa_key_slot_state_transition(),<sp/>psa_register_read(),<sp/>psa_unregister_read(),</highlight></codeline>
+<codeline lineno="113"><highlight class="comment"><sp/>*<sp/>psa_key_slot_has_readers()<sp/>and<sp/>psa_wipe_key_slot().<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/><ref refid="structmbedtls__threading__mutex__t" kindref="compound">mbedtls_threading_mutex_t</ref><sp/><ref refid="threading_8h_1aab13380c3189f3ee1278e41535712f25" kindref="member">mbedtls_threading_key_slot_mutex</ref>;</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="117"><highlight class="comment"><sp/>*<sp/>A<sp/>mutex<sp/>used<sp/>to<sp/>make<sp/>the<sp/>non-rng<sp/>PSA<sp/>global_data<sp/>struct<sp/>members<sp/>thread<sp/>safe.</highlight></codeline>
+<codeline lineno="118"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="119"><highlight class="comment"><sp/>*<sp/>This<sp/>mutex<sp/>must<sp/>be<sp/>held<sp/>when<sp/>reading<sp/>or<sp/>writing<sp/>to<sp/>any<sp/>of<sp/>the<sp/>PSA<sp/>global_data</highlight></codeline>
+<codeline lineno="120"><highlight class="comment"><sp/>*<sp/>structure<sp/>members,<sp/>other<sp/>than<sp/>the<sp/>rng_state<sp/>or<sp/>rng<sp/>struct.<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/><ref refid="structmbedtls__threading__mutex__t" kindref="compound">mbedtls_threading_mutex_t</ref><sp/><ref refid="threading_8h_1ab7b6876b2b39a4fe5506257695e9b417" kindref="member">mbedtls_threading_psa_globaldata_mutex</ref>;</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="124"><highlight class="comment"><sp/>*<sp/>A<sp/>mutex<sp/>used<sp/>to<sp/>make<sp/>the<sp/>PSA<sp/>global_data<sp/>rng<sp/>data<sp/>thread<sp/>safe.</highlight></codeline>
+<codeline lineno="125"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="126"><highlight class="comment"><sp/>*<sp/>This<sp/>mutex<sp/>must<sp/>be<sp/>held<sp/>when<sp/>reading<sp/>or<sp/>writing<sp/>to<sp/>the<sp/>PSA</highlight></codeline>
+<codeline lineno="127"><highlight class="comment"><sp/>*<sp/>global_data<sp/>rng_state<sp/>or<sp/>rng<sp/>struct<sp/>members.<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/><ref refid="structmbedtls__threading__mutex__t" kindref="compound">mbedtls_threading_mutex_t</ref><sp/><ref refid="threading_8h_1af186c9b0d0a584972d154c51a8a32ad4" kindref="member">mbedtls_threading_psa_rngdata_mutex</ref>;</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="130"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>MBEDTLS_THREADING_C<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+<codeline lineno="132"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight></codeline>
+<codeline lineno="134"><highlight class="preprocessor"></highlight><highlight class="normal">}</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="136"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>threading.h<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/threading.h"/>
+  </compounddef>
+</doxygen>

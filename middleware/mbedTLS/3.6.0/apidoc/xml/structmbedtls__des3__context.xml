@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="structmbedtls__des3__context" kind="struct" prot="public">
+    <compoundname>mbedtls_des3_context</compoundname>
+    <includes refid="des__alt_8h" local="no">des_alt.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structmbedtls__des3__context_1a4f86ffdd25461f5b89f69fbf96a236ba" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int mbedtls_des3_context::dummy</definition>
+        <argsstring></argsstring>
+        <name>dummy</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/tests/include/alt-dummy/des_alt.h" line="17" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/tests/include/alt-dummy/des_alt.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/tests/include/alt-dummy/des_alt.h" line="16" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/tests/include/alt-dummy/des_alt.h" bodystart="16" bodyend="18"/>
+    <listofallmembers>
+      <member refid="structmbedtls__des3__context_1a4f86ffdd25461f5b89f69fbf96a236ba" prot="public" virt="non-virtual"><scope>mbedtls_des3_context</scope><name>dummy</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

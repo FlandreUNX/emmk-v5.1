@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="structmbedtls__psa__pake__operation__t" kind="struct" prot="public">
+    <compoundname>mbedtls_psa_pake_operation_t</compoundname>
+    <includes refid="crypto__builtin__composites_8h" local="no">crypto_builtin_composites.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structmbedtls__psa__pake__operation__t_1ac34a54e826cf906fb777611923028a9a" prot="public" static="no" mutable="no">
+        <type><ref refid="group__crypto__types_1gac2e4d47f1300d73c2f829a6d99252d69" kindref="member">psa_algorithm_t</ref></type>
+        <definition>psa_algorithm_t mbedtls_psa_pake_operation_t::private_alg</definition>
+        <argsstring></argsstring>
+        <name>private_alg</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_builtin_composites.h" line="192" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_builtin_composites.h" bodystart="192" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmbedtls__psa__pake__operation__t_1a56ece291bcc15fa6d038c21d5ec134c7" prot="public" static="no" mutable="no">
+        <type>uint8_t *</type>
+        <definition>uint8_t* mbedtls_psa_pake_operation_t::private_password</definition>
+        <argsstring></argsstring>
+        <name>private_password</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_builtin_composites.h" line="194" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_builtin_composites.h" bodystart="194" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmbedtls__psa__pake__operation__t_1a9cd62896ecf95de81282b46b6d533e9a" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t mbedtls_psa_pake_operation_t::private_password_len</definition>
+        <argsstring></argsstring>
+        <name>private_password_len</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_builtin_composites.h" line="195" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_builtin_composites.h" bodystart="195" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmbedtls__psa__pake__operation__t_1ad19d1bd335164789f2b38880f500b19c" prot="public" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int mbedtls_psa_pake_operation_t::private_dummy</definition>
+        <argsstring></argsstring>
+        <name>private_dummy</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_builtin_composites.h" line="204" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_builtin_composites.h" bodystart="204" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmbedtls__psa__pake__operation__t_1a608ea140011252f74fc92239f7b85f1d" prot="public" static="no" mutable="no">
+        <type>union mbedtls_psa_pake_operation_t::@2</type>
+        <definition>union mbedtls_psa_pake_operation_t::@2  mbedtls_psa_pake_operation_t::private_ctx</definition>
+        <argsstring></argsstring>
+        <name>private_ctx</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_builtin_composites.h" line="208" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_builtin_composites.h" line="191" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_builtin_composites.h" bodystart="191" bodyend="210"/>
+    <listofallmembers>
+      <member refid="structmbedtls__psa__pake__operation__t_1ac34a54e826cf906fb777611923028a9a" prot="public" virt="non-virtual"><scope>mbedtls_psa_pake_operation_t</scope><name>private_alg</name></member>
+      <member refid="structmbedtls__psa__pake__operation__t_1a608ea140011252f74fc92239f7b85f1d" prot="public" virt="non-virtual"><scope>mbedtls_psa_pake_operation_t</scope><name>private_ctx</name></member>
+      <member refid="structmbedtls__psa__pake__operation__t_1ad19d1bd335164789f2b38880f500b19c" prot="public" virt="non-virtual"><scope>mbedtls_psa_pake_operation_t</scope><name>private_dummy</name></member>
+      <member refid="structmbedtls__psa__pake__operation__t_1a56ece291bcc15fa6d038c21d5ec134c7" prot="public" virt="non-virtual"><scope>mbedtls_psa_pake_operation_t</scope><name>private_password</name></member>
+      <member refid="structmbedtls__psa__pake__operation__t_1a9cd62896ecf95de81282b46b6d533e9a" prot="public" virt="non-virtual"><scope>mbedtls_psa_pake_operation_t</scope><name>private_password_len</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

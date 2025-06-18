@@ -1,0 +1,24 @@
+name: BigEndian
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  big-endian:
+    runs-on: ubuntu-latest
+    name: Build on s390x
+    steps:
+    - uses: actions/checkout@v4
+    - uses: uraimo/run-on-arch-action@v2
+      name: Run commands
+      id: runcmd
+      with:
+        arch: s390x
+        distro: ubuntu22.04
+        run: |
+          apt update && apt install -y gcc g++ make git
+          git clone https://github.com/kmilo17pet/QuarkTS.git --recursive
+           cd QuarkTS && make test

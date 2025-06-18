@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="dir_b218eacb531d3ccb87c59876bff9320f" kind="dir">
+    <compoundname>alt-dummy</compoundname>
+    <innerfile refid="aes__alt_8h">aes_alt.h</innerfile>
+    <innerfile refid="aria__alt_8h">aria_alt.h</innerfile>
+    <innerfile refid="camellia__alt_8h">camellia_alt.h</innerfile>
+    <innerfile refid="ccm__alt_8h">ccm_alt.h</innerfile>
+    <innerfile refid="chacha20__alt_8h">chacha20_alt.h</innerfile>
+    <innerfile refid="chachapoly__alt_8h">chachapoly_alt.h</innerfile>
+    <innerfile refid="cmac__alt_8h">cmac_alt.h</innerfile>
+    <innerfile refid="des__alt_8h">des_alt.h</innerfile>
+    <innerfile refid="dhm__alt_8h">dhm_alt.h</innerfile>
+    <innerfile refid="ecjpake__alt_8h">ecjpake_alt.h</innerfile>
+    <innerfile refid="ecp__alt_8h">ecp_alt.h</innerfile>
+    <innerfile refid="gcm__alt_8h">gcm_alt.h</innerfile>
+    <innerfile refid="md5__alt_8h">md5_alt.h</innerfile>
+    <innerfile refid="nist__kw__alt_8h">nist_kw_alt.h</innerfile>
+    <innerfile refid="platform__alt_8h">platform_alt.h</innerfile>
+    <innerfile refid="poly1305__alt_8h">poly1305_alt.h</innerfile>
+    <innerfile refid="ripemd160__alt_8h">ripemd160_alt.h</innerfile>
+    <innerfile refid="rsa__alt_8h">rsa_alt.h</innerfile>
+    <innerfile refid="sha1__alt_8h">sha1_alt.h</innerfile>
+    <innerfile refid="sha256__alt_8h">sha256_alt.h</innerfile>
+    <innerfile refid="sha512__alt_8h">sha512_alt.h</innerfile>
+    <innerfile refid="threading__alt_8h">threading_alt.h</innerfile>
+    <innerfile refid="timing__alt_8h">timing_alt.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/tests/include/alt-dummy/"/>
+  </compounddef>
+</doxygen>

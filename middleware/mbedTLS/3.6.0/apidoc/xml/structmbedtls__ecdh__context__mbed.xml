@@ -1,0 +1,150 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="structmbedtls__ecdh__context__mbed" kind="struct" prot="public">
+    <compoundname>mbedtls_ecdh_context_mbed</compoundname>
+    <includes refid="ecdh_8h" local="no">ecdh.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structmbedtls__ecdh__context__mbed_1aa9409ffd97c6ce262dd19fdb587e99a9" prot="public" static="no" mutable="no">
+        <type><ref refid="structmbedtls__ecp__group" kindref="compound">mbedtls_ecp_group</ref></type>
+        <definition>mbedtls_ecp_group mbedtls_ecdh_context_mbed::private_grp</definition>
+        <argsstring></argsstring>
+        <name>private_grp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>The elliptic curve used. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/ecdh.h" line="87" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/ecdh.h" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmbedtls__ecdh__context__mbed_1a6ba224d797b484561454f40a1cd41473" prot="public" static="no" mutable="no">
+        <type><ref refid="structmbedtls__mpi" kindref="compound">mbedtls_mpi</ref></type>
+        <definition>mbedtls_mpi mbedtls_ecdh_context_mbed::private_d</definition>
+        <argsstring></argsstring>
+        <name>private_d</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>The private key. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/ecdh.h" line="88" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/ecdh.h" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmbedtls__ecdh__context__mbed_1a576018f4ebf050ec3b817643398c9dc2" prot="public" static="no" mutable="no">
+        <type><ref refid="structmbedtls__ecp__point" kindref="compound">mbedtls_ecp_point</ref></type>
+        <definition>mbedtls_ecp_point mbedtls_ecdh_context_mbed::private_Q</definition>
+        <argsstring></argsstring>
+        <name>private_Q</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>The public key. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/ecdh.h" line="89" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/ecdh.h" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmbedtls__ecdh__context__mbed_1a23d005fd9a6017c3a20780b0692c0c7f" prot="public" static="no" mutable="no">
+        <type><ref refid="structmbedtls__ecp__point" kindref="compound">mbedtls_ecp_point</ref></type>
+        <definition>mbedtls_ecp_point mbedtls_ecdh_context_mbed::private_Qp</definition>
+        <argsstring></argsstring>
+        <name>private_Qp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>The value of the public key of the peer. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/ecdh.h" line="90" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/ecdh.h" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmbedtls__ecdh__context__mbed_1a843778f4bb5c38a4c8101ffc6baee789" prot="public" static="no" mutable="no">
+        <type><ref refid="structmbedtls__mpi" kindref="compound">mbedtls_mpi</ref></type>
+        <definition>mbedtls_mpi mbedtls_ecdh_context_mbed::private_z</definition>
+        <argsstring></argsstring>
+        <name>private_z</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>The shared secret. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/ecdh.h" line="91" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/ecdh.h" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmbedtls__ecdh__context__mbed_1a3d2baf3209614ea3167312c3dc799fde" prot="public" static="no" mutable="no">
+        <type><ref refid="structmbedtls__ecp__restart__ctx" kindref="compound">mbedtls_ecp_restart_ctx</ref></type>
+        <definition>mbedtls_ecp_restart_ctx mbedtls_ecdh_context_mbed::private_rs</definition>
+        <argsstring></argsstring>
+        <name>private_rs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>The restart context for EC computations. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/ecdh.h" line="93" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/ecdh.h" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>The context used by the default ECDH implementation.</para><para>Later versions might change the structure of this context, therefore users should not make any assumptions about the structure of <ref refid="structmbedtls__ecdh__context__mbed" kindref="compound">mbedtls_ecdh_context_mbed</ref>. </para>    </detaileddescription>
+    <collaborationgraph>
+      <node id="567">
+        <label>mbedtls_ecp_point</label>
+        <link refid="structmbedtls__ecp__point"/>
+        <childnode refid="568" relation="usage">
+          <edgelabel>private_X</edgelabel>
+          <edgelabel>private_Y</edgelabel>
+          <edgelabel>private_Z</edgelabel>
+        </childnode>
+      </node>
+      <node id="565">
+        <label>mbedtls_ecdh_context_mbed</label>
+        <link refid="structmbedtls__ecdh__context__mbed"/>
+        <childnode refid="566" relation="usage">
+          <edgelabel>private_grp</edgelabel>
+        </childnode>
+        <childnode refid="569" relation="usage">
+          <edgelabel>private_rs</edgelabel>
+        </childnode>
+        <childnode refid="567" relation="usage">
+          <edgelabel>private_Q</edgelabel>
+          <edgelabel>private_Qp</edgelabel>
+        </childnode>
+        <childnode refid="568" relation="usage">
+          <edgelabel>private_d</edgelabel>
+          <edgelabel>private_z</edgelabel>
+        </childnode>
+      </node>
+      <node id="568">
+        <label>mbedtls_mpi</label>
+        <link refid="structmbedtls__mpi"/>
+      </node>
+      <node id="566">
+        <label>mbedtls_ecp_group</label>
+        <link refid="structmbedtls__ecp__group"/>
+        <childnode refid="567" relation="usage">
+          <edgelabel>G</edgelabel>
+        </childnode>
+        <childnode refid="568" relation="usage">
+          <edgelabel>N</edgelabel>
+          <edgelabel>P</edgelabel>
+          <edgelabel>A</edgelabel>
+          <edgelabel>B</edgelabel>
+        </childnode>
+      </node>
+      <node id="569">
+        <label>mbedtls_ecp_restart_ctx</label>
+        <link refid="structmbedtls__ecp__restart__ctx"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/ecdh.h" line="86" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/ecdh.h" bodystart="86" bodyend="95"/>
+    <listofallmembers>
+      <member refid="structmbedtls__ecdh__context__mbed_1a6ba224d797b484561454f40a1cd41473" prot="public" virt="non-virtual"><scope>mbedtls_ecdh_context_mbed</scope><name>private_d</name></member>
+      <member refid="structmbedtls__ecdh__context__mbed_1aa9409ffd97c6ce262dd19fdb587e99a9" prot="public" virt="non-virtual"><scope>mbedtls_ecdh_context_mbed</scope><name>private_grp</name></member>
+      <member refid="structmbedtls__ecdh__context__mbed_1a576018f4ebf050ec3b817643398c9dc2" prot="public" virt="non-virtual"><scope>mbedtls_ecdh_context_mbed</scope><name>private_Q</name></member>
+      <member refid="structmbedtls__ecdh__context__mbed_1a23d005fd9a6017c3a20780b0692c0c7f" prot="public" virt="non-virtual"><scope>mbedtls_ecdh_context_mbed</scope><name>private_Qp</name></member>
+      <member refid="structmbedtls__ecdh__context__mbed_1a3d2baf3209614ea3167312c3dc799fde" prot="public" virt="non-virtual"><scope>mbedtls_ecdh_context_mbed</scope><name>private_rs</name></member>
+      <member refid="structmbedtls__ecdh__context__mbed_1a843778f4bb5c38a4c8101ffc6baee789" prot="public" virt="non-virtual"><scope>mbedtls_ecdh_context_mbed</scope><name>private_z</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

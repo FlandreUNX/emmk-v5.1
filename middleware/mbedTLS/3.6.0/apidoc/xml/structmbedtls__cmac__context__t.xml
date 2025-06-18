@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="structmbedtls__cmac__context__t" kind="struct" prot="public">
+    <compoundname>mbedtls_cmac_context_t</compoundname>
+    <includes refid="cmac__alt_8h" local="no">cmac_alt.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structmbedtls__cmac__context__t_1a2386a3ff571ee6c18fc28fa90fd53736" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int mbedtls_cmac_context_t::dummy</definition>
+        <argsstring></argsstring>
+        <name>dummy</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/tests/include/alt-dummy/cmac_alt.h" line="11" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/tests/include/alt-dummy/cmac_alt.h" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/tests/include/alt-dummy/cmac_alt.h" line="10" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/tests/include/alt-dummy/cmac_alt.h" bodystart="10" bodyend="12"/>
+    <listofallmembers>
+      <member refid="structmbedtls__cmac__context__t_1a2386a3ff571ee6c18fc28fa90fd53736" prot="public" virt="non-virtual"><scope>mbedtls_cmac_context_t</scope><name>dummy</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

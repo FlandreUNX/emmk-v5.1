@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="dir_2c00119299a10c22d7d936c8d817ad65" kind="dir">
+    <compoundname>mbedcrypto</compoundname>
+    <innerdir refid="dir_05e9957f24a7193700a1ea83ede7799f">psa</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/"/>
+  </compounddef>
+</doxygen>

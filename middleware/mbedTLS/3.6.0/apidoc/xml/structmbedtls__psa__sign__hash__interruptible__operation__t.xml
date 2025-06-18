@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="structmbedtls__psa__sign__hash__interruptible__operation__t" kind="struct" prot="public">
+    <compoundname>mbedtls_psa_sign_hash_interruptible_operation_t</compoundname>
+    <includes refid="crypto__builtin__composites_8h" local="no">crypto_builtin_composites.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structmbedtls__psa__sign__hash__interruptible__operation__t_1a45b5ec80493ffce1f2476621dee6965f" prot="public" static="no" mutable="no">
+        <type>unsigned</type>
+        <definition>unsigned mbedtls_psa_sign_hash_interruptible_operation_t::private_dummy</definition>
+        <argsstring></argsstring>
+        <name>private_dummy</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_builtin_composites.h" line="125" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_builtin_composites.h" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_builtin_composites.h" line="108" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_builtin_composites.h" bodystart="108" bodyend="130"/>
+    <listofallmembers>
+      <member refid="structmbedtls__psa__sign__hash__interruptible__operation__t_1a45b5ec80493ffce1f2476621dee6965f" prot="public" virt="non-virtual"><scope>mbedtls_psa_sign_hash_interruptible_operation_t</scope><name>private_dummy</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

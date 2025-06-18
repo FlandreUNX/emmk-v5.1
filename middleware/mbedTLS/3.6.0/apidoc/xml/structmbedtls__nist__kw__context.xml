@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="structmbedtls__nist__kw__context" kind="struct" prot="public">
+    <compoundname>mbedtls_nist_kw_context</compoundname>
+    <includes refid="nist__kw__alt_8h" local="no">nist_kw_alt.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structmbedtls__nist__kw__context_1a2803803743d604033d1e74ffc2342d59" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int mbedtls_nist_kw_context::dummy</definition>
+        <argsstring></argsstring>
+        <name>dummy</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/tests/include/alt-dummy/nist_kw_alt.h" line="11" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/tests/include/alt-dummy/nist_kw_alt.h" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/tests/include/alt-dummy/nist_kw_alt.h" line="10" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/tests/include/alt-dummy/nist_kw_alt.h" bodystart="10" bodyend="12"/>
+    <listofallmembers>
+      <member refid="structmbedtls__nist__kw__context_1a2803803743d604033d1e74ffc2342d59" prot="public" virt="non-virtual"><scope>mbedtls_nist_kw_context</scope><name>dummy</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

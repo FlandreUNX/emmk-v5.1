@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="ccm__alt_8h" kind="file">
+    <compoundname>ccm_alt.h</compoundname>
+    <includedby refid="ccm_8h" local="yes">ccm.h</includedby>
+    <invincdepgraph>
+      <node id="5040">
+        <label>ccm.h</label>
+        <link refid="ccm_8h"/>
+      </node>
+      <node id="5039">
+        <label>ccm_alt.h</label>
+        <link refid="ccm_alt.h"/>
+        <childnode refid="5040" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structmbedtls__ccm__context" prot="public">mbedtls_ccm_context</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="ccm__alt_8h_1a241738df72062f1a88ebdbf0dc855d07" prot="public" static="no">
+        <type>struct <ref refid="structmbedtls__ccm__context" kindref="compound">mbedtls_ccm_context</ref></type>
+        <definition>typedef struct mbedtls_ccm_context
+ mbedtls_ccm_context</definition>
+        <argsstring></argsstring>
+        <name>mbedtls_ccm_context</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/tests/include/alt-dummy/ccm_alt.h" line="13" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*<sp/>ccm_alt.h<sp/>with<sp/>dummy<sp/>types<sp/>for<sp/>MBEDTLS_CCM_ALT<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/><sp/>Copyright<sp/>The<sp/>Mbed<sp/>TLS<sp/>Contributors</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*<sp/><sp/>SPDX-License-Identifier:<sp/>Apache-2.0<sp/>OR<sp/>GPL-2.0-or-later</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>CCM_ALT_H</highlight></codeline>
+<codeline lineno="8"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>CCM_ALT_H</highlight></codeline>
+<codeline lineno="9"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10" refid="structmbedtls__ccm__context" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structmbedtls__ccm__context" kindref="compound">mbedtls_ccm_context</ref><sp/>{</highlight></codeline>
+<codeline lineno="11" refid="structmbedtls__ccm__context_1ad3b93862fcbb510432d96d150c427c3e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structmbedtls__ccm__context_1ad3b93862fcbb510432d96d150c427c3e" kindref="member">dummy</ref>;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><ref refid="ccm__alt_8h_1a241738df72062f1a88ebdbf0dc855d07" kindref="member">mbedtls_ccm_context</ref>;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>ccm_alt.h<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/tests/include/alt-dummy/ccm_alt.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="deprecated" kind="page">
+    <compoundname>deprecated</compoundname>
+    <title>Deprecated List</title>
+    <detaileddescription>
+<para><variablelist>
+<varlistentry><term><anchor id="deprecated_1_deprecated000004"/>File <ref refid="compat-2_8x_8h" kindref="compound">compat-2.x.h</ref>  </term></varlistentry>
+<listitem><para>Use the new names directly instead  </para></listitem>
+<varlistentry><term><anchor id="deprecated_1_deprecated000006"/>Global <ref refid="mbedtls__config_8h_1a7d31bdc8946b87038702628ba1f60e8c" kindref="member">MBEDTLS_PSA_CRYPTO_SE_C</ref>  </term></varlistentry>
+<listitem><para>This feature is deprecated. Please switch to the PSA driver interface. </para></listitem>
+<varlistentry><term><anchor id="deprecated_1_deprecated000007"/>Global <ref refid="mbedtls__config_8h_1ad4ceff6d1d341dee2f4713dd02aa27e1" kindref="member">MBEDTLS_SHA256_USE_A64_CRYPTO_IF_PRESENT</ref>  </term></varlistentry>
+<listitem><para>This is now known as MBEDTLS_SHA256_USE_ARMV8_A_CRYPTO_IF_PRESENT. This name is now deprecated, but may still be used as an alternative form for this option.  </para></listitem>
+<varlistentry><term><anchor id="deprecated_1_deprecated000008"/>Global <ref refid="mbedtls__config_8h_1aec249fd9200dbc7b99fb4a77cc655cb8" kindref="member">MBEDTLS_SHA256_USE_A64_CRYPTO_ONLY</ref>  </term></varlistentry>
+<listitem><para>This is now known as MBEDTLS_SHA256_USE_ARMV8_A_CRYPTO_ONLY. This name is now deprecated, but may still be used as an alternative form for this option.  </para></listitem>
+<varlistentry><term><anchor id="deprecated_1_deprecated000005"/>Global <ref refid="mbedtls__config_8h_1af5421935540ecb6481a392528e20e9a4" kindref="member">MBEDTLS_SSL_DTLS_CONNECTION_ID_COMPAT</ref>  </term></varlistentry>
+<listitem><para>Support for the legacy version of the DTLS Connection ID feature is deprecated. Please switch to the standardized version defined in RFC 9146 enabled by utilizing MBEDTLS_SSL_DTLS_CONNECTION_ID without use of MBEDTLS_SSL_DTLS_CONNECTION_ID_COMPAT. </para></listitem>
+<varlistentry><term><anchor id="deprecated_1_deprecated000001"/>Global <ref refid="group__attributes_1gab930304ccac92e0729fb5535c87a9fc2" kindref="member">PSA_DH_FAMILY_CUSTOM</ref>  </term></varlistentry>
+<listitem><para>This value is not useful, so this macro will be removed in a future version of the library.  </para></listitem>
+<varlistentry><term><anchor id="deprecated_1_deprecated000003"/>Global <ref refid="group__attributes_1gae40c5b0309ede4a4d121681bf73069e0" kindref="member">psa_get_key_domain_parameters</ref>  (const psa_key_attributes_t *attributes, uint8_t *data, size_t data_size, size_t *data_length)</term></varlistentry>
+<listitem><para>Mbed TLS no longer supports any domain parameters. This function alwaya has an empty output and will be removed in a future version of the library. </para></listitem>
+<varlistentry><term><anchor id="deprecated_1_deprecated000002"/>Global <ref refid="group__attributes_1ga780e4839104a518e3c52c7b6b96dcc9b" kindref="member">psa_set_key_domain_parameters</ref>  (psa_key_attributes_t *attributes, psa_key_type_t type, const uint8_t *data, size_t data_length)</term></varlistentry>
+<listitem><para>Mbed TLS no longer supports any domain parameters. This function only does the equivalent of <ref refid="group__attributes_1ga6857ef0ecb3fa844d4536939d9c64025" kindref="member">psa_set_key_type()</ref> and will be removed in a future version of the library.</para></listitem>
+</variablelist>
+</para>    </detaileddescription>
+  </compounddef>
+</doxygen>

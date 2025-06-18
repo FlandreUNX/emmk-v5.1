@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="des__alt_8h" kind="file">
+    <compoundname>des_alt.h</compoundname>
+    <includedby refid="des_8h" local="yes">des.h</includedby>
+    <invincdepgraph>
+      <node id="7054">
+        <label>des.h</label>
+        <link refid="des_8h"/>
+      </node>
+      <node id="7053">
+        <label>des_alt.h</label>
+        <link refid="des_alt.h"/>
+        <childnode refid="7054" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structmbedtls__des__context" prot="public">mbedtls_des_context</innerclass>
+    <innerclass refid="structmbedtls__des3__context" prot="public">mbedtls_des3_context</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="des__alt_8h_1a9d7ed325422e99d7d56d50eff9156dd2" prot="public" static="no">
+        <type>struct <ref refid="structmbedtls__des__context" kindref="compound">mbedtls_des_context</ref></type>
+        <definition>typedef struct mbedtls_des_context
+ mbedtls_des_context</definition>
+        <argsstring></argsstring>
+        <name>mbedtls_des_context</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/tests/include/alt-dummy/des_alt.h" line="14" column="1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="des__alt_8h_1ab0b6b6601a24d5348b2799398cd5a88d" prot="public" static="no">
+        <type>struct <ref refid="structmbedtls__des3__context" kindref="compound">mbedtls_des3_context</ref></type>
+        <definition>typedef struct mbedtls_des3_context
+ mbedtls_des3_context</definition>
+        <argsstring></argsstring>
+        <name>mbedtls_des3_context</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/tests/include/alt-dummy/des_alt.h" line="19" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*<sp/>des_alt.h<sp/>with<sp/>dummy<sp/>types<sp/>for<sp/>MBEDTLS_DES_ALT<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/><sp/>Copyright<sp/>The<sp/>Mbed<sp/>TLS<sp/>Contributors</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*<sp/><sp/>SPDX-License-Identifier:<sp/>Apache-2.0<sp/>OR<sp/>GPL-2.0-or-later</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>DES_ALT_H</highlight></codeline>
+<codeline lineno="9"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>DES_ALT_H</highlight></codeline>
+<codeline lineno="10"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11" refid="structmbedtls__des__context" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structmbedtls__des__context" kindref="compound">mbedtls_des_context</ref><sp/>{</highlight></codeline>
+<codeline lineno="12" refid="structmbedtls__des__context_1a91b40c5676f550cc18fa1d5def43b437" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structmbedtls__des__context_1a91b40c5676f550cc18fa1d5def43b437" kindref="member">dummy</ref>;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><ref refid="des__alt_8h_1a9d7ed325422e99d7d56d50eff9156dd2" kindref="member">mbedtls_des_context</ref>;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16" refid="structmbedtls__des3__context" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structmbedtls__des3__context" kindref="compound">mbedtls_des3_context</ref><sp/>{</highlight></codeline>
+<codeline lineno="17" refid="structmbedtls__des3__context_1a4f86ffdd25461f5b89f69fbf96a236ba" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structmbedtls__des3__context_1a4f86ffdd25461f5b89f69fbf96a236ba" kindref="member">dummy</ref>;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><ref refid="des__alt_8h_1ab0b6b6601a24d5348b2799398cd5a88d" kindref="member">mbedtls_des3_context</ref>;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>des_alt.h<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/tests/include/alt-dummy/des_alt.h"/>
+  </compounddef>
+</doxygen>

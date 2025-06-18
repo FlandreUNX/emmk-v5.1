@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="dhm__alt_8h" kind="file">
+    <compoundname>dhm_alt.h</compoundname>
+    <includedby refid="dhm_8h" local="yes">dhm.h</includedby>
+    <invincdepgraph>
+      <node id="7089">
+        <label>ssl.h</label>
+        <link refid="ssl_8h"/>
+        <childnode refid="7090" relation="include">
+        </childnode>
+        <childnode refid="7091" relation="include">
+        </childnode>
+        <childnode refid="7092" relation="include">
+        </childnode>
+        <childnode refid="7093" relation="include">
+        </childnode>
+        <childnode refid="7094" relation="include">
+        </childnode>
+      </node>
+      <node id="7087">
+        <label>dhm_alt.h</label>
+        <link refid="dhm_alt.h"/>
+        <childnode refid="7088" relation="include">
+        </childnode>
+      </node>
+      <node id="7094">
+        <label>ssl_ticket.h</label>
+        <link refid="ssl__ticket_8h"/>
+      </node>
+      <node id="7093">
+        <label>ssl_cookie.h</label>
+        <link refid="ssl__cookie_8h"/>
+      </node>
+      <node id="7090">
+        <label>debug.h</label>
+        <link refid="debug_8h"/>
+      </node>
+      <node id="7092">
+        <label>ssl_cache.h</label>
+        <link refid="ssl__cache_8h"/>
+      </node>
+      <node id="7088">
+        <label>dhm.h</label>
+        <link refid="dhm_8h"/>
+        <childnode refid="7089" relation="include">
+        </childnode>
+      </node>
+      <node id="7091">
+        <label>net_sockets.h</label>
+        <link refid="net__sockets_8h"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structmbedtls__dhm__context" prot="public">mbedtls_dhm_context</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="dhm__alt_8h_1ac2f92f8937fc102033d8f3dacc0b0186" prot="public" static="no">
+        <type>struct <ref refid="structmbedtls__dhm__context" kindref="compound">mbedtls_dhm_context</ref></type>
+        <definition>typedef struct mbedtls_dhm_context
+ mbedtls_dhm_context</definition>
+        <argsstring></argsstring>
+        <name>mbedtls_dhm_context</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/tests/include/alt-dummy/dhm_alt.h" line="13" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*<sp/>dhm_alt.h<sp/>with<sp/>dummy<sp/>types<sp/>for<sp/>MBEDTLS_DHM_ALT<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/><sp/>Copyright<sp/>The<sp/>Mbed<sp/>TLS<sp/>Contributors</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*<sp/><sp/>SPDX-License-Identifier:<sp/>Apache-2.0<sp/>OR<sp/>GPL-2.0-or-later</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>DHM_ALT_H</highlight></codeline>
+<codeline lineno="8"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>DHM_ALT_H</highlight></codeline>
+<codeline lineno="9"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10" refid="structmbedtls__dhm__context" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structmbedtls__dhm__context" kindref="compound">mbedtls_dhm_context</ref><sp/>{</highlight></codeline>
+<codeline lineno="11" refid="structmbedtls__dhm__context_1a2b34e6517c89528f5594327eec6dd0e6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structmbedtls__dhm__context_1a2b34e6517c89528f5594327eec6dd0e6" kindref="member">dummy</ref>;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><ref refid="dhm__alt_8h_1ac2f92f8937fc102033d8f3dacc0b0186" kindref="member">mbedtls_dhm_context</ref>;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>dhm_alt.h<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/tests/include/alt-dummy/dhm_alt.h"/>
+  </compounddef>
+</doxygen>

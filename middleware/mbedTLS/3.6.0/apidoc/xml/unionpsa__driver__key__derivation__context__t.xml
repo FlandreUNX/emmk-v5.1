@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="unionpsa__driver__key__derivation__context__t" kind="union" prot="public">
+    <compoundname>psa_driver_key_derivation_context_t</compoundname>
+    <includes refid="crypto__driver__contexts__key__derivation_8h" local="no">crypto_driver_contexts_key_derivation.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="unionpsa__driver__key__derivation__context__t_1ab76eb334611a7cce9c66477a99a67428" prot="public" static="no" mutable="no">
+        <type>unsigned</type>
+        <definition>unsigned psa_driver_key_derivation_context_t::dummy</definition>
+        <argsstring></argsstring>
+        <name>dummy</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_driver_contexts_key_derivation.h" line="33" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_driver_contexts_key_derivation.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_driver_contexts_key_derivation.h" line="32" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_driver_contexts_key_derivation.h" bodystart="32" bodyend="49"/>
+    <listofallmembers>
+      <member refid="unionpsa__driver__key__derivation__context__t_1ab76eb334611a7cce9c66477a99a67428" prot="public" virt="non-virtual"><scope>psa_driver_key_derivation_context_t</scope><name>dummy</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

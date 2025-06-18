@@ -1,0 +1,780 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="config__adjust__ssl_8h" kind="file">
+    <compoundname>config_adjust_ssl.h</compoundname>
+    <includedby refid="mbedtls_2build__info_8h" local="yes">build_info.h</includedby>
+    <invincdepgraph>
+      <node id="5670">
+        <label>entropy.h</label>
+        <link refid="entropy_8h"/>
+        <childnode refid="5671" relation="include">
+        </childnode>
+      </node>
+      <node id="5645">
+        <label>crypto_types.h</label>
+        <link refid="crypto__types_8h"/>
+        <childnode refid="5629" relation="include">
+        </childnode>
+        <childnode refid="5646" relation="include">
+        </childnode>
+        <childnode refid="5647" relation="include">
+        </childnode>
+      </node>
+      <node id="5696">
+        <label>chachapoly_alt.h</label>
+        <link refid="chachapoly__alt_8h"/>
+        <childnode refid="5684" relation="include">
+        </childnode>
+      </node>
+      <node id="5632">
+        <label>ssl.h</label>
+        <link refid="ssl_8h"/>
+        <childnode refid="5633" relation="include">
+        </childnode>
+        <childnode refid="5634" relation="include">
+        </childnode>
+        <childnode refid="5635" relation="include">
+        </childnode>
+        <childnode refid="5636" relation="include">
+        </childnode>
+        <childnode refid="5637" relation="include">
+        </childnode>
+      </node>
+      <node id="5682">
+        <label>platform_time.h</label>
+        <link refid="platform__time_8h"/>
+        <childnode refid="5664" relation="include">
+        </childnode>
+        <childnode refid="5632" relation="include">
+        </childnode>
+        <childnode refid="5683" relation="include">
+        </childnode>
+        <childnode refid="5637" relation="include">
+        </childnode>
+      </node>
+      <node id="5689">
+        <label>ripemd160.h</label>
+        <link refid="ripemd160_8h"/>
+        <childnode refid="5653" relation="include">
+        </childnode>
+      </node>
+      <node id="5628">
+        <label>crypto_platform.h</label>
+        <link refid="crypto__platform_8h"/>
+        <childnode refid="5629" relation="include">
+        </childnode>
+      </node>
+      <node id="5643">
+        <label>oid.h</label>
+        <link refid="oid_8h"/>
+      </node>
+      <node id="5638">
+        <label>x509.h</label>
+        <link refid="x509_8h"/>
+        <childnode refid="5639" relation="include">
+        </childnode>
+        <childnode refid="5641" relation="include">
+        </childnode>
+        <childnode refid="5642" relation="include">
+        </childnode>
+      </node>
+      <node id="5640">
+        <label>pkcs7.h</label>
+        <link refid="pkcs7_8h"/>
+      </node>
+      <node id="5702">
+        <label>timing.h</label>
+        <link refid="timing_8h"/>
+      </node>
+      <node id="5660">
+        <label>gcm.h</label>
+        <link refid="gcm_8h"/>
+      </node>
+      <node id="5662">
+        <label>pkcs12.h</label>
+        <link refid="pkcs12_8h"/>
+      </node>
+      <node id="5637">
+        <label>ssl_ticket.h</label>
+        <link refid="ssl__ticket_8h"/>
+      </node>
+      <node id="5649">
+        <label>crypto_driver_contexts_composites.h</label>
+        <link refid="crypto__driver__contexts__composites_8h"/>
+        <childnode refid="5650" relation="include">
+        </childnode>
+      </node>
+      <node id="5690">
+        <label>sha1.h</label>
+        <link refid="sha1_8h"/>
+        <childnode refid="5653" relation="include">
+        </childnode>
+      </node>
+      <node id="5631">
+        <label>ssl_ciphersuites.h</label>
+        <link refid="ssl__ciphersuites_8h"/>
+        <childnode refid="5632" relation="include">
+        </childnode>
+      </node>
+      <node id="5656">
+        <label>crypto_sizes.h</label>
+        <link refid="crypto__sizes_8h"/>
+        <childnode refid="5629" relation="include">
+        </childnode>
+        <childnode refid="5647" relation="include">
+        </childnode>
+      </node>
+      <node id="5636">
+        <label>ssl_cookie.h</label>
+        <link refid="ssl__cookie_8h"/>
+      </node>
+      <node id="5680">
+        <label>camellia.h</label>
+        <link refid="camellia_8h"/>
+        <childnode refid="5676" relation="include">
+        </childnode>
+      </node>
+      <node id="5681">
+        <label>des.h</label>
+        <link refid="des_8h"/>
+      </node>
+      <node id="5703">
+        <label>version.h</label>
+        <link refid="version_8h"/>
+      </node>
+      <node id="5676">
+        <label>block_cipher.h</label>
+        <link refid="block__cipher_8h"/>
+      </node>
+      <node id="5698">
+        <label>error.h</label>
+        <link refid="error_8h"/>
+      </node>
+      <node id="5669">
+        <label>md.h</label>
+        <link refid="md_8h"/>
+        <childnode refid="5666" relation="include">
+        </childnode>
+        <childnode refid="5667" relation="include">
+        </childnode>
+        <childnode refid="5670" relation="include">
+        </childnode>
+        <childnode refid="5630" relation="include">
+        </childnode>
+        <childnode refid="5672" relation="include">
+        </childnode>
+        <childnode refid="5631" relation="include">
+        </childnode>
+        <childnode refid="5632" relation="include">
+        </childnode>
+        <childnode refid="5673" relation="include">
+        </childnode>
+        <childnode refid="5674" relation="include">
+        </childnode>
+        <childnode refid="5643" relation="include">
+        </childnode>
+        <childnode refid="5662" relation="include">
+        </childnode>
+        <childnode refid="5663" relation="include">
+        </childnode>
+      </node>
+      <node id="5699">
+        <label>lms.h</label>
+        <link refid="lms_8h"/>
+      </node>
+      <node id="5677">
+        <label>aria.h</label>
+        <link refid="aria_8h"/>
+        <childnode refid="5676" relation="include">
+        </childnode>
+      </node>
+      <node id="5685">
+        <label>poly1305.h</label>
+        <link refid="poly1305_8h"/>
+        <childnode refid="5684" relation="include">
+        </childnode>
+      </node>
+      <node id="5659">
+        <label>ccm.h</label>
+        <link refid="ccm_8h"/>
+      </node>
+      <node id="5664">
+        <label>platform_util.h</label>
+        <link refid="platform__util_8h"/>
+        <childnode refid="5658" relation="include">
+        </childnode>
+        <childnode refid="5665" relation="include">
+        </childnode>
+        <childnode refid="5669" relation="include">
+        </childnode>
+        <childnode refid="5675" relation="include">
+        </childnode>
+        <childnode refid="5677" relation="include">
+        </childnode>
+        <childnode refid="5678" relation="include">
+        </childnode>
+        <childnode refid="5680" relation="include">
+        </childnode>
+        <childnode refid="5632" relation="include">
+        </childnode>
+        <childnode refid="5681" relation="include">
+        </childnode>
+        <childnode refid="5663" relation="include">
+        </childnode>
+      </node>
+      <node id="5675">
+        <label>aes.h</label>
+        <link refid="aes_8h"/>
+        <childnode refid="5676" relation="include">
+        </childnode>
+        <childnode refid="5671" relation="include">
+        </childnode>
+      </node>
+      <node id="5655">
+        <label>crypto_se_driver.h</label>
+        <link refid="crypto__se__driver_8h"/>
+      </node>
+      <node id="5625">
+        <label>config_adjust_ssl.h</label>
+        <link refid="config_adjust_ssl.h"/>
+        <childnode refid="5626" relation="include">
+        </childnode>
+      </node>
+      <node id="5667">
+        <label>ecjpake.h</label>
+        <link refid="ecjpake_8h"/>
+        <childnode refid="5648" relation="include">
+        </childnode>
+      </node>
+      <node id="5633">
+        <label>debug.h</label>
+        <link refid="debug_8h"/>
+      </node>
+      <node id="5635">
+        <label>ssl_cache.h</label>
+        <link refid="ssl__cache_8h"/>
+      </node>
+      <node id="5651">
+        <label>crypto_builtin_key_derivation.h</label>
+        <link refid="crypto__builtin__key__derivation_8h"/>
+        <childnode refid="5652" relation="include">
+        </childnode>
+      </node>
+      <node id="5657">
+        <label>cmac.h</label>
+        <link refid="cmac_8h"/>
+        <childnode refid="5648" relation="include">
+        </childnode>
+      </node>
+      <node id="5652">
+        <label>crypto_driver_contexts_key_derivation.h</label>
+        <link refid="crypto__driver__contexts__key__derivation_8h"/>
+        <childnode refid="5650" relation="include">
+        </childnode>
+      </node>
+      <node id="5694">
+        <label>base64.h</label>
+        <link refid="base64_8h"/>
+      </node>
+      <node id="5695">
+        <label>chacha20.h</label>
+        <link refid="chacha20_8h"/>
+        <childnode refid="5696" relation="include">
+        </childnode>
+      </node>
+      <node id="5684">
+        <label>chachapoly.h</label>
+        <link refid="chachapoly_8h"/>
+        <childnode refid="5648" relation="include">
+        </childnode>
+      </node>
+      <node id="5679">
+        <label>asn1write.h</label>
+        <link refid="asn1write_8h"/>
+        <childnode refid="5644" relation="include">
+        </childnode>
+      </node>
+      <node id="5663">
+        <label>pkcs5.h</label>
+        <link refid="pkcs5_8h"/>
+      </node>
+      <node id="5642">
+        <label>x509_csr.h</label>
+        <link refid="x509__csr_8h"/>
+      </node>
+      <node id="5674">
+        <label>hmac_drbg.h</label>
+        <link refid="hmac__drbg_8h"/>
+      </node>
+      <node id="5688">
+        <label>md5.h</label>
+        <link refid="md5_8h"/>
+        <childnode refid="5653" relation="include">
+        </childnode>
+      </node>
+      <node id="5665">
+        <label>ecp.h</label>
+        <link refid="ecp_8h"/>
+        <childnode refid="5666" relation="include">
+        </childnode>
+        <childnode refid="5667" relation="include">
+        </childnode>
+        <childnode refid="5632" relation="include">
+        </childnode>
+        <childnode refid="5630" relation="include">
+        </childnode>
+        <childnode refid="5668" relation="include">
+        </childnode>
+        <childnode refid="5633" relation="include">
+        </childnode>
+      </node>
+      <node id="5653">
+        <label>crypto_builtin_primitives.h</label>
+        <link refid="crypto__builtin__primitives_8h"/>
+        <childnode refid="5654" relation="include">
+        </childnode>
+      </node>
+      <node id="5673">
+        <label>hkdf.h</label>
+        <link refid="hkdf_8h"/>
+      </node>
+      <node id="5700">
+        <label>memory_buffer_alloc.h</label>
+        <link refid="memory__buffer__alloc_8h"/>
+      </node>
+      <node id="5668">
+        <label>ecdh.h</label>
+        <link refid="ecdh_8h"/>
+        <childnode refid="5632" relation="include">
+        </childnode>
+      </node>
+      <node id="5672">
+        <label>rsa.h</label>
+        <link refid="rsa_8h"/>
+        <childnode refid="5630" relation="include">
+        </childnode>
+        <childnode refid="5638" relation="include">
+        </childnode>
+      </node>
+      <node id="5661">
+        <label>nist_kw.h</label>
+        <link refid="nist__kw_8h"/>
+      </node>
+      <node id="5687">
+        <label>dhm.h</label>
+        <link refid="dhm_8h"/>
+        <childnode refid="5632" relation="include">
+        </childnode>
+      </node>
+      <node id="5693">
+        <label>sha3.h</label>
+        <link refid="sha3_8h"/>
+        <childnode refid="5653" relation="include">
+        </childnode>
+      </node>
+      <node id="5671">
+        <label>ctr_drbg.h</label>
+        <link refid="ctr__drbg_8h"/>
+      </node>
+      <node id="5692">
+        <label>sha512.h</label>
+        <link refid="sha512_8h"/>
+        <childnode refid="5653" relation="include">
+        </childnode>
+      </node>
+      <node id="5683">
+        <label>platform.h</label>
+        <link refid="platform_8h"/>
+      </node>
+      <node id="5666">
+        <label>ecdsa.h</label>
+        <link refid="ecdsa_8h"/>
+        <childnode refid="5648" relation="include">
+        </childnode>
+        <childnode refid="5630" relation="include">
+        </childnode>
+      </node>
+      <node id="5626">
+        <label>build_info.h</label>
+        <link refid="mbedtls_2build__info_8h"/>
+        <childnode refid="5627" relation="include">
+        </childnode>
+        <childnode refid="5657" relation="include">
+        </childnode>
+        <childnode refid="5658" relation="include">
+        </childnode>
+        <childnode refid="5664" relation="include">
+        </childnode>
+        <childnode refid="5682" relation="include">
+        </childnode>
+        <childnode refid="5684" relation="include">
+        </childnode>
+        <childnode refid="5685" relation="include">
+        </childnode>
+        <childnode refid="5666" relation="include">
+        </childnode>
+        <childnode refid="5665" relation="include">
+        </childnode>
+        <childnode refid="5686" relation="include">
+        </childnode>
+        <childnode refid="5669" relation="include">
+        </childnode>
+        <childnode refid="5667" relation="include">
+        </childnode>
+        <childnode refid="5688" relation="include">
+        </childnode>
+        <childnode refid="5689" relation="include">
+        </childnode>
+        <childnode refid="5690" relation="include">
+        </childnode>
+        <childnode refid="5691" relation="include">
+        </childnode>
+        <childnode refid="5692" relation="include">
+        </childnode>
+        <childnode refid="5693" relation="include">
+        </childnode>
+        <childnode refid="5675" relation="include">
+        </childnode>
+        <childnode refid="5677" relation="include">
+        </childnode>
+        <childnode refid="5678" relation="include">
+        </childnode>
+        <childnode refid="5679" relation="include">
+        </childnode>
+        <childnode refid="5694" relation="include">
+        </childnode>
+        <childnode refid="5676" relation="include">
+        </childnode>
+        <childnode refid="5680" relation="include">
+        </childnode>
+        <childnode refid="5659" relation="include">
+        </childnode>
+        <childnode refid="5695" relation="include">
+        </childnode>
+        <childnode refid="5671" relation="include">
+        </childnode>
+        <childnode refid="5670" relation="include">
+        </childnode>
+        <childnode refid="5697" relation="include">
+        </childnode>
+        <childnode refid="5633" relation="include">
+        </childnode>
+        <childnode refid="5632" relation="include">
+        </childnode>
+        <childnode refid="5631" relation="include">
+        </childnode>
+        <childnode refid="5630" relation="include">
+        </childnode>
+        <childnode refid="5672" relation="include">
+        </childnode>
+        <childnode refid="5639" relation="include">
+        </childnode>
+        <childnode refid="5638" relation="include">
+        </childnode>
+        <childnode refid="5641" relation="include">
+        </childnode>
+        <childnode refid="5687" relation="include">
+        </childnode>
+        <childnode refid="5668" relation="include">
+        </childnode>
+        <childnode refid="5681" relation="include">
+        </childnode>
+        <childnode refid="5698" relation="include">
+        </childnode>
+        <childnode refid="5660" relation="include">
+        </childnode>
+        <childnode refid="5673" relation="include">
+        </childnode>
+        <childnode refid="5674" relation="include">
+        </childnode>
+        <childnode refid="5699" relation="include">
+        </childnode>
+        <childnode refid="5700" relation="include">
+        </childnode>
+        <childnode refid="5634" relation="include">
+        </childnode>
+        <childnode refid="5661" relation="include">
+        </childnode>
+        <childnode refid="5643" relation="include">
+        </childnode>
+        <childnode refid="5701" relation="include">
+        </childnode>
+        <childnode refid="5662" relation="include">
+        </childnode>
+        <childnode refid="5663" relation="include">
+        </childnode>
+        <childnode refid="5640" relation="include">
+        </childnode>
+        <childnode refid="5683" relation="include">
+        </childnode>
+        <childnode refid="5644" relation="include">
+        </childnode>
+        <childnode refid="5635" relation="include">
+        </childnode>
+        <childnode refid="5636" relation="include">
+        </childnode>
+        <childnode refid="5637" relation="include">
+        </childnode>
+        <childnode refid="5702" relation="include">
+        </childnode>
+        <childnode refid="5703" relation="include">
+        </childnode>
+        <childnode refid="5642" relation="include">
+        </childnode>
+      </node>
+      <node id="5648">
+        <label>crypto_builtin_composites.h</label>
+        <link refid="crypto__builtin__composites_8h"/>
+        <childnode refid="5649" relation="include">
+        </childnode>
+      </node>
+      <node id="5658">
+        <label>cipher.h</label>
+        <link refid="cipher_8h"/>
+        <childnode refid="5657" relation="include">
+        </childnode>
+        <childnode refid="5653" relation="include">
+        </childnode>
+        <childnode refid="5659" relation="include">
+        </childnode>
+        <childnode refid="5631" relation="include">
+        </childnode>
+        <childnode refid="5660" relation="include">
+        </childnode>
+        <childnode refid="5661" relation="include">
+        </childnode>
+        <childnode refid="5643" relation="include">
+        </childnode>
+        <childnode refid="5662" relation="include">
+        </childnode>
+        <childnode refid="5663" relation="include">
+        </childnode>
+        <childnode refid="5637" relation="include">
+        </childnode>
+      </node>
+      <node id="5644">
+        <label>psa_util.h</label>
+        <link refid="psa__util_8h"/>
+      </node>
+      <node id="5691">
+        <label>sha256.h</label>
+        <link refid="sha256_8h"/>
+        <childnode refid="5653" relation="include">
+        </childnode>
+      </node>
+      <node id="5654">
+        <label>crypto_driver_contexts_primitives.h</label>
+        <link refid="crypto__driver__contexts__primitives_8h"/>
+        <childnode refid="5650" relation="include">
+        </childnode>
+      </node>
+      <node id="5627">
+        <label>build_info.h</label>
+        <link refid="mbedcrypto_2psa_2build__info_8h"/>
+        <childnode refid="5628" relation="include">
+        </childnode>
+        <childnode refid="5645" relation="include">
+        </childnode>
+        <childnode refid="5656" relation="include">
+        </childnode>
+        <childnode refid="5650" relation="include">
+        </childnode>
+      </node>
+      <node id="5629">
+        <label>crypto.h</label>
+        <link refid="crypto_8h"/>
+        <childnode refid="5630" relation="include">
+        </childnode>
+        <childnode refid="5632" relation="include">
+        </childnode>
+        <childnode refid="5644" relation="include">
+        </childnode>
+        <childnode refid="5637" relation="include">
+        </childnode>
+      </node>
+      <node id="5630">
+        <label>pk.h</label>
+        <link refid="pk_8h"/>
+        <childnode refid="5631" relation="include">
+        </childnode>
+        <childnode refid="5638" relation="include">
+        </childnode>
+        <childnode refid="5643" relation="include">
+        </childnode>
+      </node>
+      <node id="5701">
+        <label>pem.h</label>
+        <link refid="pem_8h"/>
+      </node>
+      <node id="5650">
+        <label>crypto_struct.h</label>
+        <link refid="crypto__struct_8h"/>
+      </node>
+      <node id="5639">
+        <label>x509_crt.h</label>
+        <link refid="x509__crt_8h"/>
+        <childnode refid="5632" relation="include">
+        </childnode>
+        <childnode refid="5640" relation="include">
+        </childnode>
+      </node>
+      <node id="5634">
+        <label>net_sockets.h</label>
+        <link refid="net__sockets_8h"/>
+      </node>
+      <node id="5678">
+        <label>asn1.h</label>
+        <link refid="asn1_8h"/>
+        <childnode refid="5679" relation="include">
+        </childnode>
+        <childnode refid="5638" relation="include">
+        </childnode>
+        <childnode refid="5643" relation="include">
+        </childnode>
+        <childnode refid="5662" relation="include">
+        </childnode>
+        <childnode refid="5663" relation="include">
+        </childnode>
+        <childnode refid="5640" relation="include">
+        </childnode>
+      </node>
+      <node id="5647">
+        <label>crypto_driver_common.h</label>
+        <link refid="crypto__driver__common_8h"/>
+        <childnode refid="5648" relation="include">
+        </childnode>
+        <childnode refid="5651" relation="include">
+        </childnode>
+        <childnode refid="5653" relation="include">
+        </childnode>
+        <childnode refid="5649" relation="include">
+        </childnode>
+        <childnode refid="5652" relation="include">
+        </childnode>
+        <childnode refid="5654" relation="include">
+        </childnode>
+        <childnode refid="5655" relation="include">
+        </childnode>
+      </node>
+      <node id="5686">
+        <label>bignum.h</label>
+        <link refid="bignum_8h"/>
+        <childnode refid="5665" relation="include">
+        </childnode>
+        <childnode refid="5678" relation="include">
+        </childnode>
+        <childnode refid="5632" relation="include">
+        </childnode>
+        <childnode refid="5672" relation="include">
+        </childnode>
+        <childnode refid="5639" relation="include">
+        </childnode>
+        <childnode refid="5687" relation="include">
+        </childnode>
+      </node>
+      <node id="5646">
+        <label>crypto_extra.h</label>
+        <link refid="crypto__extra_8h"/>
+        <childnode refid="5629" relation="include">
+        </childnode>
+      </node>
+      <node id="5697">
+        <label>threading.h</label>
+        <link refid="threading_8h"/>
+        <childnode refid="5670" relation="include">
+        </childnode>
+        <childnode refid="5671" relation="include">
+        </childnode>
+        <childnode refid="5672" relation="include">
+        </childnode>
+        <childnode refid="5674" relation="include">
+        </childnode>
+        <childnode refid="5635" relation="include">
+        </childnode>
+        <childnode refid="5637" relation="include">
+        </childnode>
+      </node>
+      <node id="5641">
+        <label>x509_crl.h</label>
+        <link refid="x509__crl_8h"/>
+        <childnode refid="5639" relation="include">
+        </childnode>
+        <childnode refid="5632" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <briefdescription>
+<para>Adjust TLS configuration. </para>    </briefdescription>
+    <detaileddescription>
+<para>Automatically enable certain dependencies. Generally, MBEDLTS_xxx configurations need to be explicitly enabled by the user: enabling MBEDTLS_xxx_A but not MBEDTLS_xxx_B when A requires B results in a compilation error. However, we do automatically enable certain options in some circumstances. One case is if MBEDTLS_xxx_B is an internal option used to identify parts of a module that are used by other module, and we don&apos;t want to make the symbol MBEDTLS_xxx_B part of the public API. Another case is if A didn&apos;t depend on B in earlier versions, and we want to use B in A but we need to preserve backward compatibility with configurations that explicitly activate MBEDTLS_xxx_A but not MBEDTLS_xxx_B. </para>    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="17"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/><sp/>Copyright<sp/>The<sp/>Mbed<sp/>TLS<sp/>Contributors</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*<sp/><sp/>SPDX-License-Identifier:<sp/>Apache-2.0<sp/>OR<sp/>GPL-2.0-or-later</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>MBEDTLS_CONFIG_ADJUST_SSL_H</highlight></codeline>
+<codeline lineno="23"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>MBEDTLS_CONFIG_ADJUST_SSL_H</highlight></codeline>
+<codeline lineno="24"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>The<sp/>following<sp/>blocks<sp/>make<sp/>it<sp/>easier<sp/>to<sp/>disable<sp/>all<sp/>of<sp/>TLS,</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>*<sp/>or<sp/>of<sp/>TLS<sp/>1.2<sp/>or<sp/>1.3<sp/>or<sp/>DTLS,<sp/>without<sp/>having<sp/>to<sp/>manually<sp/>disable<sp/>all</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>*<sp/>key<sp/>exchanges,<sp/>options<sp/>and<sp/>extensions<sp/>related<sp/>to<sp/>them.<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>!defined(MBEDTLS_SSL_TLS_C)</highlight></codeline>
+<codeline lineno="30"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#undef<sp/>MBEDTLS_SSL_CLI_C</highlight></codeline>
+<codeline lineno="31"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#undef<sp/>MBEDTLS_SSL_SRV_C</highlight></codeline>
+<codeline lineno="32"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#undef<sp/>MBEDTLS_SSL_PROTO_TLS1_3</highlight></codeline>
+<codeline lineno="33"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#undef<sp/>MBEDTLS_SSL_PROTO_TLS1_2</highlight></codeline>
+<codeline lineno="34"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#undef<sp/>MBEDTLS_SSL_PROTO_DTLS</highlight></codeline>
+<codeline lineno="35"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="36"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>!(defined(MBEDTLS_SSL_SRV_C)<sp/>&amp;&amp;<sp/>defined(MBEDTLS_SSL_SESSION_TICKETS))</highlight></codeline>
+<codeline lineno="38"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#undef<sp/>MBEDTLS_SSL_TICKET_C</highlight></codeline>
+<codeline lineno="39"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="40"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>!defined(MBEDTLS_SSL_PROTO_DTLS)</highlight></codeline>
+<codeline lineno="42"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#undef<sp/>MBEDTLS_SSL_DTLS_ANTI_REPLAY</highlight></codeline>
+<codeline lineno="43"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#undef<sp/>MBEDTLS_SSL_DTLS_CONNECTION_ID</highlight></codeline>
+<codeline lineno="44"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#undef<sp/>MBEDTLS_SSL_DTLS_CONNECTION_ID_COMPAT</highlight></codeline>
+<codeline lineno="45"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#undef<sp/>MBEDTLS_SSL_DTLS_HELLO_VERIFY</highlight></codeline>
+<codeline lineno="46"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#undef<sp/>MBEDTLS_SSL_DTLS_SRTP</highlight></codeline>
+<codeline lineno="47"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#undef<sp/>MBEDTLS_SSL_DTLS_CLIENT_PORT_REUSE</highlight></codeline>
+<codeline lineno="48"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="49"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>!defined(MBEDTLS_SSL_PROTO_TLS1_2)</highlight></codeline>
+<codeline lineno="51"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#undef<sp/>MBEDTLS_SSL_ENCRYPT_THEN_MAC</highlight></codeline>
+<codeline lineno="52"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#undef<sp/>MBEDTLS_SSL_EXTENDED_MASTER_SECRET</highlight></codeline>
+<codeline lineno="53"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#undef<sp/>MBEDTLS_SSL_RENEGOTIATION</highlight></codeline>
+<codeline lineno="54"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#undef<sp/>MBEDTLS_KEY_EXCHANGE_RSA_ENABLED</highlight></codeline>
+<codeline lineno="55"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#undef<sp/>MBEDTLS_KEY_EXCHANGE_DHE_RSA_ENABLED</highlight></codeline>
+<codeline lineno="56"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#undef<sp/>MBEDTLS_KEY_EXCHANGE_ECDHE_RSA_ENABLED</highlight></codeline>
+<codeline lineno="57"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#undef<sp/>MBEDTLS_KEY_EXCHANGE_ECDHE_ECDSA_ENABLED</highlight></codeline>
+<codeline lineno="58"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#undef<sp/>MBEDTLS_KEY_EXCHANGE_PSK_ENABLED</highlight></codeline>
+<codeline lineno="59"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#undef<sp/>MBEDTLS_KEY_EXCHANGE_DHE_PSK_ENABLED</highlight></codeline>
+<codeline lineno="60"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#undef<sp/>MBEDTLS_KEY_EXCHANGE_RSA_PSK_ENABLED</highlight></codeline>
+<codeline lineno="61"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#undef<sp/>MBEDTLS_KEY_EXCHANGE_ECDHE_PSK_ENABLED</highlight></codeline>
+<codeline lineno="62"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#undef<sp/>MBEDTLS_KEY_EXCHANGE_ECDH_RSA_ENABLED</highlight></codeline>
+<codeline lineno="63"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#undef<sp/>MBEDTLS_KEY_EXCHANGE_ECDH_ECDSA_ENABLED</highlight></codeline>
+<codeline lineno="64"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#undef<sp/>MBEDTLS_KEY_EXCHANGE_ECJPAKE_ENABLED</highlight></codeline>
+<codeline lineno="65"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="66"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>!defined(MBEDTLS_SSL_PROTO_TLS1_3)</highlight></codeline>
+<codeline lineno="68"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#undef<sp/>MBEDTLS_SSL_TLS1_3_KEY_EXCHANGE_MODE_PSK_ENABLED</highlight></codeline>
+<codeline lineno="69"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#undef<sp/>MBEDTLS_SSL_TLS1_3_KEY_EXCHANGE_MODE_EPHEMERAL_ENABLED</highlight></codeline>
+<codeline lineno="70"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#undef<sp/>MBEDTLS_SSL_TLS1_3_KEY_EXCHANGE_MODE_PSK_EPHEMERAL_ENABLED</highlight></codeline>
+<codeline lineno="71"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#undef<sp/>MBEDTLS_SSL_EARLY_DATA</highlight></codeline>
+<codeline lineno="72"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#undef<sp/>MBEDTLS_SSL_RECORD_SIZE_LIMIT</highlight></codeline>
+<codeline lineno="73"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="74"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(MBEDTLS_SSL_PROTO_TLS1_2)<sp/>&amp;&amp;<sp/>\</highlight></codeline>
+<codeline lineno="76"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>(defined(MBEDTLS_ECDH_C)<sp/>||<sp/>defined(MBEDTLS_ECDSA_C)<sp/>||<sp/>\</highlight></codeline>
+<codeline lineno="77"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>defined(MBEDTLS_KEY_EXCHANGE_ECJPAKE_ENABLED))</highlight></codeline>
+<codeline lineno="78"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>MBEDTLS_SSL_TLS1_2_SOME_ECC</highlight></codeline>
+<codeline lineno="79"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="80"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>MBEDTLS_CONFIG_ADJUST_SSL_H<sp/>*/</highlight><highlight class="preprocessor"></highlight></codeline>
+    </programlisting>
+    <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/config_adjust_ssl.h"/>
+  </compounddef>
+</doxygen>

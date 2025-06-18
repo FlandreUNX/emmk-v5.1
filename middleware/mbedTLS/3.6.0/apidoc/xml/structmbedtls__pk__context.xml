@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="structmbedtls__pk__context" kind="struct" prot="public">
+    <compoundname>mbedtls_pk_context</compoundname>
+    <includes refid="pk_8h" local="no">pk.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structmbedtls__pk__context_1ac98791e4426f0fa1e97e8de8375a9a65" prot="public" static="no" mutable="no">
+        <type>const <ref refid="pk_8h_1a5929d902e6b2dad79458c8583ca5c42d" kindref="member">mbedtls_pk_info_t</ref> *</type>
+        <definition>const mbedtls_pk_info_t* mbedtls_pk_context::private_pk_info</definition>
+        <argsstring></argsstring>
+        <name>private_pk_info</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Public key information </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/pk.h" line="221" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/pk.h" bodystart="221" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmbedtls__pk__context_1a583694625dbdb8a313975705872b78d9" prot="public" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* mbedtls_pk_context::private_pk_ctx</definition>
+        <argsstring></argsstring>
+        <name>private_pk_ctx</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Underlying public key context </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/pk.h" line="222" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/pk.h" bodystart="222" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmbedtls__pk__context_1ae8c1a362ef3e9b69b1da56f16eb9c6d2" prot="public" static="no" mutable="no">
+        <type><ref refid="structmbedtls__svc__key__id__t" kindref="compound">mbedtls_svc_key_id_t</ref></type>
+        <definition>mbedtls_svc_key_id_t mbedtls_pk_context::private_priv_id</definition>
+        <argsstring></argsstring>
+        <name>private_priv_id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Key ID for opaque keys </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/pk.h" line="237" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/pk.h" bodystart="237" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Public key container. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="639">
+        <label>mbedtls_svc_key_id_t</label>
+        <link refid="structmbedtls__svc__key__id__t"/>
+      </node>
+      <node id="638">
+        <label>mbedtls_pk_context</label>
+        <link refid="structmbedtls__pk__context"/>
+        <childnode refid="639" relation="usage">
+          <edgelabel>private_priv_id</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/pk.h" line="220" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/pk.h" bodystart="220" bodyend="265"/>
+    <listofallmembers>
+      <member refid="structmbedtls__pk__context_1a583694625dbdb8a313975705872b78d9" prot="public" virt="non-virtual"><scope>mbedtls_pk_context</scope><name>private_pk_ctx</name></member>
+      <member refid="structmbedtls__pk__context_1ac98791e4426f0fa1e97e8de8375a9a65" prot="public" virt="non-virtual"><scope>mbedtls_pk_context</scope><name>private_pk_info</name></member>
+      <member refid="structmbedtls__pk__context_1ae8c1a362ef3e9b69b1da56f16eb9c6d2" prot="public" virt="non-virtual"><scope>mbedtls_pk_context</scope><name>private_priv_id</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

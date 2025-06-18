@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="structpsa__drv__se__mac__t" kind="struct" prot="public">
+    <compoundname>psa_drv_se_mac_t</compoundname>
+    <includes refid="crypto__se__driver_8h" local="no">crypto_se_driver.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structpsa__drv__se__mac__t_1a630880a61a343c3066ace740fd4393ef" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t psa_drv_se_mac_t::private_context_size</definition>
+        <argsstring></argsstring>
+        <name>private_context_size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>The size in bytes of the hardware-specific secure element MAC context structure </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_se_driver.h" line="315" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_se_driver.h" bodystart="315" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structpsa__drv__se__mac__t_1a409a50bcf9ecf6bb3f5ce57eab9b941a" prot="public" static="no" mutable="no">
+        <type><ref refid="group__se__mac_1ga82e76f0e8691e0823b9e57185a848366" kindref="member">psa_drv_se_mac_setup_t</ref></type>
+        <definition>psa_drv_se_mac_setup_t psa_drv_se_mac_t::private_p_setup</definition>
+        <argsstring></argsstring>
+        <name>private_p_setup</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Function that performs a MAC setup operation </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_se_driver.h" line="318" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_se_driver.h" bodystart="318" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structpsa__drv__se__mac__t_1acae02c07a7a5f13e8fed9cb611f1d9f7" prot="public" static="no" mutable="no">
+        <type><ref refid="group__se__mac_1ga5c7cd9fd9ab206b792f760d85f206c44" kindref="member">psa_drv_se_mac_update_t</ref></type>
+        <definition>psa_drv_se_mac_update_t psa_drv_se_mac_t::private_p_update</definition>
+        <argsstring></argsstring>
+        <name>private_p_update</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Function that performs a MAC update operation </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_se_driver.h" line="321" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_se_driver.h" bodystart="321" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structpsa__drv__se__mac__t_1adb1a899a75355167c46978b511a27b03" prot="public" static="no" mutable="no">
+        <type><ref refid="group__se__mac_1gaf09b7a8f0724ef62899e31e66ef00bad" kindref="member">psa_drv_se_mac_finish_t</ref></type>
+        <definition>psa_drv_se_mac_finish_t psa_drv_se_mac_t::private_p_finish</definition>
+        <argsstring></argsstring>
+        <name>private_p_finish</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Function that completes a MAC operation </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_se_driver.h" line="324" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_se_driver.h" bodystart="324" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structpsa__drv__se__mac__t_1a1c189e417c2bc3add303b3277a9442b8" prot="public" static="no" mutable="no">
+        <type><ref refid="group__se__mac_1ga8ce380746e630ad4d43890011f817003" kindref="member">psa_drv_se_mac_finish_verify_t</ref></type>
+        <definition>psa_drv_se_mac_finish_verify_t psa_drv_se_mac_t::private_p_finish_verify</definition>
+        <argsstring></argsstring>
+        <name>private_p_finish_verify</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Function that completes a MAC operation with a verify check </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_se_driver.h" line="327" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_se_driver.h" bodystart="327" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structpsa__drv__se__mac__t_1a04523532f4f063e0b79b00d8dd304871" prot="public" static="no" mutable="no">
+        <type><ref refid="group__se__mac_1ga21176e1393d87fbbb687b124f153a611" kindref="member">psa_drv_se_mac_abort_t</ref></type>
+        <definition>psa_drv_se_mac_abort_t psa_drv_se_mac_t::private_p_abort</definition>
+        <argsstring></argsstring>
+        <name>private_p_abort</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Function that aborts a previously started MAC operation </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_se_driver.h" line="330" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_se_driver.h" bodystart="330" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structpsa__drv__se__mac__t_1a0103d05a464b85025506373e971f9b77" prot="public" static="no" mutable="no">
+        <type><ref refid="group__se__mac_1ga013e0e9836afa0f6c8b8a8cc57cb6b98" kindref="member">psa_drv_se_mac_generate_t</ref></type>
+        <definition>psa_drv_se_mac_generate_t psa_drv_se_mac_t::private_p_mac</definition>
+        <argsstring></argsstring>
+        <name>private_p_mac</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Function that performs a MAC operation in one call </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_se_driver.h" line="333" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_se_driver.h" bodystart="333" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structpsa__drv__se__mac__t_1a130a8059464a2716bb23ee18d823afb2" prot="public" static="no" mutable="no">
+        <type><ref refid="group__se__mac_1ga09b8c1c76a515213f9cb65f75f4954b5" kindref="member">psa_drv_se_mac_verify_t</ref></type>
+        <definition>psa_drv_se_mac_verify_t psa_drv_se_mac_t::private_p_mac_verify</definition>
+        <argsstring></argsstring>
+        <name>private_p_mac_verify</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Function that performs a MAC and verify operation in one call </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_se_driver.h" line="336" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_se_driver.h" bodystart="336" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A struct containing all of the function pointers needed to perform secure element MAC operations. </para>    </briefdescription>
+    <detaileddescription>
+<para>PSA Crypto API implementations should populate the table as appropriate upon startup.</para><para>If one of the functions is not implemented (such as <computeroutput>psa_drv_se_mac_generate_t</computeroutput>), it should be set to NULL.</para><para>Driver implementers should ensure that they implement all of the functions that make sense for their hardware, and that they provide a full solution (for example, if they support <computeroutput>p_setup</computeroutput>, they should also support <computeroutput>p_update</computeroutput> and at least one of <computeroutput>p_finish</computeroutput> or <computeroutput>p_finish_verify</computeroutput>). </para>    </detaileddescription>
+    <collaborationgraph>
+      <node id="964">
+        <label>psa_drv_se_context_t</label>
+        <link refid="structpsa__drv__se__context__t"/>
+      </node>
+      <node id="963">
+        <label>psa_drv_se_mac_t</label>
+        <link refid="structpsa__drv__se__mac__t"/>
+        <childnode refid="964" relation="usage">
+          <edgelabel>private_p_mac_verify</edgelabel>
+          <edgelabel>private_p_setup</edgelabel>
+          <edgelabel>private_p_mac</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_se_driver.h" line="311" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedcrypto/psa/crypto_se_driver.h" bodystart="311" bodyend="337"/>
+    <listofallmembers>
+      <member refid="structpsa__drv__se__mac__t_1a630880a61a343c3066ace740fd4393ef" prot="public" virt="non-virtual"><scope>psa_drv_se_mac_t</scope><name>private_context_size</name></member>
+      <member refid="structpsa__drv__se__mac__t_1a04523532f4f063e0b79b00d8dd304871" prot="public" virt="non-virtual"><scope>psa_drv_se_mac_t</scope><name>private_p_abort</name></member>
+      <member refid="structpsa__drv__se__mac__t_1adb1a899a75355167c46978b511a27b03" prot="public" virt="non-virtual"><scope>psa_drv_se_mac_t</scope><name>private_p_finish</name></member>
+      <member refid="structpsa__drv__se__mac__t_1a1c189e417c2bc3add303b3277a9442b8" prot="public" virt="non-virtual"><scope>psa_drv_se_mac_t</scope><name>private_p_finish_verify</name></member>
+      <member refid="structpsa__drv__se__mac__t_1a0103d05a464b85025506373e971f9b77" prot="public" virt="non-virtual"><scope>psa_drv_se_mac_t</scope><name>private_p_mac</name></member>
+      <member refid="structpsa__drv__se__mac__t_1a130a8059464a2716bb23ee18d823afb2" prot="public" virt="non-virtual"><scope>psa_drv_se_mac_t</scope><name>private_p_mac_verify</name></member>
+      <member refid="structpsa__drv__se__mac__t_1a409a50bcf9ecf6bb3f5ce57eab9b941a" prot="public" virt="non-virtual"><scope>psa_drv_se_mac_t</scope><name>private_p_setup</name></member>
+      <member refid="structpsa__drv__se__mac__t_1acae02c07a7a5f13e8fed9cb611f1d9f7" prot="public" virt="non-virtual"><scope>psa_drv_se_mac_t</scope><name>private_p_update</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

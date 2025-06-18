@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="structmbedtls__block__cipher__context__t" kind="struct" prot="public">
+    <compoundname>mbedtls_block_cipher_context_t</compoundname>
+    <includes refid="block__cipher_8h" local="no">block_cipher.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structmbedtls__block__cipher__context__t_1a82b8d96fc73579a71b388d4fd0ca5808" prot="public" static="no" mutable="no">
+        <type><ref refid="block__cipher_8h_1a4ea902984e31452e729f4e287b6072b6" kindref="member">mbedtls_block_cipher_id_t</ref></type>
+        <definition>mbedtls_block_cipher_id_t mbedtls_block_cipher_context_t::private_id</definition>
+        <argsstring></argsstring>
+        <name>private_id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/block_cipher.h" line="53" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/block_cipher.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmbedtls__block__cipher__context__t_1a7ddbbb4a0606f6a5839c4848d1cc916c" prot="public" static="no" mutable="no">
+        <type>unsigned</type>
+        <definition>unsigned mbedtls_block_cipher_context_t::dummy</definition>
+        <argsstring></argsstring>
+        <name>dummy</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/block_cipher.h" line="59" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/block_cipher.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmbedtls__block__cipher__context__t_1ad93f00ca72b5c2942c4649be8bad7803" prot="public" static="no" mutable="no">
+        <type><ref refid="structmbedtls__aes__context" kindref="compound">mbedtls_aes_context</ref></type>
+        <definition>mbedtls_aes_context mbedtls_block_cipher_context_t::private_aes</definition>
+        <argsstring></argsstring>
+        <name>private_aes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/block_cipher.h" line="61" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/block_cipher.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmbedtls__block__cipher__context__t_1ae4beeee5c2d67b4d71c4a5298eb26f0a" prot="public" static="no" mutable="no">
+        <type><ref refid="structmbedtls__aria__context" kindref="compound">mbedtls_aria_context</ref></type>
+        <definition>mbedtls_aria_context mbedtls_block_cipher_context_t::private_aria</definition>
+        <argsstring></argsstring>
+        <name>private_aria</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/block_cipher.h" line="64" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/block_cipher.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmbedtls__block__cipher__context__t_1ae94bace665990e9bb2ab37c491956a89" prot="public" static="no" mutable="no">
+        <type><ref refid="structmbedtls__camellia__context" kindref="compound">mbedtls_camellia_context</ref></type>
+        <definition>mbedtls_camellia_context mbedtls_block_cipher_context_t::private_camellia</definition>
+        <argsstring></argsstring>
+        <name>private_camellia</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/block_cipher.h" line="67" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/block_cipher.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmbedtls__block__cipher__context__t_1a5ba45e81f26ac9aa2b345b413d943055" prot="public" static="no" mutable="no">
+        <type>union mbedtls_block_cipher_context_t::@7</type>
+        <definition>union mbedtls_block_cipher_context_t::@7  mbedtls_block_cipher_context_t::private_ctx</definition>
+        <argsstring></argsstring>
+        <name>private_ctx</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/block_cipher.h" line="69" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="528">
+        <label>mbedtls_aes_context</label>
+        <link refid="structmbedtls__aes__context"/>
+      </node>
+      <node id="526">
+        <label>mbedtls_camellia_context</label>
+        <link refid="structmbedtls__camellia__context"/>
+      </node>
+      <node id="527">
+        <label>mbedtls_aria_context</label>
+        <link refid="structmbedtls__aria__context"/>
+      </node>
+      <node id="525">
+        <label>mbedtls_block_cipher_context_t</label>
+        <link refid="structmbedtls__block__cipher__context__t"/>
+        <childnode refid="526" relation="usage">
+          <edgelabel>private_camellia</edgelabel>
+        </childnode>
+        <childnode refid="527" relation="usage">
+          <edgelabel>private_aria</edgelabel>
+        </childnode>
+        <childnode refid="528" relation="usage">
+          <edgelabel>private_aes</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/block_cipher.h" line="52" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/block_cipher.h" bodystart="52" bodyend="70"/>
+    <listofallmembers>
+      <member refid="structmbedtls__block__cipher__context__t_1a7ddbbb4a0606f6a5839c4848d1cc916c" prot="public" virt="non-virtual"><scope>mbedtls_block_cipher_context_t</scope><name>dummy</name></member>
+      <member refid="structmbedtls__block__cipher__context__t_1ad93f00ca72b5c2942c4649be8bad7803" prot="public" virt="non-virtual"><scope>mbedtls_block_cipher_context_t</scope><name>private_aes</name></member>
+      <member refid="structmbedtls__block__cipher__context__t_1ae4beeee5c2d67b4d71c4a5298eb26f0a" prot="public" virt="non-virtual"><scope>mbedtls_block_cipher_context_t</scope><name>private_aria</name></member>
+      <member refid="structmbedtls__block__cipher__context__t_1ae94bace665990e9bb2ab37c491956a89" prot="public" virt="non-virtual"><scope>mbedtls_block_cipher_context_t</scope><name>private_camellia</name></member>
+      <member refid="structmbedtls__block__cipher__context__t_1a5ba45e81f26ac9aa2b345b413d943055" prot="public" virt="non-virtual"><scope>mbedtls_block_cipher_context_t</scope><name>private_ctx</name></member>
+      <member refid="structmbedtls__block__cipher__context__t_1a82b8d96fc73579a71b388d4fd0ca5808" prot="public" virt="non-virtual"><scope>mbedtls_block_cipher_context_t</scope><name>private_id</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

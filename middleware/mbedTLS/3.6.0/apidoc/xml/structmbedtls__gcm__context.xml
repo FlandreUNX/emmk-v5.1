@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="structmbedtls__gcm__context" kind="struct" prot="public">
+    <compoundname>mbedtls_gcm_context</compoundname>
+    <includes refid="gcm__alt_8h" local="no">gcm_alt.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structmbedtls__gcm__context_1afa63dd45e07342af1207cb0045e3fa93" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int mbedtls_gcm_context::dummy</definition>
+        <argsstring></argsstring>
+        <name>dummy</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/tests/include/alt-dummy/gcm_alt.h" line="11" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/tests/include/alt-dummy/gcm_alt.h" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/tests/include/alt-dummy/gcm_alt.h" line="10" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/tests/include/alt-dummy/gcm_alt.h" bodystart="10" bodyend="12"/>
+    <listofallmembers>
+      <member refid="structmbedtls__gcm__context_1afa63dd45e07342af1207cb0045e3fa93" prot="public" virt="non-virtual"><scope>mbedtls_gcm_context</scope><name>dummy</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

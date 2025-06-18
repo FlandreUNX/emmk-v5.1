@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.6">
+  <compounddef id="structmbedtls__oid__descriptor__t" kind="struct" prot="public">
+    <compoundname>mbedtls_oid_descriptor_t</compoundname>
+    <includes refid="oid_8h" local="no">oid.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structmbedtls__oid__descriptor__t_1ac2dfdcb1a225a5c577a17be5a5a36905" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* mbedtls_oid_descriptor_t::private_asn1</definition>
+        <argsstring></argsstring>
+        <name>private_asn1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>OID ASN.1 representation </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/oid.h" line="477" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/oid.h" bodystart="477" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmbedtls__oid__descriptor__t_1afa659ef8cda1ff1d6d352879e8fd5d15" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t mbedtls_oid_descriptor_t::private_asn1_len</definition>
+        <argsstring></argsstring>
+        <name>private_asn1_len</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>length of asn1 </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/oid.h" line="478" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/oid.h" bodystart="478" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Base OID descriptor structure. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/oid.h" line="476" column="1" bodyfile="D:/GitHub/ARM-software/CMSIS-mbedTLS/include/mbedtls/oid.h" bodystart="476" bodyend="483"/>
+    <listofallmembers>
+      <member refid="structmbedtls__oid__descriptor__t_1ac2dfdcb1a225a5c577a17be5a5a36905" prot="public" virt="non-virtual"><scope>mbedtls_oid_descriptor_t</scope><name>private_asn1</name></member>
+      <member refid="structmbedtls__oid__descriptor__t_1afa659ef8cda1ff1d6d352879e8fd5d15" prot="public" virt="non-virtual"><scope>mbedtls_oid_descriptor_t</scope><name>private_asn1_len</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
