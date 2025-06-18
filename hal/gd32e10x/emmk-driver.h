@@ -79,11 +79,9 @@ extern uint32_t SystemCoreClock;
 #include "gd32e10x_spi.h"               // GigaDevice::Device:GD32F1x0_StdPeripherals:SPI_I2S
 #include "gd32e10x_dma.h"
 #include "gd32e10x_ctc.h"
+#include "gd32e10x_bkp.h"
 
 #include "RTE_Components.h"
-#ifdef RTE_Compiler_IO_STDOUT_EVR
-#include "EventRecorder.h"
-#endif
 
 ////
 //// driver

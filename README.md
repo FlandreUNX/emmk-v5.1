@@ -250,4 +250,8 @@ chg: middleware, xbutton> 旋转编码器中断增加外部调用
 ###### V1.6.5.0-250618
 add: hal, device, ev1527> 增加软件模拟发送1527编码
 
+###### V1.7.0.0-250618
+chg: 整合离线代码
+add: hal, driver, gd32e10x> 增加gd32e10x驱动支持
+
 ------------
