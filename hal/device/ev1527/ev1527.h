@@ -59,6 +59,8 @@ typedef struct {
 
 typedef struct {
     uint32_t clkCount;
+    uint32_t c4;
+    uint32_t c12;
 
     struct {
         void (*timerInit_1us)(void);
@@ -100,10 +102,10 @@ extern void ev1527_pinDecode(ev1527_Instance_t *ins, register uint32_t newPinVal
 
 /*@{*/
 
-extern void ev1527_encode_init(ev1527_Encoder_t *enc);
+extern void ev1527_encode_init(ev1527_Encoder_t *enc, uint32_t tick);
 extern void ev1527_encode_finalize(ev1527_Encoder_t *enc);
 
-extern void ev1527_encode_sendBlock(ev1527_Encoder_t *enc, uint32_t b20, uint32_t b4, uint32_t repeat);
+extern void ev1527_encode_sendBlock(ev1527_Encoder_t *enc, uint32_t b24_h, uint32_t repeat);
 
 /*@}*/
 
