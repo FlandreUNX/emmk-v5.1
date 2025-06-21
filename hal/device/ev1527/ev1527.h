@@ -51,6 +51,8 @@ typedef struct {
             uint8_t receiverState;
             uint8_t rawDataBitCounter;
             uint32_t rawData;
+            
+            uint8_t bitSize;
         } pinMode;
     } aux;
 
@@ -81,7 +83,7 @@ typedef struct {
 
 /*@{*/
 
-extern void ev1527_init(ev1527_Instance_t *ins, const void *pinData, const ev1527_Callback_t *callback) ;
+extern void ev1527_init(ev1527_Instance_t *ins, const void *pinData, const ev1527_Callback_t *callback, uint8_t bitSize);
 extern void ev1527_finalize(ev1527_Instance_t *ins);
 extern void ev1527_counter(ev1527_Instance_t *ins);
 extern void ev1527_decode(ev1527_Instance_t *ins);
@@ -105,7 +107,7 @@ extern void ev1527_pinDecode(ev1527_Instance_t *ins, register uint32_t newPinVal
 extern void ev1527_encode_init(ev1527_Encoder_t *enc, uint32_t tick);
 extern void ev1527_encode_finalize(ev1527_Encoder_t *enc);
 
-extern void ev1527_encode_sendBlock(ev1527_Encoder_t *enc, uint32_t b24_h, uint32_t repeat);
+extern void ev1527_encode_sendBlock(ev1527_Encoder_t *enc, uint32_t data, uint8_t bitSize, uint32_t repeat);
 
 /*@}*/
 

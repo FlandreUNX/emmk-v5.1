@@ -53,10 +53,6 @@
 #define EV1527_BIT_IS_TIMEOUT2 (ins->aux.timingMode.baseTiming_per200us >= 7)
 
 //// NEC protocol bit inerval
-#define NEC_ADDRESS_BITS             20
-#define NEC_COMMAND_BITS             4
-
-#define NEC_BITS                     (NEC_ADDRESS_BITS + NEC_COMMAND_BITS)
 #define NEC_UNIT                     (400 / 10)         // 1unit = 4clk
 
 #define NEC_HEADER_MARK              (1 * NEC_UNIT)     // H=4CLK
@@ -87,12 +83,13 @@
 
 /*@{*/
 
-void ev1527_init(ev1527_Instance_t *ins, const void *pinData, const ev1527_Callback_t *callback) {
+void ev1527_init(ev1527_Instance_t *ins, const void *pinData, const ev1527_Callback_t *callback, uint8_t bitSize) {
     ASSERT(ins != NULL);
     ASSERT(pinData != NULL);
 
     ins->pinData = (void *) pinData;
     ins->callback = callback;
+    ins->aux.pinMode.bitSize = bitSize;
 }
 
 
@@ -144,7 +141,7 @@ void ev1527_pinDecode(ev1527_Instance_t *ins, const register uint32_t newPinValu
                     // BIT=0
                 }
                 ins->aux.pinMode.rawDataBitCounter++;
-                if (ins->aux.pinMode.rawDataBitCounter >= NEC_BITS) {
+                if (ins->aux.pinMode.rawDataBitCounter >= ins->aux.pinMode.bitSize) {
                     ins->data = ins->aux.pinMode.rawData;
                     ins->isDataReady = true;
                     tState = RECEIVER_STATE_WAITING_FOR_START_MARK;
@@ -327,15 +324,15 @@ void ev1527_encode_finalize(ev1527_Encoder_t *enc) {
 }
 
 
-void ev1527_encode_sendBlock(ev1527_Encoder_t *enc, uint32_t b24_h, uint32_t repeat) {
+void ev1527_encode_sendBlock(ev1527_Encoder_t *enc, uint32_t data, uint8_t bitSize, uint32_t repeat) {
     ASSERT(enc != NULL);
 
     enc->callback.timerInit_1us();
     enc->callback.gpioInit();
     for (uint32_t i = 0; i < repeat; i++) {
         encode_sync(enc);
-        for (int x = 0; x < 24; x++) {
-            encode_bit(enc, (b24_h >> x) & 0x01);
+        for (int x = 0; x < bitSize; x++) {
+            encode_bit(enc, (data >> x) & 0x01);
         }
     }
     enc->callback.timerFinalize();

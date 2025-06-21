@@ -407,17 +407,20 @@ int32_t xbutton_sync(void) {
                     mBtnObj[i].flag.pressingAccess = 1;
                     mBtnObj[i].flag.releaseAccess = 0;
                 }
-                if (mBtnObj[i].flag.pressingAccess && mBtnObj[i].pressingCount >= mBtnObj[i].hal.opts.accessCountTh2) {
-                    if (mBtnObj[i].hal.opts.isLongPressBtn && !mBtnObj[i].flag.isLongBtnSet) {
-                        mBtnObj[i].flag.isLongBtnSet = 1;
-                        button_event(i, XBUTTON_EVT_LONG_PRESS);
-                    } else if (!mBtnObj[i].hal.opts.isLongPressBtn) {
-                        if (mBtnObj[i].pressingCount >= mBtnObj[i].hal.opts.accessCountThEmit) {
-                            mBtnObj[i].pressingCount = mBtnObj[i].hal.opts.accessCountTh2;
-                            button_event(i, XBUTTON_EVT_SHORT_PRESS);
-                        }
-                    }
+                if (mBtnObj[i].flag.pressingAccess) {
                     button_event(i, XBUTTON_EVT_PRESSING);
+                    
+                    if (mBtnObj[i].pressingCount >= mBtnObj[i].hal.opts.accessCountTh2) {
+                        if (mBtnObj[i].hal.opts.isLongPressBtn && !mBtnObj[i].flag.isLongBtnSet) {
+                            mBtnObj[i].flag.isLongBtnSet = 1;
+                            button_event(i, XBUTTON_EVT_LONG_PRESS);
+                        } else if (!mBtnObj[i].hal.opts.isLongPressBtn) {
+                            if (mBtnObj[i].pressingCount >= mBtnObj[i].hal.opts.accessCountThEmit) {
+                                mBtnObj[i].pressingCount = mBtnObj[i].hal.opts.accessCountTh2;
+                                button_event(i, XBUTTON_EVT_SHORT_PRESS);
+                            }
+                        }
+                    } 
                 }
             }
         } else {
