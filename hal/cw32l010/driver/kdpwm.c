@@ -82,7 +82,7 @@ int32_t kdpwm_powerUp(kdpwm_t *kd) {
     if (kd->_host->isAtim) {
         if (kd->_config.channel.index <= 3) {
             ccmr = (uint32_t *) ((uint32_t) (&kd->_host->tim.atim->CCMR1CMP)
-            + ((kd->_config.channel.index / 3) * 4));
+            + ((kd->_config.channel.index / 2) * 4));
             uint32_t genmask = GENMASK(7, 0) << ((kd->_config.channel.index % 2) * 8);
             *ccmr &= ~genmask;
             *ccmr |= FIELD_PREP(genmask, 
