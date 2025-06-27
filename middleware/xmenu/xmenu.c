@@ -17,7 +17,7 @@
 #include "emmk-config.h"
 
 #include "./xmenu.h"
-#include "config-md-xmenu.h"
+#include "opts_xmenu.h"
 
 /**
  * @addtogroup Debug support
