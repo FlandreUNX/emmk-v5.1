@@ -61,10 +61,11 @@ int32_t cModule_protocolTransmit_control(cModule_Instance_t *ins, ProtocolRda1_t
     int32_t rc = -1;
     char *payload = calloc(1, 32);
     ASSERT(payload != NULL);
-    rc = klPtf_sprintf(payload, "%d,%d,%d,%d,%d,%d,%d,%d,%d", 0,
+    rc = klPtf_sprintf(payload, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d", 0,
         protocol->value, protocol->state, protocol->unit, protocol->type, 
         protocol->alarmL, protocol->alarmH, 
-        protocol->updateTimeMin, protocol->temp);
+        protocol->updateTimeMin, protocol->temp,
+        protocol->valueCo, protocol->auxCoLtm);
     ASSERT(rc <= 31);
 
     _cModule_packMutexLock(ins, true);
