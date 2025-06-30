@@ -53,17 +53,13 @@
 #define EV1527_BIT_IS_TIMEOUT2 (ins->aux.timingMode.baseTiming_per200us >= 7)
 
 //// NEC protocol bit inerval
-#define NEC_ADDRESS_BITS             20
-#define NEC_COMMAND_BITS             4
-
-#define NEC_BITS                     (NEC_ADDRESS_BITS + NEC_COMMAND_BITS)
-#define NEC_UNIT                     (350 / 10)         // 1unit = 4clk
+#define NEC_UNIT                     (400 / 10)         // 1unit = 4clk
 
 #define NEC_HEADER_MARK              (1 * NEC_UNIT)     // H=4CLK
 #define NEC_HEADER_SPACE             (31 * NEC_UNIT)    // L=124CLK
 
 #define NEC_ONE_SPACE                (1 * NEC_UNIT)     // H=12CLK, L=4CLK
-#define NEC_ZERO_SPACE               (4 * NEC_UNIT)     // H=4CLK, L=12CLK
+#define NEC_ZERO_SPACE               (3 * NEC_UNIT)     // H=4CLK, L=12CLK
 
 
 //// The states for the state machine
@@ -87,12 +83,13 @@
 
 /*@{*/
 
-void ev1527_init(ev1527_Instance_t *ins, const void *pinData, const ev1527_Callback_t *callback) {
+void ev1527_init(ev1527_Instance_t *ins, const void *pinData, const ev1527_Callback_t *callback, uint8_t bitSize) {
     ASSERT(ins != NULL);
     ASSERT(pinData != NULL);
 
     ins->pinData = (void *) pinData;
     ins->callback = callback;
+    ins->aux.pinMode.bitSize = bitSize;
 }
 
 
@@ -137,14 +134,14 @@ void ev1527_pinDecode(ev1527_Instance_t *ins, const register uint32_t newPinValu
         } else if (tState == RECEIVER_STATE_WAITING_FOR_DATA_SPACE) {
             if (tMicrosOfMarkOrSpace >= lowerValue(NEC_ONE_SPACE)
                 && tMicrosOfMarkOrSpace <= upperValue(NEC_ZERO_SPACE)) {
-                if (tMicrosOfMarkOrSpace >= 2 * NEC_UNIT) {
+                if (tMicrosOfMarkOrSpace < 2 * NEC_UNIT) {
                     // BIT=1
-                    ins->aux.pinMode.rawData |= 0x01 << ((24 - ins->aux.pinMode.rawDataBitCounter) - 1);
+                    ins->aux.pinMode.rawData |= 0x01 << (ins->aux.pinMode.rawDataBitCounter);
                 } else {
                     // BIT=0
                 }
                 ins->aux.pinMode.rawDataBitCounter++;
-                if (ins->aux.pinMode.rawDataBitCounter >= NEC_BITS) {
+                if (ins->aux.pinMode.rawDataBitCounter >= ins->aux.pinMode.bitSize) {
                     ins->data = ins->aux.pinMode.rawData;
                     ins->isDataReady = true;
                     tState = RECEIVER_STATE_WAITING_FOR_START_MARK;
@@ -275,45 +272,29 @@ void ev1527_clearDataReady(ev1527_Instance_t *ins) {
 
 /*@{*/
 
-static inline void encode_delay(ev1527_Encoder_t *enc) {
-    enc->callback.timerWait(enc->clkCount);
-}
-
-
 static void encode_sync(ev1527_Encoder_t *enc) {
+    uint32_t c124 = enc->c4 * 31;
     enc->callback.gpioSet(1);
-    for (int i = 0; i < 4; i++) {
-        encode_delay(enc);
-    }
-
+    enc->callback.timerWait(enc->c4);
+    
     enc->callback.gpioSet(0);
-    for (int i = 0; i < 12; i++) {
-        encode_delay(enc);
-    }
+    enc->callback.timerWait(c124);
 }
 
 
 static void encode_bit(ev1527_Encoder_t *enc, const uint8_t bit) {
     if (bit) {
         enc->callback.gpioSet(1);
-        for (int i = 0; i < 12; i++) {
-            encode_delay(enc);
-        }
+        enc->callback.timerWait(enc->c12);
 
         enc->callback.gpioSet(0);
-        for (int i = 0; i < 4; i++) {
-            encode_delay(enc);
-        }
+        enc->callback.timerWait(enc->c4);
     } else {
-        enc->callback.gpioSet(0);
-        for (int i = 0; i < 4; i++) {
-            encode_delay(enc);
-        }
-
         enc->callback.gpioSet(1);
-        for (int i = 0; i < 12; i++) {
-            encode_delay(enc);
-        }
+        enc->callback.timerWait(enc->c4);
+
+        enc->callback.gpioSet(0);
+        enc->callback.timerWait(enc->c12);
     }
 }
 
@@ -326,12 +307,15 @@ static void encode_bit(ev1527_Encoder_t *enc, const uint8_t bit) {
 
 /*@{*/
 
-void ev1527_encode_init(ev1527_Encoder_t *enc) {
+void ev1527_encode_init(ev1527_Encoder_t *enc, uint32_t tick) {
     ASSERT(enc != NULL);
     ASSERT(enc->callback.timerInit_1us != NULL);
     ASSERT(enc->callback.timerFinalize != NULL);
     ASSERT(enc->callback.timerWait != NULL);
     ASSERT(enc->callback.gpioSet != NULL);
+    enc->clkCount = tick;
+    enc->c12 = tick * 3;
+    enc->c4 = tick * 1;
 }
 
 
@@ -340,17 +324,15 @@ void ev1527_encode_finalize(ev1527_Encoder_t *enc) {
 }
 
 
-void ev1527_encode_sendBlock(ev1527_Encoder_t *enc, uint32_t b20, uint32_t b4, uint32_t repeat) {
+void ev1527_encode_sendBlock(ev1527_Encoder_t *enc, uint32_t data, uint8_t bitSize, uint32_t repeat) {
     ASSERT(enc != NULL);
-
-    b20 = (b20 << 4) | (b4 & 0x0000000F);
 
     enc->callback.timerInit_1us();
     enc->callback.gpioInit();
     for (uint32_t i = 0; i < repeat; i++) {
         encode_sync(enc);
-        for (int x = 0; x < 24; x++) {
-            encode_bit(enc, (b20 >> (23 - x)) & 0x01);
+        for (int x = 0; x < bitSize; x++) {
+            encode_bit(enc, (data >> x) & 0x01);
         }
     }
     enc->callback.timerFinalize();
