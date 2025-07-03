@@ -280,7 +280,7 @@ extern int32_t kduart_sends(kduart_t *kd, const void *data, uint32_t size, uint3
 extern int32_t kduart_recvs(kduart_t *kd, void *data, uint32_t expectSize, uint32_t *recvSize, uint32_t timeout);
 extern int32_t kduart_flush(kduart_t *kd);
 extern int32_t kduart_hasRecvData(kduart_t *kd);
-extern int32_t kduart_isSendIdle(kduart_t *kd);
+extern int32_t kduart_isSendIdle(kduart_t *kd, uint32_t wait);
 extern void kduart_updateBaudRate(kduart_t *kd, uint32_t bd);
 extern bool kduart_sendBuffingVerify(kduart_t *kd, uint32_t dataSize);
 

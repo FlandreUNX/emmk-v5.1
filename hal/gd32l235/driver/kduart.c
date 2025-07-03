@@ -354,26 +354,24 @@ int32_t kduart_sends(kduart_t *kd, const void *data, uint32_t size, uint32_t tim
             dma_memory_address_config(kd->_config.dma.channelTx, (uint32_t) kd->buffer.writeBuffer);
         }
         dma_channel_enable(kd->_config.dma.channelTx);
+    } else if (kd->buffer.writeBufferSize != 0 && size <= kd->buffer.writeBufferSize) {
+        for (uint32_t i = 0; i < size; i++) {
+            qBSBuffer_Put(kd->buffer.sendLwrb, ((uint8_t *) data)[i]);
+        }
+        usart_interrupt_flag_clear(kd->_config.uart.uart, USART_INT_FLAG_TC);
+        usart_interrupt_enable(kd->_config.uart.uart, USART_INT_TC);
+        usart_interrupt_enable(kd->_config.uart.uart, USART_INT_TBE);
     } else {
-        if (kd->buffer.writeBufferSize != 0) {
-            for (uint32_t i = 0; i < size; i++) {
-                qBSBuffer_Put(kd->buffer.sendLwrb, ((uint8_t *) data)[i]);
-            }
-            usart_interrupt_flag_clear(kd->_config.uart.uart, USART_INT_FLAG_TC);
-            usart_interrupt_enable(kd->_config.uart.uart, USART_INT_TC);
-            usart_interrupt_enable(kd->_config.uart.uart, USART_INT_TBE);
-        } else {
-            for (uint32_t i = 0; i < size; i++) {
-                while (RESET == usart_flag_get(kd->_config.uart.uart, USART_FLAG_TBE)) {
-                }
-                usart_data_transmit(kd->_config.uart.uart, ((uint8_t *) data)[i]);
-            }
+        for (uint32_t i = 0; i < size; i++) {
             while (RESET == usart_flag_get(kd->_config.uart.uart, USART_FLAG_TBE)) {
             }
-            while (RESET == usart_flag_get(kd->_config.uart.uart, USART_FLAG_TC)) {
-            }
-            kd->_va->flag.isSendCompleted = 1;
+            usart_data_transmit(kd->_config.uart.uart, ((uint8_t *) data)[i]);
         }
+        while (RESET == usart_flag_get(kd->_config.uart.uart, USART_FLAG_TBE)) {
+        }
+        while (RESET == usart_flag_get(kd->_config.uart.uart, USART_FLAG_TC)) {
+        }
+        kd->_va->flag.isSendCompleted = 1;
     }
     len = (int) size;
 
@@ -583,19 +581,18 @@ int32_t kduart_isSendIdle(kduart_t *kd, uint32_t wait) {
 #else
     if (kd->_va->flag.isSendCompleted) {
         return true;
-    } else {
-        if (wait == 0) {
-            return false;
-        }
-        qSTimer_t waitTimer;
-        qSTimer_Set(&waitTimer, wait);
-        while (!qSTimer_Expired(&waitTimer)) {
-            if (kd->_va->flag.isSendCompleted) {
-                return true;
-            }
-        }
+    }
+    if (wait == 0) {
         return false;
     }
+    qSTimer_t waitTimer;
+    qSTimer_Set(&waitTimer, wait);
+    while (!qSTimer_Expired(&waitTimer)) {
+        if (kd->_va->flag.isSendCompleted) {
+            return true;
+        }
+    }
+    return false;
 #endif
 }
 
