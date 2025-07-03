@@ -245,17 +245,7 @@ extern bool kduart_sendBuffingVerify(kduart_t *kd, uint32_t dataSize);
     void _irqUART(void) { \
         if (_KDUART_UART(_uartNumber)->INTSR & 0x02) { \
             _KDUART_UART(_uartNumber)->INTCLR = 0x02; \
-            if (_KDUART_IVA(_name).flag.isSendIrq) {  \
-                if (qBSBuffer_Empty(_KDUART_INAME(_name).buffer.writeLwrb)) { \
-                    _KDUART_IVA(_name).flag.isSendCompleted = 1; \
-                } else { \
-                    uint8_t data; \
-                    qBSBuffer_Get(_KDUART_INAME(_name).buffer.writeLwrb, &data); \
-                    _KDUART_UART(_uartNumber)->SBUF = data; \
-                } \
-            } else { \
-                _KDUART_IVA(_name).flag.isSendCompleted = 1; \
-            } \
+            _KDUART_IVA(_name).flag.isSendCompleted = 1; \
         } else if (_KDUART_UART(_uartNumber)->INTSR & 0x01) { \
             uint8_t recvByte = _KDUART_UART(_uartNumber)->SBUF; \
             qBSBuffer_Put(_KDUART_INAME(_name).buffer.recvLwrb, recvByte); \
@@ -405,17 +395,7 @@ extern bool kduart_sendBuffingVerify(kduart_t *kd, uint32_t dataSize);
     void _irqUART(void) { \
         if (_KDLPUART_MODULE(_uartNumber)->INTSR & 0x02) { \
             _KDLPUART_MODULE(_uartNumber)->INTCLR = 0x02; \
-            if (_KDUART_IVA(_name).flag.isSendIrq) {  \
-                if (qBSBuffer_Empty(_KDUART_INAME(_name).buffer.writeLwrb)) { \
-                    _KDUART_IVA(_name).flag.isSendCompleted = 1; \
-                } else { \
-                    uint8_t data; \
-                    qBSBuffer_Get(_KDUART_INAME(_name).buffer.writeLwrb, &data); \
-                    _KDLPUART_MODULE(_uartNumber)->SBUF = data; \
-                } \
-            } else { \
-                _KDUART_IVA(_name).flag.isSendCompleted = 1; \
-            } \
+            _KDUART_IVA(_name).flag.isSendCompleted = 1; \
         } else if (_KDLPUART_MODULE(_uartNumber)->INTSR & 0x01) { \
             uint8_t recvByte = _KDLPUART_MODULE(_uartNumber)->SBUF; \
             qBSBuffer_Put(_KDUART_INAME(_name).buffer.recvLwrb, recvByte); \

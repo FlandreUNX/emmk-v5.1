@@ -195,6 +195,9 @@ int32_t kduart_init(kduart_t *kd) {
     if (kd->buffer.recvLwrb != NULL) {
         qBSBuffer_Setup(kd->buffer.recvLwrb, kd->buffer.recvBuffer, kd->buffer.recvBufferSize);
     }
+    if (kd->buffer.writeLwrb != NULL) {
+        qBSBuffer_Setup(kd->buffer.writeLwrb, kd->buffer.writeBuffer, kd->buffer.writeBufferSize);
+    }
 
     kduart_flush(kd);
 
@@ -270,6 +273,9 @@ int32_t kduart_powerUp(kduart_t *kd) {
     if (kd->buffer.recvLwrb != NULL) {
         qBSBuffer_Setup(kd->buffer.recvLwrb, kd->buffer.recvBuffer, kd->buffer.recvBufferSize);
     }
+    if (kd->buffer.writeLwrb != NULL) {
+        qBSBuffer_Setup(kd->buffer.writeLwrb, kd->buffer.writeBuffer, kd->buffer.writeBufferSize);
+    }
 
     if (!kd->_config.uart.isLp) {
     } else {
@@ -328,31 +334,25 @@ int32_t kduart_sends(kduart_t *kd, const void *data, uint32_t size, uint32_t tim
     }
     kd->_va->flag.isSendCompleted = 0;
 
-    if (size == 1) {
-        gpioSetIdle_start(kd);
-        kd->_va->flag.isSendIrq = 0;
+    if (size != 1 
+        && kd->buffer.writeBufferSize != 0
+        && size <= kd->buffer.writeBufferSize
+        && kd->_config.pin.txPinMode != KDUART_TX_PIN_MODE_IN_IDLE) {
+        kd->_va->flag.isSendIrq = 1;
+        for (uint32_t i = 0; i < size - 1; i++) {
+            qBSBuffer_Put(kd->buffer.writeLwrb, ((uint8_t *) data)[1 + i]);
+        }
         if (!kd->_config.uart.isLp) {
             kd->_config.uart.uart->SBUF = ((uint8_t *) data)[0];
         } else {
             kd->_config.uart.lpuart->SBUF = ((uint8_t *) data)[0];
         }
-        waitSendCompleted(kd);
-        kd->_va->flag.isSendCompleted = 1;
-        gpioSetIdle_end(kd);
-        return 1;
-    }
-    if (kd->buffer.writeBufferSize != 0
-        && size <= kd->buffer.writeBufferSize
-        && kd->_config.pin.txPinMode != KDUART_TX_PIN_MODE_IN_IDLE) {
-        kd->_va->flag.isSendIrq = 1;
-        for (uint32_t i = 0; i < size; i++) {
-            qBSBuffer_Put(kd->buffer.writeLwrb, ((uint8_t *) data)[1 + i]);
-        }
-        kd->_config.uart.uart->SBUF = ((uint8_t *) data)[0];
     } else {
+        l_blockWrite:
         gpioSetIdle_start(kd);
         kd->_va->flag.isSendIrq = 0;
         for (uint32_t i = 0; i < size; i++) {
+            kd->_va->flag.isSendCompleted = 0;
             if (!kd->_config.uart.isLp) {
                 kd->_config.uart.uart->SBUF = ((uint8_t *) data)[i];
             } else {
@@ -430,6 +430,10 @@ int32_t kduart_flush(kduart_t *kd) {
     if (kd->buffer.recvLwrb != NULL) {
         qBSBuffer_Setup(kd->buffer.recvLwrb, kd->buffer.recvBuffer, kd->buffer.recvBufferSize);
     }
+    if (kd->buffer.writeLwrb != NULL) {
+        qBSBuffer_Setup(kd->buffer.writeLwrb, kd->buffer.writeBuffer, kd->buffer.writeBufferSize);
+    }
+
     kd->_va->flag._ = 0;
     kd->_va->flag.isSendCompleted = 1;
 
@@ -470,7 +474,7 @@ int32_t kduart_isSendIdle(kduart_t *kd, uint32_t wait) {
             return true;
         }
     }
-    return false;
+    return true;
 }
 
 
