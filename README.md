@@ -266,4 +266,7 @@ add: hal, driver, gd32el235> 增加gd32el235驱动支持
 ###### V1.7.1.1-250703
 add: hal, driver, zb32l003> 增加UART中断发送的函数
 
+###### V1.7.1.2-250703
+add: hal, driver, cw32l010> 增加UART中断发送的函数
+
 ------------
