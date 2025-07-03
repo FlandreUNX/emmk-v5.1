@@ -354,7 +354,8 @@ int32_t kduart_sends(kduart_t *kd, const void *data, uint32_t size, uint32_t tim
             dma_memory_address_config(kd->_config.dma.channelTx, (uint32_t) kd->buffer.writeBuffer);
         }
         dma_channel_enable(kd->_config.dma.channelTx);
-    } else if (kd->buffer.writeBufferSize != 0 && size <= kd->buffer.writeBufferSize) {
+    } else if (kd->buffer.writeBufferSize != 0
+        && size <= kd->buffer.writeBufferSize) {
         for (uint32_t i = 0; i < size; i++) {
             qBSBuffer_Put(kd->buffer.sendLwrb, ((uint8_t *) data)[i]);
         }
@@ -592,7 +593,7 @@ int32_t kduart_isSendIdle(kduart_t *kd, uint32_t wait) {
             return true;
         }
     }
-    return false;
+    return true;
 #endif
 }
 
