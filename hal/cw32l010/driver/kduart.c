@@ -277,6 +277,7 @@ int32_t kduart_sends(kduart_t *kd, const void *data, uint32_t size, uint32_t tim
         }
     }
     kd->_va->flag.isSendCompleted = 0;
+    kd->_config.uart.uart->ICR = UARTx_ICR_TC_Msk;
 
     if (size != 1
             && kd->buffer.writeBufferSize != 0
@@ -285,7 +286,6 @@ int32_t kduart_sends(kduart_t *kd, const void *data, uint32_t size, uint32_t tim
         for (uint32_t i = 0; i < size; i++) {
             qBSBuffer_Put(kd->buffer.writeLwrb, ((uint8_t *) data)[i]);
         }
-        kd->_config.uart.uart->ICR = UARTx_ICR_TC_Msk;
         kd->_config.uart.uart->IER |= UARTx_IER_TC_Msk | UARTx_IER_TXE_Msk;
     } else {
         gpioSetIdle_start(kd);
