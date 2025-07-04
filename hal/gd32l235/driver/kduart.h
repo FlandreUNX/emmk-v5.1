@@ -315,8 +315,8 @@ extern bool kduart_sendBuffingVerify(kduart_t *kd, uint32_t dataSize);
                 .timer = 0, \
             }, \
             .dma = { \
-                .channelTx = _dmaTxChannel, \
-                .channelRx = _dmaRxChannel, \
+                .channelTx = 0xFF, \
+                .channelRx = 0xFF, \
             }, \
             .pin = { \
                 _tx, _rx, \
@@ -339,7 +339,7 @@ extern bool kduart_sendBuffingVerify(kduart_t *kd, uint32_t dataSize);
         KDUART_ISR(_name); \
     } \
 
-#define KDUART_DEFINE_RXRTO_TXNOBLCOK(_uartNumber, _name, \
+#define KDUART_DEFINE_RXRTO_TXIRQ(_uartNumber, _name, \
         _timModuleNumber, \
         _dmaTxChannel, _dmaRxChannel, \
         _txBufferSize, _rxBufferSize, \
@@ -372,8 +372,8 @@ extern bool kduart_sendBuffingVerify(kduart_t *kd, uint32_t dataSize);
                 .timer = 0, \
             }, \
             .dma = { \
-                .channelTx = _dmaTxChannel, \
-                .channelRx = _dmaRxChannel, \
+                .channelTx = 0xFF, \
+                .channelRx = 0xFF, \
             }, \
             .pin = { \
                 _tx, _rx, \
@@ -395,6 +395,75 @@ extern bool kduart_sendBuffingVerify(kduart_t *kd, uint32_t dataSize);
     void _uartIrq(void) { \
         KDUART_ISR(_name); \
     } \
+
+#define KDUART_DEFINE_RXRTO_TXDMA(_uartNumber, _name, \
+        _timModuleNumber, \
+        _dmaTxChannel, _dmaRxChannel, \
+        _txBufferSize, _rxBufferSize, \
+        _baudRate, _rto, \
+        _wlen, _parity, _stopBits, \
+        _tx, _rx, \
+        _enableFunc, _disableFunc, \
+        _uartIrq, _dmaTxIrq, _timerIrq) \
+    static void _KDUART_FUNC_ENABLE(_name)(kduart_t *kd) _enableFunc \
+    static void _KDUART_FUNC_DISABLE(_name)(kduart_t *kd) _disableFunc \
+    static kduart_VA_t _KDUART_IVA(_name) = {0}; \
+    static qBSBuffer_t _KDUART_RX_LWRB(_name); \
+    static uint8_t AT_NONCACHEABLE_SECTION_ALIGN(_KDUART_RX_BUFFER(_name)[_rxBufferSize], 4); \
+    const kduart_t _KDUART_INAME(_name) = { \
+        ._va = &_KDUART_IVA(_name), \
+        ._config = { \
+            .rto = _rto, \
+            .uart = { \
+                .uart = _KDUART_MODULE(_uartNumber), \
+                .init = { \
+                    .baudRate = _baudRate, \
+                    .parity = _parity, \
+                    .stop = _stopBits, \
+                    .wlen = _wlen, \
+                }, \
+            }, \
+            .timer = { \
+                .timer = 0, \
+            }, \
+            .dma = { \
+                .channelTx = _dmaTxChannel, \
+                .channelRx = 0xFF, \
+                .initTx = { \
+                    .periph_addr = (uint32_t) &USART_TDATA(_KDUART_MODULE(_uartNumber)), \
+                    .memory_addr = 0, \
+                    .direction = DMA_MEMORY_TO_PERIPHERAL, \
+                    .memory_width = DMA_MEMORY_WIDTH_8BIT, \
+                    .periph_width = DMA_PERIPHERAL_WIDTH_8BIT, \
+                    .priority = DMA_PRIORITY_LOW, \
+                    .number = 0, \
+                    .periph_inc = DMA_PERIPH_INCREASE_DISABLE, \
+                    .memory_inc = DMA_MEMORY_INCREASE_ENABLE, \
+                }, \
+            }, \
+            .pin = { \
+                _tx, _rx, \
+            }, \
+        }, \
+        ._instance = { \
+            .enableFunc = _KDUART_FUNC_ENABLE(_name), \
+            .disableFunc = _KDUART_FUNC_DISABLE(_name), \
+        }, \
+        .buffer = { \
+            .recvBufferSize = _rxBufferSize, \
+            .recvBuffer = _KDUART_RX_BUFFER(_name), \
+            .writeBufferSize = 0, \
+            .writeBuffer = NULL, \
+            .recvLwrb = &_KDUART_RX_LWRB(_name), \
+            .writeLwrb = NULL, \
+        }, \
+    }; \
+    void _uartIrq(void) { \
+        KDUART_ISR(_name); \
+    } \
+    void _dmaTxIrq(void) { \
+        KDUART_DMA_TX_ISR(_name); \
+    }
 
 /*@}*/
 

@@ -330,6 +330,7 @@ int32_t kduart_sends(kduart_t *kd, const void *data, uint32_t size, uint32_t tim
     }
     kd->_va->flag.isSendCompleted = 0;
 #endif
+    usart_interrupt_flag_clear(kd->_config.uart.uart, USART_INT_FLAG_TC);
 
     if (size == 1) {
         while (RESET == usart_flag_get(kd->_config.uart.uart, USART_FLAG_TBE)) {
@@ -358,11 +359,10 @@ int32_t kduart_sends(kduart_t *kd, const void *data, uint32_t size, uint32_t tim
         }
         dma_channel_enable(kd->_config.dma.channelTx);
     } else if (kd->buffer.writeBufferSize != 0
-        && size <= kd->buffer.writeBufferSize) {
+               && size <= kd->buffer.writeBufferSize) {
         for (uint32_t i = 0; i < size; i++) {
             qBSBuffer_Put(kd->buffer.writeLwrb, ((uint8_t *) data)[i]);
         }
-        usart_interrupt_flag_clear(kd->_config.uart.uart, USART_INT_FLAG_TC);
         usart_interrupt_enable(kd->_config.uart.uart, USART_INT_TC);
         usart_interrupt_enable(kd->_config.uart.uart, USART_INT_TBE);
     } else {
@@ -398,6 +398,10 @@ int32_t kduart_sends(kduart_t *kd, const void *data, uint32_t size, uint32_t tim
             len = -1;
         }
 #endif
+        if (kd->_config.dma.channelTx != 0xFF) {
+            while (RESET == usart_flag_get(kd->_config.uart.uart, USART_FLAG_TC)) {
+            }
+        }
     }
 
     return len;
@@ -573,16 +577,35 @@ int32_t kduart_isSendIdle(kduart_t *kd, uint32_t wait) {
     int32_t flag = 0
     if (wait == 0) {
         flag = osEventFlagsGet(kd->_va->flag);
-        return (flag > 0) && (flag & (UART_FLAG_SEND_COMPLETE));
+        if ((flag > 0) && (flag & (UART_FLAG_SEND_COMPLETE))) {
+            if (kd->_config.dma.channelTx != 0xFF) {
+                if (usart_flag_get(kd->_config.uart.uart, USART_FLAG_TC)) {
+                    return true;
+                }
+                return false;
+            }
+        } else {
+            return false;
+        }
     } else {
         flag = osEventFlagsWait(kd->_va->flag, UART_FLAG_SEND_COMPLETE, osFlagsWaitAll | osFlagsNoClear, wait);
         if ((flag & 0x80000000) || ((flag & (UART_FLAG_SEND_COMPLETE)) != (UART_FLAG_SEND_COMPLETE))) {
             return false;
         }
+        if (kd->_config.dma.channelTx != 0xFF) {
+            while (RESET == usart_flag_get(kd->_config.uart.uart, USART_FLAG_TC)) {
+            }
+        }
         return true;
     }
 #else
     if (kd->_va->flag.isSendCompleted) {
+        if (kd->_config.dma.channelTx != 0xFF) {
+            if (usart_flag_get(kd->_config.uart.uart, USART_FLAG_TC)) {
+                return true;
+            }
+            return false;
+        }
         return true;
     }
     if (wait == 0) {
@@ -592,6 +615,10 @@ int32_t kduart_isSendIdle(kduart_t *kd, uint32_t wait) {
     qSTimer_Set(&waitTimer, wait);
     while (!qSTimer_Expired(&waitTimer)) {
         if (kd->_va->flag.isSendCompleted) {
+            if (kd->_config.dma.channelTx != 0xFF) {
+                while (RESET == usart_flag_get(kd->_config.uart.uart, USART_FLAG_TC)) {
+                }
+            }
             return true;
         }
     }
