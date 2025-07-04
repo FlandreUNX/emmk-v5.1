@@ -126,6 +126,7 @@ struct kduart {
         uint8_t *writeBuffer;
 
         qBSBuffer_t *recvLwrb;
+        qBSBuffer_t *writeLwrb;
     } buffer;
 };
 
@@ -169,7 +170,8 @@ struct kduart {
 #define _KDUART_RX_LWRB(x)          __kduart_rx_lwrb_##x
         
 #define KDUART_TX_BUFFER(x) x
-#define _KDUART_TX_BUFFER(x)  __kduart_tx_buffer_##x
+#define _KDUART_TX_BUFFER(x)        __kduart_tx_buffer_##x
+#define _KDUART_TX_LWRB(x)          __kduart_tx_lwrb_##x
 
 #define KDUART_TX_DEFINE(_gpio) \
     .tx = { \
@@ -194,6 +196,19 @@ struct kduart {
             TIMER_CTL0(_KDUART_INAME(name)._config.timer.timer) |= (uint32_t) TIMER_CTL0_CEN; \
         } \
         osEventFlagsClear(_KDUART_INAME(name)._va->flag, UART_FLAG_RECV_COMPLETE); \
+    } else if (usart_interrupt_flag_get(_KDUART_INAME(name)._config.uart.uart, USART_INT_FLAG_TBE) == SET) { \
+        uint8_t data; \
+        qBSBuffer_Get(_KDUART_INAME(name).buffer.writeLwrb, &data); \
+        if (qBSBuffer_Empty(_KDUART_INAME(name).buffer.writeLwrb)) { \
+            usart_interrupt_disable(_KDUART_INAME(name)._config.uart.uart, USART_INT_TBE); \
+        } \
+        usart_data_transmit(_KDUART_INAME(name)._config.uart.uart, data); \
+    } else if (usart_interrupt_flag_get(_KDUART_INAME(name)._config.uart.uart, USART_INT_FLAG_TC) == SET) { \
+        usart_interrupt_flag_clear(_KDUART_INAME(name)._config.uart.uart, USART_INT_FLAG_TC); \
+        if (qBSBuffer_Empty(_KDUART_INAME(name).buffer.writeLwrb)) { \
+            usart_interrupt_disable(_KDUART_INAME(name)._config.uart.uart, USART_INT_TC); \
+            osEventFlagsSet(_KDUART_INAME(name)._va->flag, UART_FLAG_SEND_DMA_COMPLETE); \
+        } \
     } else { \
         usart_interrupt_flag_clear(_KDUART_INAME(name)._config.uart.uart, USART_INT_FLAG_ERR_NERR); \
         usart_interrupt_flag_clear(_KDUART_INAME(name)._config.uart.uart, USART_INT_FLAG_ERR_FERR); \
@@ -228,6 +243,19 @@ struct kduart {
             TIMER_CNT(_KDUART_INAME(name)._config.timer.timer) = 0; \
             TIMER_CTL0(_KDUART_INAME(name)._config.timer.timer) |= (uint32_t) TIMER_CTL0_CEN; \
         } \
+    } else if (usart_interrupt_flag_get(_KDUART_INAME(name)._config.uart.uart, USART_INT_FLAG_TBE) == SET) { \
+        uint8_t data; \
+        qBSBuffer_Get(_KDUART_INAME(name).buffer.writeLwrb, &data); \
+        if (qBSBuffer_Empty(_KDUART_INAME(name).buffer.writeLwrb)) { \
+            usart_interrupt_disable(_KDUART_INAME(name)._config.uart.uart, USART_INT_TBE); \
+        } \
+        usart_data_transmit(_KDUART_INAME(name)._config.uart.uart, data); \
+    } else if (usart_interrupt_flag_get(_KDUART_INAME(name)._config.uart.uart, USART_INT_FLAG_TC) == SET) { \
+        usart_interrupt_flag_clear(_KDUART_INAME(name)._config.uart.uart, USART_INT_FLAG_TC); \
+        if (qBSBuffer_Empty(_KDUART_INAME(name).buffer.writeLwrb)) { \
+            usart_interrupt_disable(_KDUART_INAME(name)._config.uart.uart, USART_INT_TC); \
+            _KDUART_INAME(name)._va->flag.isSendCompleted = 1; \
+        } \
     } else { \
         usart_interrupt_flag_clear(_KDUART_INAME(name)._config.uart.uart, USART_INT_FLAG_ERR_NERR); \
         usart_interrupt_flag_clear(_KDUART_INAME(name)._config.uart.uart, USART_INT_FLAG_ERR_FERR); \
@@ -259,10 +287,12 @@ extern int32_t kduart_sends(kduart_t *kd, const void *data, uint32_t size, uint3
 extern int32_t kduart_recvs(kduart_t *kd, void *data, uint32_t expectSize, uint32_t *recvSize, uint32_t timeout);
 extern int32_t kduart_flush(kduart_t *kd);
 extern int32_t kduart_hasRecvData(kduart_t *kd);
-extern int32_t kduart_isSendIdle(kduart_t *kd);
+extern int32_t kduart_isSendIdle(kduart_t *kd, uint32_t wait);
 extern void kduart_updateBaudRate(kduart_t *kd, uint32_t bd);
+extern bool kduart_sendBuffingVerify(kduart_t *kd, uint32_t dataSize);
+
     
-#define KDUART_DEFINE_RTO_BLOCK(_uartNumber, _name, \
+#define KDUART_DEFINE_RXRTO_TXBLOCK(_uartNumber, _name, \
         _timModuleNumber, \
         _dmaTxModuleNumber, _dmaTxChannel, \
         _dmaRxModuleNumber, _dmaRxChannel, \
@@ -316,12 +346,65 @@ extern void kduart_updateBaudRate(kduart_t *kd, uint32_t bd);
     }; \
     void _uartIrq(void) { \
         KDUART_ISR(_name); \
-    } \
-    void _dmaTxIrq(void) { \
-        KDUART_DMA_TX_ISR(_name); \
-    } \
-    void _timerIrq(void) { \
-        KDUART_DMA_TX_ISR(_name); \
+    }
+
+#define KDUART_DEFINE_RXRTO_TXIRQ(_uartNumber, _name, \
+        _timModuleNumber, \
+        _dmaTxModuleNumber, _dmaTxChannel, \
+        _dmaRxModuleNumber, _dmaRxChannel, \
+        _txBufferSize, _rxBufferSize, \
+        _baudRate, _rto, \
+        _parity, _stopBits, \
+        _tx, _rx, \
+        _enableFunc, _disableFunc, \
+        _uartIrq, _dmaTxIrq, _timerIrq) \
+    static void _KDUART_FUNC_ENABLE(_name)(kduart_t *kd) _enableFunc \
+    static void _KDUART_FUNC_DISABLE(_name)(kduart_t *kd) _disableFunc \
+    static kduart_VA_t _KDUART_IVA(_name) = {0}; \
+    static qBSBuffer_t _KDUART_RX_LWRB(_name); \
+    static uint8_t AT_NONCACHEABLE_SECTION_ALIGN(_KDUART_RX_BUFFER(_name)[_rxBufferSize], 4); \
+    static qBSBuffer_t _KDUART_TX_LWRB(_name); \
+    static uint8_t AT_NONCACHEABLE_SECTION_ALIGN(_KDUART_TX_BUFFER(_name)[_txBufferSize], 4); \
+    const kduart_t _KDUART_INAME(_name) = { \
+        ._va = &_KDUART_IVA(_name), \
+        ._config = { \
+            .rto = _rto, \
+            .uart = { \
+                .uart = _KDUART_UART(_uartNumber), \
+                .init = { \
+                    .baudRate = _baudRate, \
+                    .parity = _parity, \
+                    .stop = _stopBits, \
+                }, \
+            }, \
+            .timer = { \
+                .timer = 0, \
+            }, \
+            .dma = { \
+                .dmaTx = _dmaTxModuleNumber != 0xFF ? _KDUART_DMA_TX_MODULE(_dmaTxModuleNumber): 0, \
+                .dmaRx = _dmaRxModuleNumber != 0xFF ? _KDUART_DMA_RX_MODULE(_dmaRxModuleNumber): 0, \
+                .channelTx = _dmaTxChannel, \
+                .channelRx = _dmaRxChannel, \
+            }, \
+            .pin = { \
+                _tx, _rx, \
+            }, \
+        }, \
+        ._instance = { \
+            .enableFunc = _KDUART_FUNC_ENABLE(_name), \
+            .disableFunc = _KDUART_FUNC_DISABLE(_name), \
+        }, \
+        .buffer = { \
+            .recvBufferSize = _rxBufferSize, \
+            .recvBuffer = _KDUART_RX_BUFFER(_name), \
+            .writeBufferSize = _txBufferSize, \
+            .writeBuffer = _KDUART_TX_BUFFER(_name), \
+            .recvLwrb = &_KDUART_RX_LWRB(_name), \
+            .writeLwrb = &_KDUART_TX_LWRB(_name), \
+        }, \
+    }; \
+    void _uartIrq(void) { \
+        KDUART_ISR(_name); \
     }
     
 /*@}*/
