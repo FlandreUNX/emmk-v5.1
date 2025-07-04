@@ -94,6 +94,7 @@ int32_t kduart_init(kduart_t *kd) {
     }
     usart_interrupt_enable(kd->_config.uart.uart, USART_INT_ERR);
     usart_interrupt_enable(kd->_config.uart.uart, USART_INT_PERR);
+    usart_receive_fifo_enable(kd->_config.uart.uart);
 
     if (kd->_config.timer.timer != NULL) {
         timer_parameter_struct timerInit = {
