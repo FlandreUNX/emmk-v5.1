@@ -382,6 +382,9 @@ int32_t kduart_sends(kduart_t *kd, const void *data, uint32_t size, uint32_t tim
 
 
 int32_t kduart_recvs(kduart_t *kd, void *data, uint32_t expect_size, uint32_t *recv_size, uint32_t timeout) {
+    if (data == NULL || expect_size == 0) {
+        return -1;
+    }
     uint32_t buffCount = qBSBuffer_Count(kd->buffer.recvLwrb);
     if (buffCount == 0) {
         kd->_va->flag.isRecvCompleted = 0;
@@ -447,11 +450,6 @@ int32_t kduart_flush(kduart_t *kd) {
 
 
 int32_t kduart_hasRecvData(kduart_t *kd) {
-    int32_t flag = 0;
-    flag = kd->_va->flag.isSendCompleted;
-    if (flag > 0) {
-        return (int32_t) qBSBuffer_Count(kd->buffer.recvLwrb);
-    }
     if ((kd->_va->flag.isRecvCompleted) && !kd->_va->flag.isRecving) {
         return (int32_t) qBSBuffer_Count(kd->buffer.recvLwrb);
     }

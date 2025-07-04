@@ -402,6 +402,9 @@ int32_t kduart_sends(kduart_t *kd, const void *data, uint32_t size, uint32_t tim
 
 
 int32_t kduart_recvs(kduart_t *kd, void *data, uint32_t expect_size, uint32_t *recv_size, uint32_t timeout) {
+    if (data == NULL) {
+        return -1;
+    }
     if (expect_size == 0) {
         if (recv_size != NULL) {
             *recv_size = 0;
@@ -549,7 +552,7 @@ int32_t kduart_hasRecvData(kduart_t *kd) {
         flag = 1;
     }
 #else
-    flag = kd->_va->flag.isSendCompleted;
+    flag = (kd->_va->flag.isRecvCompleted) && !kd->_va->flag.isRecving;
 #endif
     if (flag > 0) {
         if (kd->buffer.recvLwrb != NULL) {
@@ -558,10 +561,6 @@ int32_t kduart_hasRecvData(kduart_t *kd) {
             return (int32_t) kd->buffer.recvBufferSize - (int32_t) dma_transfer_number_get(kd->_config.dma.channelRx);
         }
     }
-    if ((kd->_va->flag.isRecvCompleted) && !kd->_va->flag.isRecving) {
-        return (int32_t) qBSBuffer_Count(kd->buffer.recvLwrb);
-    }
-
     return 0;
 }
 
