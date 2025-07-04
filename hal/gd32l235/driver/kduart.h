@@ -182,7 +182,9 @@ struct kduart {
         usart_interrupt_flag_clear(_KDUART_INAME(name)._config.uart.uart, USART_INT_FLAG_RT); \
         osEventFlagsSet(_KDUART_INAME(name)._va->flag, UART_FLAG_RECV_COMPLETE); \
     } else if (usart_interrupt_flag_get(_KDUART_INAME(name)._config.uart.uart, USART_INT_FLAG_RBNE) == SET) { \
+        usart_interrupt_disable(_KDUART_INAME(name)._config.uart.uart, USART_INT_RBNE); \
         uint8_t data = usart_data_receive(_KDUART_INAME(name)._config.uart.uart); \
+        usart_interrupt_enable(_KDUART_INAME(name)._config.uart.uart, USART_INT_RBNE); \
         qBSBuffer_Put(_KDUART_INAME(name).buffer.recvLwrb, data); \
         if (_KDUART_INAME(name)._config.timer.timer != NULL) { \
             TIMER_CNT(_KDUART_INAME(name)._config.timer.timer) = 0; \
