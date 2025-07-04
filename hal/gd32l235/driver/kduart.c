@@ -140,6 +140,9 @@ int32_t kduart_init(kduart_t *kd) {
     if (kd->buffer.recvLwrb != NULL) {
         qBSBuffer_Setup(kd->buffer.recvLwrb, kd->buffer.recvBuffer, kd->buffer.recvBufferSize);
     }
+    if (kd->buffer.writeLwrb != NULL) {
+        qBSBuffer_Setup(kd->buffer.writeLwrb, kd->buffer.writeBuffer, kd->buffer.writeBufferSize);
+    }
 
     kduart_flush(kd);
 
@@ -232,7 +235,7 @@ int32_t kduart_powerUp(kduart_t *kd) {
     }
 
     if (kd->buffer.recvLwrb != NULL) {
-        qBSBuffer_Setup(kd->buffer.sendLwrb, kd->buffer.writeBuffer, kd->buffer.writeBufferSize);
+        qBSBuffer_Setup(kd->buffer.writeLwrb, kd->buffer.writeBuffer, kd->buffer.writeBufferSize);
     }
 
     usart_interrupt_flag_clear(kd->_config.uart.uart, USART_INT_FLAG_RT);
@@ -357,7 +360,7 @@ int32_t kduart_sends(kduart_t *kd, const void *data, uint32_t size, uint32_t tim
     } else if (kd->buffer.writeBufferSize != 0
         && size <= kd->buffer.writeBufferSize) {
         for (uint32_t i = 0; i < size; i++) {
-            qBSBuffer_Put(kd->buffer.sendLwrb, ((uint8_t *) data)[i]);
+            qBSBuffer_Put(kd->buffer.writeLwrb, ((uint8_t *) data)[i]);
         }
         usart_interrupt_flag_clear(kd->_config.uart.uart, USART_INT_FLAG_TC);
         usart_interrupt_enable(kd->_config.uart.uart, USART_INT_TC);
@@ -528,8 +531,8 @@ int32_t kduart_flush(kduart_t *kd) {
     if (kd->buffer.recvLwrb != NULL) {
         qBSBuffer_Setup(kd->buffer.recvLwrb, kd->buffer.recvBuffer, kd->buffer.recvBufferSize);
     }
-    if (kd->buffer.sendLwrb != NULL) {
-        qBSBuffer_Setup(kd->buffer.sendLwrb, kd->buffer.writeBuffer, kd->buffer.writeBufferSize);
+    if (kd->buffer.writeLwrb != NULL) {
+        qBSBuffer_Setup(kd->buffer.writeLwrb, kd->buffer.writeBuffer, kd->buffer.writeBufferSize);
     }
 
 #if EMMK_FULL_RTOS_SUPPORT == EMMK_FULL_RTOS_RTX5
