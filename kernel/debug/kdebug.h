@@ -211,7 +211,7 @@ extern void _klPtf_putchar(char c);
 
 #define dbg_log_line(lvl, color_n, fmt, ...) \
     do { \
-        extern uint8_t g_kdebug_skip_log; \
+        extern volatile uint8_t g_kdebug_skip_log; \
         if (g_kdebug_skip_log) { \
             break; \
         } \

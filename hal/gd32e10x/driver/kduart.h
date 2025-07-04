@@ -36,7 +36,7 @@
  
 /*@{*/
 
-#define UART_FLAG_SEND_DMA_COMPLETE       0x00000001u
+#define UART_FLAG_SEND_COMPLETE       0x00000001u
 #define UART_FLAG_SEND_IDLE               0x00000002u
 #define UART_FLAG_RECV_COMPLETE           0x00000004u
 #define UART_FLAG_SEND_REQUEST            0x00000008u

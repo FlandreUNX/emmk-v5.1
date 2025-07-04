@@ -364,7 +364,11 @@ int32_t kduart_sends(kduart_t *kd, const void *data, uint32_t size, uint32_t tim
         }
         while (RESET == usart_flag_get(kd->_config.uart.uart, USART_FLAG_TC)) {
         }
+#if EMMK_FULL_RTOS_SUPPORT == EMMK_FULL_RTOS_RTX5
+        osEventFlagsSet(kd->_va->flag, UART_FLAG_SEND_COMPLETE);
+#else
         kd->_va->flag.isSendCompleted = 1;
+#endif
     }
     len = (int) size;
 
@@ -428,7 +432,7 @@ int32_t kduart_recvs(kduart_t *kd, void *data, uint32_t expect_size, uint32_t *r
 #endif
     } else {
 #if EMMK_FULL_RTOS_SUPPORT == EMMK_FULL_RTOS_RTX5
-        flag = osEventFlagsGet(kd->_va->flag);
+        int flag = osEventFlagsGet(kd->_va->flag);
         if ((flag & 0x80000000) || ((flag & UART_FLAG_RECV_COMPLETE) != UART_FLAG_RECV_COMPLETE)) {
             if (recv_size != NULL) {
                 *recv_size = 0;
@@ -474,7 +478,12 @@ int32_t kduart_recvs(kduart_t *kd, void *data, uint32_t expect_size, uint32_t *r
     } else {
         uint32_t buffCount = qBSBuffer_Count(kd->buffer.recvLwrb);
         if (buffCount == 0) {
+#if EMMK_FULL_RTOS_SUPPORT == EMMK_FULL_RTOS_RTX5
+            osEventFlagsClear(kd->_va->flag, UART_FLAG_RECV_COMPLETE);
+#else
             kd->_va->flag.isRecvCompleted = 0;
+#endif
+
 
             if (recv_size != NULL) {
                 *recv_size = 0;
@@ -493,7 +502,11 @@ int32_t kduart_recvs(kduart_t *kd, void *data, uint32_t expect_size, uint32_t *r
         }
 
         if (qBSBuffer_Count(kd->buffer.recvLwrb) == 0) {
+#if EMMK_FULL_RTOS_SUPPORT == EMMK_FULL_RTOS_RTX5
+            osEventFlagsClear(kd->_va->flag, UART_FLAG_RECV_COMPLETE);
+#else
             kd->_va->flag.isRecvCompleted = 0;
+#endif
         }
     }
     return 0;
@@ -518,7 +531,7 @@ int32_t kduart_flush(kduart_t *kd) {
 
 #if EMMK_FULL_RTOS_SUPPORT == EMMK_FULL_RTOS_RTX5
     osEventFlagsClear(kd->_va->flag, UART_FLAG_RECV_COMPLETE);
-    osEventFlagsSet(kd->_va->flag, UART_FLAG_SEND_DMA_COMPLETE);
+    osEventFlagsSet(kd->_va->flag, UART_FLAG_SEND_COMPLETE);
 #else
     kd->_va->flag._ = 0;
     kd->_va->flag.isSendCompleted = 1;
@@ -551,7 +564,7 @@ int32_t kduart_hasRecvData(kduart_t *kd) {
 
 int32_t kduart_isSendIdle(kduart_t *kd, uint32_t wait) {
 #if EMMK_FULL_RTOS_SUPPORT == EMMK_FULL_RTOS_RTX5
-    int32_t flag = 0
+    int32_t flag = 0;
     if (wait == 0) {
         flag = osEventFlagsGet(kd->_va->flag);
         return (flag > 0) && (flag & (UART_FLAG_SEND_COMPLETE));

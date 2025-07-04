@@ -274,10 +274,10 @@ void xbutton_rotEnc_init(xbutton_RotEncObj_t *objs, uint8_t encCount) {
 #if CONFIG_XBUTTON_ROTENC_FILTER_MS != 0
     qSTimer_Set(&mRotEncScanTimer, CONFIG_XBUTTON_ROTENC_FILTER_MS);
 #endif
-    mRotEnc = objs;
-    mRotEncCount = encCount;
 
 #if CONFIG_XBUTTON_ROTENC_ENABLE > 0
+    mRotEnc = objs;
+    mRotEncCount = encCount;
     for (uint8_t i = 0; i < mRotEncCount; i++) {
         kdgpio_init(mRotEnc[i].hal.pinA);
         kdgpio_powerUp(mRotEnc[i].hal.pinA, mRotEnc[i].hal.pinAGpioMode, mRotEnc[i].hal.pinAGpioPullResistor);
