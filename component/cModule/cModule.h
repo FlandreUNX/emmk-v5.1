@@ -130,7 +130,8 @@ typedef enum {
     CMODULE_REQ_ON_NTP_UPDATE,
     CMODULE_REQ_ON_STATE_CHANGED,
     CMODULE_REQ_ON_STACK_NEED_RESET,
-    
+
+    CMODULE_REQ_ON_GNSS_SIMPLE_RECV,
 
     CMODULE_REQ_ON_REQ_ID_ACK,
 
@@ -230,6 +231,21 @@ typedef struct {
     int16_t eci;
     int32_t cellId;
 } cModule_SignalExtInfo_t;
+
+typedef struct {
+    char *utc;              // (hhmmss.sss) UTC时间，时分秒.毫秒，位宽10
+    char *latitude;         // (ddmm.mmmmN/S) 纬度，dd:度，mm.mmmm:分，N/S:北纬/南纬，保留4位小数
+    char *longtitude;       // (dddmm.mmmmE/W) 经度，ddd:度，mm.mmmm:分，E/W:东经/西经，保留4位小数
+    char *hdop;             // (x.x) 水平精度因子，保留1位小数
+    char *altitude;         // (x.x) 海拔高度，单位:米，保留1位小数
+    char *fix;              // (n) 定位类型。1:未定位，2:2D定位，3:3D定位；位宽1。
+    char *cog;              // (ddd.dd) 运动角度，真北参照系，单位:度，保留2位小数。
+    char *spkm;             // (x.x) 水平运动速度，单位Km/h，保留1位小数
+    char *spkn;             // (x.x) 水平运动速度，单位Knots，保留1位小数
+    char *date;             // (ddmmyy) 当前日期，日月年，位宽6
+    char *nsat;             // (nn) 参与定位的卫星数量，位宽2
+    char *dtype;            // (n) 差分定位标识，位宽1。0:无效，1:单点定位，2:差分定位
+} cModule_GnssSimpleData_t;
 
 typedef struct {
     void (*onInstanceInit)(void);

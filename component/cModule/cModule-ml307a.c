@@ -150,6 +150,57 @@ const __CMODULE_X_SECTION cModule_InstanceConst_t mModuleInstanceConst = {
 /*@}*/
 
 /**
+ * @addtogroup AtCommand -Ext GNSS
+ * @note none
+ */
+
+/*@{*/
+
+#if CONFIG_CMODULE_GNSS_SUPPORT == 1
+
+static int32_t gnss_startup_once(void) {
+    // static const char MGNSSCFG[] = "AT+MGNSSCFG=\"nmea/mask\",63";
+    static const char MGNSSLOC[] = "AT+MGNSSLOC=1";
+    static const char MGNSS[] = "AT+MGNSS=2";
+
+    Rilat_AtResponse_t *response = NULL;
+    int32_t ret = -1;
+
+    // rilat_writeLine(&mModuleInstance.rilat.instance, MGNSSCFG, NULL, 500);
+    rilat_writeLine(&mModuleInstance.rilat.instance, MGNSSLOC, NULL, 500);
+
+    if (rilat_writeSingleline(&mModuleInstance.rilat.instance, MGNSS, "+MGNSSURC:", &response, 2000) != 0
+        || response == NULL || response->success == 0) {
+        rilat_freeResponse(&mModuleInstance.rilat.instance, response);
+        response = NULL;
+        return -1;
+    }
+
+    char *line = NULL;
+    if (response->intermediates == NULL) {
+        goto l_exit;
+    }
+    line = response->intermediates->line;
+    if (klAttoken_start(&line) != 0) {
+        goto l_exit;
+    }
+    if (strstr(response->intermediates->line, "error")) {
+        klAttoken_getNextInt(&line, &ret);
+        ret = -1 - ret;
+    } else if (strstr(response->intermediates->line, "state")) {
+        klAttoken_getNextInt(&line, &ret);
+    }
+    l_exit:
+    rilat_freeResponse(&mModuleInstance.rilat.instance, response);
+    response = NULL;
+    return ret;
+}
+
+#endif
+
+/*@}*/
+
+/**
  * @addtogroup AtCommand
  * @note none
  */
@@ -1208,6 +1259,31 @@ static void onLoop(void) {
  */
 
 /*@{*/
+
+#if CONFIG_CMODULE_GNSS_SUPPORT == 1
+
+RILAT_COMMAND_MATCH_DEFINE(_MGNSSLOC, "+MGNSSLOC:", data, len) {
+    char *line = (char *) data;
+    cModule_GnssSimpleData_t gnssData = {0};
+    if (klAttoken_start(&line) != 0) {
+        return -1;
+    }
+    klAttoken_getNextString(&line, &gnssData.utc, NULL);
+    klAttoken_getNextString(&line, &gnssData.latitude, NULL);
+    klAttoken_getNextString(&line, &gnssData.longtitude, NULL);
+    klAttoken_getNextString(&line, &gnssData.hdop, NULL);
+    klAttoken_getNextString(&line, &gnssData.altitude, NULL);
+    klAttoken_getNextString(&line, &gnssData.fix, NULL);
+    klAttoken_getNextString(&line, &gnssData.cog, NULL);
+    klAttoken_getNextString(&line, &gnssData.spkm, NULL);
+    klAttoken_getNextString(&line, &gnssData.spkn, NULL);
+    klAttoken_getNextString(&line, &gnssData.date, NULL);
+    klAttoken_getNextString(&line, &gnssData.nsat, NULL);
+    klAttoken_getNextString(&line, &gnssData.dtype, NULL);
+    CREQUEST(ON_GNSS_SIMPLE_RECV, {.ptr = &gnssData});
+}
+
+#endif
 
 #if CONFIG_CMODULE_INSTANCE_INIT_MODE == CONFIG_CMODULE_INSTANCE_INIT_MODE_HTTP
 RILAT_COMMAND_MATCH_DEFINE(_MHTTPURC, "+MHTTPURC:", data, len) {
