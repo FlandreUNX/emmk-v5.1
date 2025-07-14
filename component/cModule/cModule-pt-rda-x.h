@@ -95,6 +95,9 @@ typedef struct {
     uint8_t alarmH;
     uint16_t updateTimeMin;
     uint16_t measureTimeMin;
+    float latitude;
+    float longitude;
+    float height;
 } ProtocolRdaUnderWell_t;
 
 typedef enum {

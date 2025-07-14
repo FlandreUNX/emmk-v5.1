@@ -177,6 +177,7 @@ typedef enum {
     TRANSMIT_PACK_REQ_ID_ATD,
     TRANSMIT_PACK_REQ_ID_HTTP_GET,
     TRANSMIT_PACK_REQ_ID_NTP_UPDATE,
+    TRANSMIT_PACK_REQ_ID_GNSS_UPDATE_ONCE,
 } cModule_TransmitPackageRequestId_t;
 
 typedef struct {

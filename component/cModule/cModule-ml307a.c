@@ -1281,6 +1281,7 @@ RILAT_COMMAND_MATCH_DEFINE(_MGNSSLOC, "+MGNSSLOC:", data, len) {
     klAttoken_getNextString(&line, &gnssData.nsat, NULL);
     klAttoken_getNextString(&line, &gnssData.dtype, NULL);
     CREQUEST(ON_GNSS_SIMPLE_RECV, {.ptr = &gnssData});
+    return 0;
 }
 
 #endif
@@ -1735,6 +1736,9 @@ static int32_t onPtPackIdTransmit(cModule_TransmitPackageInfo_t *info) {
 
 
 static int32_t onPtPackIdCustom(cModule_TransmitPackageInfo_t *info) {
+    if (info->flag.requestId == TRANSMIT_PACK_REQ_ID_GNSS_UPDATE_ONCE) {
+        gnss_startup_once();
+    }
     return 0;
 }
 
