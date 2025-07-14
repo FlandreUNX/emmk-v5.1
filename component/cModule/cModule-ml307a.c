@@ -1736,9 +1736,11 @@ static int32_t onPtPackIdTransmit(cModule_TransmitPackageInfo_t *info) {
 
 
 static int32_t onPtPackIdCustom(cModule_TransmitPackageInfo_t *info) {
+#if CONFIG_CMODULE_GNSS_SUPPORT == 1
     if (info->flag.requestId == TRANSMIT_PACK_REQ_ID_GNSS_UPDATE_ONCE) {
         gnss_startup_once();
     }
+#endif
     return 0;
 }
 
