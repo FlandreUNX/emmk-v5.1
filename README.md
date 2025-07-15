@@ -275,5 +275,8 @@ add: hal, component, cModule> 增加ML307系列的GNSS支持
 
 ###### V1.7.2.1-250715
 fix: hal, driver, gd32el235> 修复驱动若干问题
+add: component, cModule> 添加GNSS-NMEA格式回调
+add: component, cModule> 添加IdleRefresh功能
+add: component, cModule> 添加IdleRefresh功能
 
 ------------

@@ -132,6 +132,7 @@ typedef enum {
     CMODULE_REQ_ON_STACK_NEED_RESET,
 
     CMODULE_REQ_ON_GNSS_SIMPLE_RECV,
+    CMODULE_REQ_ON_GNSS_NMEA_RECV,
 
     CMODULE_REQ_ON_REQ_ID_ACK,
 
@@ -463,6 +464,7 @@ extern void cModule_resetStack(cModule_Instance_t *ins);
 extern int32_t cModule_directWrite(cModule_Instance_t *ins, uint8_t *data, uint16_t dataLength);
 
 extern void cModule_enablePmu(cModule_Instance_t *ins, bool en);
+extern void cModuele_pmuIdleRefresh(cModule_Instance_t *ins);
 extern uint8_t cModule_getSleepStatus(cModule_Instance_t *ins);
 
 extern uint8_t cModule_isBlocking(cModule_Instance_t *ins);

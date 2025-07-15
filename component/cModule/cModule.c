@@ -672,6 +672,13 @@ void cModule_enablePmu(cModule_Instance_t *ins, bool en) {
 }
 
 
+void cModuele_pmuIdleRefresh(cModule_Instance_t *ins) {
+    if (ins->aux.flag.pmuSupport) {
+        qSTimer_Set(&((ComponentPmu_t *) ins->cmmpu)->aux.idleTimer, CONFIG_CMODULE_IDLE_TIMEOUT_MS);
+    }
+}
+
+
 
 inline uint8_t cModule_getSleepStatus(cModule_Instance_t *ins) {
     if (ins->cmmpu != NULL) {
