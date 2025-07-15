@@ -1284,6 +1284,41 @@ RILAT_COMMAND_MATCH_DEFINE(_MGNSSLOC, "+MGNSSLOC:", data, len) {
     return 0;
 }
 
+RILAT_COMMAND_MATCH_DEFINE(_GNGGA, "$GNGGA", data, len) {
+    CREQUEST(ON_GNSS_NMEA_RECV, {.ptr = &data});
+    return 0;
+}
+
+RILAT_COMMAND_MATCH_DEFINE(_GPGSA, "$GPGSA", data, len) {
+    CREQUEST(ON_GNSS_NMEA_RECV, {.ptr = &data});
+    return 0;
+}
+
+RILAT_COMMAND_MATCH_DEFINE(_BDGSA, "$BDGSA", data, len) {
+    CREQUEST(ON_GNSS_NMEA_RECV, {.ptr = &data});
+    return 0;
+}
+
+RILAT_COMMAND_MATCH_DEFINE(_GLGSA, "$GLGSA", data, len) {
+    CREQUEST(ON_GNSS_NMEA_RECV, {.ptr = &data});
+    return 0;
+}
+
+RILAT_COMMAND_MATCH_DEFINE(_GNRMC, "$GNRMC", data, len) {
+    CREQUEST(ON_GNSS_NMEA_RECV, {.ptr = &data});
+    return 0;
+}
+
+RILAT_COMMAND_MATCH_DEFINE(_GNVTG, "$GNVTG", data, len) {
+    CREQUEST(ON_GNSS_NMEA_RECV, {.ptr = &data});
+    return 0;
+}
+
+RILAT_COMMAND_MATCH_DEFINE(_GNGLL, "$GNGLL", data, len) {
+    CREQUEST(ON_GNSS_NMEA_RECV, {.ptr = &data});
+    return 0;
+}
+
 #endif
 
 #if CONFIG_CMODULE_INSTANCE_INIT_MODE == CONFIG_CMODULE_INSTANCE_INIT_MODE_HTTP

@@ -41,8 +41,8 @@
 /*@{*/
 
 void RTC_WKUP_IRQHandler(void) {
-    rtc_flag_clear(RTC_INT_WAKEUP);
-    rtc_interrupt_disable(RTC_INT_WAKEUP);
+    rtc_flag_clear(RTC_FLAG_WT);
+    // rtc_interrupt_disable(RTC_INT_WAKEUP);
 
     exti_interrupt_flag_clear(EXTI_20);
 }
@@ -73,19 +73,19 @@ void kdrtc_setupPeriod(uint32_t v) {
         exti_interrupt_disable(EXTI_20);
     } else {
         rtc_interrupt_disable(RTC_INT_WAKEUP);
-        rtc_flag_clear(RTC_INT_WAKEUP);
+        rtc_flag_clear(RTC_FLAG_WT);
         rtc_wakeup_disable();
 
         rtc_wakeup_clock_set(WAKEUP_CKSPRE);
         rtc_wakeup_timer_set(v);
-
-        rtc_interrupt_enable(RTC_INT_WAKEUP);
-        rtc_wakeup_enable();
-
-        exti_init(EXTI_20, EXTI_INTERRUPT, EXTI_TRIG_BOTH);
+        
+        exti_init(EXTI_20, EXTI_INTERRUPT, EXTI_TRIG_RISING);
         exti_interrupt_enable(EXTI_20);
 
         NVIC_EnableIRQ(RTC_WKUP_IRQn);
+
+        rtc_interrupt_enable(RTC_INT_WAKEUP);
+        rtc_wakeup_enable();
     }
 }
 
