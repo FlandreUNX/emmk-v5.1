@@ -192,7 +192,7 @@ int32_t kduart_powerUp(kduart_t *kd) {
     if (kd->_config.pin.tx.gpio != NULL) {
         _gpio_modeConfig(kd->_config.pin.tx.gpio->_config.base.port,
                          kd->_config.pin.tx.gpio->_config.base.pin,
-                         KDGPIO_MODE_OUTPUT_PP);
+                         KDGPIO_MODE_AF_PP);
         _gpio_pullConfig(kd->_config.pin.tx.gpio->_config.base.port,
                          kd->_config.pin.tx.gpio->_config.base.pin,
                          KDGPIO_PULL_NONE);
@@ -205,7 +205,7 @@ int32_t kduart_powerUp(kduart_t *kd) {
     if (kd->_config.pin.rx.gpio != NULL) {
         _gpio_modeConfig(kd->_config.pin.rx.gpio->_config.base.port,
                          kd->_config.pin.rx.gpio->_config.base.pin,
-                         KDGPIO_MODE_INPUT);
+                         KDGPIO_MODE_AF_PP);
         _gpio_pullConfig(kd->_config.pin.rx.gpio->_config.base.port,
                          kd->_config.pin.rx.gpio->_config.base.pin,
                          KDGPIO_PULL_NONE);

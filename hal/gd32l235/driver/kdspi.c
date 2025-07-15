@@ -194,7 +194,7 @@ int32_t kdspi_powerUp(kdspi_t *kd) {
     if (kd->_config.pin.clk.gpio != NULL) {
         _gpio_modeConfig(kd->_config.pin.clk.gpio->_config.base.port, 
             kd->_config.pin.clk.gpio->_config.base.pin, 
-            KDGPIO_MODE_OUTPUT_PP);
+            KDGPIO_MODE_AF_PP);
         _gpio_pullConfig(kd->_config.pin.clk.gpio->_config.base.port, 
             kd->_config.pin.clk.gpio->_config.base.pin, 
             KDGPIO_PULL_NONE);
@@ -207,7 +207,7 @@ int32_t kdspi_powerUp(kdspi_t *kd) {
     if (kd->_config.pin.mosi.gpio != NULL) {
         _gpio_modeConfig(kd->_config.pin.mosi.gpio->_config.base.port, 
             kd->_config.pin.mosi.gpio->_config.base.pin, 
-            KDGPIO_MODE_OUTPUT_PP);
+            KDGPIO_MODE_AF_PP);
         _gpio_pullConfig(kd->_config.pin.mosi.gpio->_config.base.port, 
             kd->_config.pin.mosi.gpio->_config.base.pin, 
             KDGPIO_PULL_NONE);
@@ -220,7 +220,7 @@ int32_t kdspi_powerUp(kdspi_t *kd) {
     if (kd->_config.pin.miso.gpio != NULL) {
         _gpio_modeConfig(kd->_config.pin.miso.gpio->_config.base.port, 
             kd->_config.pin.miso.gpio->_config.base.pin, 
-            KDGPIO_MODE_INPUT);
+            KDGPIO_MODE_AF_PP);
         _gpio_pullConfig(kd->_config.pin.miso.gpio->_config.base.port, 
             kd->_config.pin.miso.gpio->_config.base.pin, 
             KDGPIO_PULL_NONE);

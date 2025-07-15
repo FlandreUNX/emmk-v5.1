@@ -58,6 +58,7 @@ typedef struct {
     void (*disableFunc)(kdpwm_t *kd);
     
     uint32_t timer;
+    rcu_periph_enum timerRcu;
     timer_parameter_struct init;
     
     uint8_t autoReload;
@@ -102,6 +103,7 @@ struct kdpwm {
 
 #define KDPWM_HOST_NUMBER(x)            x
 #define _KDPWM_HOST_NUMBER_TIM(x)       TIMER##x
+#define _KDPWM_HOST_NUMBER_TIM_RCU(x)       RCU_TIMER##x
 #define _KDPWM_HOST_INAME(_name)        __kdpwm_host_##_name
 #define _KDPWM_HOST_IVA(_hn)            __kdpwm_host_va_##_hn
 #define _KDPWM_HOST_FUNC_ENABLE(x)      __kdpwm_host_enable_##x
@@ -179,6 +181,7 @@ extern void kdpwm_irqEnable(kdpwm_t *kd, kdpwm_Event_t evt, bool enable, kdpwm_S
         .enableFunc = _KDPWM_HOST_FUNC_ENABLE(_hn), \
         .disableFunc = _KDPWM_HOST_FUNC_DISABLE(_hn), \
         .timer = _KDPWM_HOST_NUMBER_TIM(_hn), \
+        .timerRcu = _KDPWM_HOST_NUMBER_TIM_RCU(_hn), \
         .va = &_KDPWM_HOST_IVA(_hn), \
         .init = { \
             .period = _arr - 1, \

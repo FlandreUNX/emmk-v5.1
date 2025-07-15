@@ -273,4 +273,7 @@ add: hal, driver, cw32l010> 增加UART中断发送的函数
 add: hal, component, cModule> 增加GNSS-simple格式支持
 add: hal, component, cModule> 增加ML307系列的GNSS支持
 
+###### V1.7.2.1-250715
+fix: hal, driver, gd32el235> 修复驱动若干问题
+
 ------------
