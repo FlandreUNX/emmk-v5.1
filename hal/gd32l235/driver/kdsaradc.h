@@ -190,6 +190,7 @@ extern void kdsaradc_convertStop(kdsaradc_t *kd);
                     .direction = DMA_PERIPHERAL_TO_MEMORY, \
                     .number = _channelNumber, \
                     .priority = DMA_PRIORITY_HIGH, \
+                    .request = DMA_REQUEST_ADC, \
                 }, \
             }, \
             .adc = { \

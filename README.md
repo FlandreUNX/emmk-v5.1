@@ -278,4 +278,8 @@ fix: hal, driver, gd32el235> 修复驱动若干问题
 add: component, cModule> 添加GNSS-NMEA格式回调
 add: component, cModule> 添加IdleRefresh功能
 
+###### V1.7.2.2-250715
+fix: component, cModule> rdax协议修复GNSS-simple格式支持
+fix: hal, driver, gd32el235> 修复驱动若干问题
+
 ------------
