@@ -156,6 +156,39 @@ extern void _klPtf_putchar(char c);
 /*@}*/
 
 /**
+ * @addtogroup CpuUsage
+ * @note none
+ */
+
+/*@{*/
+
+typedef struct {
+    uint8_t usage;
+    uint32_t counter;
+    klist_t list;
+} kdebug_CpuUsage_t;
+
+#if EMMK_CFG_DEBUG_ENABLE == 1 && EMMK_CFG_DEBUG_CPU_USAGE_ENABLE == 1
+
+extern void kdebug_cpuUsage_calculate1ms(void);
+
+extern void kdebug_cpuUsage_idleCount(void);
+extern uint8_t kdebug_cpuUsage_getIdleUsage(void);
+
+extern void kdebug_cpuUsage_counter(kdebug_CpuUsage_t *usage);
+
+extern void kdebug_cpuUsage_register(kdebug_CpuUsage_t *usage);
+#else
+#define kdebug_cpuUsage_calculate1ms()
+#define kdebug_cpuUsage_idleCount()
+#define kdebug_cpuUsage_getIdleUsage()
+#define kdebug_cpuUsage_counter(x)
+#define kdebug_cpuUsage_register(x)
+#endif
+
+/*@}*/
+
+/**
  * @addtogroup Debug static func
  * @note none
  */

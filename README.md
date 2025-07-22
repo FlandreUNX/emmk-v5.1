@@ -281,4 +281,7 @@ add: component, cModule> 添加IdleRefresh功能
 ###### V1.7.2.2-250715
 fix: component, cModule> rdax协议修复GNSS-simple格式支持
 
+###### V1.7.3.0-250722
+add: 增加支持cpuUsage函数的支持
+
 ------------

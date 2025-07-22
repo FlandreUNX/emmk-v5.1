@@ -36,6 +36,24 @@ volatile uint8_t g_kdebug_skip_log = false;
 /*@}*/
 
 /**
+ * @addtogroup CpuUsage
+ * @note none
+ */
+
+/*@{*/
+
+#if EMMK_CFG_DEBUG_CPU_USAGE_ENABLE == 1
+
+static klist_t mCpuUsage_list;
+
+static uint32_t mCpuUsage_idleTick = 0;
+static uint8_t mCpuUsage_idleUsage = 0;
+
+#endif
+
+/*@}*/
+
+/**
  * @addtogroup kdbg inline func
  * @note none
  */
@@ -92,6 +110,12 @@ int32_t kdebug_init(void) {
 #endif
     
     g_kdebug_skip_log = false;
+
+#if EMMK_CFG_DEBUG_CPU_USAGE_ENABLE == 1
+    klist_init(&mCpuUsage_list);
+    mCpuUsage_idleTick = 0;
+    mCpuUsage_idleUsage = 0;
+#endif
     
     return 0;
 }
@@ -102,5 +126,72 @@ void kdebug_skip(bool set) {
 }
 
 /*@}*/
+
+/**
+ * @addtogroup CpuUsage
+ * @note none
+ */
+
+/*@{*/
+
+#if EMMK_CFG_DEBUG_CPU_USAGE_ENABLE == 1
+
+void kdebug_cpuUsage_calculate1ms(void) {
+    static uint16_t tick = 0;
+    if (++tick >= 1000) {
+        tick = 0;
+        static klist_t *pos = NULL;
+        static kdebug_CpuUsage_t *usage = NULL;
+        static uint32_t totalTick = 0;
+        klist_forEach(pos, &mCpuUsage_list) {
+            usage = klist_entry(pos, kdebug_CpuUsage_t, list);
+            totalTick += usage->counter;
+        }
+        totalTick += mCpuUsage_idleTick;
+
+        pos = NULL;
+        usage = NULL;
+        klist_forEach(pos, &mCpuUsage_list) {
+            usage = klist_entry(pos, kdebug_CpuUsage_t, list);
+            usage->usage = (usage->counter) / totalTick;
+            usage->counter = 0;
+        }
+
+        mCpuUsage_idleUsage = (mCpuUsage_idleTick) / totalTick;
+        mCpuUsage_idleTick = 0;
+
+        totalTick = 0;
+    }
+}
+
+
+void kdebug_cpuUsage_idleCount(void) {
+    mCpuUsage_idleTick++;
+}
+
+
+uint8_t kdebug_cpuUsage_getIdleUsage(void) {
+    return mCpuUsage_idleUsage;
+}
+
+
+void kdebug_cpuUsage_counter(kdebug_CpuUsage_t *usage) {
+    ASSERT(usage != NULL);
+    usage->counter++;
+}
+
+
+void kdebug_cpuUsage_register(kdebug_CpuUsage_t *usage) {
+    ASSERT(usage != NULL);
+    usage->usage = 0;
+    usage->counter = 0;
+    klist_init(&usage->list);
+    klist_addTail(&mCpuUsage_list, &usage->list);
+}
+
+#endif
+
+/*@}*/
+
 
 #endif
