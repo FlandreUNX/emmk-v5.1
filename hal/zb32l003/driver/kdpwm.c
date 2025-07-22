@@ -57,7 +57,8 @@ int32_t kdpwm_finalize(kdpwm_t *kd) {
     }
     
     kd->_host->timer->CR1 &= ~KLBIT(0);
-
+    kd->_host->timer->PSC = 0;
+    kd->_host->timer->ARR = 0;
     kd->_host->disableFunc(kd);
  
     return 0;

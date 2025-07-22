@@ -59,6 +59,8 @@ int32_t kdpwm_finalize(kdpwm_t *kd) {
     }
     
     timer_disable(kd->_host->timer);
+    timer_prescaler_config(kd->_host->timer, 0, TIMER_PSC_RELOAD_NOW);
+    timer_autoreload_value_config(kd->_host->timer, 0);
 
     kd->_host->disableFunc(kd);
  

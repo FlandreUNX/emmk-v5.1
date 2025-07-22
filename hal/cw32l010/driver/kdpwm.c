@@ -70,6 +70,8 @@ int32_t kdpwm_finalize(kdpwm_t *kd) {
         ATIM_DeInit();
     } else {
         GTIM_Cmd(kd->_host->tim.gtim, DISABLE);
+        kd->_host->tim.gtim->PSC = 0;
+        kd->_host->tim.gtim->ARR = 0;
     }
 
     kd->_host->disableFunc(kd);
