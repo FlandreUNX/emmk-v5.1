@@ -230,6 +230,7 @@ void kdmisc_cloneEncrypt(void) {
 #if EMMK_FULL_RTOS_SUPPORT == EMMK_FULL_RTOS_QTS
 void SysTick_Handler(void) {
     qClock_SysTick();
+    kdebug_cpuUsage_calculate1ms();
 }
 #endif
 
