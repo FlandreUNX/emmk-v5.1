@@ -24,7 +24,7 @@
  
 /*@{*/
 
-void _gpio_modeConfig(GPIO_TypeDef *port, uint32_t pin, kdgpio_Mode_t mode) {
+void  _gpio_modeConfig(GPIO_TypeDef *port, uint32_t pin, kdgpio_Mode_t mode) {
     REGBITS_CLR(port->ANALOG, pin); 
     
     switch (mode) {

@@ -72,9 +72,11 @@ int32_t kdsaradc_powerUp(kdsaradc_t *kd) {
         return -1;
     }
     
-    ADC->CR0 &= ~(0x01 << 0);
+    ADC->CR0 &= ~KLBIT(0);
+    ADC->CR0 &= ~KLBIT(1);
     ADC->CR2 |= (1u << kd->_config.channel);
-    ADC->CR0 |= (0x01 << 0);
+    ADC->CR0 |= KLBIT(0);
+    ADC->CR0 |= KLBIT(1);
     
     if (kd->_config.pin.gpio != NULL) {
         _gpio_modeConfig(kd->_config.pin.gpio->_config.base.port,
