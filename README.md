@@ -284,4 +284,7 @@ fix: component, cModule> rdax协议修复GNSS-simple格式支持
 ###### V1.7.3.0-250722
 add: 增加支持cpuUsage函数的支持
 
+###### V1.7.3.1-250722
+fix: hal, driver, zb32l003> 修复ADC可能转换导致的无法启动的错误
+
 ------------
