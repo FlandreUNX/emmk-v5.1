@@ -31,9 +31,9 @@ int32_t kdpwm_init(kdpwm_t *kd) {
         return -1;
     }
     
-    if (kd->_host->timer->PSC != 0 && kd->_host->timer->ARR != 0) {
-        return 0;
-    }
+//    if (kd->_host->timer->PSC != 0 && kd->_host->timer->ARR != 0) {
+//        return 0;
+//    }
     kd->_host->enableFunc(kd);
     
     kd->_host->timer->PSC = kd->_host->psc;

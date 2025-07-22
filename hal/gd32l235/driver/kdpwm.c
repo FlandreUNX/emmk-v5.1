@@ -31,9 +31,9 @@ int32_t kdpwm_init(kdpwm_t *kd) {
         return -1;
     }
 
-    if (RCU_REG_VAL(kd->_host->timerRcu) & BIT(RCU_BIT_POS(kd->_host->timerRcu))) {
-        return 0;
-    } 
+    // if (RCU_REG_VAL(kd->_host->timerRcu) & BIT(RCU_BIT_POS(kd->_host->timerRcu))) {
+    //     return 0;
+    // }
     kd->_host->enableFunc(kd);
     
     timer_init(kd->_host->timer, (timer_parameter_struct *) &kd->_host->init);
