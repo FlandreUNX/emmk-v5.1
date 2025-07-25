@@ -77,10 +77,12 @@ struct kdpwm {
 
         struct {
             kdgpio_t *gpio;
+            uint32_t af;
         } pin;
         
         struct {
             kdgpio_t *gpio;
+            uint32_t af;
         } pinN;
     } _config;
     
@@ -116,6 +118,8 @@ struct kdpwm {
 #define _KDPWM_CHN(_c)                  TIMER_CH_##_c
 #define _KDPWM_CHNX(_c, _isN)           ((_isN ? 0x04 : 0x01) << (_c * 4))
 
+#define KDPWM_GPIO_AF(_x)         _x
+
 #define KDPWM_PRESCALER(x) x
 #define KDPWM_PERIOD(x) x
 
@@ -138,7 +142,8 @@ extern void kdpwm_counterReset(kdpwm_t *kd);
 extern void kdpwm_irqEnable(kdpwm_t *kd, kdpwm_Event_t evt, bool enable, kdpwm_SignalEvent_t cbEvent);
 
 #define KDPWM_CHN_DEFINE(_name, _hn, _chnNumber, \
-        _gpio, _gpioN, \
+        _gpio, _af, \
+        _gpioN, _afn, \
         _mode, \
         _pol, _idle, \
         _polN, _idleN, \
@@ -163,9 +168,11 @@ extern void kdpwm_irqEnable(kdpwm_t *kd, kdpwm_Event_t evt, bool enable, kdpwm_S
             }, \
             .pin = { \
                 .gpio = (kdgpio_t *) _gpio, \
+                .af = _af, \
             }, \
             .pinN = { \
                 .gpio = (kdgpio_t *) _gpioN, \
+                .af = _afn, \
             }, \
         }, \
     };

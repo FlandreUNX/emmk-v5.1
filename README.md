@@ -291,4 +291,7 @@ fix: hal, driver, zb32l003> 修复ADC可能转换导致的无法启动的错误
 ###### V1.7.3.2-250722
 fix: hal, driver, zb32l003> 修复可能导致PWM没输出的错误
 
+###### V1.7.3.4-250726
+fix: middleware, rilat> 整理代码
+
 ------------
