@@ -90,6 +90,8 @@ void ev1527_init(ev1527_Instance_t *ins, const void *pinData, const ev1527_Callb
     ins->pinData = (void *) pinData;
     ins->callback = callback;
     ins->aux.pinMode.bitSize = bitSize;
+
+    qBSBuffer_Setup(&ins->decodeBuffer, ins->decodeBufferPool, sizeof(ins->decodeBufferPool));
 }
 
 
@@ -117,7 +119,7 @@ void ev1527_pinDecode(ev1527_Instance_t *ins, const register uint32_t newPinValu
             }
         } else if (tState == RECEIVER_STATE_WAITING_FOR_FIRST_DATA_SPACE) {
             ins->aux.pinMode.rawDataBitCounter = 0;
-            ins->aux.pinMode.rawData = 0;
+            ins->aux.pinMode.data.u32 = 0;
             tState = RECEIVER_STATE_WAITING_FOR_DATA_SPACE;
         } else if (tState == RECEIVER_STATE_WAITING_FOR_DATA_SPACE) {
         } else {
@@ -136,14 +138,17 @@ void ev1527_pinDecode(ev1527_Instance_t *ins, const register uint32_t newPinValu
                 && tMicrosOfMarkOrSpace <= upperValue(NEC_ZERO_SPACE)) {
                 if (tMicrosOfMarkOrSpace < 2 * NEC_UNIT) {
                     // BIT=1
-                    ins->aux.pinMode.rawData |= 0x01 << (ins->aux.pinMode.rawDataBitCounter);
+                    ins->aux.pinMode.data.u32 |= 0x01 << (ins->aux.pinMode.rawDataBitCounter);
                 } else {
                     // BIT=0
                 }
                 ins->aux.pinMode.rawDataBitCounter++;
                 if (ins->aux.pinMode.rawDataBitCounter >= ins->aux.pinMode.bitSize) {
-                    ins->data = ins->aux.pinMode.rawData;
-                    ins->isDataReady = true;
+                    qBSBuffer_Put(&ins->decodeBuffer, ins->aux.pinMode.data.u8[0]);
+                    qBSBuffer_Put(&ins->decodeBuffer, ins->aux.pinMode.data.u8[1]);
+                    qBSBuffer_Put(&ins->decodeBuffer, ins->aux.pinMode.data.u8[2]);
+                    qBSBuffer_Put(&ins->decodeBuffer, ins->aux.pinMode.data.u8[3]);
+
                     tState = RECEIVER_STATE_WAITING_FOR_START_MARK;
                     ins->callback->onCounterClean();
                 }
@@ -184,7 +189,7 @@ void ev1527_decode(ev1527_Instance_t *ins) {
                     ins->aux.timingMode.step1++;
 
                     ins->aux.timingMode.bitCount = 0;
-                    ins->aux.timingMode.decodeData = 0;
+                    ins->aux.timingMode.data.u32 = 0;
                 } else {
                     ins->aux.timingMode.step1 = 0;
                 }
@@ -196,7 +201,7 @@ void ev1527_decode(ev1527_Instance_t *ins) {
                 ins->aux.timingMode.step1 = 0;
             } else if (!pinLevel) {
                 if (EV1527_BIT_IS_HIGH) {
-                    ins->aux.timingMode.decodeData |= 0x01 << ((24 - ins->aux.timingMode.bitCount) - 1);
+                    ins->aux.timingMode.data.u32 |= 0x01 << ((24 - ins->aux.timingMode.bitCount) - 1);
                 }
                 ins->aux.timingMode.bitCount++;
                 if (ins->aux.timingMode.bitCount != 24) {
@@ -204,8 +209,11 @@ void ev1527_decode(ev1527_Instance_t *ins) {
                     ins->aux.timingMode.baseTiming_per200us = 0;
                 } else {
                     ins->aux.timingMode.step1 = 0;
-                    ins->data = ins->aux.timingMode.decodeData;
-                    ins->isDataReady = true;
+
+                    qBSBuffer_Put(&ins->decodeBuffer, ins->aux.pinMode.data.u8[0]);
+                    qBSBuffer_Put(&ins->decodeBuffer, ins->aux.pinMode.data.u8[1]);
+                    qBSBuffer_Put(&ins->decodeBuffer, ins->aux.pinMode.data.u8[2]);
+                    qBSBuffer_Put(&ins->decodeBuffer, ins->aux.pinMode.data.u8[3]);
                     break;
                 }
             }
@@ -226,9 +234,9 @@ void ev1527_decode(ev1527_Instance_t *ins) {
 
 
 void ev1527_startUp(ev1527_Instance_t *ins) {
-    ins->isDataReady = false;
-    ins->data = 0;
-    ins->aux.timingMode.decodeData = 0;
+    qBSBuffer_Setup(&ins->decodeBuffer, ins->decodeBufferPool, sizeof(ins->decodeBufferPool));
+
+    ins->aux.timingMode.data.u32 = 0;
     ins->aux.timingMode.bitCount = 0;
     ins->aux.timingMode.baseTiming_per200us = 0;
     ins->aux.timingMode.step1 = 0;
@@ -236,12 +244,11 @@ void ev1527_startUp(ev1527_Instance_t *ins) {
     ins->callback->init();
 }
 
+
 void ev1527_down(ev1527_Instance_t *ins) {
     ins->callback->finalize();
 
-    ins->isDataReady = false;
-    ins->data = 0;
-    ins->aux.timingMode.decodeData = 0;
+    ins->aux.timingMode.data.u32 = 0;
     ins->aux.timingMode.bitCount = 0;
     ins->aux.timingMode.baseTiming_per200us = 0;
     ins->aux.timingMode.step1 = 0;
@@ -249,18 +256,26 @@ void ev1527_down(ev1527_Instance_t *ins) {
 
 
 uint32_t ev1527_read(ev1527_Instance_t *ins) {
-    return ins->data;
+    union {
+        uint32_t u32;
+        uint8_t u8[4];
+    } data = {
+        .u32 = 0,
+    };
+
+    qBSBuffer_Read(&ins->decodeBuffer, data.u8, 4);
+
+    return data.u32;
 }
 
 
 uint8_t ev1527_isDataReady(ev1527_Instance_t *ins) {
-    return ins->isDataReady;
+    return qBSBuffer_Count(&ins->decodeBuffer) / 4 >= 1;
 }
 
 
 void ev1527_clearDataReady(ev1527_Instance_t *ins) {
-    ins->isDataReady = 0;
-    ins->data = 0;
+    qBSBuffer_Setup(&ins->decodeBuffer, ins->decodeBufferPool, sizeof(ins->decodeBufferPool));
 }
 
 /*@}*/
@@ -276,7 +291,7 @@ static void encode_sync(ev1527_Encoder_t *enc) {
     uint32_t c124 = enc->c4 * 31;
     enc->callback.gpioSet(1);
     enc->callback.timerWait(enc->c4);
-    
+
     enc->callback.gpioSet(0);
     enc->callback.timerWait(c124);
 }
@@ -320,7 +335,6 @@ void ev1527_encode_init(ev1527_Encoder_t *enc, uint32_t tick) {
 
 
 void ev1527_encode_finalize(ev1527_Encoder_t *enc) {
-
 }
 
 

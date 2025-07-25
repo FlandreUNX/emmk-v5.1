@@ -20,6 +20,8 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+#include "kernel/QuarkTS/src/os/include/qbsbuffers.h"
+
 /**
  * @addtogroup Define & Typedef
  * @note none
@@ -36,21 +38,30 @@ typedef struct {
 typedef struct {
     void *pinData;
 
-    bool isDataReady;
-    uint32_t data;
+
+    uint8_t decodeBufferPool[32];
+    qBSBuffer_t decodeBuffer;
 
     union {
         struct {
             uint8_t step1;
             uint8_t bitCount;
-            uint32_t decodeData;
             uint8_t baseTiming_per200us;
+
+            union {
+                uint32_t u32;
+                uint8_t u8[4];
+            } data;
         } timingMode;
         struct {
             uint32_t lastChangeMicros;
             uint8_t receiverState;
             uint8_t rawDataBitCounter;
-            uint32_t rawData;
+
+            union {
+                uint32_t u32;
+                uint8_t u8[4];
+            } data;
             
             uint8_t bitSize;
         } pinMode;
