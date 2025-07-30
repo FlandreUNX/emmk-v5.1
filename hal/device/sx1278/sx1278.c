@@ -943,6 +943,7 @@ SX1278_ProcessReturnCodes_t sx1278_poll(SX1278_t *handler) {
     
     switch (handler->currentState) {
         case SX1278_STATE_STANDBY:
+        case SX1278_STATE_SLEEP:
             rc = RF_IDLE;
             break;
         
@@ -1379,6 +1380,19 @@ SX1278_ProcessReturnCodes_t sx1278_poll(SX1278_t *handler) {
             handler->currentState = SX1278_STATE_STANDBY;
             rc = RF_IDLE;
         } break;
+        case SX1278_STATE_TO_SLEEP: {
+            _setOperateMode(handler, RFLR_OPMODE_SLEEP);
+
+            //// Clear all Irq
+            uint8_t regData = 0xFF;
+            _writeData(handler, REG_LR_IRQFLAGS, &regData, 1);
+
+            handler->flag |= SX1278_FLAG_IS_IDLE;
+
+            handler->currentState = SX1278_STATE_SLEEP;
+            rc = RF_IDLE;
+            break;
+        }
     }
     
     return rc;
@@ -1535,6 +1549,18 @@ int32_t sx1278_standby(SX1278_t *handler) {
     handler->flag &= ~(0x7FFFFFFFu);
     
     handler->currentState = SX1278_STATE_TO_STANDBY;
+    return 0;
+}
+
+
+int32_t sx1278_sleep(SX1278_t *handler) {
+    _ASSERT(handler != NULL);
+    if (handler->flag & SX1278_FLAG_HAL_FAILED) {
+        return -1;
+    }
+    handler->flag &= ~(0x7FFFFFFFu);
+
+    handler->currentState = SX1278_STATE_TO_SLEEP;
     return 0;
 }
 
