@@ -102,6 +102,8 @@ typedef enum {
     SX1278_STATE_CAD_RUNNING = 10,
     
     SX1278_STATE_TO_STANDBY = 11,
+    SX1278_STATE_TO_SLEEP = 12,
+    SX1278_STATE_SLEEP = 13,
 } SX1278_State_t;
 
 typedef enum {
