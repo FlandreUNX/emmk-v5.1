@@ -153,11 +153,11 @@ void kdebug_cpuUsage_calculate1ms(void) {
         usage = NULL;
         klist_forEach(pos, &mCpuUsage_list) {
             usage = klist_entry(pos, kdebug_CpuUsage_t, list);
-            usage->usage = (usage->counter) / totalTick;
+            usage->usage =  (usage->counter * 100) / totalTick;
             usage->counter = 0;
         }
 
-        mCpuUsage_idleUsage = (mCpuUsage_idleTick) / totalTick;
+        mCpuUsage_idleUsage =  (mCpuUsage_idleTick * 100) / totalTick;
         mCpuUsage_idleTick = 0;
 
         totalTick = 0;
