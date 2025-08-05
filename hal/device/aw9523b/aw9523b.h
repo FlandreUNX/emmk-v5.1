@@ -102,7 +102,7 @@ typedef struct {
  
 /*@{*/
 
-extern void aw9523b_initBus(aw9523b_Instance_t *instnace, const char *ifPath);
+extern void aw9523b_initBus(aw9523b_Instance_t *instnace, void *ifPath);
 extern int32_t aw9523b_initSoft(aw9523b_Instance_t *instnace, aw9523b_B7AddressPin_t addressSet, uint16_t defDir, uint16_t defOut);
 extern void aw9523b_finalizeBus(aw9523b_Instance_t *instnace);
 extern void aw9523b_finalizeSoft(aw9523b_Instance_t *instnace);

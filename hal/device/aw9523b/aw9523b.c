@@ -14,7 +14,7 @@
  * limitations under the License.
  */
  
-#include "emmk-kernel.h"
+#include "emmk-config.h"
 #include "emmk-driver.h"
 
 #include "./aw9523b.h"
@@ -27,7 +27,9 @@
 /*@{*/
 
 #undef DBG_SECTION_NAME
-#define DBG_SECTION_NAME  "DEV_AW9523B"
+#define DBG_SECTION_NAME  "AW9523B"
+#undef TAG
+#define TAG  DBG_SECTION_NAME
 
 /*@}*/
 
@@ -82,7 +84,7 @@
 /*@{*/
 
 static inline int32_t readReg(aw9523b_Instance_t *instnace, uint8_t regAddr, uint8_t *data, uint8_t len) {
-    return KDMETHOD(I2C).regRead(((kdI2C_t *) instnace->i2cIf), 
+    return kdi2c_regRead(((kdi2c_t *) instnace->i2cIf), 
         instnace->address, 
         regAddr, 1, 
         data, len);
@@ -90,7 +92,7 @@ static inline int32_t readReg(aw9523b_Instance_t *instnace, uint8_t regAddr, uin
 
 
 static inline int32_t writeReg(aw9523b_Instance_t *instnace, uint8_t regAddr, uint8_t *data, uint8_t len) {
-    return KDMETHOD(I2C).regWrite(((kdI2C_t *) instnace->i2cIf), 
+    return kdi2c_regWrite(((kdi2c_t *) instnace->i2cIf), 
         instnace->address, 
         regAddr, 1, 
         data, len);
@@ -105,17 +107,13 @@ static inline int32_t writeReg(aw9523b_Instance_t *instnace, uint8_t regAddr, ui
  
 /*@{*/
 
-void aw9523b_initBus(aw9523b_Instance_t *instnace, const char *ifPath) {
+void aw9523b_initBus(aw9523b_Instance_t *instnace, void *ifPath) {
     ASSERT(instnace != NULL);
-    
-    if (instnace->i2cIf != NULL) {
-        return;
-    }
-    
-    instnace->i2cIf = KDINSTANCE(I2C, ifPath);
     ASSERT(instnace->i2cIf != NULL);
-    KDMETHOD(I2C).init(((kdI2C_t *) instnace->i2cIf));
-    KDMETHOD(I2C).powerUp(((kdI2C_t *) instnace->i2cIf));
+
+    instnace->i2cIf = ifPath;
+    kdi2c_init(((kdi2c_t *) instnace->i2cIf));
+    kdi2c_powerUp(((kdi2c_t *) instnace->i2cIf));
 }
 
 
@@ -166,8 +164,8 @@ void aw9523b_finalizeBus(aw9523b_Instance_t *instnace) {
     if (instnace->i2cIf == NULL) {
         return;
     }
-    KDMETHOD(I2C).powerDown(((kdI2C_t *) instnace->i2cIf));
-    KDMETHOD(I2C).finalize(((kdI2C_t *) instnace->i2cIf));
+    kdi2c_powerDown(((kdi2c_t *) instnace->i2cIf));
+    kdi2c_finalize(((kdi2c_t *) instnace->i2cIf));
     instnace->i2cIf = NULL;
 }
 
@@ -307,5 +305,6 @@ int32_t aw9523b_setPinPort(aw9523b_Instance_t *instnace, uint16_t pinPort) {
 /*@{*/
 
 #undef DBG_SECTION_NAME
+#undef TAG
 
 /*@}*/
