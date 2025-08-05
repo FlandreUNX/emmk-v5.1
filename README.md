@@ -298,4 +298,7 @@ fix: middleware, rilat> 整理代码
 add(sx1278): 增加休眠功能
 add(drivers/esp32/saradc): adc增加支持S3
 
+###### V1.7.3.6-250805
+add(drivers/esp32/kdmisc): 添加支持kddelay
+
 ------------

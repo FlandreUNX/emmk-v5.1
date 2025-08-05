@@ -19,6 +19,7 @@
 #include "./driver/kdsaradc.h"
 #include "./driver/kdpwm.h"
 #include "./driver/kdspi.h"
+#include "./driver/kdmisc.h"
 
 /**
  * @addtogroup Instance method
