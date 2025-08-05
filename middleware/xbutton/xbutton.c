@@ -279,13 +279,21 @@ void xbutton_rotEnc_init(xbutton_RotEncObj_t *objs, uint8_t encCount) {
     mRotEnc = objs;
     mRotEncCount = encCount;
     for (uint8_t i = 0; i < mRotEncCount; i++) {
-        kdgpio_init(mRotEnc[i].hal.pinA);
-        kdgpio_powerUp(mRotEnc[i].hal.pinA, mRotEnc[i].hal.pinAGpioMode, mRotEnc[i].hal.pinAGpioPullResistor);
-        kdgpio_irqEnable(mRotEnc[i].hal.pinA, KDGPIO_TRIGGER_RISING_FALLING, NULL);
+        if (mRotEnc[i].hal.pinA != NULL) {
+            kdgpio_init(mRotEnc[i].hal.pinA);
+            kdgpio_powerUp(mRotEnc[i].hal.pinA, mRotEnc[i].hal.pinAGpioMode, mRotEnc[i].hal.pinAGpioPullResistor);
+            kdgpio_irqEnable(mRotEnc[i].hal.pinA, KDGPIO_TRIGGER_RISING_FALLING, NULL);
 
-        kdmisc_delayMs(10);
-        mRotEnc[i].aux.alps.alpsIdleA = kdgpio_input(mRotEnc[i].hal.pinA) ? 1 : 0;
-        mRotEnc[i].aux.alps.alpsIdleB = kdgpio_input(mRotEnc[i].hal.pinB) ? 1 : 0;
+            kdmisc_delayMs(10);
+            mRotEnc[i].aux.alps.alpsIdleA = kdgpio_input(mRotEnc[i].hal.pinA) ? 1 : 0;
+        }
+        if (mRotEnc[i].hal.pinB != NULL) {
+            kdgpio_init(mRotEnc[i].hal.pinB);
+            kdgpio_powerUp(mRotEnc[i].hal.pinB, mRotEnc[i].hal.pinAGpioMode, mRotEnc[i].hal.pinBGpioPullResistor);
+
+            kdmisc_delayMs(10);
+            mRotEnc[i].aux.alps.alpsIdleB = kdgpio_input(mRotEnc[i].hal.pinB) ? 1 : 0;
+        }
 
         mBtnObj[mRotEnc[i].aux.btnObjIndexA].enc.setStep = 1;
         mBtnObj[mRotEnc[i].aux.btnObjIndexB].enc.setStep = 1;
