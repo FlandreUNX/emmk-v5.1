@@ -41,6 +41,8 @@ extern bool xbutton_cb_access(xbutton_Obj_t *obj);
 extern bool xbutton_cb_vLevel(xbutton_Obj_t *obj);
 extern void xbutton_cb_attach(xbutton_Obj_t *obj, xbutton_Event_t evt);
 
+extern uint32_t xbutton_cb_encPinReadHandler(uint32_t rotIndex, uint8_t a0b1);
+
 static xbutton_Obj_t *mBtnObj = NULL;
 static uint8_t mBtnCount = 0;
 #if CONFIG_XBUTTON_ROTENC_ENABLE != 0
@@ -61,9 +63,27 @@ static qSTimer_t mLoopTimer = QSTIMER_INITIALIZER;
 
 #if CONFIG_XBUTTON_ROTENC_ENABLE != 0
 
+
+static uint32_t enc_pinRead(uint32_t i, uint8_t pin) {
+    if (pin == 0) {
+        if (mRotEnc[i].hal.pinA != NULL) {
+            return kdgpio_input(mRotEnc[i].hal.pinA) ? 1 : 0;
+        } else {
+            return xbutton_cb_encPinReadHandler(i, 0);
+        }
+    } else {
+        if (mRotEnc[i].hal.pinB != NULL) {
+            return kdgpio_input(mRotEnc[i].hal.pinB) ? 1 : 0;
+        } else {
+            return xbutton_cb_encPinReadHandler(i, 1);
+        }
+    }
+}
+
+
 static void enc_irqHandler(uint32_t i) {
-    uint32_t pinALevel = kdgpio_input(mRotEnc[i].hal.pinA) ? 1 : 0;
-    uint32_t pinBLevel = kdgpio_input(mRotEnc[i].hal.pinB) ? 1 : 0;
+    uint32_t pinALevel = enc_pinRead(i, 0);
+    uint32_t pinBLevel = enc_pinRead(i, 1);
 
     if (mRotEnc[i].aux.mode == XBUTTON_ROTENC_MODE_1N1P) {
         if (pinALevel != mRotEnc[i].aux.cwxA) {
@@ -125,8 +145,8 @@ static void enc_irqHandler(uint32_t i) {
 }
 
 static void enc_irqHandler_alps(uint32_t i) {
-    uint32_t pinALevel = kdgpio_input(mRotEnc[i].hal.pinA) ? 1 : 0;
-    uint32_t pinBLevel = kdgpio_input(mRotEnc[i].hal.pinB) ? 1 : 0;
+    uint32_t pinALevel = enc_pinRead(i, 0);
+    uint32_t pinBLevel = enc_pinRead(i, 1);
 
     if (mRotEnc[i].aux.alps.alpsIdleA && mRotEnc[i].aux.alps.alpsIdleB) {
         if (!pinALevel && pinBLevel) {
@@ -135,8 +155,8 @@ static void enc_irqHandler_alps(uint32_t i) {
             mRotEnc[i].aux.attachB = 1;
         }
 
-        mRotEnc[i].aux.alps.alpsIdleA = kdgpio_input(mRotEnc[i].hal.pinA) ? 1 : 0;
-        mRotEnc[i].aux.alps.alpsIdleB = kdgpio_input(mRotEnc[i].hal.pinB) ? 1 : 0;
+        mRotEnc[i].aux.alps.alpsIdleA = enc_pinRead(i, 0);
+        mRotEnc[i].aux.alps.alpsIdleB = enc_pinRead(i, 1);
     } else {
         if (pinALevel && !pinBLevel) {
             mRotEnc[i].aux.attachA = 1;
@@ -144,8 +164,8 @@ static void enc_irqHandler_alps(uint32_t i) {
             mRotEnc[i].aux.attachB = 1;
         }
 
-        mRotEnc[i].aux.alps.alpsIdleA = kdgpio_input(mRotEnc[i].hal.pinA) ? 1 : 0;
-        mRotEnc[i].aux.alps.alpsIdleB = kdgpio_input(mRotEnc[i].hal.pinB) ? 1 : 0;
+        mRotEnc[i].aux.alps.alpsIdleA = enc_pinRead(i, 0);
+        mRotEnc[i].aux.alps.alpsIdleB = enc_pinRead(i, 1);
     }
 }
 
@@ -170,42 +190,39 @@ static void enc_scan(void) {
 #endif
     for (uint8_t i = 0; i < mRotEncCount; i++) {
         if (mRotEnc[i].aux.mode != XBUTTON_ROTENC_MODE_ALPS) {
-            continue;
-        }
-
-        uint32_t pinALevel = kdgpio_input(mRotEnc[i].hal.pinA) ? 1 : 0;
-        uint32_t pinBLevel = kdgpio_input(mRotEnc[i].hal.pinB) ? 1 : 0;
-
-        if (mRotEnc[i].aux.alps.alpsIdleA != pinALevel) {
-            if (pinALevel) {
-                if (mRotEnc[i].aux.alps.alpsIdleB && !pinBLevel) {
-                    mRotEnc[i].aux.attachA = 1;
+            uint32_t pinALevel = enc_pinRead(i, 0);
+            uint32_t pinBLevel = enc_pinRead(i, 1);
+            if (mRotEnc[i].aux.alps.alpsIdleA != pinALevel) {
+                if (pinALevel) {
+                    if (mRotEnc[i].aux.alps.alpsIdleB && !pinBLevel) {
+                        mRotEnc[i].aux.attachA = 1;
+                    }
+                    if (!mRotEnc[i].aux.alps.alpsIdleB && pinBLevel) {
+                        mRotEnc[i].aux.attachB = 1;
+                    }
+                    if ((mRotEnc[i].aux.alps.alpsIdleB == pinBLevel) && !pinBLevel) {
+                        mRotEnc[i].aux.attachA = 1;
+                    }
+                    if ((mRotEnc[i].aux.alps.alpsIdleB == pinBLevel) && pinBLevel) {
+                        mRotEnc[i].aux.attachB = 1;
+                    }
+                } else {
+                    if (mRotEnc[i].aux.alps.alpsIdleB && !pinBLevel) {
+                        mRotEnc[i].aux.attachB = 1;
+                    }
+                    if (!mRotEnc[i].aux.alps.alpsIdleB && pinBLevel) {
+                        mRotEnc[i].aux.attachA = 1;
+                    }
+                    if ((mRotEnc[i].aux.alps.alpsIdleB == pinBLevel) && !pinBLevel) {
+                        mRotEnc[i].aux.attachB = 1;
+                    }
+                    if ((mRotEnc[i].aux.alps.alpsIdleB == pinBLevel) && pinBLevel) {
+                        mRotEnc[i].aux.attachA = 1;
+                    }
                 }
-                if (!mRotEnc[i].aux.alps.alpsIdleB && pinBLevel) {
-                    mRotEnc[i].aux.attachB = 1;
-                }
-                if ((mRotEnc[i].aux.alps.alpsIdleB == pinBLevel) && !pinBLevel) {
-                    mRotEnc[i].aux.attachA = 1;
-                }
-                if ((mRotEnc[i].aux.alps.alpsIdleB == pinBLevel) && pinBLevel) {
-                    mRotEnc[i].aux.attachB = 1;
-                }
-            } else {
-                if (mRotEnc[i].aux.alps.alpsIdleB && !pinBLevel) {
-                    mRotEnc[i].aux.attachB = 1;
-                }
-                if (!mRotEnc[i].aux.alps.alpsIdleB && pinBLevel) {
-                    mRotEnc[i].aux.attachA = 1;
-                }
-                if ((mRotEnc[i].aux.alps.alpsIdleB == pinBLevel) && !pinBLevel) {
-                    mRotEnc[i].aux.attachB = 1;
-                }
-                if ((mRotEnc[i].aux.alps.alpsIdleB == pinBLevel) && pinBLevel) {
-                    mRotEnc[i].aux.attachA = 1;
-                }
+                mRotEnc[i].aux.alps.alpsIdleA = enc_pinRead(i, 0);
+                mRotEnc[i].aux.alps.alpsIdleB = enc_pinRead(i, 1);
             }
-            mRotEnc[i].aux.alps.alpsIdleA = kdgpio_input(mRotEnc[i].hal.pinA) ? 1 : 0;
-            mRotEnc[i].aux.alps.alpsIdleB = kdgpio_input(mRotEnc[i].hal.pinB) ? 1 : 0;
         }
     }
 }
@@ -286,6 +303,8 @@ void xbutton_rotEnc_init(xbutton_RotEncObj_t *objs, uint8_t encCount) {
 
             kdmisc_delayMs(10);
             mRotEnc[i].aux.alps.alpsIdleA = kdgpio_input(mRotEnc[i].hal.pinA) ? 1 : 0;
+        } else {
+            mRotEnc[i].aux.alps.alpsIdleA = enc_pinRead(i, 0);
         }
         if (mRotEnc[i].hal.pinB != NULL) {
             kdgpio_init(mRotEnc[i].hal.pinB);
@@ -293,10 +312,12 @@ void xbutton_rotEnc_init(xbutton_RotEncObj_t *objs, uint8_t encCount) {
 
             kdmisc_delayMs(10);
             mRotEnc[i].aux.alps.alpsIdleB = kdgpio_input(mRotEnc[i].hal.pinB) ? 1 : 0;
+        } else {
+            mRotEnc[i].aux.alps.alpsIdleB = enc_pinRead(i, 1);
         }
 
-        mBtnObj[mRotEnc[i].aux.btnObjIndexA].enc.setStep = 1;
-        mBtnObj[mRotEnc[i].aux.btnObjIndexB].enc.setStep = 1;
+        mBtnObj[mRotEnc[i].aux.btnObjIndexA].enc.setStep = 0x80 | 1;
+        mBtnObj[mRotEnc[i].aux.btnObjIndexB].enc.setStep = 0x80 | 1;
     }
 #endif
 }
@@ -321,6 +342,7 @@ void xbutton_refresh(void) {
 #endif
 }
 
+
 int32_t xbutton_sync(void) {
 #if CONFIG_XBUTTON_ROTENC_ENABLE >= 1
     enc_scan();
@@ -332,6 +354,7 @@ int32_t xbutton_sync(void) {
         }
     }
     qSTimer_Set(&mLoopTimer, CONFIG_XBUTTON_FILTER_MS);
+
 
 #if CONFIG_XBUTTON_ROTENC_ENABLE >= 1
     for (uint8_t i = 0; i < mRotEncCount; i++) {
@@ -352,9 +375,9 @@ int32_t xbutton_sync(void) {
             mRotEnc[i].aux.outputA = 0;
         }
         if (mRotEnc[i].aux.outputA) {
-            mBtnObj[mRotEnc[i].aux.btnObjIndexA].enc.setStep = 2;
+            mBtnObj[mRotEnc[i].aux.btnObjIndexA].enc.setStep = 0x80 | 2;
         } else {
-            mBtnObj[mRotEnc[i].aux.btnObjIndexA].enc.setStep = 1;
+            mBtnObj[mRotEnc[i].aux.btnObjIndexA].enc.setStep = 0x80 | 1;
         }
 
         if (!mRotEnc[i].aux.outputA) {
@@ -374,9 +397,9 @@ int32_t xbutton_sync(void) {
             mRotEnc[i].aux.outputB = 0;
         }
         if (mRotEnc[i].aux.outputB) {
-            mBtnObj[mRotEnc[i].aux.btnObjIndexB].enc.setStep = 2;
+            mBtnObj[mRotEnc[i].aux.btnObjIndexB].enc.setStep = 0x80 | 2;
         } else {
-            mBtnObj[mRotEnc[i].aux.btnObjIndexB].enc.setStep = 1;
+            mBtnObj[mRotEnc[i].aux.btnObjIndexB].enc.setStep = 0x80 | 1;
         }
     }
 #endif
@@ -386,12 +409,12 @@ int32_t xbutton_sync(void) {
             continue;
         }
         uint32_t pressing;
-        if (mBtnObj[i].enc.setStep) {
-            pressing = mBtnObj[i].enc.setStep - 1;
-//            if (pressing) {
-//                mBtnObj[i].flag.pressingPre = 1;
-//                mBtnObj[i].flag.pressingAccess = 1;
-//            }
+        if (mBtnObj[i].enc.setStep & 0x80) {
+            pressing = (0x7F & mBtnObj[i].enc.setStep) - 1;
+            //            if (pressing) {
+            //                mBtnObj[i].flag.pressingPre = 1;
+            //                mBtnObj[i].flag.pressingAccess = 1;
+            //            }
         } else if (mBtnObj[i].hal.gpio == NULL) {
             pressing = xbutton_cb_vLevel(&mBtnObj[i]);
         } else {
@@ -417,18 +440,20 @@ int32_t xbutton_sync(void) {
                 }
                 if (mBtnObj[i].flag.pressingAccess) {
                     button_event(i, XBUTTON_EVT_PRESSING);
-                    
-                    if (mBtnObj[i].pressingCount >= mBtnObj[i].hal.opts.accessCountTh2) {
-                        if (mBtnObj[i].hal.opts.isLongPressBtn && !mBtnObj[i].flag.isLongBtnSet) {
-                            mBtnObj[i].flag.isLongBtnSet = 1;
-                            button_event(i, XBUTTON_EVT_LONG_PRESS);
-                        } else if (!mBtnObj[i].hal.opts.isLongPressBtn) {
-                            if (mBtnObj[i].pressingCount >= mBtnObj[i].hal.opts.accessCountThEmit) {
-                                mBtnObj[i].pressingCount = mBtnObj[i].hal.opts.accessCountTh2;
-                                button_event(i, XBUTTON_EVT_SHORT_PRESS);
+
+                    if (!(mBtnObj[i].enc.setStep & 0x80)) {
+                        if (mBtnObj[i].pressingCount >= mBtnObj[i].hal.opts.accessCountTh2) {
+                            if (mBtnObj[i].hal.opts.isLongPressBtn && !mBtnObj[i].flag.isLongBtnSet) {
+                                mBtnObj[i].flag.isLongBtnSet = 1;
+                                button_event(i, XBUTTON_EVT_LONG_PRESS);
+                            } else if (!mBtnObj[i].hal.opts.isLongPressBtn) {
+                                if (mBtnObj[i].pressingCount >= mBtnObj[i].hal.opts.accessCountThEmit) {
+                                    mBtnObj[i].pressingCount = mBtnObj[i].hal.opts.accessCountTh2;
+                                    button_event(i, XBUTTON_EVT_SHORT_PRESS);
+                                }
                             }
                         }
-                    } 
+                    }
                 }
             }
         } else {
