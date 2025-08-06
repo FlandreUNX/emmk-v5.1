@@ -109,7 +109,7 @@ static inline int32_t writeReg(aw9523b_Instance_t *instnace, uint8_t regAddr, ui
 
 void aw9523b_initBus(aw9523b_Instance_t *instnace, void *ifPath) {
     ASSERT(instnace != NULL);
-    ASSERT(instnace->i2cIf != NULL);
+    ASSERT(ifPath != NULL);
 
     instnace->i2cIf = ifPath;
     kdi2c_init(((kdi2c_t *) instnace->i2cIf));
