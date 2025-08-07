@@ -53,13 +53,13 @@ typedef enum {
 extern int32_t dac8560_hardInit(dac8560_Instance_t *ins, void *iicIf);
 extern int32_t dac8560_hardFinalize(dac8560_Instance_t *ins);
 
-extern int32_t dac8560_softInit(dac8560_Instance_t *ins, bool iVrefEnable, dac8560_Gain_t gain, uint16_t vref);
-extern void dac8560_softFinalize(dac8560_Instance_t *ins, dac8560_PowerCtl_t ctl);
+extern int32_t dac8560_softInit(dac8560_Instance_t *ins, bool iVrefEnable, uint16_t vref);
+extern void dac8560_softFinalize(dac8560_Instance_t *ins);
 
 extern uint32_t dac8560_caliRawByVolt(dac8560_Instance_t *ins, float mv);
 
-extern int32_t dac8560_setOutVolt(dac8560_Instance_t *ins, dac8560_Channel_t ch, float mv);
-extern int32_t dac8560_setOutRaw(dac8560_Instance_t *ins, dac8560_Channel_t chn, uint16_t u);
+extern int32_t dac8560_setOutVolt(dac8560_Instance_t *ins, dac8560_PowerCtl_t pd, float mv);
+extern int32_t dac8560_setOutRaw(dac8560_Instance_t *ins, dac8560_PowerCtl_t pd, uint16_t u);
 
 /*@}*/
 
