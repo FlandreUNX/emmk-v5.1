@@ -91,11 +91,12 @@ static inline int32_t readReg(aw9523b_Instance_t *instnace, uint8_t regAddr, uin
 }
 
 
-static inline int32_t writeReg(aw9523b_Instance_t *instnace, uint8_t regAddr, uint8_t *data, uint8_t len) {
-    return kdi2c_regWrite(((kdi2c_t *) instnace->i2cIf), 
+static int32_t writeReg(aw9523b_Instance_t *instnace, uint8_t regAddr, uint8_t *data, uint8_t len) {
+    uint8_t buf[4] = {regAddr};
+    memcpy(buf + 1, data, len);
+    return kdi2c_write(((kdi2c_t *) instnace->i2cIf),
         instnace->address, 
-        regAddr, 1, 
-        data, len);
+        buf, len + 1);
 }
 
 /*@}*/
@@ -129,7 +130,7 @@ int32_t aw9523b_initSoft(aw9523b_Instance_t *instnace, aw9523b_B7AddressPin_t ad
     if (data != 0x23) {
         return -1;
     }
-    
+
     if (readReg(instnace, REG_ADDR_GALBAL1, &data, 1) != 0) {
         return -1;
     }

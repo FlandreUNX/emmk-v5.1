@@ -363,13 +363,13 @@ int32_t xbutton_sync(void) {
                 mRotEnc[i].aux.outputA = 1;
                 mRotEnc[i].aux.attachA = 0;
                 mRotEnc[i].aux.releaseCount[0] = CONFIG_XBUTTON_ROTENC_RELEASE_COUNT;
-
-                mRotEnc[i].aux.outputB = 0;
-                mRotEnc[i].aux.attachB = 0;
             }
         }
         if (mRotEnc[i].aux.outputA && mRotEnc[i].aux.releaseCount[0]) {
             mRotEnc[i].aux.releaseCount[0]--;
+
+            mRotEnc[i].aux.outputB = 0;
+            mRotEnc[i].aux.attachB = 0;
         }
         if (mRotEnc[i].aux.releaseCount[0] == 0) {
             mRotEnc[i].aux.outputA = 0;
@@ -385,13 +385,13 @@ int32_t xbutton_sync(void) {
                 mRotEnc[i].aux.outputB = 1;
                 mRotEnc[i].aux.attachB = 0;
                 mRotEnc[i].aux.releaseCount[1] = CONFIG_XBUTTON_ROTENC_RELEASE_COUNT;
-
-                mRotEnc[i].aux.outputA = 0;
-                mRotEnc[i].aux.attachA = 0;
             }
         }
         if (mRotEnc[i].aux.outputB && mRotEnc[i].aux.releaseCount[1]) {
             mRotEnc[i].aux.releaseCount[1]--;
+
+            mRotEnc[i].aux.outputA = 0;
+            mRotEnc[i].aux.attachA = 0;
         }
         if (mRotEnc[i].aux.releaseCount[1] == 0) {
             mRotEnc[i].aux.outputB = 0;
