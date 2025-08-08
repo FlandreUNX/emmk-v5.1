@@ -110,8 +110,6 @@ int32_t kdspi_powerUp(kdspi_t *kd) {
     }
     
     ESP_ERROR_CHECK(spi_bus_add_device(kd->_config.host, kd->_config.ifConfig, &kd->_va->handle));
-    
-    kdspi_unselect(kd);
 
     return 0;
 }
@@ -122,9 +120,7 @@ int32_t kdspi_powerDown(kdspi_t *kd) {
     if (emmkDriver_initRefsCountDown(&kd->_va->initRefsPower) != 0) {
         return -1;
     }
-    
-    kdspi_unselect(kd);
-    
+
     ESP_ERROR_CHECK(spi_bus_remove_device(kd->_va->handle));
 
     return 0;
@@ -132,59 +128,47 @@ int32_t kdspi_powerDown(kdspi_t *kd) {
 
 void kdspi_select(kdspi_t *kd) {
     mutexLock(kd);
+    ESP_ERROR_CHECK(spi_device_acquire_bus(kd->_va->handle, portMAX_DELAY));
 }
 
 void kdspi_unselect(kdspi_t *kd) {
+    spi_device_release_bus(kd->_va->handle);
     mutexUnlock(kd);
 }
 
 int32_t kdspi_transmit(kdspi_t *kd, uint8_t *wbuf, uint8_t *rbuf, uint16_t len, uint32_t timeout) {
-    mutexLock(kd);
-    
     spi_transaction_t t = {0};
     t.length = len * 8;
     t.tx_buffer = wbuf;
     t.rx_buffer = rbuf;
     ESP_ERROR_CHECK(spi_device_polling_transmit(kd->_va->handle, &t));
-    
-    mutexUnlock(kd);
-    
+
     return len;
 }
 
 int32_t kdspi_sendData(kdspi_t *kd, uint8_t *data, uint16_t len, uint32_t timeout) {
-    mutexLock(kd);
-    
     spi_transaction_t t = {0};
     t.length = len * 8;
     t.tx_buffer = data;
     if (timeout == UINT32_MAX) {
         ESP_ERROR_CHECK(spi_device_polling_transmit(kd->_va->handle, &t));
     }
-    
-    mutexUnlock(kd);
-    
+
     return len;
 }
 
 int32_t kdspi_recvData(kdspi_t *kd, uint8_t *data, uint16_t len, uint32_t timeout) {
-    mutexLock(kd);
-    
     spi_transaction_t t = {0};
     t.length = len * 8;
     t.rx_buffer = data;
     t.tx_buffer = data;
     ESP_ERROR_CHECK(spi_device_polling_transmit(kd->_va->handle, &t));
-    
-    mutexUnlock(kd);
-    
+
     return 0;
 }
 
 void kdspi_setBaudRate(kdspi_t *kd, uint32_t br) {
-    mutexLock(kd);
     updateFreq(kd, br);
-    mutexUnlock(kd);
 }
 
 /*@}*/
