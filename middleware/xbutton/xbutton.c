@@ -97,6 +97,16 @@ static void enc_irqHandler(uint32_t i) {
                     mRotEnc[i].aux.attachA = 0;
                     mRotEnc[i].aux.attachB = 1;
                 }
+            } else {
+                if (mRotEnc[i].aux.attachA == 1) {
+                    if (!pinBLevel) {
+                        mRotEnc[i].aux.attachA = 2;
+                    }
+                } else if (mRotEnc[i].aux.attachB == 1) {
+                    if (pinBLevel) {
+                        mRotEnc[i].aux.attachB = 2;
+                    }
+                }
             }
         }
         mRotEnc[i].aux.cwxA = pinALevel;
@@ -361,7 +371,7 @@ int32_t xbutton_sync(void) {
 #if CONFIG_XBUTTON_ROTENC_ENABLE >= 1
     for (uint8_t i = 0; i < mRotEncCount; i++) {
         if (!mRotEnc[i].aux.outputB) {
-            if (mRotEnc[i].aux.attachA) {
+            if (mRotEnc[i].aux.attachA == 2) {
                 mRotEnc[i].aux.outputA = 1;
                 mRotEnc[i].aux.attachA = 0;
                 mRotEnc[i].aux.releaseCount[0] = CONFIG_XBUTTON_ROTENC_RELEASE_COUNT;
@@ -383,7 +393,7 @@ int32_t xbutton_sync(void) {
         }
 
         if (!mRotEnc[i].aux.outputA) {
-            if (mRotEnc[i].aux.attachB) {
+            if (mRotEnc[i].aux.attachB == 2) {
                 mRotEnc[i].aux.outputB = 1;
                 mRotEnc[i].aux.attachB = 0;
                 mRotEnc[i].aux.releaseCount[1] = CONFIG_XBUTTON_ROTENC_RELEASE_COUNT;
