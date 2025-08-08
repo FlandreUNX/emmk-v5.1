@@ -131,9 +131,11 @@ int32_t kdspi_powerDown(kdspi_t *kd) {
 }
 
 void kdspi_select(kdspi_t *kd) {
+    mutexLock(kd);
 }
 
 void kdspi_unselect(kdspi_t *kd) {
+    mutexUnlock(kd);
 }
 
 int32_t kdspi_transmit(kdspi_t *kd, uint8_t *wbuf, uint8_t *rbuf, uint16_t len, uint32_t timeout) {
