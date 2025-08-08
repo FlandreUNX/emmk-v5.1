@@ -4,6 +4,8 @@
 
 #include "xbutton.h"
 
+#include <rom/ets_sys.h>
+
 #include "emmk-config.h"
 #include "emmk-driver.h"
 
@@ -96,9 +98,9 @@ static void enc_irqHandler(uint32_t i) {
                     mRotEnc[i].aux.attachB = 1;
                 }
             }
-            mRotEnc[i].aux.cwxA = pinALevel;
-            mRotEnc[i].aux.cwxB = pinBLevel;
         }
+        mRotEnc[i].aux.cwxA = pinALevel;
+        mRotEnc[i].aux.cwxB = pinBLevel;
     } else {
         if (pinALevel != mRotEnc[i].aux.cwxA) {
             if (pinALevel) {
@@ -189,7 +191,7 @@ static void enc_scan(void) {
     qSTimer_Set(&mRotEncScanTimer, CONFIG_XBUTTON_ROTENC_FILTER_MS);
 #endif
     for (uint8_t i = 0; i < mRotEncCount; i++) {
-        if (mRotEnc[i].aux.mode != XBUTTON_ROTENC_MODE_ALPS) {
+        if (mRotEnc[i].aux.mode == XBUTTON_ROTENC_MODE_ALPS) {
             uint32_t pinALevel = enc_pinRead(i, 0);
             uint32_t pinBLevel = enc_pinRead(i, 1);
             if (mRotEnc[i].aux.alps.alpsIdleA != pinALevel) {
