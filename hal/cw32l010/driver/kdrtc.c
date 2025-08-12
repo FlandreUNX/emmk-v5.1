@@ -54,8 +54,14 @@ void kdrtc_setupPeriod(uint32_t v) {
     if (v) {
         RTC_UNLOCK();
         if (IS_RTC_START()) {
+            uint32_t timeout = 100000;
             CW_RTC->CR1_f.ACCESS = 1;
-            while (!CW_RTC->CR1_f.WINDOW);
+            while (!CW_RTC->CR1_f.WINDOW) {
+                timeout--;
+                if (timeout == 0) {
+                    break;
+                }
+            }
         }
         CW_RTC->CR2_f.AWTSRC = 0b1;
         CW_RTC->CR2_f.AWTPRS = 0b00;
@@ -68,8 +74,14 @@ void kdrtc_setupPeriod(uint32_t v) {
     } else {
         RTC_UNLOCK();
         if (IS_RTC_START()) {
+            uint32_t timeout = 100000;
             CW_RTC->CR1_f.ACCESS = 1;
-            while (!CW_RTC->CR1_f.WINDOW);
+            while (!CW_RTC->CR1_f.WINDOW) {
+                timeout--;
+                if (timeout == 0) {
+                    break;
+                }
+            }
         }
         CW_RTC->CR2_f.AWTEN = 0b0;
         CW_RTC->IER_f.AWTIMER = 0b0;
@@ -130,9 +142,10 @@ void kdrtc_setTimestamp(uint32_t *ts) {
 
 
 void kdrtc_getTm(klDateTime_SampleTm_t *tm) {
+    qSTimer_t wait;
+    qSTimer_Set(&wait, 1500);
+
     if (IS_RTC_START()) {
-        qSTimer_t wait;
-        qSTimer_Set(&wait, 1500);
         while (!qSTimer_Expired(&wait)) {
             if (CW_RTC->CR1_f.WAIT == 0) {
                 break;
@@ -141,8 +154,12 @@ void kdrtc_getTm(klDateTime_SampleTm_t *tm) {
     }
     
     uint32_t regTemp;
+    qSTimer_Set(&wait, 1500);
     do {
         regTemp = CW_RTC->TIME;
+        if (qSTimer_Expired(&wait)) {
+            break;
+        }
     }
     while (regTemp != CW_RTC->TIME);
 
@@ -152,9 +169,13 @@ void kdrtc_getTm(klDateTime_SampleTm_t *tm) {
     if (CW_RTC->CR0_f.H24 == RTC_HOUR12) {
         tm->hour = bcd2bin(((uint8_t) (regTemp & RTC_TAMPTIME_HOUR_Msk)) & 0x1F);
     }
-    
+
+    qSTimer_Set(&wait, 1500);
     do {
         regTemp = CW_RTC->DATE;
+        if (qSTimer_Expired(&wait)) {
+            break;
+        }
     }
     while (regTemp != CW_RTC->DATE);
 
