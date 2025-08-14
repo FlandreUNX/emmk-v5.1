@@ -235,7 +235,7 @@ int32_t kduart_sends(kduart_t *kd, const void *data, uint32_t size, uint32_t tim
     qSTimer_t wait;
 
 
-    if (kd->_va->flag.isSendCompleted == 0) {
+    if (kd->_va->flag.isSendCompleted == 0 || UART_IsTXBusy(kd->_config.uart.uart)) {
         if (timeout == 0) {
             return -1;
         }
@@ -409,6 +409,9 @@ int32_t kduart_hasRecvData(kduart_t *kd) {
 
 
 int32_t kduart_isSendIdle(kduart_t *kd, uint32_t wait) {
+    if (UART_IsTXBusy(kd->_config.uart.uart)) {
+        return false;
+    }
     if (kd->_va->flag.isSendCompleted) {
         return true;
     }
