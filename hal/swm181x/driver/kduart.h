@@ -57,11 +57,8 @@ typedef struct {
 } kduart_Pin_t;
 
 typedef struct {
-#if EMMK_FULL_RTOS_SUPPORT == EMMK_FULL_RTOS_RTX5
+#if EMMK_FULL_RTOS_SUPPORT > EMMK_FULL_RTOS_QTS
     void *flag;
-   
-    void *recvMutex;
-    void *writeMutex;
 #else
     union {
         struct {
@@ -101,8 +98,12 @@ struct kduart {
         uint16_t recvBufferSize;
         uint8_t *recvBuffer;
 
+        uint16_t writeBufferSize;
+        uint8_t *writeBuffer;
+
         qBSBuffer_t *recvLwrb;
-    } _buffer;
+        qBSBuffer_t *writeLwrb;
+    } buffer;
 };
 
 /*@}*/
@@ -135,8 +136,10 @@ struct kduart {
 #define _KDUART_RX_BUFFER(x)        __kduart_rx_buffer_##x
 #define _KDUART_RX_LWRB(x)          __kduart_rx_lwrb_##x
     
-#define _KDUART_TX_BUFFER(x)        __kduart_tx_buffer_##x
-    
+#define KDUART_TX_BUFFER(x) x
+#define _KDUART_TX_BUFFER(x)  __kduart_tx_buffer_##x
+#define _KDUART_TX_LWRB(x)          __kduart_tx_lwrb_##x
+
 #define KDUART_BAUDRATE(x)          x
 #define KDUART_TIMEOUT_CHAR(x)      x
     
@@ -163,9 +166,9 @@ extern int32_t kduart_sends9(kduart_t *kd, uint16_t *data, uint32_t size, uint32
 extern int32_t kduart_recvs(kduart_t *kd, void *data, uint32_t expect_size, uint32_t *recv_size, uint32_t timeout);
 extern int32_t kduart_flush(kduart_t *kd);
 extern int32_t kduart_hasRecvData(kduart_t *kd);
-extern int32_t kduart_isSendIdle(kduart_t *kd);
+extern int32_t kduart_isSendIdle(kduart_t *kd, uint32_t wait);
 extern void kduart_updateBaudRate(kduart_t *kd, uint32_t bd);
-
+extern bool kduart_sendBuffingVerify(kduart_t *kd, uint32_t dataSize);
 
 #if EMMK_FULL_RTOS_SUPPORT == EMMK_FULL_RTOS_RTX5
 #define KDUART_RTO_DEFINE(_instance, _name, \
@@ -203,7 +206,7 @@ extern void kduart_updateBaudRate(kduart_t *kd, uint32_t bd);
             .baseEnable = _KDUART_FUNC_ENABLE(_name), \
             .baseDisable = _KDUART_FUNC_DISABLE(_name), \
         }, \
-        ._buffer = { \
+        .buffer = { \
             .recvBufferSize = _rxBufferSize, \
             .recvBuffer = _KDUART_RX_BUFFER(_name), \
             .recvLwrb = &_KDUART_RX_LWRB(_name), \
@@ -213,22 +216,99 @@ extern void kduart_updateBaudRate(kduart_t *kd, uint32_t bd);
         if (UART_INTRXThresholdStat(_KDUART_MODULE(_instance))) { \
             while ((_KDUART_MODULE(_instance)->FIFO & UART_FIFO_RXLVL_Msk) > 1) { \
                 uint8_t data = _KDUART_MODULE(_instance)->DATA & UART_DATA_DATA_Msk; \
-                klwrb_write(_KDUART_INAME(_name)._buffer.recvLwrb, &data, 1); \
+                klwrb_write(_KDUART_INAME(_name).buffer.recvLwrb, &data, 1); \
             } \
         } else if (UART_INTTimeoutStat(_KDUART_MODULE(_instance))) { \
             while (UART_IsRXFIFOEmpty(_KDUART_MODULE(_instance)) == 0) { \
                 uint8_t data = _KDUART_MODULE(_instance)->DATA & UART_DATA_DATA_Msk; \
-                klwrb_write(_KDUART_INAME(_name)._buffer.recvLwrb, &data, 1); \
+                klwrb_write(_KDUART_INAME(_name).buffer.recvLwrb, &data, 1); \
             } \
              osEventFlagsSet(_KDUART_INAME(_name)._va->flag, UART_FLAG_RECV_COMPLETE); \
         } \
     }
 #else
-#define KDUART_RTO_DEFINE(_instance, _name, \
+
+#define KDUART_RTO_TIRQ_DEFINE(_instance, _name, \
         _baudrate, _dataBits, _parity, _stopBits, \
         _rxThreshold, _txThreshold, \
         _timeoutTime, \
-        _rxBufferSize, \
+        _txBufferSize, _rxBufferSize, \
+        _tx, _rx, \
+        _enableFunc, _disableFunc, _irqName) \
+    static qBSBuffer_t _KDUART_RX_LWRB(_name); \
+    static uint8_t AT_NONCACHEABLE_SECTION_ALIGN(_KDUART_RX_BUFFER(_name)[_rxBufferSize], 4); \
+    static qBSBuffer_t _KDUART_TX_LWRB(_name); \
+    static uint8_t AT_NONCACHEABLE_SECTION_ALIGN(_KDUART_TX_BUFFER(_name)[_txBufferSize], 4); \
+    static void _KDUART_FUNC_ENABLE(_name)(kduart_t *kd) _enableFunc \
+    static void _KDUART_FUNC_DISABLE(_name)(kduart_t *kd) _disableFunc \
+    static kduart_Va_t _KDUART_IVA(_name) = {0}; \
+    const kduart_t _KDUART_INAME(_name) = { \
+        ._va = &_KDUART_IVA(_name), \
+        ._config = { \
+            .uart = { \
+                .uart = _KDUART_MODULE(_instance), \
+                .init = { \
+                    .Baudrate = _baudrate, \
+                    .RXThreshold = _rxThreshold, \
+                    .RXThresholdIEn = 1, \
+                    .TXThreshold = _txThreshold, \
+                    .TXThresholdIEn = 0, \
+                    .TimeoutTime = _timeoutTime, \
+                    .TimeoutIEn = 1, \
+                }, \
+            }, \
+            .pin = { \
+                _tx, _rx, \
+            }, \
+        }, \
+        ._base = { \
+            .baseEnable = _KDUART_FUNC_ENABLE(_name), \
+            .baseDisable = _KDUART_FUNC_DISABLE(_name), \
+        }, \
+        .buffer = { \
+            .recvBufferSize = _rxBufferSize, \
+            .recvBuffer = _KDUART_RX_BUFFER(_name), \
+            .writeBufferSize = _txBufferSize, \
+            .writeBuffer = _KDUART_TX_BUFFER(_name), \
+            .recvLwrb = &_KDUART_RX_LWRB(_name), \
+            .writeLwrb = &_KDUART_TX_LWRB(_name), \
+        }, \
+    }; \
+    void _irqName(void) { \
+        if (UART_INTTXThresholdStat(_KDUART_MODULE(_instance))) { \
+            while (UART_IsTXFIFOFull(_KDUART_MODULE(_instance)) == 0) { \
+                if (qBSBuffer_Empty(_KDUART_INAME(_name).buffer.writeLwrb)) { \
+                    UART_INTTXThresholdDis(_KDUART_MODULE(_instance)); \
+                    _KDUART_INAME(_name)._va->flag.isSendCompleted = 1; \
+                    break; \
+                } else { \
+                    uint8_t data; \
+                    qBSBuffer_Get(_KDUART_INAME(_name).buffer.writeLwrb, &data); \
+                    UART_WriteByte(_KDUART_MODULE(_instance), data); \
+                } \
+            } \
+        } else if (UART_INTRXThresholdStat(_KDUART_MODULE(_instance))) { \
+            _KDUART_INAME(_name)._va->flag.isRecving = 1; \
+            _KDUART_INAME(_name)._va->flag.isRecvCompleted = 0; \
+            while ((_KDUART_MODULE(_instance)->FIFO & UART_FIFO_RXLVL_Msk) > 1) { \
+                uint8_t data = _KDUART_MODULE(_instance)->DATA & UART_DATA_DATA_Msk; \
+                qBSBuffer_Put(_KDUART_INAME(_name).buffer.recvLwrb, data); \
+            } \
+        } else if (UART_INTTimeoutStat(_KDUART_MODULE(_instance))) { \
+            while (UART_IsRXFIFOEmpty(_KDUART_MODULE(_instance)) == 0) { \
+                uint8_t data = _KDUART_MODULE(_instance)->DATA & UART_DATA_DATA_Msk; \
+                qBSBuffer_Put(_KDUART_INAME(_name).buffer.recvLwrb, data); \
+            } \
+            _KDUART_INAME(_name)._va->flag.isRecving = 0; \
+            _KDUART_INAME(_name)._va->flag.isRecvCompleted = 1; \
+        } \
+    }
+
+#define KDUART_RTO_TBLOCK_DEFINE(_instance, _name, \
+        _baudrate, _dataBits, _parity, _stopBits, \
+        _rxThreshold, _txThreshold, \
+        _timeoutTime, \
+        _txBufferSize, _rxBufferSize, \
         _tx, _rx, \
         _enableFunc, _disableFunc, _irqName) \
     static qBSBuffer_t _KDUART_RX_LWRB(_name); \
@@ -259,9 +339,11 @@ extern void kduart_updateBaudRate(kduart_t *kd, uint32_t bd);
             .baseEnable = _KDUART_FUNC_ENABLE(_name), \
             .baseDisable = _KDUART_FUNC_DISABLE(_name), \
         }, \
-        ._buffer = { \
+        .buffer = { \
             .recvBufferSize = _rxBufferSize, \
             .recvBuffer = _KDUART_RX_BUFFER(_name), \
+            .writeBufferSize = 0, \
+            .writeBuffer = NULL, \
             .recvLwrb = &_KDUART_RX_LWRB(_name), \
         }, \
     }; \
@@ -271,12 +353,12 @@ extern void kduart_updateBaudRate(kduart_t *kd, uint32_t bd);
             _KDUART_INAME(_name)._va->flag.isRecvCompleted = 0; \
             while ((_KDUART_MODULE(_instance)->FIFO & UART_FIFO_RXLVL_Msk) > 1) { \
                 uint8_t data = _KDUART_MODULE(_instance)->DATA & UART_DATA_DATA_Msk; \
-                qBSBuffer_Put(_KDUART_INAME(_name)._buffer.recvLwrb, data); \
+                qBSBuffer_Put(_KDUART_INAME(_name).buffer.recvLwrb, data); \
             } \
         } else if (UART_INTTimeoutStat(_KDUART_MODULE(_instance))) { \
             while (UART_IsRXFIFOEmpty(_KDUART_MODULE(_instance)) == 0) { \
                 uint8_t data = _KDUART_MODULE(_instance)->DATA & UART_DATA_DATA_Msk; \
-                qBSBuffer_Put(_KDUART_INAME(_name)._buffer.recvLwrb, data); \
+                qBSBuffer_Put(_KDUART_INAME(_name).buffer.recvLwrb, data); \
             } \
             _KDUART_INAME(_name)._va->flag.isRecving = 0; \
             _KDUART_INAME(_name)._va->flag.isRecvCompleted = 1; \

@@ -85,6 +85,10 @@ int32_t kdpwm_powerUp(kdpwm_t *kd) {
         _gpio_pullConfig(kd->_config.pin.gpio->_config.base.port,
             kd->_config.pin.gpio->_config.base.pin, 
             KDGPIO_PULL_NONE);
+        _gpio_afConfig(kd->_config.pin.gpio->_config.base.port,
+            kd->_config.pin.gpio->_config.base.number,
+            kd->_config.pin.gpio->_config.base.pin,
+            kd->_config.pin.af);
     }
     
     if (kd->_config.pinN.gpio != NULL) {
@@ -97,6 +101,10 @@ int32_t kdpwm_powerUp(kdpwm_t *kd) {
         _gpio_pullConfig(kd->_config.pinN.gpio->_config.base.port,
             kd->_config.pinN.gpio->_config.base.pin, 
             KDGPIO_PULL_NONE);
+        _gpio_afConfig(kd->_config.pinN.gpio->_config.base.port,
+            kd->_config.pinN.gpio->_config.base.number,
+            kd->_config.pinN.gpio->_config.base.pin,
+            kd->_config.pinN.af);
     }
     
     return 0;

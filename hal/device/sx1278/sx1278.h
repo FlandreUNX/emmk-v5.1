@@ -102,6 +102,8 @@ typedef enum {
     SX1278_STATE_CAD_RUNNING = 10,
     
     SX1278_STATE_TO_STANDBY = 11,
+    SX1278_STATE_TO_SLEEP = 12,
+    SX1278_STATE_SLEEP = 13,
 } SX1278_State_t;
 
 typedef enum {
@@ -231,7 +233,7 @@ extern int32_t sx1278_recvs(SX1278_t *handler,
         uint32_t timeout);
 extern int32_t sx1278_cadDetect(SX1278_t *handler, SX1278_TransmitOperate_t op);
 extern int32_t sx1278_standby(SX1278_t *handler);
-
+extern int32_t sx1278_sleep(SX1278_t *handler);
 extern uint16_t sx1278_getTpayload(SX1278_t *handler, uint8_t payloadLength);
 extern uint16_t sx1278_getTpreamble(SX1278_t *handler);
 extern uint16_t sx1278_getCadTime(SX1278_t *handler);

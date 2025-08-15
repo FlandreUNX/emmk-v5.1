@@ -291,4 +291,14 @@ fix: hal, driver, zb32l003> 修复ADC可能转换导致的无法启动的错误
 ###### V1.7.3.2-250722
 fix: hal, driver, zb32l003> 修复可能导致PWM没输出的错误
 
+###### V1.7.3.4-250726
+fix: middleware, rilat> 整理代码
+
+###### V1.7.3.5-250730
+add(sx1278): 增加休眠功能
+add(drivers/esp32/saradc): adc增加支持S3
+
+###### V1.7.3.6-250805
+add(drivers/esp32/kdmisc): 添加支持kddelay
+
 ------------

@@ -132,7 +132,7 @@ uint8_t kdsaradc_isConvertCompleted(kdsaradc_t *kd, uint32_t wait) {
         for (int i = 0; i < bufferReadNumber; i += 4) {
             adc_digi_output_data_t *p = (void *) &buffer[i];
             if (checkValidData(p)) {
-#if CONFIG_IDF_TARGET_ESP32C3 || CONFIG_IDF_TARGET_ESP32C2
+#if CONFIG_IDF_TARGET_ESP32C3 || CONFIG_IDF_TARGET_ESP32C2 || CONFIG_IDF_TARGET_ESP32S3
                 uint8_t index = (p->type2.unit) == 2
                                 ? KDSARADC_ADC2_CHANNEL_0 + p->type2.channel
                                 : p->type2.channel;

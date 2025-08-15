@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Flandreunx@outlook.com
+* Copyright (C) 2020 Flandreunx@outlook.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,20 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
-#ifndef _TEMP_CONFIG_MD_XBUTTON_H_
-#define _TEMP_CONFIG_MD_XBUTTON_H_
+
+#ifndef TEMP_CONFIG_MD_XBUTTON_H_
+#define TEMP_CONFIG_MD_XBUTTON_H_
 
 /// @xbuttonConfig
 /////////////////////////////////
 
-#define CONFIG_XBUTTON_FILTER_MS                (10)
-#define CONFIG_XBUTTON_DEFAULT_ACCESS_TH_COUNT          (50 / CONFIG_XBUTTON_FILTER_MS)
-#define CONFIG_XBUTTON_DEFAULT_ACCESS_2_TH_COUNT        (500 / CONFIG_XBUTTON_FILTER_MS)
-#define CONFIG_XBUTTON_DEFAULT_ACCESS_2_EMIT_TH_COUNT   ((CONFIG_XBUTTON_DEFAULT_ACCESS_2_TH_COUNT + 100) / CONFIG_XBUTTON_FILTER_MS)
+#define _TEMP_CONFIG_XBUTTON_FILTER_MS                        (10)
+#define _TEMP_CONFIG_XBUTTON_DEFAULT_ACCESS_TH_COUNT          (10 / CONFIG_XBUTTON_FILTER_MS)
+#define _TEMP_CONFIG_XBUTTON_DEFAULT_ACCESS_2_TH_COUNT        (300 / CONFIG_XBUTTON_FILTER_MS)
+#define _TEMP_CONFIG_XBUTTON_DEFAULT_ACCESS_2_EMIT_TH_COUNT   ((CONFIG_XBUTTON_DEFAULT_ACCESS_2_TH_COUNT + 100) / CONFIG_XBUTTON_FILTER_MS)
 
-#define CONFIG_XBUTTON_ROTENC_RELEASE_COUNT     (80 / CONFIG_XBUTTON_FILTER_MS)
-
-#define CONFIG_XBUTTON_ROTENC_ENABLE            (0)
+#define _TEMP_CONFIG_XBUTTON_ROTENC_FILTER_MS                 (0)
+#define _TEMP_CONFIG_XBUTTON_ROTENC_RELEASE_COUNT             (30 / CONFIG_XBUTTON_FILTER_MS)
+#define _TEMP_CONFIG_XBUTTON_ROTENC_ENABLE                    (1)
 
 #endif

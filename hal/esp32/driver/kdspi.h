@@ -99,9 +99,9 @@ extern void kdspi_setBaudRate(kdspi_t *kd, uint32_t br);
 #define KDSPI_CONFIG_IF(_moduleNumber) static const spi_device_interface_config_t _KDSPI_CONFIG_IF_NAME(_moduleNumber)
 
 #define KDSPI_DEFINE(_moduleNumber, _name) \
-    static kdspi_VA_t _KDSPI_VA(_moduleNumber) = { \
+    static kdspi_Va_t _KDSPI_IVA(_moduleNumber) = { \
     }; \
-    __KDSPI_SECTION const kdspi_t _KDSPI_INAME(_name) = { \
+    const kdspi_t _KDSPI_INAME(_name) = { \
         ._va = &_KDSPI_IVA(_moduleNumber), \
         ._config = {                       \
             .host = _moduleNumber,                               \

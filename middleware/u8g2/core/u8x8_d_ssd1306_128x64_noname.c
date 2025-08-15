@@ -52,11 +52,11 @@ static const uint8_t u8x8_d_ssd1306_128x64_noname_init_seq[] = {
   U8X8_CA(0x08d, 0x014),		/* [2] charge pump setting (p62): 0x014 enable, 0x010 disable, SSD1306 only, should be removed for SH1106 */
   U8X8_CA(0x020, 0x000),		/* horizontal addressing mode */
   
-  //U8X8_C(0x0a1),				/* segment remap a0/a1*/
-  //U8X8_C(0x0c8),				/* c0: scan dir normal, c8: reverse */
+  U8X8_C(0x0a1),				/* segment remap a0/a1*/
+  U8X8_C(0x0c8),				/* c0: scan dir normal, c8: reverse */
   // Flipmode
-  U8X8_C(0x0a0),				/* segment remap a0/a1*/
-  U8X8_C(0x0c0),				/* c0: scan dir normal, c8: reverse */
+  // U8X8_C(0x0a0),				/* segment remap a0/a1*/
+  // U8X8_C(0x0c0),				/* c0: scan dir normal, c8: reverse */
   
   U8X8_CA(0x0da, 0x012),		/* com pin HW config, sequential com pin config (bit 4), disable left/right remap (bit 5) */
 

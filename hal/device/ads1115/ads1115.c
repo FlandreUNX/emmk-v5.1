@@ -60,8 +60,8 @@ void ads1115_initBus(ads1115_Instance_t *ins, void *kdi2c) {
         return;
     }
     ins->i2cIf = kdi2c;
-    kdi2c_init(((kdI2C_t *) ins->i2cIf));
-    kdi2c_powerUp(((kdI2C_t *) ins->i2cIf));
+    kdi2c_init(((kdi2c_t *) ins->i2cIf));
+    kdi2c_powerUp(((kdi2c_t *) ins->i2cIf));
 }
 
 int32_t ads1115_initSoft(ads1115_Instance_t *ins) {
@@ -90,8 +90,8 @@ void ads1115_finalizeBus(ads1115_Instance_t *ins) {
     if (ins->i2cIf == NULL) {
         return;
     }
-    kdi2c_powerDown(((kdI2C_t *) ins->i2cIf));
-    kdi2c_finalize(((kdI2C_t *) ins->i2cIf));
+    kdi2c_powerDown(((kdi2c_t *) ins->i2cIf));
+    kdi2c_finalize(((kdi2c_t *) ins->i2cIf));
     ins->i2cIf = NULL;
 }
 

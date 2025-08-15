@@ -48,8 +48,8 @@ typedef struct {
         kdgpio_PullResistor_t pinBGpioPullResistor;
     } hal;
     struct {
-        uint8_t attachA: 1;
-        uint8_t attachB: 1;
+        uint8_t attachA;
+        uint8_t attachB;
 
         uint8_t outputA: 1;
         uint8_t outputB: 1;
