@@ -1324,9 +1324,15 @@ static void directWrite(Rilat_Instance_t *instance, uint32_t packMsgId) {
                         len = klPtf_sprintf(&buffer[0], "\"gas_sampling_period\":%d,",ud->protocol->measureTimeMin); DIRECT_WRITE;
                         len = klPtf_sprintf(&buffer[0], "\"gas_alarm_hi\":%d,", ud->protocol->alarmH); DIRECT_WRITE;
                         len = klPtf_sprintf(&buffer[0], "\"gas_alarm_lo\":%d,", ud->protocol->alarmL); DIRECT_WRITE;
-                        len = klPtf_sprintf(&buffer[0], "\"latitude\":%.5f,", ud->protocol->latitude); DIRECT_WRITE;
-                        len = klPtf_sprintf(&buffer[0], "\"longitude\":%.5f,", ud->protocol->longitude); DIRECT_WRITE;
-                        len = klPtf_sprintf(&buffer[0], "\"height\":%.5f,", ud->protocol->height); DIRECT_WRITE;
+                        if (ud->protocol->latitude != 0) {
+                            len = klPtf_sprintf(&buffer[0], "\"latitude\":%.5f,", ud->protocol->latitude); DIRECT_WRITE;
+                        }
+                        if (ud->protocol->longitude != 0) {
+                            len = klPtf_sprintf(&buffer[0], "\"longitude\":%.5f,", ud->protocol->longitude); DIRECT_WRITE;
+                        }
+                        if (ud->protocol->height != 0) {
+                            len = klPtf_sprintf(&buffer[0], "\"height\":%.5f,", ud->protocol->height); DIRECT_WRITE;
+                        }
                         len = klPtf_sprintf(&buffer[0], "\"updateTime\":%d", ud->protocol->updateTimeMin); DIRECT_WRITE;
                     len = klPtf_sprintf(&buffer[0], "}"); DIRECT_WRITE;
                 len = klPtf_sprintf(&buffer[0], "}"); DIRECT_WRITE;
@@ -1369,9 +1375,15 @@ static uint32_t directGetPayloadLength(Rilat_Instance_t *instance, uint32_t pack
                         len += klPtf_sprintf(&buffer[0], "\"gas_sampling_period\":%d,",ud->protocol->measureTimeMin);
                         len += klPtf_sprintf(&buffer[0], "\"gas_alarm_hi\":%d,", ud->protocol->alarmH);
                         len += klPtf_sprintf(&buffer[0], "\"gas_alarm_lo\":%d,", ud->protocol->alarmL);
-                        len += klPtf_sprintf(&buffer[0], "\"latitude\":%.5f,", ud->protocol->latitude);
-                        len += klPtf_sprintf(&buffer[0], "\"longitude\":%.5f,", ud->protocol->alarmL);
-                        len += klPtf_sprintf(&buffer[0], "\"height\":%.5f,", ud->protocol->height);
+                        if (ud->protocol->latitude != 0) {
+                            len += klPtf_sprintf(&buffer[0], "\"latitude\":%.5f,", ud->protocol->latitude);
+                        }
+                        if (ud->protocol->longitude != 0) {
+                            len += klPtf_sprintf(&buffer[0], "\"longitude\":%.5f,", ud->protocol->longitude);
+                        }
+                        if (ud->protocol->height != 0) {
+                            len += klPtf_sprintf(&buffer[0], "\"height\":%.5f,", ud->protocol->height);
+                        }
                         len += klPtf_sprintf(&buffer[0], "\"updateTime\":%d", ud->protocol->updateTimeMin);
                     len += klPtf_sprintf(&buffer[0], "}");
                 len += klPtf_sprintf(&buffer[0], "}");
