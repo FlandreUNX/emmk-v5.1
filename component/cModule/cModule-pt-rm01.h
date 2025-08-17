@@ -55,6 +55,7 @@ typedef enum {
     CMODULE_REQ_PT_RQ12_PIO1_CALI_ORP,
     CMODULE_REQ_PT_RQ15_PIO1_STILL_MEAUSRE,
     CMODULE_REQ_PT_RQ16_PIO1_SALT_OFFSET,
+    CMODULE_REQ_PT_RQ100,
 } cModule_RequestType_Pt_t;
 
 typedef struct {
@@ -79,10 +80,26 @@ typedef struct {
     cModule_RequestVar_t var1;
 } cModule_Rq_Pio1Cali_t;
 
+typedef struct {
+    uint8_t id;
+    float value[4];
+} cModule_Rq100_DevData_t;
+typedef struct {
+    char devSn[20];
+
+    cModule_Rq100_DevData_t *data;
+    uint8_t dataCount;
+}cModule_Rq100_Dev_t;
+typedef struct {
+    uint8_t devListCount;
+    cModule_Rq100_Dev_t *dev;
+} cModule_Rq100_Obj_t;
+
 #define CMODULE_PT_RM01_AC2_SID       8604
 #define CMODULE_PT_RM01_MC1_SID       8605
 
 #define CMODULE_PT_RM01_PIO1_XXX_SID      8606
+#define CMODULE_PT_RM01_AC3_ADDR          1
 #define CMODULE_PT_RM01_PIO1_DO_ADDR      3
 #define CMODULE_PT_RM01_PIO1_PH_ADDR      4
 #define CMODULE_PT_RM01_PIO1_ORP_ADDR     5
