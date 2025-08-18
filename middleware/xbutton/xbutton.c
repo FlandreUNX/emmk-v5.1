@@ -4,8 +4,6 @@
 
 #include "xbutton.h"
 
-#include <rom/ets_sys.h>
-
 #include "emmk-config.h"
 #include "emmk-driver.h"
 
