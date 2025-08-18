@@ -113,16 +113,16 @@ static void enc_irqHandler(uint32_t i) {
         if (pinALevel != mRotEnc[i].aux.cwxA) {
             if (pinALevel) {
                 if (!pinBLevel && mRotEnc[i].aux.cwxB) {
-                    mRotEnc[i].aux.attachA = 1;
+                    mRotEnc[i].aux.attachA = 2;
                     mRotEnc[i].aux.attachB = 0;
                 }
                 if (pinBLevel && !mRotEnc[i].aux.cwxB) {
                     mRotEnc[i].aux.attachA = 0;
-                    mRotEnc[i].aux.attachB = 1;
+                    mRotEnc[i].aux.attachB = 2;
                 }
                 if (pinBLevel == mRotEnc[i].aux.cwxB) {
                     if (!pinBLevel) {
-                        mRotEnc[i].aux.attachA = 1;
+                        mRotEnc[i].aux.attachA = 2;
                         mRotEnc[i].aux.attachB = 0;
                     } else {
                         mRotEnc[i].aux.attachA = 0;
@@ -132,18 +132,18 @@ static void enc_irqHandler(uint32_t i) {
             } else {
                 if (!pinBLevel && mRotEnc[i].aux.cwxB) {
                     mRotEnc[i].aux.attachA = 0;
-                    mRotEnc[i].aux.attachB = 1;
+                    mRotEnc[i].aux.attachB = 2;
                 }
                 if (pinBLevel && !mRotEnc[i].aux.cwxB) {
-                    mRotEnc[i].aux.attachA = 1;
+                    mRotEnc[i].aux.attachA = 2;
                     mRotEnc[i].aux.attachB = 0;
                 }
                 if (pinBLevel == mRotEnc[i].aux.cwxB) {
                     if (!pinBLevel) {
                         mRotEnc[i].aux.attachA = 0;
-                        mRotEnc[i].aux.attachB = 1;
+                        mRotEnc[i].aux.attachB = 2;
                     } else {
-                        mRotEnc[i].aux.attachA = 1;
+                        mRotEnc[i].aux.attachA = 2;
                         mRotEnc[i].aux.attachB = 0;
                     }
                 }
