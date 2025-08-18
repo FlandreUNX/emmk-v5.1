@@ -68,6 +68,7 @@ typedef struct {
     
     void (*enableFunc)(kdpwm_t *kd);
     void (*disableFunc)(kdpwm_t *kd);
+    int (*isInitFunc)(kdpwm_t *kd);
     
     union {
         ATIM_TypeDef *atim;
@@ -129,6 +130,7 @@ struct kdpwm {
 #define _KDPWM_HOST_IVA(_hn)            __kdpwm_host_va_##_hn
 #define _KDPWM_HOST_FUNC_ENABLE(x)      __kdpwm_host_enable_##x
 #define _KDPWM_HOST_FUNC_DISABLE(x)     __kdpwm_host_disable_##x
+#define _KDPWM_HOST_FUNC_IS_INIT(x)     __kdpwm_host_isInit_##x
 
 #define KDPWM_CHN_NUMBER(x)             x
 #define _KDPWM_CHN_INAME(_name)         __kdpwm_##_name
@@ -185,13 +187,15 @@ extern void kdpwm_irqEnable(kdpwm_t *kd, kdpwm_Event_t evt, bool enable, kdpwm_S
 
 #define KDPWM_DEFINE_ATIM(_hn, \
         _psc, _arr, _autoReload, \
-        _enableFunc, _disableFunc) \
+        _enableFunc, _disableFunc, _isInitFunc) \
     static void _KDPWM_HOST_FUNC_ENABLE(_hn)(kdpwm_t *kd)  _enableFunc \
     static void _KDPWM_HOST_FUNC_DISABLE(_hn)(kdpwm_t *kd)  _disableFunc \
+    static int _KDPWM_HOST_FUNC_IS_INIT(_hn)(kdpwm_t *kd)  _isInitFunc \
     static kdpwm_HostVa_t _KDPWM_HOST_IVA(_hn) = {0}; \
     const kdpwm_Host_t _KDPWM_HOST_INAME(_hn) = { \
         .enableFunc = _KDPWM_HOST_FUNC_ENABLE(_hn), \
         .disableFunc = _KDPWM_HOST_FUNC_DISABLE(_hn), \
+        .isInitFunc = _KDPWM_HOST_FUNC_IS_INIT(_hn), \
         .tim.atim = _KDPWM_HOST_NUMBER_ATIM(_hn), \
         .va = &_KDPWM_HOST_IVA(_hn), \
         .psc = _psc, \
@@ -205,10 +209,12 @@ extern void kdpwm_irqEnable(kdpwm_t *kd, kdpwm_Event_t evt, bool enable, kdpwm_S
         _enableFunc, _disableFunc) \
     static void _KDPWM_HOST_FUNC_ENABLE(_hn)(kdpwm_t *kd)  _enableFunc \
     static void _KDPWM_HOST_FUNC_DISABLE(_hn)(kdpwm_t *kd)  _disableFunc \
+    static int _KDPWM_HOST_FUNC_IS_INIT(_hn)(kdpwm_t *kd)  _isInitFunc \
     static kdpwm_HostVa_t _KDPWM_HOST_IVA(_hn) = {0}; \
     const kdpwm_Host_t _KDPWM_HOST_INAME(_hn) = { \
         .enableFunc = _KDPWM_HOST_FUNC_ENABLE(_hn), \
         .disableFunc = _KDPWM_HOST_FUNC_DISABLE(_hn), \
+        .isInitFunc = _KDPWM_HOST_FUNC_IS_INIT(_hn), \
         .tim.gtim = _KDPWM_HOST_NUMBER_GTIM(_hn), \
         .va = &_KDPWM_HOST_IVA(_hn), \
         .psc = _psc, \

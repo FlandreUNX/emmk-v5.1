@@ -38,6 +38,9 @@ int32_t kdpwm_init(kdpwm_t *kd) {
     //         return 0;
     //     }
     // }
+    if (kd->_host->isInitFunc(kd)) {
+        return 0;
+    }
     kd->_host->enableFunc(kd);
 
     if (kd->_host->isAtim) {
