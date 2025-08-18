@@ -42,6 +42,7 @@ typedef struct {
 typedef struct {
     kdpwm_InstanceVa_t *va;
     ledc_timer_config_t config;
+    int (*isInitFunc)(void *kd);
 } kdpwm_Instance_t;
 
 typedef enum {
@@ -98,6 +99,7 @@ struct kdpwm {
 #define _KDPWM_INAME(_name)                 __kdpwm_##_name
 #define _KDPWM_IVA(_name)                    __kdpwm_va_##_name
 #define _KDPWM_INSTANCE_VA(_name)           __kdpwm_instance_va_##_name
+#define _KDPWM_INSTANCE_IS_INIT(_name)           __kdpwm_instance_isInitFunc_##_name
 
 extern int32_t kdpwm_init(kdpwm_t *kd);
 extern int32_t kdpwm_finalize(kdpwm_t *kd);
@@ -134,10 +136,12 @@ extern void kdpwm_irqEnable(kdpwm_t *kd, kdpwm_Event_t evt, bool enable, kdpwm_S
         ._instance = &_KDPWM_INSTANCE(_timerNum), \
     };
 
-#define KDPWM_DEFINE(_timerNum, _speedMode, _dutyRes, _freq, _clkCfg) \
+#define KDPWM_DEFINE(_timerNum, _speedMode, _dutyRes, _freq, _clkCfg, _isInitFunc) \
     static kdpwm_InstanceVa_t _KDPWM_INSTANCE_VA(_timerNum) = {0}; \
+    static int _KDPWM_INSTANCE_IS_INIT(_timerNum)(void *kd) _isInitFunc \
     const kdpwm_Instance_t _KDPWM_INSTANCE(_timerNum) = { \
         .va = &_KDPWM_INSTANCE_VA(_timerNum), \
+        .isInitFunc = &_KDPWM_INSTANCE_IS_INIT(_timerNum), \
         .config = {                                                   \
             .speed_mode = _speedMode,                                 \
             .timer_num = _KDPWM_CFG_TIMER_NUM(_timerNum),                                   \

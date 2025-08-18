@@ -42,6 +42,10 @@ int32_t kdpwm_init(kdpwm_t *kd) {
         return -1;
     }
 
+    if (kd->_instance->isInitFunc(kd) != 0) {
+        return 0;
+    }
+
     ESP_ERROR_CHECK(ledc_timer_config(&kd->_instance->config));
 
     return 0;
