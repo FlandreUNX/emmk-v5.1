@@ -499,6 +499,8 @@ extern cModule_Instance_t *cModule_getInstance_nb63(void);
 extern cModule_Instance_t *cModule_getInstance_xg307dat(void);
 extern cModule_Instance_t *cModule_getInstance_xbg01(void);
 
+extern cModule_Instance_t *cModule_getInstance_ec200u(void);
+
 /*@}*/
 
 /**
@@ -529,7 +531,7 @@ extern void _cModule_onProtocolMqttSubFree(cModule_Instance_t *ins, char **topic
 extern void _cModule_onProtocolTcpConnectAlloc(cModule_Instance_t *ins,
                                                 char **borkerIp);
 extern void _cModule_onProtocolTcpConnect(cModule_Instance_t *ins,
-                                                char **borkerIp, uint16_t *port);
+                                                uint8_t *tcp0udp1, char **borkerIp, uint16_t *port);
 extern void _cModule_onProtocolTcpConnectFree(cModule_Instance_t *ins,
                                                 char **borkerIp);
 
