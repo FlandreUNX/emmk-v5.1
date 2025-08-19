@@ -63,7 +63,7 @@ void RTC_Alarm_IRQHandler(void) {
  
 /*@{*/
 
-void kdRTC_syncRequest(void) {
+void kdrtc_syncRequest(void) {
     RTC_CTL &= ~RTC_CTL_RSYNF;
     while (RESET == (RTC_CTL & RTC_CTL_RSYNF)) {
         // __WFI();
@@ -71,7 +71,7 @@ void kdRTC_syncRequest(void) {
 }
 
 
-void kdRTC_setupPeriod(uint32_t v) {
+void kdrtc_setupPeriod(uint32_t v) {
     v = rtc_counter_get() + v;
     
     rtc_register_sync_wait();
@@ -112,16 +112,16 @@ void kdRTC_setupPeriod(uint32_t v) {
 }
 
 
-void kdRTC_clearPeriodFLag(void) {
+void kdrtc_clearPeriodFLag(void) {
     rtc_interrupt_flag_clear(RTC_INT_FLAG_ALARM);
 }
 
 
-uint32_t kdRTC_getTimestamp(uint32_t *ts) {
+uint32_t kdrtc_getTimestamp(uint32_t *ts) {
     klDateTime_SampleTm_t tm;
 	time_t t;
     
-    kdRTC_getTm(&tm);
+    kdrtc_getTm(&tm);
     t = klDateTime_mktime(&tm);
 	
 	if (ts == NULL) {
@@ -133,7 +133,7 @@ uint32_t kdRTC_getTimestamp(uint32_t *ts) {
 }
 
 
-void kdRTC_setTimestamp(uint32_t *ts) {
+void kdrtc_setTimestamp(uint32_t *ts) {
     rtc_lwoff_wait();
     rtc_configuration_mode_enter();
     rtc_counter_set(*ts);
@@ -142,17 +142,17 @@ void kdRTC_setTimestamp(uint32_t *ts) {
 }
 
 
-void kdRTC_getTm(klDateTime_SampleTm_t *tm) {
+void kdrtc_getTm(klDateTime_SampleTm_t *tm) {
     klDateTime_bktime(rtc_counter_get(), tm);
 }
 
 
-void kdRTC_setBkp(uint8_t index, uint8_t value) {
+void kdrtc_setBkp(uint8_t index, uint8_t value) {
     bkp_data_write(index + 1, value & 0xFFFF);
 }
 
 
-uint32_t kdRTC_getBkp(uint8_t index) {
+uint32_t kdrtc_getBkp(uint8_t index) {
     return bkp_data_read(index + 1) & 0xFFFF;
 }
 

@@ -14,32 +14,19 @@
  * limitations under the License.
  */
 
-#ifndef _KRTC_SOC_H_
-#define _KRTC_SOC_H_
+#ifndef _KWDOG_SOC_H_
+#define _KWDOG_SOC_H_
 
 #include <stdint.h>
-
-#include "kernel/lib/utils/kldatetime.h"
-
 /**
- * @addtogroup Public functions 
+ * @addtogroup Operate functions
  * @note none
  */
  
 /*@{*/
 
-extern void kdrtc_syncRequest(void);
-
-extern void kdrtc_setupPeriod(uint32_t v);
-extern void kdrtc_clearPeriodFLag(void);
-
-extern void kdrtc_setTimestamp(uint32_t *ts);
-extern uint32_t kdrtc_getTimestamp(uint32_t *ts);
-
-extern void kdrtc_getTm(klDateTime_SampleTm_t *tm);
-
-extern void kdrtc_setBkp(uint8_t index, uint8_t value);
-extern uint32_t kdrtc_getBkp(uint8_t index);
+extern void kdwdog_enable(void);
+extern void kdwdog_reload(void);
 
 /*@}*/
 

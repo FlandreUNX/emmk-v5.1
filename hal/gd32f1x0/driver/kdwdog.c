@@ -13,34 +13,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-#ifndef _KRTC_SOC_H_
-#define _KRTC_SOC_H_
-
-#include <stdint.h>
-
-#include "kernel/lib/utils/kldatetime.h"
+ 
+#include "emmk-config.h"
+#include "emmk-driver.h"
 
 /**
- * @addtogroup Public functions 
+ * @addtogroup Interfaace define
  * @note none
  */
  
 /*@{*/
 
-extern void kdrtc_syncRequest(void);
+/*@}*/
 
-extern void kdrtc_setupPeriod(uint32_t v);
-extern void kdrtc_clearPeriodFLag(void);
-
-extern void kdrtc_setTimestamp(uint32_t *ts);
-extern uint32_t kdrtc_getTimestamp(uint32_t *ts);
-
-extern void kdrtc_getTm(klDateTime_SampleTm_t *tm);
-
-extern void kdrtc_setBkp(uint8_t index, uint8_t value);
-extern uint32_t kdrtc_getBkp(uint8_t index);
+/**
+ * @addtogroup Instance support functions
+ * @note none
+ */
+ 
+/*@{*/
 
 /*@}*/
 
-#endif
+/**
+ * @addtogroup Operate functions
+ * @note none
+ */
+ 
+/*@{*/
+
+void kdwdog_enable(void) {
+    fwdgt_config(0x0FFF, FWDGT_PSC_DIV256);
+    fwdgt_enable();
+}
+
+
+void kdwdog_reload(void) {
+    fwdgt_counter_reload();
+}
+
+/*@}*/
