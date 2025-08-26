@@ -166,15 +166,15 @@ extern float kdsdadc_convertRawToVolt(kdsdadc_t *kd, kdsdadc_Channel_t chn, int1
                 .cfg = { \
                     [0] = { \
                         _sdModeA, _gainA, _refMA, channelsA, \
-                        (((((float) _refVolt)) / (2.0f * _convertGaintA)) / 32767.0f) \
+                        _sdModeA == KDSDADC_SDMODE_DIFF ? ((((((float) _refVolt)) / (2.0f * _convertGaintA)) / 32767.0f)) : ((((float) _refVolt)) / _convertGaintA / 65535.0f) \
                     }, \
                     [1] = { \
                         _sdModeB, _gainB, _refMB, channelsB, \
-                        (((((float) _refVolt)) / (2.0f * _convertGaintB)) / 32767.0f) \
+                        _sdModeB == KDSDADC_SDMODE_DIFF ? ((((((float) _refVolt)) / (2.0f * _convertGaintB)) / 32767.0f)) : ((((float) _refVolt)) / _convertGaintB / 65535.0f) \
                     }, \
                     [2] = { \
                         _sdModeC, _gainC, _refMC, channelsC, \
-                        (((((float) _refVolt)) / (2.0f * _convertGaintC)) / 32767.0f) \
+                        _sdModeC == KDSDADC_SDMODE_DIFF ? ((((((float) _refVolt)) / (2.0f * _convertGaintC)) / 32767.0f)) : ((((float) _refVolt)) / _convertGaintC / 65535.0f) \
                     }, \
                 }, \
                 .enableFunc = __kdsdadc_enableFunc, \

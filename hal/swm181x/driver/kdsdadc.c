@@ -242,19 +242,22 @@ int32_t kdsdadc_getRaw(kdsdadc_t *kd, kdsdadc_Channel_t chn, int16_t *raw) {
 }
 
 float kdsdadc_convertRawToVolt(kdsdadc_t *kd, kdsdadc_Channel_t chn, int16_t raw) {
-    float os = 0;
-    for (uint8_t i = 0; i < 3; i++) {
-        if (kd->_config.instance.cfg[i].channels == 0xFFFFFFFF) {
+    uint8_t idx = 0;
+
+    for (idx = 0; idx < 3; idx++) {
+        if (kd->_config.instance.cfg[idx].channels == 0xFFFFFFFF) {
             continue;
         }
-        if (kd->_config.instance.cfg[i].channels & chn) {
-            os = kd->_config.instance.cfg[i].convertOffset;
+        if (kd->_config.instance.cfg[idx].channels & chn) {
+            break;
         }
     }
-    if (os == 0) {
-        return 0;
+
+    if (kd->_config.instance.cfg[idx].sdMode == KDSDADC_SDMODE_SINGLE) {
+        return ((float) raw + 32768) * kd->_config.instance.cfg[idx].convertOffset;
+    } else {
+        return (float) raw * kd->_config.instance.cfg[idx].convertOffset;
     }
-    return raw * os;
 }
 
 /*@}*/
