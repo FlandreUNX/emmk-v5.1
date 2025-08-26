@@ -345,6 +345,7 @@ extern bool kduart_sendBuffingVerify(kduart_t *kd, uint32_t dataSize);
             .writeBufferSize = 0, \
             .writeBuffer = NULL, \
             .recvLwrb = &_KDUART_RX_LWRB(_name), \
+            .writeLwrb = NULL, \
         }, \
     }; \
     void _irqName(void) { \
