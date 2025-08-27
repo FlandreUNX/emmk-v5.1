@@ -1123,7 +1123,7 @@ static int32_t httpGet(uint32_t msgId, cModule_ReqId_HttpGetReq_t *httpGetReq) {
             goto l_retry;
         }
         lineStr += strlen("bytes");
-        
+
         klib_str_skipWhiteSpace(&lineStr);
 
         char *strTotalSize = strstr(lineStr + 1, "/");
@@ -1869,12 +1869,12 @@ int32_t onPtPackIdReceived(cModule_TransmitPackageInfo_t *info) {
 
 static int32_t onPtPackIdTransmit(cModule_TransmitPackageInfo_t *info) {
     int32_t rc = -1;
-
+#if CONFIG_CMODULE_INSTANCE_INIT_MODE == CONFIG_CMODULE_INSTANCE_INIT_MODE_MQTT
     if (info->flag.packIsDynMqttMsg) {
         cModule_ProtocolMqttMessage_t *msg = info->payload;
-
         if (msg->isPayloadJson) {
 #if CONFIG_CMODULE_CJSON_SUPPORT == 1
+            cModule_ProtocolMqttMessage_t *msg = info->payload;
             if (_cModule_onProtocolTransmited(&mModuleInstance, info) != 0) {
                 return rc;
             }
@@ -1882,7 +1882,7 @@ static int32_t onPtPackIdTransmit(cModule_TransmitPackageInfo_t *info) {
             cJSON *cjValue = (void *) msg->payload;
             char *payload = cJSON_PrintUnformatted(cjValue);
             if (payload != NULL) {
-                rc = mqttPubTopic(msg, info->aux.gen.msgId, payload, strlen(payload));
+                rc = mqttPubTopic(msg, payload, strlen(payload), info->aux.gen.msgId);
             }
             cJSON_free(payload);
             if (rc != 0) {
@@ -1893,13 +1893,26 @@ static int32_t onPtPackIdTransmit(cModule_TransmitPackageInfo_t *info) {
             ASSERT(0);
 #endif
         } else if (msg->isPayloadString) {
-            rc = mqttPubTopic(msg, info->aux.gen.msgId, NULL, 0);
+            rc = mqttPubTopic(msg, NULL, 0, info->aux.gen.msgId);
         } else {
-            LOG_E("cModule_ProtocolMqttMessage_t, Unknown msgType");
             return rc;
         }
-    }
-
+    } else
+#endif
+#if CONFIG_CMODULE_INSTANCE_INIT_MODE == CONFIG_CMODULE_INSTANCE_INIT_MODE_NONE
+        if (info->flag.packIsDynHttpMsg) {
+            cModule_ProtocolHttpMessage_t *msg = info->payload;
+            rc = httpPost(msg, info->aux.gen.msgId);
+        } else
+#endif
+            if (info->flag.packIsDynTcpIpData) {
+                cModule_ProtocolTcpIpMessage_t *msg = info->payload;
+                if (msg->dStream == false) {
+                    rc = socketTcpSend(msg, info->aux.gen.msgId);
+                } else {
+                    // TODO UdpSend
+                }
+            }
     return rc;
 }
 
@@ -1929,7 +1942,7 @@ static int32_t onPtPackPayloadFree(cModule_TransmitPackageInfo_t *info, bool isF
     if (info->flag.requestId == TRANSMIT_PACK_REQ_ID_RX) {
         return 0;
     }
-    
+#if CONFIG_CMODULE_INSTANCE_INIT_MODE == CONFIG_CMODULE_INSTANCE_INIT_MODE_MQTT
     if (info->flag.packIsDynMqttMsg) {
         cModule_ProtocolMqttMessage_t *msg = info->payload;
         if (msg->payload == NULL) {
@@ -1952,7 +1965,10 @@ static int32_t onPtPackPayloadFree(cModule_TransmitPackageInfo_t *info, bool isF
         if (!msg->topicConstant) {
             free(msg->topic);
         }
-    } else if (info->flag.packIsDynHttpMsg) {
+    } else
+#endif
+#if CONFIG_CMODULE_INSTANCE_INIT_MODE == CONFIG_CMODULE_INSTANCE_INIT_MODE_NONE
+    if (info->flag.packIsDynHttpMsg) {
         cModule_ProtocolHttpMessage_t *msg = info->payload;
         if (msg->onDirectWriteResponse != NULL) {
             msg->onDirectWriteResponse(&mModuleInstance.rilat.instance, info->aux.gen.msgId, msg->isWritenSuccess, isForce);
@@ -1971,6 +1987,20 @@ static int32_t onPtPackPayloadFree(cModule_TransmitPackageInfo_t *info, bool isF
             if (msg->payloadLength != 0) {
                 free(msg->payload);
             }
+        }
+    } else
+#endif
+    if (info->flag.packIsDynTcpIpData) {
+        cModule_ProtocolTcpIpMessage_t *msg = info->payload;
+        if (msg->payload == NULL) {
+            if (msg->writer.onDirectWriteResponse != NULL) {
+                msg->writer.onDirectWriteResponse(&mModuleInstance.rilat.instance, info->aux.gen.msgId, msg->writer.isWritenSuccess, isForce);
+            }
+        } else {
+            free(msg->payload);
+        }
+        if (msg->host != NULL && !msg->hostContant) {
+            free(msg->host);
         }
     }
     return 0;
