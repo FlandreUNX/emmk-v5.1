@@ -1211,11 +1211,11 @@ static int32_t httpGet(uint32_t msgId, cModule_ReqId_HttpGetReq_t *httpGetReq) {
 
 static int32_t socketTcpState(void) {
     Rilat_AtResponse_t *response = NULL;
-    if (rilat_writeSinglelineOnlyPrefixMatched(&mModuleInstance.rilat.instance, "AT+QISTATE=0", "+MIPSTATE:", &response, 1000) != 0 || response == NULL || response->success == 0) {
+    if (rilat_writeSinglelineOnlyPrefixMatched(&mModuleInstance.rilat.instance, "AT+QISTATE=1,0", "+QISTATE:", &response, 1000) != 0 || response == NULL || response->success == 0) {
         goto _l_retryExit;
     }
     char *line = response->intermediates->line;
-    char *st = NULL;
+    int st = 0;
     if (klAttoken_start(&line) != 0) {
         goto _l_retryExit;
     }
@@ -1224,10 +1224,10 @@ static int32_t socketTcpState(void) {
     klAttoken_skip(&line); // <IP_address>
     klAttoken_skip(&line); // <remote_port>
     klAttoken_skip(&line); // <<local_port>
-    if (klAttoken_getNextString(&line, &st, NULL) != 0) { // <socket_state>
+    if (klAttoken_getNextInt(&line, &st) != 0) { // <socket_state>
         goto _l_retryExit;
     }
-    if (strstr(st, "Connected")) {
+    if (st == 2) {
         rilat_freeResponse(&mModuleInstance.rilat.instance, response);
         response = NULL;
         return 0;
@@ -1621,6 +1621,37 @@ RILAT_COMMAND_MATCH_DEFINE(__DSCI, "^DSCI:", data, len) {
 
 
 #if CONFIG_CMODULE_INSTANCE_INIT_MODE == CONFIG_CMODULE_INSTANCE_INIT_MODE_TCP
+RILAT_READ_LINE_LINK_PATCH_DEFINE(_MIPURC, "+QIURC:", data, len) {
+    char *line = (char *) data;
+    char *statusStr = NULL;
+
+    if (klAttoken_start(&line) != 0) {
+        return NULL;
+    }
+
+    // StatusString
+    if (klAttoken_getNextString(&line, &statusStr, NULL) != 0) {
+        return NULL;
+    }
+
+    if (strstr(statusStr, "recv")) {
+        klAttoken_skip(&line);   // <connect_id>
+        while (!isspace((int) (*line))) {
+            line++;
+        }
+        for (int i = 0; i < len - 2; i++) {
+            if (*line == '\r' && *(line + 1) == '\n') {
+                *line = ',';
+                *(line + 1) = ' ';
+                break;
+            } else {
+                break;
+            }
+        }
+        return ((char *) data) + len - 4;
+    }
+    return NULL;
+}
 RILAT_COMMAND_MATCH_DEFINE(_MIPURC, "+QIURC:", data, len) {
     if (mModuleInstance.aux.flag.passiveRecvMode) {
         return -1;
