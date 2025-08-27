@@ -1306,7 +1306,7 @@ static int32_t socketTcpClose(void) {
 }
 
 static int32_t socketTcpSend(cModule_ProtocolTcpIpMessage_t *msg, uint32_t packMsgId) {
-    static const char MIPSEND[] = "AT+QISEND=0,\"";  // HEX-Send
+    static const char MIPSEND[] = "AT+QISENDEX=0,\"";  // HEX-Send
 
     int32_t rc = -1;
 
