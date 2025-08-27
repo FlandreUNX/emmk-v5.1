@@ -288,7 +288,7 @@ static void hexWrite(Rilat_Instance_t *instance, uint8_t *buffer, uint16_t len) 
         if (writeLen >= 64) {
             writeLen = 64;
         }
-        uint8_t hexLen = klStr_hex2str((uint8_t *) buffer + cur, writeLen, (char *) hexBuffer);
+        uint32_t hexLen = klStr_hex2str((uint8_t *) buffer + cur, writeLen, (char *) hexBuffer);
         
         rilat_directWrite(instance, (uint8_t *) hexBuffer, hexLen, 0);
         

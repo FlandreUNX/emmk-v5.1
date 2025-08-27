@@ -682,11 +682,11 @@ static int32_t lwm2mPost(cModule_ProtocolGenMessage_t *msg, char *xPayload, uint
         uint8_t *hexBuffer = calloc(1, 129);
         ASSERT(hexBuffer != NULL);
         while (cur < msg->payloadLength) {
-            uint8_t writeLen = msg->payloadLength - cur;
+            uint32_t writeLen = msg->payloadLength - cur;
             if (writeLen >= 64) {
                 writeLen = 64;
             }
-            uint8_t hexLen = klStr_hex2str((uint8_t *) xPayload + cur, writeLen, (char *) hexBuffer);
+            uint32_t hexLen = klStr_hex2str((uint8_t *) xPayload + cur, writeLen, (char *) hexBuffer);
             
             rilat_directWrite(&mModuleInstance.rilat.instance, (uint8_t *) hexBuffer, hexLen, 0);
             memset(hexBuffer, 0x00, 129);
