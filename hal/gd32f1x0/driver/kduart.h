@@ -238,6 +238,7 @@ struct kduart {
         usart_interrupt_enable(_KDUART_INAME(name)._config.uart.uart, USART_INT_RBNE); \
         qBSBuffer_Put(_KDUART_INAME(name).buffer.recvLwrb, data); \
         if (_KDUART_INAME(name)._config.timer.timer != NULL) { \
+            TIMER_INTF(_KDUART_INAME(name)._config.timer.timer) = (~(uint32_t) TIMER_INT_FLAG_UP); \
             TIMER_CNT(_KDUART_INAME(name)._config.timer.timer) = 0; \
             TIMER_CTL0(_KDUART_INAME(name)._config.timer.timer) |= (uint32_t) TIMER_CTL0_CEN; \
         } \

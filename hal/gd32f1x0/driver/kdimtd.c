@@ -47,9 +47,9 @@ static int32_t pageProgram(kdimtd_t *kd, uint32_t addr, uint8_t *data, uint16_t 
 
         fmc_unlock();
         for (uint32_t i = 0; i < wlen / 4; i++) {
-            fmc_word_program(addr + (i * 4), ((uint64_t *) (data))[i]);
+            fmc_word_program(addr + (i * 4), ((uint32_t *) (data))[i]);
+            fmc_flag_clear(FMC_FLAG_END | FMC_FLAG_WPERR | FMC_FLAG_PGERR);
         }
-        fmc_flag_clear(FMC_FLAG_END | FMC_FLAG_WPERR | FMC_FLAG_PGERR);
         fmc_lock();
 
         addr += kd->_instance.pageSize;
