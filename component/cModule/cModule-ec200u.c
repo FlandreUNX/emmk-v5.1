@@ -1406,15 +1406,26 @@ static void __onSoftWakeup(void) {
 static void __onSoftSleep(void) {
     AT();
     AT();
+#if CONFIG_CMODULE_INSTANCE_INIT_MODE == CONFIG_CMODULE_INSTANCE_INIT_MODE_TCP
+    socketTcpClose();
+#endif
+#if CONFIG_CMODULE_INSTANCE_INIT_MODE == CONFIG_CMODULE_INSTANCE_INIT_MODE_MQTT
     mqttDisconnect();
     mqttClose();
+#endif
 
     powerSet(false);
 }
 
 static void onResetStack(void) {
+#if CONFIG_CMODULE_INSTANCE_INIT_MODE == CONFIG_CMODULE_INSTANCE_INIT_MODE_TCP
+    socketTcpClose();
+#endif
+#if CONFIG_CMODULE_INSTANCE_INIT_MODE == CONFIG_CMODULE_INSTANCE_INIT_MODE_MQTT
     mqttDisconnect();
     mqttClose();
+#endif
+
     onReboot(false);
 }
 
