@@ -822,8 +822,10 @@ void _cModule_onProtocolTcpConnectAlloc(cModule_Instance_t *ins,
         char **borkerIp) {
 }
 
-void _cModule_onProtocolTcpConnect(cModule_Instance_t *ins, 
+void _cModule_onProtocolTcpConnect(cModule_Instance_t *ins,
+        uint8_t *tcp0udp1,
         char **borkerIp, uint16_t *port) {
+    *tcp0udp1 = 0;
     *borkerIp = CREQUEST(PT_GET_IP, {}).ptr;
     *port = CREQUEST(PT_GET_PORT, {}).u32;
 }

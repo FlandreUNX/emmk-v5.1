@@ -1689,8 +1689,9 @@ static void onInitStep(uint8_t step) {
         
         char *ip = NULL;
         uint16_t port = 0;
+        uint8_t tcp0udp1 = 0;
         _cModule_onProtocolTcpConnectAlloc(&mModuleInstance, &ip);
-        _cModule_onProtocolTcpConnect(&mModuleInstance, &ip, &port);
+        _cModule_onProtocolTcpConnect(&mModuleInstance, &tcp0udp1, &ip, &port);
         rc = socketTcpCreate(ip, port, 30000);
         _cModule_onProtocolTcpConnectFree(&mModuleInstance, &ip);
         
