@@ -572,7 +572,7 @@ static int32_t pdpact(void) {
 
     Rilat_AtResponse_t *response = NULL;
 
-    if (rilat_writeMultiline(&mModuleInstance.rilat.instance, AT_QIACT_A, "+QIACT", &response, 150000) != 0) {
+    if (rilat_writeMultiline(&mModuleInstance.rilat.instance, AT_QIACT_A, "+QIACT", &response, 30000) != 0) {
         mModuleInstance.aux.initRetryCount++;
         rilat_freeResponse(&mModuleInstance.rilat.instance, response);
         return -1;
@@ -583,7 +583,7 @@ static int32_t pdpact(void) {
     }
 
     rilat_freeResponse(&mModuleInstance.rilat.instance, response);
-    if (rilat_writeLine(&mModuleInstance.rilat.instance, AT_QIACT, &response, 150000) != 0 || response == NULL ||
+    if (rilat_writeLine(&mModuleInstance.rilat.instance, AT_QIACT, &response, 30000) != 0 || response == NULL ||
         response->success == 0) {
         mModuleInstance.aux.initRetryCount++;
         rilat_freeResponse(&mModuleInstance.rilat.instance, response);
