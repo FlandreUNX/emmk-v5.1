@@ -298,9 +298,9 @@ static int32_t checkCGREG(void) {
 
     rilat_writeLine(&mModuleInstance.rilat.instance, "ATI", NULL, 500);
     rilat_writeLine(&mModuleInstance.rilat.instance, "AT+QENG=\"servingcell\"", NULL, 500);
-    rilat_writeLine(&mModuleInstance.rilat.instance, "AT+COLP=1", NULL, 15000);
-    rilat_writeLine(&mModuleInstance.rilat.instance, "AT^DSCI=1", NULL, 15000);
-    rilat_writeLine(&mModuleInstance.rilat.instance, "AT+QURCCFG=\"URCPORT\",\"UART1\"", NULL, 15000);
+    rilat_writeLine(&mModuleInstance.rilat.instance, "AT+COLP=1", NULL, 1000);
+    rilat_writeLine(&mModuleInstance.rilat.instance, "AT^DSCI=1", NULL, 1000);
+    rilat_writeLine(&mModuleInstance.rilat.instance, "AT+QURCCFG=\"URCPORT\",\"UART1\"", NULL, 1000);
 
     return 0;
 
