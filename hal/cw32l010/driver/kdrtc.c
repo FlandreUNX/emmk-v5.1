@@ -24,6 +24,15 @@
  
 /*@{*/
 
+static void rtcReset(void) {
+    RTC_Cmd(DISABLE);
+    RTC_SetClockSource(CW_SYSCTRL->LSE_f.STABLE ? RTC_RTCCLK_FROM_LSE : RTC_RTCCLK_FROM_LSI);
+    RTC_UNLOCK();
+    CW_RTC->CR0_f.H24 = 1;
+    RTC_LOCK();
+    RTC_Cmd(ENABLE);
+}
+
 /*@}*/
 
 /**
@@ -123,11 +132,22 @@ void kdrtc_setTimestamp(uint32_t *ts) {
     
     if (IS_RTC_START()) {
         qSTimer_t wait;
-        qSTimer_Set(&wait, 1500);
+        qSTimer_Set(&wait, 1100);
         RTC_ACCESS_SET();
         while (!qSTimer_Expired(&wait)) {
             if (RTC_WINDOW_GETVALUE()) {
                 break;
+            }
+        }
+        if (qSTimer_Expired(&wait)) {
+            rtcReset();
+
+            qSTimer_Set(&wait, 1100);
+            RTC_ACCESS_SET();
+            while (!qSTimer_Expired(&wait)) {
+                if (RTC_WINDOW_GETVALUE()) {
+                    break;
+                }
             }
         }
     }
@@ -143,7 +163,7 @@ void kdrtc_setTimestamp(uint32_t *ts) {
 
 void kdrtc_getTm(klDateTime_SampleTm_t *tm) {
     qSTimer_t wait;
-    qSTimer_Set(&wait, 1500);
+    qSTimer_Set(&wait, 1100);
 
     if (IS_RTC_START()) {
         while (!qSTimer_Expired(&wait)) {
@@ -151,10 +171,21 @@ void kdrtc_getTm(klDateTime_SampleTm_t *tm) {
                 break;
             }
         }
+
+        if (qSTimer_Expired(&wait)) {
+            rtcReset();
+
+            qSTimer_Set(&wait, 1100);
+            while (!qSTimer_Expired(&wait)) {
+                if (CW_RTC->CR1_f.WAIT == 0) {
+                    break;
+                }
+            }
+        }
     }
     
     uint32_t regTemp;
-    qSTimer_Set(&wait, 1500);
+    qSTimer_Set(&wait, 1100);
     do {
         regTemp = CW_RTC->TIME;
         if (qSTimer_Expired(&wait)) {
@@ -170,7 +201,7 @@ void kdrtc_getTm(klDateTime_SampleTm_t *tm) {
         tm->hour = bcd2bin(((uint8_t) (regTemp & RTC_TAMPTIME_HOUR_Msk)) & 0x1F);
     }
 
-    qSTimer_Set(&wait, 1500);
+    qSTimer_Set(&wait, 1100);
     do {
         regTemp = CW_RTC->DATE;
         if (qSTimer_Expired(&wait)) {
