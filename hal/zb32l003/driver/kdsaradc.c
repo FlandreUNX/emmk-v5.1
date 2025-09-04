@@ -74,7 +74,6 @@ int32_t kdsaradc_powerUp(kdsaradc_t *kd) {
     
     ADC->CR0 &= ~KLBIT(0);
     ADC->CR0 &= ~KLBIT(1);
-    ADC->CR2 |= (1u << kd->_config.channel);
     ADC->CR0 |= KLBIT(0);
     ADC->CR0 |= KLBIT(1);
     
@@ -121,6 +120,12 @@ void kdsaradc_convertStart(kdsaradc_t *kd) {
     if (emmkDriver_initRefsCountUp(&kd->_config.host->_va->startRefs) != 0) {
         return;
     }
+
+    uint32_t cr2 = ADC->CR2;
+    cr2 &= ~GENMASK(18, 17);
+    cr2 |= FIELD_PREP(GENMASK(18, 17), (kd->_config.channel) / 8);
+    cr2 |= 1 << ((kd->_config.channel) % 8);
+    ADC->CR2 = cr2;
 }
 
 void kdsaradc_convertStop(kdsaradc_t *kd) {
@@ -130,6 +135,10 @@ void kdsaradc_convertStop(kdsaradc_t *kd) {
     if (emmkDriver_initRefsCountDown(&kd->_config.host->_va->startRefs) != 0) {
         return;
     }
+
+    uint32_t cr2 = ADC->CR2;
+    cr2 &= ~(1 << ((kd->_config.channel) % 8));
+    ADC->CR2 = cr2;
 }
 
 uint8_t kdsaradc_isConvertCompleted(kdsaradc_t *kd, uint32_t wait) {
@@ -138,9 +147,9 @@ uint8_t kdsaradc_isConvertCompleted(kdsaradc_t *kd, uint32_t wait) {
 
 uint16_t kdsaradc_getRaw(kdsaradc_t *kd) {
     if (kd->_config.channel >= KDSARADC_CHANNEL_FAKE_BASE) {
-        return (*(__IO uint32_t *) (((uint32_t) &ADC->RESULT0) + (4 * (kd->_config.channel - KDSARADC_CHANNEL_FAKE_BASE)))) & 0x0FFF; 
+        return (*(__IO uint32_t *) (((uint32_t) &ADC->RESULT0) + (4 * ((kd->_config.channel - KDSARADC_CHANNEL_FAKE_BASE) % 8)))) & 0x0FFF;
     } else {
-        return (*(__IO uint32_t *) (((uint32_t) &ADC->RESULT0) + (4 * kd->_config.channel))) & 0x0FFF;
+        return (*(__IO uint32_t *) (((uint32_t) &ADC->RESULT0) + (4 * (kd->_config.channel % 8)))) & 0x0FFF;
     }
 }
 
