@@ -103,7 +103,8 @@ typedef struct {
 #define CMODULE_PT_RM01_PIO1_DO_ADDR      3
 #define CMODULE_PT_RM01_PIO1_PH_ADDR      4
 #define CMODULE_PT_RM01_PIO1_ORP_ADDR     5
-#define CMODULE_PT_RM01_PIO1_ZD_ADDR      33
+#define CMODULE_PT_RM01_PIO1_ZD_ADDR      33    // 浊度
+#define CMODULE_PT_RM01_PIO1_YD_ADDR      64    // 盐度
 
 typedef struct {
     uint16_t sid;
@@ -151,6 +152,10 @@ typedef struct {
                     uint16_t ntu_x10;
                     int16_t temp_x10;
                 } zdx;
+                struct {
+                    uint16_t ppt_x100;
+                    int16_t temp_x10;
+                } ydx;
             } value;
         } pio1;
     };

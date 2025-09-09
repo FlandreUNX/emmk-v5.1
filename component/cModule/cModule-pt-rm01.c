@@ -79,8 +79,8 @@ static void contentSetBase(cModule_Instance_t *ins, cJSON *cjContent) {
     
     char *tmpBuffer = calloc(1, 32);
     ASSERT(tmpBuffer != NULL);
-
-    ASSERT(cJSON_AddStringToObject(cjContent, "fw", VERSION_CODE) != NULL);
+    sprintf(tmpBuffer, "\"%04d\"", VERSION_CODE);
+    ASSERT(cJSON_AddRawToObject(cjContent, "fw", tmpBuffer) != NULL);
     
     CREQUEST(PT_GET_SN, { .ptr = tmpBuffer });
     ASSERT(cJSON_AddStringToObject(cjBase, "sn", tmpBuffer) != NULL);
@@ -126,32 +126,6 @@ static void contentSetMesh(cJSON *cjContent) {
     ASSERT(cJSON_AddStringToObject(cjMesh, "cssid", "") != NULL);
 }
 
-static void rq100_freeObj(cModule_Rq100_Obj_t* obj) {
-    if (obj == NULL) {
-        return;
-    }
-
-    // 释放每个设备的数据
-    if (obj->dev != NULL) {
-        for (int i = 0; i < obj->devListCount; i++) {
-            cModule_Rq100_Dev_t* dev = &obj->dev[i];
-
-            // 释放data数组
-            if (dev->data != NULL) {
-                free(dev->data);
-                dev->data = NULL;
-            }
-        }
-
-        // 释放dev数组
-        free(obj->dev);
-        obj->dev = NULL;
-    }
-
-    // 最后将计数器置零
-    obj->devListCount = 0;
-}
-
 /*@}*/
 
 /**
@@ -162,7 +136,6 @@ static void rq100_freeObj(cModule_Rq100_Obj_t* obj) {
 /*@{*/
 
 static int32_t recvAccess(cModule_Instance_t *ins, char *data, uint16_t dl) {
-    LOG_I("Recv: %s", data);
     cJSON *cjRoot = cJSON_Parse(data);
     if (cjRoot == NULL) {
         LOG_W("Parse, cjRoot");
@@ -371,67 +344,6 @@ static int32_t recvAccess(cModule_Instance_t *ins, char *data, uint16_t dl) {
                     goto l_exit;
                 }
                 CREQUEST(PT_RQ16_PIO1_SALT_OFFSET, { .u32 = cjSi->valueint });
-            } else if (cjItem->valueint == 100) {
-                cJSON *cjRqx = cJSON_GetObjectItemCaseSensitive(cjPayload, "rq-100");
-                if (cjRqx == NULL) {
-                    LOG_W("Parse, [rq-100]");
-                    goto l_exit;
-                }
-                cModule_Rq100_Obj_t obj = {
-                    .devListCount = cJSON_GetArraySize(cjRqx),
-                    .dev = (cModule_Rq100_Dev_t *) calloc(1, cJSON_GetArraySize(cjRqx) * sizeof(cModule_Rq100_Dev_t)),
-                };
-                ASSERT(obj.dev != NULL);
-                obj.devListCount = 0; // 初始化为0，在成功分配设备后递增
-                for (uint8_t i = 0; i < cJSON_GetArraySize(cjRqx); i++) {
-                    cJSON *cjDev = cJSON_GetArrayItem(cjRqx, i);
-                    cJSON *cjDevSn = cJSON_GetObjectItemCaseSensitive(cjDev, "dev-sn");
-                    cJSON *cjDevDatas = cJSON_GetObjectItemCaseSensitive(cjDev, "dev-data");
-                    if (cjDev == NULL || cjDevSn == NULL || cjDevDatas == NULL) {
-                        LOG_W("Parse, [rq-100], %d", __LINE__);
-                        rq100_freeObj(&obj);
-                        goto l_exit;
-                    }
-                    strncpy(obj.dev[i].devSn, cJSON_GetObjectItemCaseSensitive(cjDev, "dev-sn")->valuestring, sizeof(obj.dev[i].devSn));
-                    obj.dev[i].dataCount = cJSON_GetArraySize(cjDevDatas);
-                    if (obj.dev[i].dataCount == 0) {
-                        LOG_W("Parse, [rq-100], %d", __LINE__);
-                        rq100_freeObj(&obj);
-                        goto l_exit;
-                    }
-                    obj.dev[i].data = (cModule_Rq100_DevData_t *) calloc(1, obj.dev[i].dataCount * sizeof(cModule_Rq100_DevData_t));
-                    if (obj.dev[i].data == NULL) {
-                        // 内存分配失败，释放之前分配的所有内存
-                        rq100_freeObj(&obj);
-                        goto l_exit;
-                    }
-                    obj.dev[i].dataCount = 0; // 初始化为0，在成功分配数据后递增
-                    for (uint8_t j = 0; j < cJSON_GetArraySize(cjDevDatas); j++) {
-                        cJSON *cjDevData = cJSON_GetArrayItem(cjDevDatas, j);
-                        cJSON *cjDataId = cJSON_GetObjectItemCaseSensitive(cjDevData, "id");
-                        cJSON *cjDataValue = cJSON_GetObjectItemCaseSensitive(cjDevData, "vls");
-                        if (cjDataId == NULL || cjDataValue == NULL) {
-                            LOG_W("Parse, [rq-100], %d", __LINE__);
-                            rq100_freeObj(&obj);
-                            goto l_exit;
-                        }
-                        obj.dev[i].data[j].id = cjDataId->valueint;
-                        obj.dev[i].dataCount++; // 成功处理一个数据项
-                        for (uint8_t idx = 0; idx < cJSON_GetArraySize(cjDataValue); idx++) {
-                            obj.dev[i].data[j].value[idx] = (float) cJSON_GetArrayItem(cjDataValue, idx)->valuedouble;
-                            // LOG_I("rq-100, [%d] id=%d, %f",
-                            //     idx,
-                            //     obj.dev[i].data[j].id,
-                            //     obj.dev[i].data[j].value[idx]);
-                            if (idx >= sizeof(obj.dev[i].data[j].value) / sizeof(float)) {
-                                break;
-                            }
-                        }
-                    }
-                    obj.devListCount++; // 成功处理一个设备
-                }
-                CREQUEST(PT_RQ100, { .ptr = &obj});
-                rq100_freeObj(&obj);
             }
         }
     }
@@ -439,9 +351,6 @@ static int32_t recvAccess(cModule_Instance_t *ins, char *data, uint16_t dl) {
     rc = 0;
     
     l_exit:
-    if (cjRoot != NULL) {
-        cJSON_Delete(cjRoot);
-    }
     return rc;
 }
 
