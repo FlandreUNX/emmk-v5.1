@@ -55,7 +55,7 @@ Revision: $Rev: 17697 $
 #include "./SEGGER_RTT.h"
 #include "./SEGGER_RTT_Conf.h"
 
-#if defined (__ARMCC_VERSION) && (__ARMCC_VERSION >= 6100100)
+#if defined (__ARMCC_VERSION) && (__ARMCC_VERSION >= 6100100) && SEGGER_RTT_PRINTF_SUPPORT == 1
 
 /*********************************************************************
 *

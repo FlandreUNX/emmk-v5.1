@@ -79,7 +79,7 @@ static void contentSetBase(cModule_Instance_t *ins, cJSON *cjContent) {
     
     char *tmpBuffer = calloc(1, 32);
     ASSERT(tmpBuffer != NULL);
-    sprintf(tmpBuffer, "\"%04d\"", VERSION_CODE);
+    sprintf(tmpBuffer, "\"%s\"", PROJECT_FW_FULL_NAME);
     ASSERT(cJSON_AddRawToObject(cjContent, "fw", tmpBuffer) != NULL);
     
     CREQUEST(PT_GET_SN, { .ptr = tmpBuffer });
@@ -357,6 +357,7 @@ static int32_t recvAccess(cModule_Instance_t *ins, char *data, uint16_t dl) {
 int32_t cModule_response_RM01_v241022(cModule_Instance_t *ins, int8_t rq, int32_t result) {
     int32_t rc = -1;
     if (!_cModule_isAllocReqPackAccess(ins)) {
+        LOG_W("Alloc req pack failed");
         return -1;
     }
     _cModule_packMutexLock(ins, true);
@@ -415,6 +416,7 @@ int32_t cModule_response_RM01_v241022(cModule_Instance_t *ins, int8_t rq, int32_
 int32_t cModule_reportData_RM01_online_v241022(cModule_Instance_t *ins) {
     int32_t rc = -1;
     if (!_cModule_isAllocReqPackAccess(ins)) {
+        LOG_W("Alloc req pack failed");
         return -1;
     }
     _cModule_packMutexLock(ins, true);
@@ -471,6 +473,7 @@ int32_t cModule_reportData_RM01_online_v241022(cModule_Instance_t *ins) {
 int32_t cModule_reportData_RM01_data01_v241022(cModule_Instance_t *ins, cModule_RM01_Data01_V1_t *d) {
     int32_t rc = -1;
     if (!_cModule_isAllocReqPackAccess(ins)) {
+        LOG_W("Alloc req pack failed");
         return -1;
     }
     _cModule_packMutexLock(ins, true);
@@ -548,9 +551,6 @@ int32_t cModule_reportData_RM01_data01_v241022(cModule_Instance_t *ins, cModule_
             
             klPtf_sprintf(buf, "%.1f", (float) d->pio1.value.zdx.temp_x10 / 10.0f);
             cJSON_AddRawToObject(cjItem, "t", buf);
-            
-            cJSON_AddNumberToObject(cjItem, "bsoc", d->pio1.battety.soc);
-            cJSON_AddNumberToObject(cjItem, "bmv", d->pio1.battety.volt);
         } else if (d->pio1.addr == CMODULE_PT_RM01_PIO1_PH_ADDR) {
             cJSON *cjItem = cJSON_AddObjectToObject(cjPl, "i");
             
@@ -573,6 +573,14 @@ int32_t cModule_reportData_RM01_data01_v241022(cModule_Instance_t *ins, cModule_
             
             klPtf_sprintf(buf, "%.1f", 0);
             cJSON_AddRawToObject(cjItem, "tp", buf);
+        } else if (d->sid == CMODULE_PT_RM01_PIO1_YD_ADDR) {
+            cJSON *cjItem = cJSON_AddObjectToObject(cjPl, "i");
+
+            klPtf_sprintf(buf, "%.2f", (float) d->pio1.value.ydx.ppt_x100 / 100.0f);
+            cJSON_AddRawToObject(cjItem, "ppt", buf);
+
+            klPtf_sprintf(buf, "%.1f", (float) d->pio1.value.ydx.temp_x10 / 10.0f);
+            cJSON_AddRawToObject(cjItem, "t", buf);
         }
     }
     
