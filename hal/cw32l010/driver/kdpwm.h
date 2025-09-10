@@ -206,7 +206,7 @@ extern void kdpwm_irqEnable(kdpwm_t *kd, kdpwm_Event_t evt, bool enable, kdpwm_S
 
 #define KDPWM_DEFINE_GTIM(_hn, \
         _psc, _arr, _autoReload, \
-        _enableFunc, _disableFunc) \
+        _enableFunc, _disableFunc, _isInitFunc) \
     static void _KDPWM_HOST_FUNC_ENABLE(_hn)(kdpwm_t *kd)  _enableFunc \
     static void _KDPWM_HOST_FUNC_DISABLE(_hn)(kdpwm_t *kd)  _disableFunc \
     static int _KDPWM_HOST_FUNC_IS_INIT(_hn)(kdpwm_t *kd)  _isInitFunc \
