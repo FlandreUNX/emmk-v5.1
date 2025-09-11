@@ -90,8 +90,8 @@ int32_t _cModule_wait(cModule_Instance_t *ins, uint32_t t, bool withRilatPoll) {
             }
         } else {
             if (CREQUEST(ON_BLOCK_POLL, (void *) ins,
-                     (ins->state.urcResponseFlags & CMODULE_URC_FLAG_STACK_NO_BLOCK_POLL) ? 1 : 0).i32 < 0) {
-                return -1;  
+                         (ins->state.urcResponseFlags & CMODULE_URC_FLAG_STACK_NO_BLOCK_POLL) ? 1 : 0).i32 < 0) {
+                return -1;
             }
         }
     }
@@ -126,8 +126,9 @@ void _cModule_freePack(cModule_Instance_t *ins, cModule_TransmitPackageInfo_t *i
     if (info->payload != NULL) {
         if (ins->callback->onPtPackPayloadFree != NULL) {
             ins->callback->onPtPackPayloadFree(info, isForce);
-        } 
-        if (info->flag.packIsDynData || info->flag.packIsDynMqttMsg || info->flag.packIsDynHttpMsg || info->flag.packIsDynTcpIpData) {
+        }
+        if (info->flag.packIsDynData || info->flag.packIsDynMqttMsg || info->flag.packIsDynHttpMsg || info->flag.
+            packIsDynTcpIpData) {
             free(info->payload);
         }
     }
@@ -181,9 +182,10 @@ static void instancePoll(cModule_Instance_t *ins) {
             ins->aux.flag.packageIsFull = 1;
             qSTimer_Set(&ins->aux.txPackageOverFlowTimer, CONFIG_CMODULE_PACKAGE_FULL_CLEAN_TIMEOUT_SEC * 1000);
             break;
-        } else if (qSTimer_Status(&ins->aux.txPackageOverFlowTimer) && qSTimer_Expired(&ins->aux.txPackageOverFlowTimer)) {
+        } else if (qSTimer_Status(&ins->aux.txPackageOverFlowTimer) &&
+                   qSTimer_Expired(&ins->aux.txPackageOverFlowTimer)) {
             qSTimer_Disarm(&ins->aux.txPackageOverFlowTimer);
-            
+
             klist_t *pos = NULL, *t = NULL, *header = &ins->transmit.packageReqList;
             klist_forEachSafe(pos, t, header) {
                 cModule_TransmitPackageInfo_t *info = klist_entry(pos, cModule_TransmitPackageInfo_t, list);
@@ -195,7 +197,7 @@ static void instancePoll(cModule_Instance_t *ins) {
     if (ins->aux.flag.pmuSupport && ins->cmmpu != NULL) {
         if (((ComponentPmu_t *) ins->cmmpu)->sleep.currentSleepLevel > COMPONENT_SLEEP_LV_RUN) {
             if (!klist_empty(&ins->transmit.packageReqList) || !klist_empty(&ins->transmit.packageRepList)) {
-                cModule_sleep(COMPONENT_SLEEP_LV_RUN);
+                cModule_sleep(ins, COMPONENT_SLEEP_LV_RUN);
             } else {
                 ins->state.urcResponseFlags &= ~CMODULE_URC_FLAG_IN_POLL;
                 return;
@@ -213,7 +215,7 @@ static void instancePoll(cModule_Instance_t *ins) {
         if (ins->aux.flag.pmuSupport && ins->cmmpu != NULL) {
             if (((ComponentPmu_t *) ins->cmmpu)->sleep.currentSleepLevel == COMPONENT_SLEEP_LV_RUN
                 && qSTimer_Expired(&((ComponentPmu_t *) ins->cmmpu)->aux.idleTimer)) {
-                cModule_sleep(COMPONENT_SLEEP_LV_IDLE);
+                cModule_sleep(ins, COMPONENT_SLEEP_LV_IDLE);
             }
         }
         ins->state.urcResponseFlags &= ~CMODULE_URC_FLAG_IN_POLL;
@@ -221,7 +223,7 @@ static void instancePoll(cModule_Instance_t *ins) {
     }
 
     if (ins->state.urcResponseFlags & CMODULE_URC_FLAG_STACK_BLOCK_FOREVER
-            || (qSTimer_Status(&ins->aux.blockTimer) && !qSTimer_Expired(&ins->aux.blockTimer))) {
+        || (qSTimer_Status(&ins->aux.blockTimer) && !qSTimer_Expired(&ins->aux.blockTimer))) {
         ins->state.urcResponseFlags &= ~CMODULE_URC_FLAG_IN_POLL;
         return;
     } else if (qSTimer_Status(&ins->aux.blockTimer)) {
@@ -259,7 +261,7 @@ static void instancePoll(cModule_Instance_t *ins) {
                         ins->callback->onReboot(true);
                     } else {
                         ins->aux.failedCount = 0;
-                        cModule_sleep(COMPONENT_SLEEP_LV_IDLE);
+                        cModule_sleep(ins, COMPONENT_SLEEP_LV_IDLE);
                         break;
                     }
                     ins->aux.failedCount++;
@@ -350,7 +352,7 @@ static void instancePoll(cModule_Instance_t *ins) {
 
             if (ins->cmmpu != NULL) {
                 qSTimer_Set(&((ComponentPmu_t *) ins->cmmpu)->aux.idleTimer,
-                                   CONFIG_CMODULE_IDLE_TIMEOUT_MS);
+                            CONFIG_CMODULE_IDLE_TIMEOUT_MS);
             }
 
             ins->state.urcResponseFlags &= ~CMODULE_URC_FLAG_NEED_RESET;
@@ -382,10 +384,10 @@ static void instancePoll(cModule_Instance_t *ins) {
 
                     if (ins->cmmpu != NULL) {
                         if (((ComponentPmu_t *) ins->cmmpu)->sleep.currentSleepLevel == COMPONENT_SLEEP_LV_IDLE) {
-                            cModule_sleep(COMPONENT_SLEEP_LV_RUN);
+                            cModule_sleep(ins, COMPONENT_SLEEP_LV_RUN);
                         }
                         qSTimer_Set(&((ComponentPmu_t *) ins->cmmpu)->aux.idleTimer,
-                                           CONFIG_CMODULE_IDLE_TIMEOUT_MS);
+                                    CONFIG_CMODULE_IDLE_TIMEOUT_MS);
                     }
 
                     if (info->flag.requestId == TRANSMIT_PACK_REQ_ID_RX) {
@@ -401,10 +403,10 @@ static void instancePoll(cModule_Instance_t *ins) {
 
                     if (ins->cmmpu != NULL) {
                         if (((ComponentPmu_t *) ins->cmmpu)->sleep.currentSleepLevel == COMPONENT_SLEEP_LV_IDLE) {
-                            cModule_sleep(COMPONENT_SLEEP_LV_RUN);
+                            cModule_sleep(ins, COMPONENT_SLEEP_LV_RUN);
                         }
                         qSTimer_Set(&((ComponentPmu_t *) ins->cmmpu)->aux.idleTimer,
-                                           CONFIG_CMODULE_IDLE_TIMEOUT_MS);
+                                    CONFIG_CMODULE_IDLE_TIMEOUT_MS);
                     }
 
                     if (info->flag.requestId == TRANSMIT_PACK_REQ_ID_TX) {
@@ -443,9 +445,10 @@ static void instancePoll(cModule_Instance_t *ins) {
                                     if (qSTimer_Expired(&ins->aux.sendAccessTimer)) {
                                         info->flag.__delayAccess = 2;
                                     }
-                                } 
+                                }
                             }
-                            if (qSTimer_Status(&ins->aux.sendAccessTimer) && !qSTimer_Expired(&ins->aux.sendAccessTimer)) {
+                            if (qSTimer_Status(&ins->aux.sendAccessTimer) && !
+                                qSTimer_Expired(&ins->aux.sendAccessTimer)) {
                                 break;
                             }
                         }
@@ -455,9 +458,9 @@ static void instancePoll(cModule_Instance_t *ins) {
                         ins->state.urcResponseFlags |= CMODULE_URC_FLAG_STACK_NO_BLOCK_POLL;
                         rc = ins->callback->onPtPackIdTransmit(info);
                         ins->state.urcResponseFlags &= ~CMODULE_URC_FLAG_STACK_NO_BLOCK_POLL;
-                        
+
                         info->flag.__delayAccess = 0;
-                        
+
                         if (rc != 0) {
                             if (info->aux.gen.sendRetryCount != 0) {
                                 if (info->aux.gen.sendRetrySec == 0) {
@@ -484,7 +487,7 @@ static void instancePoll(cModule_Instance_t *ins) {
                                 info->aux.gen.waitConfirmFrameRecved = 0;
                                 info->aux.gen.waitConfirmFrame = 1;
                                 qSTimer_Set(&info->aux.gen.waitConfirmFrameTimer,
-                                                 info->aux.gen.waitConfirmFrameTimeoutSec * 1000);
+                                            info->aux.gen.waitConfirmFrameTimeoutSec * 1000);
                             } else {
                                 // qSTimer_Set(&ins->aux.sendAccessTimer, 1000);
                                 CREQUEST(ON_SEND_SUCCESS, (void *) ins, info);
@@ -504,7 +507,7 @@ static void instancePoll(cModule_Instance_t *ins) {
                 if (ins->cmmpu != NULL) {
                     if (((ComponentPmu_t *) ins->cmmpu)->sleep.currentSleepLevel == COMPONENT_SLEEP_LV_RUN
                         && qSTimer_Expired(&((ComponentPmu_t *) ins->cmmpu)->aux.idleTimer)) {
-                        cModule_sleep(COMPONENT_SLEEP_LV_IDLE);
+                        cModule_sleep(ins, COMPONENT_SLEEP_LV_IDLE);
                     }
                 }
             }
@@ -528,66 +531,54 @@ static void instancePoll(cModule_Instance_t *ins) {
 
 /*@{*/
 
-void cModule_init(void) {
-    cModule_InstanceConst_t *start = (cModule_InstanceConst_t *) __CMODULE_X_START;
-    int32_t tlen = ((cModule_InstanceConst_t *) __CMODULE_X_END) - start;
-    for (cModule_InstanceConst_t *ckd = start; ckd != start + tlen; ckd++) {
-        cModule_Instance_t *ins = ckd->ins;
-        ins->callback->onInstanceInit();
-        
-        qSTimer_Set(&ins->aux.pollTimer, 100);
-        qSTimer_Set(&ins->aux.sendAccessTimer, 100);
-        qSTimer_Disarm(&ins->aux.txPackageOverFlowTimer);
-        qSTimer_Disarm(&ins->aux.blockTimer);
-    }
-    mGenMessageId = 0;
+void cModule_init(cModule_Instance_t *ins) {
+    ins->callback->onInstanceInit();
+    qSTimer_Set(&ins->aux.pollTimer, 100);
+    qSTimer_Set(&ins->aux.sendAccessTimer, 100);
+    qSTimer_Disarm(&ins->aux.txPackageOverFlowTimer);
+    qSTimer_Disarm(&ins->aux.blockTimer);
 }
 
 
-void cModule_sleep(uint8_t nextSleepLevel) {
-    cModule_InstanceConst_t *start = (cModule_InstanceConst_t *) __CMODULE_X_START;
-    int32_t tlen = ((cModule_InstanceConst_t *) __CMODULE_X_END) - start;
-    for (cModule_InstanceConst_t *ckd = start; ckd != start + tlen; ckd++) {
-        cModule_Instance_t *kd = ckd->ins;
-        if (!kd->aux.flag.pmuSupport || kd->cmmpu == NULL) {
-            continue;
-        }
-        ComponentPmu_t *pmu = ((ComponentPmu_t *) kd->cmmpu);
+void cModule_sleep(cModule_Instance_t *kd, uint8_t nextSleepLevel) {
+    if (!kd->aux.flag.pmuSupport || kd->cmmpu == NULL) {
+        return;
+    }
+    ComponentPmu_t *pmu = ((ComponentPmu_t *) kd->cmmpu);
 
-        if (pmu->sleep.currentSleepLevel && !nextSleepLevel) {
-            switch (pmu->sleep.currentSleepLevel) {
-                case COMPONENT_SLEEP_LV_IDLE:
-                    qSTimer_Set(&pmu->aux.idleTimer, CONFIG_CMODULE_IDLE_TIMEOUT_MS);
-                    break;
-                case COMPONENT_SLEEP_LV_SLEEP:
-                case COMPONENT_SLEEP_LV_SHUTDOWN: {
-                    if (!pmu->flag.isReady) {
-                        pmu->flag.isReady = 1;
-                        LOG_I("PmuUp, %s", kd->rilat.instance.name);
-                        kd->callback->onInstancePmu(1);
-                    }
-                    break;
+    if (pmu->sleep.currentSleepLevel && !nextSleepLevel) {
+        switch (pmu->sleep.currentSleepLevel) {
+            case COMPONENT_SLEEP_LV_IDLE:
+                qSTimer_Set(&pmu->aux.idleTimer, CONFIG_CMODULE_IDLE_TIMEOUT_MS);
+                break;
+            case COMPONENT_SLEEP_LV_SLEEP:
+            case COMPONENT_SLEEP_LV_SHUTDOWN: {
+                if (!pmu->flag.isReady) {
+                    pmu->flag.isReady = 1;
+                    LOG_I("PmuUp, %s", kd->rilat.instance.name);
+                    kd->callback->onInstancePmu(1);
                 }
+                break;
             }
+        }
 
-            pmu->sleep.currentSleepLevel = COMPONENT_SLEEP_LV_RUN;
-        } else if ((!pmu->sleep.currentSleepLevel && nextSleepLevel)
-                   || (pmu->sleep.currentSleepLevel && pmu->sleep.currentSleepLevel < nextSleepLevel)) {
-            pmu->sleep.currentSleepLevel = nextSleepLevel;
-            switch (nextSleepLevel) {
-                case COMPONENT_SLEEP_LV_IDLE: {
-                    LOG_I("PmuIdle, %s", kd->rilat.instance.name);
-                    break;
+        pmu->sleep.currentSleepLevel = COMPONENT_SLEEP_LV_RUN;
+    } else if ((!pmu->sleep.currentSleepLevel && nextSleepLevel)
+               || (pmu->sleep.currentSleepLevel && pmu->sleep.currentSleepLevel < nextSleepLevel)) {
+        pmu->sleep.currentSleepLevel = nextSleepLevel;
+        switch (nextSleepLevel) {
+            case COMPONENT_SLEEP_LV_IDLE: {
+                LOG_I("PmuIdle, %s", kd->rilat.instance.name);
+                break;
+            }
+            case COMPONENT_SLEEP_LV_SLEEP:
+            case COMPONENT_SLEEP_LV_SHUTDOWN: {
+                if (pmu->flag.isReady) {
+                    pmu->flag.isReady = 0;
+                    LOG_I("PmuDown, %s", kd->rilat.instance.name);
+                    kd->callback->onInstancePmu(0);
                 }
-                case COMPONENT_SLEEP_LV_SLEEP:
-                case COMPONENT_SLEEP_LV_SHUTDOWN: {
-                    if (pmu->flag.isReady) {
-                        pmu->flag.isReady = 0;
-                        LOG_I("PmuDown, %s", kd->rilat.instance.name);
-                        kd->callback->onInstancePmu(0);
-                    }
-                    break;
-                }
+                break;
             }
         }
     }
@@ -595,16 +586,7 @@ void cModule_sleep(uint8_t nextSleepLevel) {
 
 
 void cModule_loop(void *specialInstance) {
-    if (specialInstance != NULL) {
-        instancePoll(specialInstance);
-    } else {
-        cModule_InstanceConst_t *start = (cModule_InstanceConst_t *) __CMODULE_X_START;
-        int32_t tlen = ((cModule_InstanceConst_t *) __CMODULE_X_END) - start;
-        for (cModule_InstanceConst_t *ckd = start; ckd != start + tlen; ckd++) {
-            cModule_Instance_t *kd = ckd->ins;
-            instancePoll(kd);
-        }
-    }
+    instancePoll(specialInstance);
 }
 
 
@@ -622,16 +604,16 @@ void cModule_resetStack(cModule_Instance_t *ins) {
     ins->state.urcResponseFlags = 0;
     rilat_finalize(&ins->rilat.instance);
     rilat_init(&ins->rilat.instance);
-    
+
     qSTimer_Set(&ins->aux.pollTimer, 100);
     qSTimer_Set(&ins->aux.sendAccessTimer, 100);
     qSTimer_Disarm(&ins->aux.blockTimer);
-    
+
     if (ins->cmmpu != NULL) {
         if (((ComponentPmu_t *) ins->cmmpu)->sleep.currentSleepLevel == COMPONENT_SLEEP_LV_IDLE) {
-            cModule_sleep(COMPONENT_SLEEP_LV_RUN);
+            cModule_sleep(ins, COMPONENT_SLEEP_LV_RUN);
         }
-        qSTimer_Set(&((ComponentPmu_t *) ins->cmmpu)->aux.idleTimer,  CONFIG_CMODULE_IDLE_TIMEOUT_MS);
+        qSTimer_Set(&((ComponentPmu_t *) ins->cmmpu)->aux.idleTimer, CONFIG_CMODULE_IDLE_TIMEOUT_MS);
     }
 }
 
@@ -666,7 +648,7 @@ void cModule_enablePmu(cModule_Instance_t *ins, bool en) {
         qSTimer_Set(&((ComponentPmu_t *) ins->cmmpu)->aux.idleTimer, CONFIG_CMODULE_IDLE_TIMEOUT_MS);
         ins->aux.flag.pmuSupport = true;
     } else if (!en && ins->aux.flag.pmuSupport) {
-        cModule_sleep(COMPONENT_SLEEP_LV_RUN);
+        cModule_sleep(ins, COMPONENT_SLEEP_LV_RUN);
         ins->aux.flag.pmuSupport = false;
     }
 }
@@ -677,7 +659,6 @@ void cModuele_pmuIdleRefresh(cModule_Instance_t *ins) {
         qSTimer_Set(&((ComponentPmu_t *) ins->cmmpu)->aux.idleTimer, CONFIG_CMODULE_IDLE_TIMEOUT_MS);
     }
 }
-
 
 
 inline uint8_t cModule_getSleepStatus(cModule_Instance_t *ins) {
@@ -699,7 +680,7 @@ inline uint8_t cModule_isBlocking(cModule_Instance_t *ins) {
         return 0;
     }
     if (ins->state.urcResponseFlags & CMODULE_URC_FLAG_STACK_BLOCK_FOREVER
-            || (qSTimer_Status(&ins->aux.blockTimer) && !qSTimer_Expired(&ins->aux.blockTimer))) {
+        || (qSTimer_Status(&ins->aux.blockTimer) && !qSTimer_Expired(&ins->aux.blockTimer))) {
         return 1;
     }
     return 0;

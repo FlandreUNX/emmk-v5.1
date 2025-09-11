@@ -148,9 +148,6 @@ static cModule_Instance_t mModuleInstance = {
                 .recvBuffer = mModuleRxBuffer,
         },
 };
-const __CMODULE_X_SECTION cModule_InstanceConst_t mModuleInstanceConst = {
-        .ins = &mModuleInstance,
-};
 
 /*@}*/
 
@@ -814,7 +811,7 @@ static int32_t mqttSubTopic(const char *topicStr, uint8_t qos) {
 }
 
 
-static int32_t mqttPubTopic(cModule_ProtocolMqttMessage_t *msg, uint32_t msgId, char *xPayload, uint16_t xPayloadLen) {
+static int32_t mqttPubTopic(cModule_ProtocolMqttMessage_t *msg, char *xPayload, uint16_t xPayloadLen, uint32_t packMsgId) {
     // static const char AT_QMTPUBEX[] = "AT+QMTPUBEX=0,%d,%d,0,\"%s\",%d";
     static const char AT_QMTPUBEX1[] = "AT+QMTPUBEX=0,";
 
@@ -837,7 +834,7 @@ static int32_t mqttPubTopic(cModule_ProtocolMqttMessage_t *msg, uint32_t msgId, 
 
     if (xPayload == NULL) {
         if (msg->len == 0) {
-            msg->len = msg->writer.onDorectGetLength(&mModuleInstance.rilat.instance, msgId);
+            msg->len = msg->writer.onDorectGetLength(&mModuleInstance.rilat.instance, packMsgId);
         }
     } else {
         msg->len = xPayloadLen;
@@ -850,7 +847,7 @@ static int32_t mqttPubTopic(cModule_ProtocolMqttMessage_t *msg, uint32_t msgId, 
                                          buffer, NULL,
                                          xPayload, xPayloadLen, msg->qos >= 1 ? RILAT_PDU_S_RESP_ONLY_MATCH : 0,
                                          "+QMTPUBEX:",
-                                         msgId,
+                                         packMsgId,
                                          &response, 30000) != 0 || response == NULL ||
             response->success == 0) {
             rc = -1;
@@ -865,7 +862,7 @@ static int32_t mqttPubTopic(cModule_ProtocolMqttMessage_t *msg, uint32_t msgId, 
                                                  (msg->qos >= 1 ? RILAT_PDU_S_RESP_ONLY_MATCH : 0) |
                                                  RILAT_PDU_S_DIRECT_WRITE,
                                                  "+QMTPUBEX:",
-                                                 msgId,
+                                                 packMsgId,
                                                  &response, 30000) != 0 || response == NULL ||
                     response->success == 0) {
                     rc = -1;
@@ -1209,8 +1206,157 @@ static int32_t httpGet(uint32_t msgId, cModule_ReqId_HttpGetReq_t *httpGetReq) {
 }
 
 
+
+static int32_t socketTcpState(void) {
+    Rilat_AtResponse_t *response = NULL;
+    if (rilat_writeSinglelineOnlyPrefixMatched(&mModuleInstance.rilat.instance, "AT+MIPSTATE=0", "+MIPSTATE:", &response, 1000) != 0 || response == NULL || response->success == 0) {
+        goto _l_retryExit;
+    }
+    char *line = response->intermediates->line;
+    char *st = NULL;
+    if (klAttoken_start(&line) != 0) {
+        goto _l_retryExit;
+    }
+    klAttoken_skip(&line); // <connect_id>
+    klAttoken_skip(&line); // <service_type>
+    klAttoken_skip(&line); // <address>
+    klAttoken_skip(&line); // <remote_port>
+    if (klAttoken_getNextString(&line, &st, NULL) != 0) { // <state>
+        goto _l_retryExit;
+    }
+    if (strstr(st, "CONNECTED")) {
+        rilat_freeResponse(&mModuleInstance.rilat.instance, response);
+        response = NULL;
+        return 0;
+    }
+    rilat_freeResponse(&mModuleInstance.rilat.instance, response);
+    response = NULL;
+
+    _l_retryExit:
+    mModuleInstance.aux.initRetryCount++;
+    rilat_freeResponse(&mModuleInstance.rilat.instance, response);
+    return -1;
+}
+
+
+static int32_t socketTcpCreate(char *ip, uint16_t port, uint32_t timeout) {
+    static const char MIPOPEN[] = "AT+MIPOPEN=0,\"TCP\",\"";
+
+    Rilat_AtResponse_t *response = NULL;
+
+    mModuleInstance.state.urcResponseFlags &= ~(CMODULE_URC_FLAG_SUB_SUCCESS | CMODULE_URC_FLAG_SUB_FAILED);
+
+    rilat_writeLine(&mModuleInstance.rilat.instance, "AT+MIPCFG=\"encoding\",0,1,1", NULL, 3000);
+
+    char *buffer = calloc(1, 32);
+    ASSERT(buffer != NULL);
+    klPtf_sprintf(buffer, "%d,%d,0", port, timeout / 1000);
+
+    rilat_directWrite(&mModuleInstance.rilat.instance, (uint8_t *) MIPOPEN, strlen(MIPOPEN), 0);
+    rilat_directWrite(&mModuleInstance.rilat.instance, (uint8_t *) ip, strlen(ip), 0);
+    rilat_directWrite(&mModuleInstance.rilat.instance, (uint8_t *) "\",", 2, 0);
+    if (rilat_writeSinglelineOnlyPrefixMatched(&mModuleInstance.rilat.instance, buffer, "+MIPOPEN:", &response, timeout + 3000) != 0) {
+        goto l_retryExit;
+    }
+    free(buffer);
+    buffer = NULL;
+
+    char *line = response->intermediates->line;
+    int32_t st = 0;
+    if (klAttoken_start(&line) != 0) {
+        goto l_retryExit;
+    }
+    klAttoken_skip(&line); // <connect_id>
+    if (klAttoken_getNextInt(&line, &st) != 0) { // <state>
+        goto l_retryExit;
+    }
+    if (st != 0) {
+        goto l_retryExit;
+    }
+
+    rilat_freeResponse(&mModuleInstance.rilat.instance, response);
+    response = NULL;
+
+    rilat_writeLine(&mModuleInstance.rilat.instance, "AT+MIPMODE=0,0", NULL, 3000);
+
+    return 0;
+
+    l_retryExit:
+    free(buffer);
+    mModuleInstance.aux.initRetryCount++;
+    rilat_freeResponse(&mModuleInstance.rilat.instance, response);
+    return -1;
+}
+
+static int32_t socketTcpClose(void) {
+    rilat_writeLine(&mModuleInstance.rilat.instance, "AT+MIPCLOSE=0", NULL, 3000);
+    return 0;
+}
+
+static int32_t socketTcpSend(cModule_ProtocolTcpIpMessage_t *msg, uint32_t packMsgId) {
+    static const char MIPSEND[] = "AT+MIPSEND=0,";  // HEX-Send
+
+    int32_t rc = -1;
+    char *buffer = calloc(1, 16);
+    ASSERT(buffer != NULL);
+
+    if (msg->payloadLength == 0) {
+        if (msg->writer.onDirectGetLength != NULL) {
+            msg->payloadLength = msg->writer.onDirectGetLength(&mModuleInstance.rilat.instance, packMsgId);
+        }
+    }
+
+    klPtf_sprintf(buffer, "%d,\"", msg->payloadLength);
+    rilat_directWrite(&mModuleInstance.rilat.instance, (uint8_t *) MIPSEND, strlen(MIPSEND), 0);
+    rilat_directWrite(&mModuleInstance.rilat.instance, (uint8_t *) buffer, strlen(buffer), 0);
+
+    if (msg->payload == NULL) {
+        if (msg->writer.onDirectWrite != NULL) {
+            msg->writer.onDirectWrite(&mModuleInstance.rilat.instance, packMsgId);
+        }
+    } else {
+        uint32_t cur = 0;
+        uint8_t *hexBuffer = calloc(1, 129);
+        ASSERT(hexBuffer != NULL);
+        while (cur < msg->payloadLength) {
+            uint32_t writeLen = msg->payloadLength - cur;
+            if (writeLen >= 64) {
+                writeLen = 64;
+            }
+            uint32_t hexLen = klStr_hex2str((uint8_t *) msg->payload + cur, writeLen, (char *) hexBuffer);
+
+            rilat_directWrite(&mModuleInstance.rilat.instance, (uint8_t *) hexBuffer, hexLen, 0);
+            memset(hexBuffer, 0x00, 129);
+
+            cur += writeLen;
+        }
+        free(hexBuffer);
+    }
+
+    Rilat_AtResponse_t *response = NULL;
+    if (rilat_writeLine(&mModuleInstance.rilat.instance, "\"", &response, msg->timeout) != 0
+            || response == NULL || response->success == 0) {
+        rc = -1;
+        goto _l_retryExit;
+    }
+    rilat_freeResponse(&mModuleInstance.rilat.instance, response);
+    response = NULL;
+    free(buffer);
+
+    msg->writer.isWritenSuccess = true;
+
+    return 0;
+
+_l_retryExit:
+    free(buffer);
+    mModuleInstance.aux.initRetryCount++;
+    rilat_freeResponse(&mModuleInstance.rilat.instance, response);
+    return -1;
+}
+
+
 static void powerSet(bool up) {
-    void *pin = CREQUEST(ON_MODEM_POWER_PIN_ACCESS, {}).ptr;
+    void *pin = CREQUEST(ON_MODEM_POWER_PIN_ACCESS, {.ptr = &mModuleInstance}).ptr;
     uint16_t delay = 0;
 
     if (up) {
@@ -1227,12 +1373,13 @@ static void powerSet(bool up) {
     }
 
     if (delay != 0) {
+        uint8_t lv = CREQUEST(ON_MODEM_POWER_PIN_LEVEL, {}).u32 ? true : false;
         kdgpio_t *pwrPin = pin;
         kdgpio_init((kdgpio_t *) pwrPin);
         kdgpio_powerUp((kdgpio_t *) pwrPin, KDGPIO_MODE_OUTPUT_PP, KDGPIO_PULL_NONE);
-        kdgpio_output((kdgpio_t *) pwrPin, 1);
+        kdgpio_output((kdgpio_t *) pwrPin, lv);
         _cModule_wait(&mModuleInstance, delay, 0);
-        kdgpio_output((kdgpio_t *) pwrPin, 0);
+        kdgpio_output((kdgpio_t *) pwrPin, !lv);
         kdgpio_powerDown((kdgpio_t *) pwrPin);
         kdgpio_finalize((kdgpio_t *) pwrPin);
     }
@@ -1254,15 +1401,26 @@ static void __onSoftWakeup(void) {
 static void __onSoftSleep(void) {
     AT();
     AT();
+#if CONFIG_CMODULE_INSTANCE_INIT_MODE == CONFIG_CMODULE_INSTANCE_INIT_MODE_MQTT
     mqttDisconnect();
     mqttClose();
-
-    powerSet(false);
+#endif
+#if CONFIG_CMODULE_INSTANCE_INIT_MODE == CONFIG_CMODULE_INSTANCE_INIT_MODE_TCP
+    socketTcpClose();
+#endif
+    if (mModuleInstance.aux.flag.pmuSupport) {
+        powerSet(false);
+    }
 }
 
 static void onResetStack(void) {
+#if CONFIG_CMODULE_INSTANCE_INIT_MODE == CONFIG_CMODULE_INSTANCE_INIT_MODE_MQTT
     mqttDisconnect();
     mqttClose();
+#endif
+#if CONFIG_CMODULE_INSTANCE_INIT_MODE == CONFIG_CMODULE_INSTANCE_INIT_MODE_TCP
+    socketTcpClose();
+#endif
     onReboot(false);
 }
 
@@ -1272,12 +1430,13 @@ static void onReboot(uint8_t isPowerUpRequest) {
     } else {
         void *pin = CREQUEST(ON_MODEM_RESET_PIN_ACCESS, {}).ptr;
         if (pin != NULL && (uint32_t) pin != UINT32_MAX) {
+            uint8_t lv = CREQUEST(ON_MODEM_RESET_PIN_LEVEL, {}).u32 ? true : false;
             kdgpio_t *rstPin = pin;
             kdgpio_init((kdgpio_t *) rstPin);
             kdgpio_powerUp((kdgpio_t *) rstPin, KDGPIO_MODE_OUTPUT_PP, KDGPIO_PULL_NONE);
-            kdgpio_output((kdgpio_t *) rstPin, 1);
+            kdgpio_output((kdgpio_t *) rstPin, lv);
             _cModule_wait(&mModuleInstance, 100, 0);
-            kdgpio_output((kdgpio_t *) rstPin, 0);
+            kdgpio_output((kdgpio_t *) rstPin, !lv);
             kdgpio_powerDown((kdgpio_t *) rstPin);
             kdgpio_finalize((kdgpio_t *) rstPin);
         } else {
@@ -1289,11 +1448,18 @@ static void onReboot(uint8_t isPowerUpRequest) {
 
 static void onLoop(void) {
     if (qSTimer_Expired(&mModuleInstance.aux.pollTimer)) {
-        qSTimer_Set(&mModuleInstance.aux.pollTimer, 60 * 1000);
-
+        qSTimer_Set(&mModuleInstance.aux.pollTimer, 60000);
+        int32_t netRc = 0;
         AT();
-        AT();
-        if (checkNTP() != 0 || readSignal() <= -113) {
+        readSignal();
+        checkNTP();
+#if CONFIG_CMODULE_INSTANCE_INIT_MODE == CONFIG_CMODULE_INSTANCE_INIT_MODE_MQTT
+        netRc = mqttConnectCheck();
+#endif
+#if CONFIG_CMODULE_INSTANCE_INIT_MODE == CONFIG_CMODULE_INSTANCE_INIT_MODE_TCP
+        netRc = socketTcpState();
+#endif
+        if (netRc != 0) {
             if (++mModuleInstance.aux.initRetryCount > 2) {
                 mModuleInstance.aux.initRetryCount = 0;
                 mModuleInstance.state.urcResponseFlags |= CMODULE_URC_FLAG_NEED_RESET;
@@ -1619,12 +1785,12 @@ int32_t onPtPackIdReceived(cModule_TransmitPackageInfo_t *info) {
 
 static int32_t onPtPackIdTransmit(cModule_TransmitPackageInfo_t *info) {
     int32_t rc = -1;
-
+#if CONFIG_CMODULE_INSTANCE_INIT_MODE == CONFIG_CMODULE_INSTANCE_INIT_MODE_MQTT
     if (info->flag.packIsDynMqttMsg) {
         cModule_ProtocolMqttMessage_t *msg = info->payload;
-
         if (msg->isPayloadJson) {
 #if CONFIG_CMODULE_CJSON_SUPPORT == 1
+            cModule_ProtocolMqttMessage_t *msg = info->payload;
             if (_cModule_onProtocolTransmited(&mModuleInstance, info) != 0) {
                 return rc;
             }
@@ -1632,7 +1798,7 @@ static int32_t onPtPackIdTransmit(cModule_TransmitPackageInfo_t *info) {
             cJSON *cjValue = (void *) msg->payload;
             char *payload = cJSON_PrintUnformatted(cjValue);
             if (payload != NULL) {
-                rc = mqttPubTopic(msg, info->aux.gen.msgId, payload, strlen(payload));
+                rc = mqttPubTopic(msg, payload, strlen(payload), info->aux.gen.msgId);
             }
             cJSON_free(payload);
             if (rc != 0) {
@@ -1643,13 +1809,26 @@ static int32_t onPtPackIdTransmit(cModule_TransmitPackageInfo_t *info) {
             ASSERT(0);
 #endif
         } else if (msg->isPayloadString) {
-            rc = mqttPubTopic(msg, info->aux.gen.msgId, NULL, 0);
+            rc = mqttPubTopic(msg, NULL, 0, info->aux.gen.msgId);
         } else {
-            LOG_E("cModule_ProtocolMqttMessage_t, Unknown msgType");
             return rc;
         }
-    }
-
+    } else
+#endif
+#if CONFIG_CMODULE_INSTANCE_INIT_MODE == CONFIG_CMODULE_INSTANCE_INIT_MODE_NONE
+        if (info->flag.packIsDynHttpMsg) {
+            cModule_ProtocolHttpMessage_t *msg = info->payload;
+            rc = httpPost(msg, info->aux.gen.msgId);
+        } else
+#endif
+        if (info->flag.packIsDynTcpIpData) {
+            cModule_ProtocolTcpIpMessage_t *msg = info->payload;
+            if (msg->dStream == false) {
+                rc = socketTcpSend(msg, info->aux.gen.msgId);
+            } else {
+                // TODO UdpSend
+            }
+        }
     return rc;
 }
 
@@ -1679,7 +1858,7 @@ static int32_t onPtPackPayloadFree(cModule_TransmitPackageInfo_t *info, bool isF
     if (info->flag.requestId == TRANSMIT_PACK_REQ_ID_RX) {
         return 0;
     }
-    
+#if CONFIG_CMODULE_INSTANCE_INIT_MODE == CONFIG_CMODULE_INSTANCE_INIT_MODE_MQTT
     if (info->flag.packIsDynMqttMsg) {
         cModule_ProtocolMqttMessage_t *msg = info->payload;
         if (msg->payload == NULL) {
@@ -1702,7 +1881,10 @@ static int32_t onPtPackPayloadFree(cModule_TransmitPackageInfo_t *info, bool isF
         if (!msg->topicConstant) {
             free(msg->topic);
         }
-    } else if (info->flag.packIsDynHttpMsg) {
+    } else
+#endif
+#if CONFIG_CMODULE_INSTANCE_INIT_MODE == CONFIG_CMODULE_INSTANCE_INIT_MODE_NONE
+    if (info->flag.packIsDynHttpMsg) {
         cModule_ProtocolHttpMessage_t *msg = info->payload;
         if (msg->onDirectWriteResponse != NULL) {
             msg->onDirectWriteResponse(&mModuleInstance.rilat.instance, info->aux.gen.msgId, msg->isWritenSuccess, isForce);
@@ -1721,6 +1903,20 @@ static int32_t onPtPackPayloadFree(cModule_TransmitPackageInfo_t *info, bool isF
             if (msg->payloadLength != 0) {
                 free(msg->payload);
             }
+        }
+    } else
+#endif
+    if (info->flag.packIsDynTcpIpData) {
+        cModule_ProtocolTcpIpMessage_t *msg = info->payload;
+        if (msg->payload == NULL) {
+            if (msg->writer.onDirectWriteResponse != NULL) {
+                msg->writer.onDirectWriteResponse(&mModuleInstance.rilat.instance, info->aux.gen.msgId, msg->writer.isWritenSuccess, isForce);
+            }
+        } else {
+            free(msg->payload);
+        }
+        if (msg->host != NULL && !msg->hostContant) {
+            free(msg->host);
         }
     }
     return 0;

@@ -454,8 +454,8 @@ extern uint32_t *_cModule_getGenMsgId(void);
 
 /*@{*/
 
-extern void cModule_init(void);
-extern void cModule_sleep(uint8_t nextSleepLevel);
+extern void cModule_init(cModule_Instance_t *ins);
+extern void cModule_sleep(cModule_Instance_t *ins,uint8_t nextSleepLevel);
 extern void cModule_loop(void *specialInstance);
 
 extern void cModule_blockFuncPoll(cModule_Instance_t *ins, uint32_t block);

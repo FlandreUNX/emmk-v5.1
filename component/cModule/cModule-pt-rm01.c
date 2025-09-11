@@ -562,6 +562,9 @@ int32_t cModule_reportData_RM01_data01_v241022(cModule_Instance_t *ins, cModule_
             
             klPtf_sprintf(buf, "%.1f", 0);
             cJSON_AddRawToObject(cjItem, "tp", buf);
+
+            cJSON_AddNumberToObject(cjItem, "bsoc", d->pio1.battety.soc);
+            cJSON_AddNumberToObject(cjItem, "bmv", d->pio1.battety.volt);
         } else if (d->pio1.addr == CMODULE_PT_RM01_PIO1_ORP_ADDR) {
             cJSON *cjItem = cJSON_AddObjectToObject(cjPl, "i");
             
@@ -573,7 +576,10 @@ int32_t cModule_reportData_RM01_data01_v241022(cModule_Instance_t *ins, cModule_
             
             klPtf_sprintf(buf, "%.1f", 0);
             cJSON_AddRawToObject(cjItem, "tp", buf);
-        } else if (d->sid == CMODULE_PT_RM01_PIO1_YD_ADDR) {
+
+            cJSON_AddNumberToObject(cjItem, "bsoc", d->pio1.battety.soc);
+            cJSON_AddNumberToObject(cjItem, "bmv", d->pio1.battety.volt);
+        } else if (d->pio1.addr == CMODULE_PT_RM01_PIO1_YD_ADDR) {
             cJSON *cjItem = cJSON_AddObjectToObject(cjPl, "i");
 
             klPtf_sprintf(buf, "%.2f", (float) d->pio1.value.ydx.ppt_x100 / 100.0f);
@@ -581,6 +587,9 @@ int32_t cModule_reportData_RM01_data01_v241022(cModule_Instance_t *ins, cModule_
 
             klPtf_sprintf(buf, "%.1f", (float) d->pio1.value.ydx.temp_x10 / 10.0f);
             cJSON_AddRawToObject(cjItem, "t", buf);
+
+            cJSON_AddNumberToObject(cjItem, "bsoc", d->pio1.battety.soc);
+            cJSON_AddNumberToObject(cjItem, "bmv", d->pio1.battety.volt);
         }
     }
     
