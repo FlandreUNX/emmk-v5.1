@@ -113,7 +113,7 @@ void SPI0_MasterSendByte(uint8_t d)
  */
 uint8_t SPI0_MasterRecvByte(void)
 {
-    R8_SPI0_CTRL_MOD &= ~RB_SPI_FIFO_DIR;
+    R8_SPI0_CTRL_MOD |= RB_SPI_FIFO_DIR; // 设置数据方向为输入
     R8_SPI0_BUFFER = 0xFF; // 启动传输
     while(!(R8_SPI0_INT_FLAG & RB_SPI_FREE));
     return (R8_SPI0_BUFFER);
@@ -276,7 +276,7 @@ void SPI0_SlaveSendByte(uint8_t d)
  *
  * @return  none
  */
-// __HIGH_CODE
+__HIGH_CODE
 void SPI0_SlaveRecv(uint8_t *pbuf, uint16_t len)
 {
     uint16_t revlen;
@@ -305,7 +305,7 @@ void SPI0_SlaveRecv(uint8_t *pbuf, uint16_t len)
  *
  * @return  none
  */
-// __HIGH_CODE
+__HIGH_CODE
 void SPI0_SlaveTrans(uint8_t *pbuf, uint16_t len)
 {
     uint16_t sendlen;
