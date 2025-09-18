@@ -528,21 +528,30 @@ int32_t cModule_reportData_RM01_data01_v241022(cModule_Instance_t *ins, cModule_
             cJSON *cjItem = cJSON_AddObjectToObject(cjPl, "i");
             
             klPtf_sprintf(buf, "%.1f", (float) d->pio1.value.dox.do_x10 / 10.0f);
-            cJSON_AddRawToObject(cjItem, "do", buf);
+            cJSON_AddRawToObject(cjItem, "dv", buf);
             
             klPtf_sprintf(buf, "%.1f", (float) d->pio1.value.dox.po_x10 / 10.0f);
-            cJSON_AddRawToObject(cjItem, "po", buf);
+            cJSON_AddRawToObject(cjItem, "pv", buf);
             
             klPtf_sprintf(buf, "%.1f", (float) d->pio1.value.dox.fdo_x10 / 10.0f);
-            cJSON_AddRawToObject(cjItem, "fdo", buf);
+            cJSON_AddRawToObject(cjItem, "fv", buf);
             
             cJSON_AddNumberToObject(cjItem, "ad", d->pio1.value.dox.ad);
             
             klPtf_sprintf(buf, "%.1f", (float) d->pio1.value.dox.temp_x10 / 10.0f);
             cJSON_AddRawToObject(cjItem, "tp", buf);
+
+            klPtf_sprintf(buf, "%.1f", (float) d->pio1.value.dox.zeroTemp_x10 / 10.0f);
+            cJSON_AddRawToObject(cjItem, "zt", buf);
+
+            klPtf_sprintf(buf, "%.1f", (float) d->pio1.value.dox.spanTemp_x10 / 10.0f);
+            cJSON_AddRawToObject(cjItem, "st", buf);
             
-            cJSON_AddNumberToObject(cjItem, "fad", d->pio1.value.dox.fcAd);
-            cJSON_AddNumberToObject(cjItem, "fdet", d->pio1.value.dox.fcDet);
+            cJSON_AddNumberToObject(cjItem, "fdv", d->pio1.value.dox.fcAd);
+            cJSON_AddNumberToObject(cjItem, "fdt", d->pio1.value.dox.fcDet);
+
+            cJSON_AddNumberToObject(cjItem, "bsoc", d->pio1.battety.soc);
+            cJSON_AddNumberToObject(cjItem, "bmv", d->pio1.battety.volt);
         } else if (d->pio1.addr == CMODULE_PT_RM01_PIO1_ZD_ADDR) {
             cJSON *cjItem = cJSON_AddObjectToObject(cjPl, "i");
             
