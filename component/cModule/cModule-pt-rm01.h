@@ -136,6 +136,8 @@ typedef struct {
                     uint16_t po_x10;
                     uint16_t fdo_x10;
                     int16_t temp_x10;
+                    int16_t zeroTemp_x10;
+                    int16_t spanTemp_x10;
                     int16_t ad;
                     int16_t fcAd;
                     uint8_t fcDet;
