@@ -17,6 +17,8 @@
 extern "C" {
 #endif
 
+#include "core_riscv.h"
+
 /**
  * @brief	GPIO_pins_define
  */

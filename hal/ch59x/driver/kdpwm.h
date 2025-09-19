@@ -155,7 +155,7 @@ extern void kdpwm_counter(kdpwm_t *kd, uint8_t enable);
 extern void kdpwm_counterReset(kdpwm_t *kd);
 extern void kdpwm_irqEnable(kdpwm_t *kd, kdpwm_Event_t evt, bool enable, kdpwm_SignalEvent_t cbEvent);
 
-#define KDPWM_CHN_DEFINE(_name, _thost, _chnNumber, \
+#define KDPWM_CHN_DEFINE(_name, _thost, \
         _gpio, _preLoad) \
     static kdpwm_ChannelVa_t _KDPWM_CHN_IVA(_name) = {0}; \
     const kdpwm_t _KDPWM_CHN_INAME(_name) = { \
@@ -166,7 +166,6 @@ extern void kdpwm_irqEnable(kdpwm_t *kd, kdpwm_Event_t evt, bool enable, kdpwm_S
                 .init = { \
                     .preLoad = _preLoad, \
                 }, \
-                .index = KDPWM_CHN_NUMBER(_chnNumber) - 1, \
             }, \
             .pin = { \
                 .gpio = (kdgpio_t *) _gpio, \
