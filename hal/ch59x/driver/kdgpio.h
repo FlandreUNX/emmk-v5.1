@@ -104,7 +104,7 @@ struct kdgpio {
 #define KDGPIO_PIN_DOWN_LEVEL_HIGH    1
 #define KDGPIO_PIN_DOWN_LEVEL_IGNORE  -1
 
-#define KDGPIO_NUM(_pinNumber) _pinNumber
+#define KDGPIO_PIN(_pinNumber) _pinNumber
 #define _KDGPIO_PIN(_pinNumber) GPIO_Pin_##_pinNumber
 #define _KDGPIO_PORT(_base) ((uint32_t) BA_P##_base)
 #define KDGPIO_PORT(_base) _base

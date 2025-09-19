@@ -29,6 +29,7 @@
 
 #include "./driver/kdmisc.h"
 #include "./driver/kdgpio.h"
+#include "./driver/kdpwm.h"
 #include "./driver/kduart.h"
 #include "./driver/kdimtd.h"
 //#include "./driver/kdi2c.h"
