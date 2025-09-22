@@ -36,7 +36,8 @@ int32_t kdpwm_init(kdpwm_t *kd) {
 
     if (kd->_host->isTimx) {
         R32_TMR_CNT_END(kd->_host->ins.timx) = kd->_host->cfg.timx.arr;
-        R8_TMR_CTRL_MOD(kd->_host->ins.timx) = RB_TMR_ALL_CLEAR;
+        R8_TMR_CTRL_MOD(kd->_host->ins.timx) = 0;
+        R8_TMR_CTRL_MOD(kd->_host->ins.timx) |= RB_TMR_ALL_CLEAR;
         R8_TMR_CTRL_MOD(kd->_host->ins.timx) |= ((uint32_t) kd->_host->cfg.timx.outputPol) << 4;
     }
     return 0;
@@ -125,7 +126,7 @@ uint32_t kdpwm_getAutoReload(kdpwm_t *kd) {
 
 void kdpwm_setDuty(kdpwm_t *kd, uint32_t duty) {
     if (kd->_host->isTimx) {
-        R32_TMR_FIFO(kd->_host->ins.timx);
+        R32_TMR_FIFO(kd->_host->ins.timx) = duty;
     }
 }
 
