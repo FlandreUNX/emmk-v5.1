@@ -588,8 +588,8 @@ extern "C" {
 #define R8_PB_PD_DRV_2      (*((PUINT8V)0x400010D6))  // RW, PB pulldown for input or PB driving capability for output byte 2
 
 /* GPIO register address offset and bit define */
-#define BA_PA               ((PUINT8V)0x400010A0)     // point GPIO PA base address
-#define BA_PB               ((PUINT8V)0x400010C0)     // point GPIO PB base address
+#define BA_PA               (0x400010A0)     // point GPIO PA base address
+#define BA_PB               (0x400010C0)     // point GPIO PB base address
 #define GPIO_DIR            0x00
 #define GPIO_DIR_0          0x00
 #define GPIO_DIR_1          0x01
@@ -792,10 +792,10 @@ extern "C" {
 
 /* Timer register address offset and bit define */
 #define TMR_FIFO_SIZE       8                         // timer FIFO size (depth)
-#define BA_TMR0             ((PUINT8V)0x40002000)     // point TMR0 base address
-#define BA_TMR1             ((PUINT8V)0x40002400)     // point TMR1 base address
-#define BA_TMR2             ((PUINT8V)0x40002800)     // point TMR2 base address
-#define BA_TMR3             ((PUINT8V)0x40002C00)     // point TMR3 base address
+#define BA_TMR0             (0x40002000)     // point TMR0 base address
+#define BA_TMR1             (0x40002400)     // point TMR1 base address
+#define BA_TMR2             (0x40002800)     // point TMR2 base address
+#define BA_TMR3             (0x40002C00)     // point TMR3 base address
 #define TMR_CTRL_MOD        0
 #define  RB_TMR_MODE_IN     0x01                      // RW, timer in mode: 0=timer/PWM, 1=capture/count
 #define  RB_TMR_ALL_CLEAR   0x02                      // RW, force clear timer FIFO and count

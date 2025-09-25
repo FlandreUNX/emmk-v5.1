@@ -63,11 +63,9 @@ __attribute__((section("noncacheable"))) __attribute__((aligned(alignbytes))) va
 #define R8_UART_RBR(x) (*(__IO uint8_t *) (x + UART_RBR))
 #define R16_UART_DL(x) (*(__IO uint16_t *) (x + UART_DLL))
 
-#define R32_TMR_CONTROL(x)      (*(__IO uint32_t *) (x + TMR_CTRL_MOD))
 #define R8_TMR_CTRL_MOD(x)      (*(__IO uint8_t *) (x + TMR_CTRL_MOD))
 #define R8_TMR_INTER_EN(x)      (*(__IO uint8_t *) (x + TMR_INTER_EN))
 #define R8_TMR_INT_FLAG(x)      (*(__IO uint8_t *) (x + TMR_INT_FLAG))
-#define R8_TMR_FIFO_COUNT(x)      (*(__IO uint8_t *) (x + TMR_FIFO_COUNT))
 #define R32_TMR_COUNT(x)      (*(__IO uint32_t *) (x + TMR_COUNT))
 #define R32_TMR_CNT_END(x)      (*(__IO uint32_t *) (x + TMR_CNT_END))
 #define R32_TMR_FIFO(x)      (*(__IO uint32_t *) (x + TMR_FIFO))

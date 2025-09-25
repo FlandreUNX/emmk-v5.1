@@ -13,12 +13,22 @@
 /*@{*/
 
 void _gpio_modeConfig(uint32_t port, uint32_t pin, kdgpio_Mode_t mode) {
+    if (port == (uint32_t) BA_PB) {
+        R32_PIN_CONFIG2 &= ~(pin << 16);
+    } else {
+        R32_PIN_CONFIG2 &= ~pin;
+    }
+
     switch (mode) {
         case KDGPIO_MODE_INPUT: {
             R32_GPIO_DIR(port) &= ~pin;
             break;
         }
-        case KDGPIO_MODE_AF_PP:
+        case KDGPIO_MODE_AF_PP: {
+            R32_GPIO_PD_DRV(port) &= ~pin;
+            R32_GPIO_DIR(port) |= pin;
+            break;
+        }
         case KDGPIO_MODE_OUTPUT_PP: {
             R32_GPIO_PD_DRV(port) |= pin;
             R32_GPIO_DIR(port) |= pin;
@@ -29,6 +39,14 @@ void _gpio_modeConfig(uint32_t port, uint32_t pin, kdgpio_Mode_t mode) {
             break;
         }
         case KDGPIO_MODE_AIN: {
+            R32_GPIO_PD_DRV(port) &= ~pin;
+            R32_GPIO_DIR(port) &= ~pin;
+            R32_GPIO_CLR(port) |= pin;
+            if (port == (uint32_t) BA_PB) {
+                R32_PIN_CONFIG2 |= pin << 16;
+            } else {
+                R32_PIN_CONFIG2 |= pin;
+            }
             break;
         }
     }
@@ -37,13 +55,13 @@ void _gpio_modeConfig(uint32_t port, uint32_t pin, kdgpio_Mode_t mode) {
 
 void _gpio_pullConfig(uint32_t port, uint32_t pin, kdgpio_PullResistor_t pull) {
     if (pull == KDGPIO_PULL_UP) {
-        R32_GPIO_PD_DRV(port) &= ~pin;
+        R32_GPIO_PD_DRV(port) &= ~(pin);
         R32_GPIO_PU(port) |= pin;
     } else if (pull == KDGPIO_PULL_DOWN) {
-        R32_GPIO_PD_DRV(port) |= pin;
+        R32_GPIO_PD_DRV(port) |= (pin);
         R32_GPIO_PU(port) &= ~pin;
     } else {
-        R32_GPIO_PD_DRV(port) &= ~pin;
+        R32_GPIO_PD_DRV(port) &= ~(pin);
         R32_GPIO_PU(port) &= ~pin;
     }
 }
@@ -63,73 +81,47 @@ void _gpio_afConfig(uint32_t port, uint32_t number, uint32_t af) {
 
 
 static void gpio_configIt(uint32_t b, uint32_t pin, GPIOITModeTpDef mode) {
-    uint32_t clr = b + GPIO_OUT;
     uint32_t out = b + GPIO_OUT;
-    uint32_t intMode;
-    if (b == (uint32_t) BA_PA) {
-        intMode = R16_PA_INT_MODE;
-    } else {
-        intMode = R16_PB_INT_MODE;
-    }
+    uint32_t intModeOffset = b == (uint32_t) BA_PB ? 16 : 0;
 
     if (mode == GPIO_ITMode_LowLevel) {
-        *((__IO uint32_t *) intMode) &= ~pin;
-        *((__IO uint32_t *) clr) |= pin;
+        R32_GPIO_INT_MODE &= ~(pin << intModeOffset);
+        *((__IO uint32_t *) out) &= ~pin;
     } else if (mode == GPIO_ITMode_HighLevel) {
-        *((__IO uint32_t *) intMode) &= ~pin;
+        R32_GPIO_INT_MODE &= ~(pin << intModeOffset);
         *((__IO uint32_t *) out) |= pin;
     } else if (mode == GPIO_ITMode_FallEdge) {
-        *((__IO uint32_t *) intMode) |= pin;
-        *((__IO uint32_t *) clr) |= pin;
+        R32_GPIO_INT_MODE |= (pin << intModeOffset);
+        *((__IO uint32_t *) out) &= ~pin;
     } else if (mode == GPIO_ITMode_RiseEdge) {
-        *((__IO uint32_t *) intMode) |= pin;
+        R32_GPIO_INT_MODE |= (pin << intModeOffset);
         *((__IO uint32_t *) out) |= pin;
     }
 }
 
 static void gpio_clearIt(uint32_t b, uint32_t pin) {
-    uint32_t intIf;
+    uint32_t offset = b == BA_PB ? 16 : 0;
 
-    if (b == (uint32_t) BA_PA) {
-        intIf = (uint32_t) &R16_PA_INT_IF;
-    } else {
-        intIf = (uint32_t) &R16_PB_INT_IF;
-    }
-
-    *((__IO uint16_t *) intIf) = pin;
+    R32_GPIO_INT_IF = (pin << offset);
 }
 
 
 static uint32_t gpio_getIt(uint32_t b, uint32_t pin) {
-    uint32_t intIf;
+    uint32_t offset = b == BA_PB ? 16 : 0;
 
-    if (b == (uint32_t) BA_PA) {
-        intIf = (uint32_t) &R16_PA_INT_IF;
-    } else {
-        intIf = (uint32_t) &R16_PB_INT_IF;
-    }
-
-    return *((__IO uint16_t *) intIf) & pin;
+    return R32_GPIO_INT_IF & (pin << offset);
 }
 
-static void gpio_enableIt(uint32_t b, uint32_t pin, bool en) {
-    uint32_t intIf;
-    uint32_t intEn;
 
-    if (b == (uint32_t) BA_PA) {
-        intIf = (uint32_t) &R16_PA_INT_IF;
-        intEn = (uint32_t) &R16_PA_INT_EN;
-    } else {
-        intIf = (uint32_t) &R16_PB_INT_IF;
-        intEn = (uint32_t) &R16_PB_INT_EN;
-    }
+static void gpio_enableIt(uint32_t b, uint32_t pin, bool en) {
+    uint32_t offset = b == BA_PB ? 16 : 0;
 
     if (en) {
-        *((__IO uint16_t *) intIf) = pin;
-        *((__IO uint16_t *) intEn) |= pin;
+        R32_GPIO_INT_IF = (pin << offset);
+        R32_GPIO_INT_EN |= (pin << offset);
     } else {
-        *((__IO uint16_t *) intEn) &= ~pin;
-        *((__IO uint16_t *) intIf) = pin;
+        R32_GPIO_INT_EN &= ~(pin << offset);
+        R32_GPIO_INT_IF = (pin << offset);
     }
 }
 

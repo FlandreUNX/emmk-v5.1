@@ -35,10 +35,11 @@ int32_t kdpwm_init(kdpwm_t *kd) {
     kd->_host->enableFunc(kd);
 
     if (kd->_host->isTimx) {
-        R32_TMR_CNT_END(kd->_host->ins.timx) = kd->_host->cfg.timx.arr;
-        R8_TMR_CTRL_MOD(kd->_host->ins.timx) = 0;
-        R8_TMR_CTRL_MOD(kd->_host->ins.timx) |= RB_TMR_ALL_CLEAR;
+        R8_TMR_CTRL_MOD(kd->_host->ins.timx) = RB_TMR_ALL_CLEAR;
+        R8_TMR_CTRL_MOD(kd->_host->ins.timx) &= ~RB_TMR_ALL_CLEAR;
         R8_TMR_CTRL_MOD(kd->_host->ins.timx) |= ((uint32_t) kd->_host->cfg.timx.outputPol) << 4;
+
+        R32_TMR_CNT_END(kd->_host->ins.timx) = kd->_host->cfg.timx.arr;
     }
     return 0;
 }
@@ -73,10 +74,6 @@ int32_t kdpwm_powerUp(kdpwm_t *kd) {
             kd->_config.pin.gpio->_config.base.number, 
             0);
     }
-
-    if (kd->_host->isTimx) {
-        R8_TMR_CTRL_MOD(kd->_host->ins.timx) |= RB_TMR_OUT_EN;
-    }
     return 0;
 }
 
@@ -88,11 +85,6 @@ int32_t kdpwm_powerDown(kdpwm_t *kd) {
             0);
         kdgpio_powerDown(kd->_config.pin.gpio);
     }
-
-    if (kd->_host->isTimx) {
-        R8_TMR_CTRL_MOD(kd->_host->ins.timx) &= ~RB_TMR_OUT_EN;
-    }
-
     return 0;
 }
 
@@ -143,8 +135,10 @@ void kdpwm_counter(kdpwm_t *kd, uint8_t enable) {
     if (kd->_host->isTimx) {
         if (enable) {
             R8_TMR_CTRL_MOD(kd->_host->ins.timx) |= RB_TMR_COUNT_EN;
+            R8_TMR_CTRL_MOD(kd->_host->ins.timx) |= RB_TMR_OUT_EN;
         } else {
             R8_TMR_CTRL_MOD(kd->_host->ins.timx) &= ~RB_TMR_COUNT_EN;
+            R8_TMR_CTRL_MOD(kd->_host->ins.timx) &= ~RB_TMR_OUT_EN;
         }
     }
 }
@@ -152,6 +146,7 @@ void kdpwm_counter(kdpwm_t *kd, uint8_t enable) {
 
 void kdpwm_counterReset(kdpwm_t *kd) {
     R8_TMR_CTRL_MOD(kd->_host->ins.timx) |= RB_TMR_ALL_CLEAR;
+    R8_TMR_CTRL_MOD(kd->_host->ins.timx) &= ~RB_TMR_ALL_CLEAR;
 }
 
 
