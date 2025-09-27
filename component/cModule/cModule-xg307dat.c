@@ -233,7 +233,7 @@ static int32_t reportRda1(char *payload, uint32_t payloadLength) {
     
     rilat_directWrite(&mModuleInstance.rilat.instance, (uint8_t *) AT_RDA1, strlen(AT_RDA1), 0);
     
-    rilat_writeLine(&mModuleInstance.rilat.instance, payload, NULL, 10000);
+    rilat_writeLine(&mModuleInstance.rilat.instance, payload, NULL, 1);
 
 //    klTmcd_t wait;
 //    klTmcd_countDownMs(&wait, 15000);
