@@ -189,7 +189,7 @@ static int32_t checkAT(void) {
         rilat_freeResponse(&mModuleInstance.rilat.instance, response);
         response = NULL;
 
-        if (mModuleInstance.state.urcResponseFlags & CMODULE_URC_FLAG_STACK_BLOCK) {
+        if (cModule_isBlocking(&mModuleInstance)) {
             isSuccess = 0;
             break;
         }
