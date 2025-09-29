@@ -26,7 +26,8 @@
 
 static int32_t sectorErase(kdimtd_t *kd, uint32_t addr) {
     FLASH_Erase(addr);
-    
+    DMA->EN = 1;
+
     return 0;
 }
 
@@ -40,6 +41,7 @@ static int32_t pageProgram(kdimtd_t *kd, uint32_t addr, uint8_t *data, uint16_t 
         }
 
         FLASH_Write(addr, (uint32_t *) (data), wlen / 4);
+        DMA->EN = 1;
 
         addr += kd->_instance.pageSize;
         data += kd->_instance.pageSize;
