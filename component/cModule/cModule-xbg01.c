@@ -547,7 +547,7 @@ static int32_t onPtPackIdCustom(cModule_TransmitPackageInfo_t *info) {
 }
 
 
-static int32_t onPtPackPayloadFree(cModule_TransmitPackageInfo_t *info) {
+static int32_t onPtPackPayloadFree(cModule_TransmitPackageInfo_t *info, bool isForce) {
     return 0;
 }
 
