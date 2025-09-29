@@ -120,7 +120,7 @@ static int32_t onPtPackIdTransmit(cModule_TransmitPackageInfo_t *info);
 
 static int32_t onPtPackIdCustom(cModule_TransmitPackageInfo_t *info);
 
-static int32_t onPtPackPayloadFree(cModule_TransmitPackageInfo_t *info);
+static int32_t onPtPackPayloadFree(cModule_TransmitPackageInfo_t *info, bool isForce);
 
 static const cModule_Callback_t mCallback = {
         .onInstanceInit = onInstanceInit,
@@ -227,41 +227,41 @@ static void reboot(void) {
 
 static int32_t reportRda1(char *payload, uint32_t payloadLength) {
     static const char AT_RDA1[] = "AX+RDA1=";
-    int32_t rc = -1;
-    Rilat_AtResponse_t *response = NULL;
+    // int32_t rc = -1;
+    // Rilat_AtResponse_t *response = NULL;
     
     mModuleInstance.state.urcResponseFlags &= ~(CMODULE_URC_FLAG_PUB_SUCCESS | CMODULE_URC_FLAG_PUB_FAILED);
     
     rilat_directWrite(&mModuleInstance.rilat.instance, (uint8_t *) AT_RDA1, strlen(AT_RDA1), 0);
+    rilat_writeLine(&mModuleInstance.rilat.instance, payload, NULL, 10);
+    // if (rilat_writeLine(&mModuleInstance.rilat.instance, payload, &response, 1) != 0 || response == NULL || response->success == 0) {
+    //     rc = -1;
+    //     goto _l_retryExit;
+    // }
+    //
+    // rilat_freeResponse(&mModuleInstance.rilat.instance, response);
     
-    if (rilat_writeLine(&mModuleInstance.rilat.instance, payload, &response, 30000) != 0 || response == NULL || response->success == 0) {
-        rc = -1;
-        goto _l_retryExit;
-    }
-    
-    rilat_freeResponse(&mModuleInstance.rilat.instance, response);
-    
-    klTmcd_t wait;
-    klTmcd_countDownMs(&wait, 15000);
-    while (!klTmcd_isExpired(&wait)) {
-        if (mModuleInstance.state.urcResponseFlags & CMODULE_URC_FLAG_PUB_SUCCESS
-                || mModuleInstance.state.urcResponseFlags & CMODULE_URC_FLAG_PUB_FAILED) {
-            break;
-        }
-        if (_cModule_wait(&mModuleInstance, 1, true) < 0) {
-            wait = 0;
-            break;
-        }
-    }
-    if (wait == 0 || klTmcd_isExpired(&wait) || mModuleInstance.state.urcResponseFlags & CMODULE_URC_FLAG_PUB_FAILED) {
-        return -1;
-    }
+    // qSTimer_t wait;
+    // qSTimer_Set(&wait, 15000);
+    // while (!qSTimer_Expired(&wait)) {
+    //     if (mModuleInstance.state.urcResponseFlags & CMODULE_URC_FLAG_PUB_SUCCESS
+    //             || mModuleInstance.state.urcResponseFlags & CMODULE_URC_FLAG_PUB_FAILED) {
+    //         break;
+    //     }
+    //     if (_cModule_wait(&mModuleInstance, 1, true) < 0) {
+    //         wait = 0;
+    //         break;
+    //     }
+    // }
+    // if (qSTimer_Expired(&wait) || mModuleInstance.state.urcResponseFlags & CMODULE_URC_FLAG_PUB_FAILED) {
+    //     return -1;
+    // }
     
     return 0;
     
     _l_retryExit:
     mModuleInstance.aux.initRetryCount++;
-    rilat_freeResponse(&mModuleInstance.rilat.instance, response);
+    // rilat_freeResponse(&mModuleInstance.rilat.instance, response);
     return -1;
 }
 
@@ -353,8 +353,8 @@ static void onReboot(uint8_t isPowerUpRequest) {
 
 
 static void onLoop(void) {
-    if (klTmcd_isExpired(&mModuleInstance.aux.pollTimer)) {
-        klTmcd_countDown(&mModuleInstance.aux.pollTimer, 60);
+    if (qSTimer_Expired(&mModuleInstance.aux.pollTimer)) {
+        qSTimer_Set(&mModuleInstance.aux.pollTimer, 60 * 1000);
 
         AT();
         if (AT() != 0) {
@@ -513,7 +513,7 @@ RILAT_COMMAND_MATCH_DEFINE(_RDA1Q, "+RDA1Q:", data, len) {
 static void onInitStep(uint8_t step) {
     mModuleInstance.aux.initRetryCount = 0;
     mModuleInstance.state.processStep = CMODULE_PROCESS_STEP_INIT_COMPLETED;
-    klTmcd_countDownMs(&mModuleInstance.aux.pollTimer, 300);
+    qSTimer_Set(&mModuleInstance.aux.pollTimer, 300);
     mModuleInstance.aux.nextPollSec = 120;
 }
 
@@ -616,10 +616,10 @@ static void onInstanceInit(void) {
     CMPMU.flag._ = 0;
     CMPMU.flag.isReady = 1;
     CMPMU.sleep.currentSleepLevel = COMPONENT_SLEEP_LV_RUN;
-    klTmcd_countDownMs(&CMPMU.aux.idleTimer, CONFIG_CMODULE_IDLE_TIMEOUT_MS);
+    qSTimer_Set(&CMPMU.aux.idleTimer, CONFIG_CMODULE_IDLE_TIMEOUT_MS);
 #endif
     
-    klTmcd_countDownMs(&mModuleInstance.aux.pollTimer, 200);
+    qSTimer_Set(&mModuleInstance.aux.pollTimer, 200);
     mModuleInstance.state.processStep = 0;
     mModuleInstance.aux.initRetryCount = 0;
     mModuleInstance.aux.flag.hasInit = 0;
@@ -650,7 +650,7 @@ static void onInstancePmu(uint8_t wakeup1sleep0) {
         mModuleInstance.state.processStep = 0;
         mModuleInstance.state.urcResponseFlags = 0;
         mModuleInstance.aux.flag.hasWakeupSuccessHappend = 1;
-        klTmcd_countDownMs(&mModuleInstance.aux.pollTimer, 200);
+        qSTimer_Set(&mModuleInstance.aux.pollTimer, 200);
 
         __onHalWakeup();
         __onSoftWakeup();
