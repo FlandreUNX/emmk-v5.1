@@ -100,21 +100,21 @@ static void gpio_configIt(uint32_t b, uint32_t pin, GPIOITModeTpDef mode) {
 }
 
 static void gpio_clearIt(uint32_t b, uint32_t pin) {
-    uint32_t offset = b == BA_PB ? 16 : 0;
+    uint32_t offset = b == U32_BA_PB ? 16 : 0;
 
     R32_GPIO_INT_IF = (pin << offset);
 }
 
 
 static uint32_t gpio_getIt(uint32_t b, uint32_t pin) {
-    uint32_t offset = b == BA_PB ? 16 : 0;
+    uint32_t offset = b == U32_BA_PB ? 16 : 0;
 
     return R32_GPIO_INT_IF & (pin << offset);
 }
 
 
 static void gpio_enableIt(uint32_t b, uint32_t pin, bool en) {
-    uint32_t offset = b == BA_PB ? 16 : 0;
+    uint32_t offset = b == U32_BA_PB ? 16 : 0;
 
     if (en) {
         R32_GPIO_INT_IF = (pin << offset);

@@ -95,17 +95,19 @@ __INTERRUPT void SysTick_Handler(void) {
 
 void kdmisc_systickDisable(void) {
     SysTick->CTLR &= ~SysTick_CTLR_STE;
+    SysTick->SR &= ~SysTick_SR_CNTIF;
 }
 
 
 void kdmisc_systickEnable(void) {
+    SysTick->SR &= ~SysTick_SR_CNTIF;
     SysTick->CTLR |= SysTick_CTLR_STE;
 }
 
 
 int32_t kdmisc_systickInit(uint32_t freq) {
     SysTick_Config(GetSysClock() / freq);
-    
+    PFIC_SetPriority(SysTick_IRQn, 0x14);
     return 0;
 }
 

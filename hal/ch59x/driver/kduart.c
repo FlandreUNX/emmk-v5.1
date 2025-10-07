@@ -98,11 +98,11 @@ int32_t kduart_init(kduart_t *kd) {
     R8_UART_LCR(kd->_config.uart.uart) &= ~RB_LCR_WORD_SZ;
     R8_UART_LCR(kd->_config.uart.uart) |= FIELD_PREP(RB_LCR_WORD_SZ, (uint32_t) kd->_config.uart.init.wordLength);
 
-    // if (kd->_config.pin.tx.enable) {
-    //     R8_UART_IER(kd->_config.uart.uart) = RB_IER_TXD_EN;
-    // } else {
-    //     R8_UART_IER(kd->_config.uart.uart) = 0;
-    // }
+    if (kd->_config.pin.tx.gpio != NULL) {
+        R8_UART_IER(kd->_config.uart.uart) = RB_IER_TXD_EN;
+    } else {
+        R8_UART_IER(kd->_config.uart.uart) = 0;
+    }
 
     R8_UART_IER(kd->_config.uart.uart) |= RB_IER_RECV_RDY;
     R8_UART_DIV(kd->_config.uart.uart) = 1;

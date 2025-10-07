@@ -35,15 +35,11 @@ signed short ADC_DataCalib_Rough(void) // 采样数据粗调,获取偏差值
     R8_ADC_CFG &= ~RB_ADC_DIFF_EN; // 关闭差分
 
     R8_ADC_CONVERT |= RB_ADC_START;
-    while(R8_ADC_CONVERT & RB_ADC_START) {
-        WWDG_SetCounter(0);
-    }
+    while(R8_ADC_CONVERT & RB_ADC_START);
     for(i = 0; i < 16; i++)
     {
         R8_ADC_CONVERT |= RB_ADC_START;
-        while(R8_ADC_CONVERT & RB_ADC_START) {
-            WWDG_SetCounter(0);
-        }
+        while(R8_ADC_CONVERT & RB_ADC_START);
         sum += (~R16_ADC_DATA) & RB_ADC_DATA;
     }
     sum = (sum + 8) >> 4;
