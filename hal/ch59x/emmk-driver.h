@@ -23,7 +23,7 @@
 #include "CH59x_common.h"
 #include "HAL.h"
 #include "CH592SFR.h"
-#include "CONFIG.h"
+#include "../../../CONFIG.h"
 
 #include "core_riscv.h"
 
