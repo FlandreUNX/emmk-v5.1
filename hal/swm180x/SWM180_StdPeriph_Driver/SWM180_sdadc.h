@@ -3,17 +3,17 @@
 
 
 typedef struct {
-	uint8_t clk_src;		//ADC×ª»»Ê±ÖÓÔ´£ºSDADC_CLKSRC_HRC_DIV8¡¢ADC_CLKSRC_XTAL
-	uint16_t channels;		//ADC×ª»»Í¨µÀÑ¡ÖÐ£¬SDADC_CH0¡¢SDADC_CH1¡¢... ... ¡¢SDADC_CH5¼°Æä×éºÏ£¨¼´¡°°´Î»»ò¡±ÔËËã£©
-	uint8_t out_cali;		//SDADC_OUT_RAW ADCÊä³öÎÞÐ£×¼µÄ×ª»»½á¹û    SDADC_OUT_CALIED ADCÊä³öÐ£×¼ºóµÄ×ª»»½á¹û
-	uint8_t refp_sel;		//SDADC_REFP_AVDD Ê¹ÓÃAVDD×÷ÎªREFP    SDADC_REFP_VREFIN Ê¹ÓÃÍâ²¿VREFINÒý½ÅÉÏ×÷ÎªREFP
-	uint8_t trig_src;		//ADC´¥·¢·½Ê½£ºADC_TRIGSRC_SW¡¢ADC_TRIGSRC_TIMR3
-	uint8_t Continue;		//ÔÚÈí¼þ´¥·¢Ä£Ê½ÏÂ£º1 Á¬Ðø×ª»»Ä£Ê½£¬Æô¶¯ºóÒ»Ö±²ÉÑù¡¢×ª»»£¬Ö±µ½Èí¼þÇå³ýSTARTÎ»
-							//                  0 µ¥´Î×ª»»Ä£Ê½£¬×ª»»Íê³ÉºóSTARTÎ»×Ô¶¯Çå³ýÍ£Ö¹×ª»»
-	uint8_t EOC_IEn;		//EOCÖÐ¶ÏÊ¹ÄÜ£¬1 Ê¹ÄÜÖÐ¶Ï    0 ½ûÖ¹ÖÐ¶Ï
-	uint8_t OVF_IEn;		//OVFÖÐ¶ÏÊ¹ÄÜ£¬1 Ê¹ÄÜÖÐ¶Ï    0 ½ûÖ¹ÖÐ¶Ï
-	uint8_t HFULL_IEn;		//FIFO°ëÂúÖÐ¶ÏÊ¹ÄÜ£¬1 Ê¹ÄÜÖÐ¶Ï    0 ½ûÖ¹ÖÐ¶Ï
-	uint8_t FULL_IEn;		//FIFOÂúÖÐ¶ÏÊ¹ÄÜ£¬1 Ê¹ÄÜÖÐ¶Ï    0 ½ûÖ¹ÖÐ¶Ï
+	uint8_t clk_src;		//ADC×ªï¿½ï¿½Ê±ï¿½ï¿½Ô´ï¿½ï¿½SDADC_CLKSRC_HRC_DIV8ï¿½ï¿½ADC_CLKSRC_XTAL
+	uint16_t channels;		//ADC×ªï¿½ï¿½Í¨ï¿½ï¿½Ñ¡ï¿½Ð£ï¿½SDADC_CH0ï¿½ï¿½SDADC_CH1ï¿½ï¿½... ... ï¿½ï¿½SDADC_CH5ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ã£©
+	uint8_t out_cali;		//SDADC_OUT_RAW ADCï¿½ï¿½ï¿½ï¿½ï¿½Ð£×¼ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½    SDADC_OUT_CALIED ADCï¿½ï¿½ï¿½Ð£×¼ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½
+	uint8_t refp_sel;		//SDADC_REFP_AVDD Ê¹ï¿½ï¿½AVDDï¿½ï¿½ÎªREFP    SDADC_REFP_VREFIN Ê¹ï¿½ï¿½ï¿½â²¿VREFINï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎªREFP
+	uint8_t trig_src;		//ADCï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ADC_TRIGSRC_SWï¿½ï¿½ADC_TRIGSRC_TIMR3
+	uint8_t Continue;		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£Ê½ï¿½Â£ï¿½1 ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½Ä£Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½STARTÎ»
+							//                  0 ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½Ä£Ê½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½Éºï¿½STARTÎ»ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Í£Ö¹×ªï¿½ï¿½
+	uint8_t EOC_IEn;		//EOCï¿½Ð¶ï¿½Ê¹ï¿½Ü£ï¿½1 Ê¹ï¿½ï¿½ï¿½Ð¶ï¿½    0 ï¿½ï¿½Ö¹ï¿½Ð¶ï¿½
+	uint8_t OVF_IEn;		//OVFï¿½Ð¶ï¿½Ê¹ï¿½Ü£ï¿½1 Ê¹ï¿½ï¿½ï¿½Ð¶ï¿½    0 ï¿½ï¿½Ö¹ï¿½Ð¶ï¿½
+	uint8_t HFULL_IEn;		//FIFOï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½Ê¹ï¿½Ü£ï¿½1 Ê¹ï¿½ï¿½ï¿½Ð¶ï¿½    0 ï¿½ï¿½Ö¹ï¿½Ð¶ï¿½
+	uint8_t FULL_IEn;		//FIFOï¿½ï¿½ï¿½Ð¶ï¿½Ê¹ï¿½Ü£ï¿½1 Ê¹ï¿½ï¿½ï¿½Ð¶ï¿½    0 ï¿½ï¿½Ö¹ï¿½Ð¶ï¿½
 } SDADC_InitStructure;
 
 
@@ -26,7 +26,7 @@ typedef struct {
 
 
 #define SDADC_CLKSRC_HRC_DIV8	0
-#define SDADC_CLKSRC_XTAL_DIV8	1	//²»ÄÜ³¬¹ý6MHz
+#define SDADC_CLKSRC_XTAL_DIV8	1	//ï¿½ï¿½ï¿½Ü³ï¿½ï¿½ï¿½6MHz
 
 #define SDADC_OUT_RAW			0
 #define SDADC_OUT_CALIED		1
@@ -34,8 +34,8 @@ typedef struct {
 #define SDADC_REFP_AVDD			0
 #define SDADC_REFP_REFP			1
 
-#define SDADC_TRIGSRC_SW		0	//Èí¼þ´¥·¢£¬¼´SDADC->STARTÐ´1Æô¶¯×ª»»
-#define SDADC_TRIGSRC_TIMR3		1	//TIMR3Òç³öÆô¶¯×ª»»
+#define SDADC_TRIGSRC_SW		0	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½SDADC->STARTÐ´1ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½
+#define SDADC_TRIGSRC_TIMR3		1	//TIMR3ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½
 
 #define SDADC_CFG_A				0
 #define SDADC_CFG_B				1
@@ -50,9 +50,9 @@ typedef struct {
 #define SDADC_CFG_GAIN_1DIV2	7
 
 
-#define SDADC_CALI_COM_GND			0	//Ð£×¼Í¨µÀ¹«¹²¶ËÎªGND
-#define SDADC_CALI_COM_VDD_1DIV2	1	//Ð£×¼Í¨µÀ¹«¹²¶ËÎªVDD/2
-#define SDADC_CALI_COM_VDD			2	//Ð£×¼Í¨µÀ¹«¹²¶ËÎªVDD
+#define SDADC_CALI_COM_GND			0	//Ð£×¼Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎªGND
+#define SDADC_CALI_COM_VDD_1DIV2	1	//Ð£×¼Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎªVDD/2
+#define SDADC_CALI_COM_VDD			2	//Ð£×¼Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎªVDD
 
 
 void SDADC_Init(SDADC_TypeDef * SDADCx, SDADC_InitStructure * initStruct);
