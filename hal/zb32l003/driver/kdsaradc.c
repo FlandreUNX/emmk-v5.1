@@ -117,22 +117,20 @@ void kdsaradc_convertStart(kdsaradc_t *kd) {
     if (kd->_config.channel >= KDSARADC_CHANNEL_FAKE_BASE) {
         return;
     }
-    if (emmkDriver_initRefsCountUp(&kd->_config.host->_va->startRefs) != 0) {
-        return;
-    }
 
     uint32_t cr2 = ADC->CR2;
+
+#ifdef CONFIG_USE_ZB32L030
     cr2 &= ~GENMASK(18, 17);
     cr2 |= FIELD_PREP(GENMASK(18, 17), (kd->_config.channel) / 8);
+#endif
+
     cr2 |= 1 << ((kd->_config.channel) % 8);
     ADC->CR2 = cr2;
 }
 
 void kdsaradc_convertStop(kdsaradc_t *kd) {
     if (kd->_config.channel >= KDSARADC_CHANNEL_FAKE_BASE) {
-        return;
-    }
-    if (emmkDriver_initRefsCountDown(&kd->_config.host->_va->startRefs) != 0) {
         return;
     }
 
