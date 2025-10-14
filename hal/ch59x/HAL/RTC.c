@@ -6,7 +6,7 @@
  * Description        : RTC配置及其初始化
  *********************************************************************************
  * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
- * Attention: This software (modified or not) and binary are used for 
+ * Attention: This software (modified or not) and binary are used for
  * microcontroller manufactured by Nanjing Qinheng Microelectronics.
  *******************************************************************************/
 
@@ -103,15 +103,10 @@ void HAL_TimeInit(void)
     LSECFG_Current(LSE_RCur_100);
     Lib_Calibration_LSI();
 #else
-    uint8_t x32K_c;
-    x32K_c = R8_XT32K_TUNE;
-    x32K_c = (x32K_c & 0x0f) | (LSECap_2p << 4);
-
     sys_safe_access_enable();
     R8_CK32K_CONFIG &= ~RB_CLK_INT32K_PON;
     sys_safe_access_disable();
     sys_safe_access_enable();
-    R8_XT32K_TUNE = x32K_c;
     R8_CK32K_CONFIG |= RB_CLK_OSC32K_XT | RB_CLK_XT32K_PON;
     sys_safe_access_disable();
 #endif

@@ -108,7 +108,7 @@ void CH59x_BLEInit(void)
     bleConfig_t cfg;
     if(tmos_memcmp(VER_LIB, VER_FILE, strlen(VER_FILE)) == FALSE)
     {
-        PRINTF("head file error...\n");
+        PRINT("head file error...\n");
         while(1);
     }
 
@@ -127,7 +127,7 @@ void CH59x_BLEInit(void)
 #if(defined(BLE_SNV)) && (BLE_SNV == TRUE)
     if((BLE_SNV_ADDR + BLE_SNV_BLOCK * BLE_SNV_NUM) > (0x78000 - FLASH_ROM_MAX_SIZE))
     {
-        PRINTF("SNV config error...\n");
+        PRINT("SNV config error...\n");
         while(1);
     }
     cfg.SNVAddr = (uint32_t)BLE_SNV_ADDR;
@@ -169,7 +169,7 @@ void CH59x_BLEInit(void)
     i = BLE_LibInit(&cfg);
     if(i)
     {
-        PRINTF("LIB init error code: %x ...\n", i);
+        PRINT("LIB init error code: %x ...\n", i);
         while(1);
     }
 }
@@ -233,7 +233,7 @@ tmosEvents HAL_ProcessEvent(tmosTaskID task_id, tmosEvents events)
     }
     if(events & HAL_TEST_EVENT)
     {
-        PRINTF("* \n");
+        PRINT("* \n");
         tmos_start_task(halTaskID, HAL_TEST_EVENT, MS1_TO_SYSTEM_TIME(1000));
         return events ^ HAL_TEST_EVENT;
     }
