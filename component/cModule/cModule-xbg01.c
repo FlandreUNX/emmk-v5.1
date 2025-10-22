@@ -560,45 +560,20 @@ static int32_t onPtPackPayloadFree(cModule_TransmitPackageInfo_t *info, bool isF
 
 /*@{*/
 
-static int32_t rilat_onCallback(Rilat_Instance_t *instance, Rilat_CallbackEvent_t event, Rilat_CallbackVar_t var1,
-                                Rilat_CallbackVar_t var2, Rilat_CallbackVar_t var3) {
-    switch (event) {
-        case RILAT_CALL_EVENT_ON_INIT: {
-            CREQUEST(ON_SERIAL_INIT, {.u32 = CONFIG_SERIAL_BAURRATE});
-            break;
-        }
-        case RILAT_CALL_EVENT_ON_FINALIZE: {
-            CREQUEST(ON_SERIAL_FINALIZE, {});
-            break;
-        }
-        case RILAT_CALL_EVENT_ON_READ: {
-            *((uint32_t *) var3.ptr) = CREQUEST(ON_SERIAL_RECV, (void *) &mModuleInstance,
-                                                (void *) var1.ptr, (uint32_t) var2.u32).u32;
-            return 0;
-        }
-        case RILAT_CALL_EVENT_ON_WRITE: {
-            return CREQUEST(ON_SERIAL_TRANSMIT, (void *) &mModuleInstance,
-                            (void *) var1.ptr, (uint32_t) var2.u32).i32;
-            break;
-        }
-        case RILAT_CALL_EVENT_ON_RAW_DATA_RECV: {
-            break;
-        }
-        case RILAT_CALL_EVENT_ON_BLOCK_WAIT: {
-            return CREQUEST(ON_BLOCK_POLL, (void *) &mModuleInstance,
-                            (uint32_t) (mModuleInstance.state.urcResponseFlags & CMODULE_URC_FLAG_STACK_NO_BLOCK_POLL)
-                            ? 1 : 0
-            ).i32;
-        }
-        case RILAT_CALL_EVENT_ON_POLL_HOCK: {
-            CREQUEST(ON_BLOCK_POLL, (void *) &mModuleInstance,
-                     (uint32_t) (mModuleInstance.state.urcResponseFlags & CMODULE_URC_FLAG_STACK_NO_BLOCK_POLL) ? 1
-                                                                                                                : 0
-            );
-            break;
-        }
+static int32_t rilat_onCallback(Rilat_Instance_t *instance, Rilat_CallbackEvent_t event, Rilat_CallbackVar_t var1, Rilat_CallbackVar_t var2, Rilat_CallbackVar_t var3) {
+    if (event == RILAT_CALL_EVENT_ON_INIT) {
+        CREQUEST(ON_SERIAL_INIT, {&mModuleInstance});
+    } else if (event == RILAT_CALL_EVENT_ON_FINALIZE) {
+        CREQUEST(ON_SERIAL_FINALIZE, {&mModuleInstance});
+    } else if (event == RILAT_CALL_EVENT_ON_READ) {
+        *((uint32_t *) var3.ptr) = CREQUEST(ON_SERIAL_RECV, (void *) &mModuleInstance, (void *) var1.ptr, (uint32_t) var2.u32).u32;
+    } else if (event == RILAT_CALL_EVENT_ON_WRITE) {
+        return CREQUEST(ON_SERIAL_TRANSMIT, (void *) &mModuleInstance, (void *) var1.ptr, (uint32_t) var2.u32).i32;
+    } else if (event == RILAT_CALL_EVENT_ON_BLOCK_WAIT) {
+        return CREQUEST(ON_BLOCK_POLL, (void *) &mModuleInstance, (uint32_t) (mModuleInstance.state.urcResponseFlags & CMODULE_URC_FLAG_STACK_NO_BLOCK_POLL) ? 1 : 0).i32;
+    } else if (event == RILAT_CALL_EVENT_ON_POLL_HOCK) {
+        return CREQUEST(ON_BLOCK_POLL, (void *) &mModuleInstance,(uint32_t) (mModuleInstance.state.urcResponseFlags & CMODULE_URC_FLAG_STACK_NO_BLOCK_POLL) ? 1 : 0).i32;
     }
-
     return 0;
 }
 
