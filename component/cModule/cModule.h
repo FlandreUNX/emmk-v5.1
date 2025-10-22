@@ -436,6 +436,7 @@ extern uint8_t _cModule_a2x(const char c);
 extern void _cModule_convertMacStr2Hex(const char *str, uint8_t *hex);
 
 extern int32_t _cModule_wait(cModule_Instance_t *ins, uint32_t t, bool withRilatPoll);
+extern bool _cModule_wait_ctlZ(cModule_Instance_t *ins, uint32_t t);
 
 extern int32_t _cModule_isAllocReqPackAccess(cModule_Instance_t *ins);
 extern int32_t _cModule_isAllocRepPackAccess(cModule_Instance_t *ins);

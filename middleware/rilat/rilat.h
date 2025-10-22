@@ -545,6 +545,15 @@ extern int32_t rilat_directSetPdu(Rilat_Instance_t *instance, uint8_t *data, uin
  */
 extern void rilat_directResetReceiveBuffer(Rilat_Instance_t *instance);
 
+
+/**
+ * @brief 检查是否接收到Ctrl+Z字符
+ * @param[in] instance RILAT实例指针
+ * @return true表示接收到Ctrl+Z字符，false表示未接收到
+ * @details 用于检查接收缓冲区中是否包含Ctrl+Z(0x1A)字符，通常用于判断PDU数据传输是否完成
+ */
+extern bool rilat_readForCtlZ(Rilat_Instance_t *instance);
+
 /*@}*/
 
 /**

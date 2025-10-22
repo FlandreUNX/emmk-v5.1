@@ -838,7 +838,10 @@ static int32_t mqttPubTopic(cModule_ProtocolMqttMessage_t *msg, char *xPayload, 
 #else
     klPtf_sprintf(buffer, "%d\r\n", msg->len);
     rilat_directWrite(&mModuleInstance.rilat.instance, (uint8_t *) buffer, strlen(buffer), 0);
-    _cModule_wait(&mModuleInstance, 100, true);
+    if (!_cModule_wait_ctlZ(&mModuleInstance, 100)) {
+        free(buffer);
+        return -1;
+    }
 
     if (xPayload != NULL) {
         rilat_directWrite(&mModuleInstance.rilat.instance, (uint8_t *) xPayload, xPayloadLen, 0);

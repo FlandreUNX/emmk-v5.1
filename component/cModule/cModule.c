@@ -99,6 +99,18 @@ int32_t _cModule_wait(cModule_Instance_t *ins, uint32_t t, bool withRilatPoll) {
 }
 
 
+bool _cModule_wait_ctlZ(cModule_Instance_t *ins, uint32_t t) {
+    qSTimer_t wait = QSTIMER_INITIALIZER;
+    qSTimer_Set(&wait, t);
+    while (!qSTimer_Expired(&wait)) {
+        if (rilat_readForCtlZ(&ins->rilat.instance)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+
 int32_t _cModule_isAllocReqPackAccess(cModule_Instance_t *ins) {
     if (ins->transmit.queneReqCount < CONFIG_CMODULE_BUFFER_POS_LEN) {
         return 1;

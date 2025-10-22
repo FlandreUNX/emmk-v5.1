@@ -1234,6 +1234,33 @@ void rilat_directResetReceiveBuffer(Rilat_Instance_t *instance) {
     instance->recvBuffer._activeRecvLength = 0;
 }
 
+
+/**
+ * @brief 检查是否接收到Ctrl+Z字符
+ * @param[in] instance RILAT实例指针
+ * @return true表示接收到Ctrl+Z字符，false表示未接收到
+ * @details 用于检查接收缓冲区中是否包含Ctrl+Z(0x1A)字符，通常用于判断PDU数据传输是否完成
+ */
+bool rilat_readForCtlZ(Rilat_Instance_t *instance) {
+    int32_t rc = instance->callback(instance, RILAT_CALL_EVENT_ON_POLL_HOCK,
+                                (Rilat_CallbackVar_t){},
+                                (Rilat_CallbackVar_t){},
+                                (Rilat_CallbackVar_t){});
+    if (rc < 0) {
+        return false;
+    }
+    const char *line = readLine(instance);
+    if (line == NULL) {
+        return false;
+    }
+    if (0 == strcmp(line, ">")) {
+        return true;
+    }
+    handleLine(instance, line);
+    return false;
+}
+
+
 /*@}*/
 
 /**
