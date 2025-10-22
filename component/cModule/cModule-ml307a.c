@@ -811,6 +811,9 @@ static int32_t mqttPubTopic(cModule_ProtocolMqttMessage_t *msg, char *xPayload, 
     } else {
         msg->len = xPayloadLen;
     }
+
+    // Note: Support ML307X/Y ML307R/C/A
+#if 0
     klPtf_sprintf(buffer, "%d,\"", msg->len);
     rilat_directWrite(&mModuleInstance.rilat.instance, (uint8_t *) buffer, strlen(buffer), 0);
     
@@ -832,6 +835,30 @@ static int32_t mqttPubTopic(cModule_ProtocolMqttMessage_t *msg, char *xPayload, 
         rc = -1;
         goto _l_retryExit;
     }
+#else
+    klPtf_sprintf(buffer, "%d", msg->len);
+    rilat_directWrite(&mModuleInstance.rilat.instance, (uint8_t *) buffer, strlen(buffer), 0);
+    _cModule_wait(&mModuleInstance, 100, true);
+
+    if (xPayload != NULL) {
+        rilat_directWrite(&mModuleInstance.rilat.instance, (uint8_t *) xPayload, xPayloadLen, 0);
+    } else {
+        if (msg->payload == NULL) {
+            if (msg->writer.onDirectWrite != NULL) {
+                msg->writer.onDirectWrite(&mModuleInstance.rilat.instance, packMsgId);
+            }
+        } else {
+            rilat_directWrite(&mModuleInstance.rilat.instance, (uint8_t *) msg->payload, msg->len, 0);
+        }
+    }
+
+    Rilat_AtResponse_t *response = NULL;
+    if (rilat_writeSinglelineOnlyPrefixMatched(&mModuleInstance.rilat.instance,
+                "", "+MQTTPUB:", &response, msg->timeout) != 0 || response == NULL || response->success == 0) {
+        rc = -1;
+        goto _l_retryExit;
+                }
+#endif
     rilat_freeResponse(&mModuleInstance.rilat.instance, response);
     response = NULL;
     free(buffer);
